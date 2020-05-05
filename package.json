@@ -1,7 +1,7 @@
 {
   "name": "@obap/obap-elements",
-  "version": "0.0.1",
-  "description": "Webcomponent obap-elements following open-wc recommendations",
+  "version": "0.0.3",
+  "description": "Open Business Application Platform LitElement Web Component Suite",
   "author": "obap-elements",
   "license": "MIT",
   "main": "",
