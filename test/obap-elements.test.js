@@ -1,5 +1,13 @@
 import { html, fixture, expect } from '@open-wc/testing';
 
+describe('ObapElements', () => {
+  it('passes a basic test', () => {
+      const el = 'test';
+
+      expect(el).to.equal('test');
+  });
+});
+
 /*
 import '../obap-elements.js';
 
