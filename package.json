@@ -1,0 +1,36 @@
+{
+  "name": "@obap/obap-elements",
+  "version": "0.0.1",
+  "description": "Webcomponent obap-elements following open-wc recommendations",
+  "author": "obap-elements",
+  "license": "MIT",
+  "main": "",
+  "module": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openbap/obap-elements.git",
+    "directory": "src"
+  },
+  "scripts": {
+    "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
+    "test": "karma start --coverage",
+    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "storybook": "start-storybook",
+    "storybook:build": "build-storybook"
+  },
+  "dependencies": {
+    "lit-html": "^1.1.2",
+    "lit-element": "^2.2.1"
+  },
+  "devDependencies": {
+    "es-dev-server": "^1.23.0",
+    "@open-wc/testing-karma": "^3.0.0",
+    "deepmerge": "^3.2.0",
+    "@open-wc/testing": "^2.0.0",
+    "@open-wc/demoing-storybook": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
+

@@ -1,0 +1,10 @@
+/*
+/.storybook
+/.demo
+/stories
+/test
+
+# Include
+!/obap-*/*
+!LICENSE
+!custom-elements.json
