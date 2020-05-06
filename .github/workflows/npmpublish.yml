@@ -6,14 +6,12 @@ name: Node.js Package
 on:
   release:
     types: [created]
-    branches:
-      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 12
@@ -22,21 +20,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v1
-      - name: Checkout master branch
-        # GITHUB_REF:11 gets `refs/heads/master` => `master`.
-        # See https://github.com/actions/checkout/issues/6 github.head_ref
-        run: git checkout "${GITHUB_REF:11} && git pull origin master
-      - name: Setup node
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - name: Install Dependencies
-        run: npm install
-      - name: Publish
-        run: npm run deploy:ci
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}
 

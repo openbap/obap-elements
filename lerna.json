@@ -1,6 +1,0 @@
-{
-  "packages": [
-    "src/*"
-  ],
-  "version": "v0.0.8-alpha"
-}

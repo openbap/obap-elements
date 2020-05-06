@@ -1,5 +1,5 @@
 import { html, fixture, expect, nextFrame } from '@open-wc/testing';
-import '../src/starter-element/starter-element.js';
+import '../starter-element/starter-element.js';
 
 describe('starter-element', () => {
     it('has the default text', async () => {

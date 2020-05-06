@@ -1,7 +1,6 @@
 {
   "name": "@obap/obap-elements",
-  "private": true,
-  "version": "v0.0.8-alpha",
+  "version": "0.0.3",
   "description": "Open Business Application Platform LitElement Web Component Suite",
   "author": "obap-elements",
   "license": "MIT",
@@ -12,29 +11,26 @@
     "url": "https://github.com/openbap/obap-elements.git",
     "directory": "src"
   },
-  "workspaces": [
-    "src/*"
-  ],
   "scripts": {
     "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
     "storybook": "start-storybook",
-    "storybook:build": "build-storybook",
-    "postinstall": "lerna bootstrap --hoist",
-    "deploy": "lerna publish --message 'chore: release new versions'",
-    "deploy:ci": "lerna publish --yes --message 'chore: release new versions'"
+    "storybook:build": "build-storybook"
   },
   "dependencies": {
-    "lit-element": "^2.2.1",
-    "lit-html": "^1.1.2"
+    "lit-html": "^1.1.2",
+    "lit-element": "^2.2.1"
   },
   "devDependencies": {
-    "@open-wc/demoing-storybook": "^2.0.0",
-    "@open-wc/testing": "^2.0.0",
+    "es-dev-server": "^1.23.0",
     "@open-wc/testing-karma": "^3.0.0",
     "deepmerge": "^3.2.0",
-    "es-dev-server": "^1.23.0",
-    "lerna": "^3.20.2"
+    "@open-wc/testing": "^2.0.0",
+    "@open-wc/demoing-storybook": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
+
