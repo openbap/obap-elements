@@ -6,7 +6,7 @@ The Open Business Application Web Components (OBAP Elements) are a collection of
 
 ## Components
 
-There's a pretty long list, which you can find [here](README.md).
+There's a pretty long list, which you can find [here](COMPONENTS.md).
 
 ## Quick Start
 
@@ -24,4 +24,4 @@ TODO
 
 ## Additional Resources
 
-A good starting place is the [LitElement documentation](https://lit-element.polymer-project.org/), and the [Material Web Components](https://github.com/material-components/material-components-web-components) have some useful information (since they're also based on LitElement)
+A good starting place is the [LitElement documentation](https://lit-element.polymer-project.org/), and the [Material Web Components](https://github.com/material-components/material-components-web-components) have some useful information (since they're also based on LitElement).
