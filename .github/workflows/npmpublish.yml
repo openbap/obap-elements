@@ -27,6 +27,9 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: git stash
+      - run: git fetch origin +refs/heads/master:refs/remotes/origin/master;
+      - run: git checkout master;
+      - run: git reset --hard "$CI_COMMIT_ID";
       - run: npm run publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}
