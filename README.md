@@ -1,8 +1,8 @@
-# Open Business Application Web Components
+# Open Business Application Platform Web Components
 
-> IMPORTANT: The Open Business Application Web Components are a work in progress and subject to major changes until 1.0 release.
+> IMPORTANT: The Open Business Application Platform Web Components are a work in progress and subject to major changes until 1.0 release.
 
-The Open Business Application Web Components (OBAP Elements) are a collection of Web Components designed specifically for desktop browser line of business applications and implement a simplified and modified Material Design.
+The Open Business Application Platform Web Components (OBAP Elements) are a collection of Web Components designed specifically for desktop browser line of business applications and implement a simplified and modified Material Design.
 
 ## Components
 
