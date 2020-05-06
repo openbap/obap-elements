@@ -25,7 +25,7 @@ jobs:
       - name: Checkout master branch
         # GITHUB_REF:11 gets `refs/heads/master` => `master`.
         # See https://github.com/actions/checkout/issues/6 github.head_ref
-        run: git checkout "${GITHUB_HEAD_REF}" && git pull
+        run: git checkout "${GITHUB_REF}" && git pull
       - name: Setup node
         uses: actions/setup-node@v1
         with:
