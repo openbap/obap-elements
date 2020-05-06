@@ -20,14 +20,23 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Checkout master branch
+        # GITHUB_REF:11 gets `refs/heads/master` => `master`.
+        # See https://github.com/actions/checkout/issues/6
+        run: |
+          git checkout "${GITHUB_REF:11}"
+          git pull
+      - name: Setup node
+        uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - name: Install Packages
+      - name: Install Dependencies
         run: npm install
-      - run: npm run deploy:ci
+      - name: Publish
+        run: npm run deploy:ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}
 
