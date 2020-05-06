@@ -1,6 +1,6 @@
 {
   "name": "@obap/obap-elements",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Open Business Application Platform LitElement Web Component Suite",
   "author": "obap-elements",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "test:watch": "karma start --auto-watch=true --single-run=false",
     "storybook": "start-storybook",
     "storybook:build": "build-storybook",
-    "publish": "lerna publish --dist-tag --yes --no-verify-access"
+    "publish": "lerna publish --dist-tag latest --yes --no-verify-access"
   },
   "dependencies": {
     "lit-element": "^2.2.1",
