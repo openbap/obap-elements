@@ -15,8 +15,6 @@
     "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
-    "storybook": "start-storybook",
-    "storybook:build": "build-storybook",
     "deploy": "npm publish src",
     "testdeploy": "npm publish src --dry-run"
   },
@@ -28,8 +26,7 @@
     "es-dev-server": "^1.23.0",
     "@open-wc/testing-karma": "^3.0.0",
     "deepmerge": "^3.2.0",
-    "@open-wc/testing": "^2.0.0",
-    "@open-wc/demoing-storybook": "^2.0.0"
+    "@open-wc/testing": "^2.0.0"
   },
   "publishConfig": {
     "access": "public"
