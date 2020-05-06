@@ -1,6 +1,6 @@
 {
   "name": "@obap/obap-elements",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Open Business Application Platform LitElement Web Component Suite",
   "author": "obap-elements",
   "license": "MIT",
@@ -16,21 +16,22 @@
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
     "storybook": "start-storybook",
-    "storybook:build": "build-storybook"
+    "storybook:build": "build-storybook",
+    "publish": "lerna publish from-package -y --no-verify-access"
   },
   "dependencies": {
-    "lit-html": "^1.1.2",
-    "lit-element": "^2.2.1"
+    "lit-element": "^2.2.1",
+    "lit-html": "^1.1.2"
   },
   "devDependencies": {
-    "es-dev-server": "^1.23.0",
+    "@open-wc/demoing-storybook": "^2.0.0",
+    "@open-wc/testing": "^2.0.0",
     "@open-wc/testing-karma": "^3.0.0",
     "deepmerge": "^3.2.0",
-    "@open-wc/testing": "^2.0.0",
-    "@open-wc/demoing-storybook": "^2.0.0"
+    "es-dev-server": "^1.23.0",
+    "lerna": "^3.20.2"
   },
   "publishConfig": {
     "access": "public"
   }
 }
-
