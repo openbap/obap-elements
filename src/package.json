@@ -1,0 +1,25 @@
+{
+  "name": "@obap/obap-elements",
+  "version": "0.0.4",
+  "description": "Open Business Application Platform LitElement Web Component Suite",
+  "author": "obap-elements",
+  "license": "MIT",
+  "main": "",
+  "module": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openbap/obap-elements.git",
+    "directory": "src"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "lit-element": "^2.2.1",
+    "lit-html": "^1.1.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.com"
+  }
+}

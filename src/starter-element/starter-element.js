@@ -21,7 +21,6 @@ export class ObapStarterElement extends ObapElement {
         `];
     }
 
-    /*
     static get properties() {
         return {
 
@@ -55,7 +54,7 @@ export class ObapStarterElement extends ObapElement {
             //
         });
     }
-    */
+    
     render() {
         return html`<div class="container">starter-element</div>`;
     }
