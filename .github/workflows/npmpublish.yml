@@ -27,7 +27,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install Packages
         run: npm install
-      - run: npm run deploy
+      - run: npm run deploy:ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_KEY }}
 
