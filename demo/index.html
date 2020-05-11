@@ -3,16 +3,34 @@
 
 <head>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,500|Roboto+Mono|Roboto:300,400,500&display=swap&subset=chinese-simplified" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./favicon.png"/>
     <title>Demo</title>
     <style>
-        body {
-            background: #fafafa;
+        html {
+          height: 100vh;
         }
-    </style>
+    
+        body {
+          font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+          background: #fafafa;
+          margin: 0;
+          padding: 0;
+          height: 100vh;
+        }
+    
+        demo-app {
+          height: 100%;
+        }
+      </style>
 </head>
 
 <body>
-    <div>Demo</div>
+    <demo-app></demo-app>
+    
+    <script type="module">
+        import './demo-app/demo-app.js';
+    </script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 {
   "name": "@obap/obap-elements",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "A LitElement Web Component Suite for line of business applications.",
   "author": "obap-elements",
   "license": "MIT",
@@ -16,17 +16,19 @@
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
     "deploy": "npm publish src",
-    "testdeploy": "npm publish src --dry-run"
+    "testdeploy": "npm publish src --dry-run",
+    "doc": "./node_modules/.bin/wca analyze src --format markdown --outDir docs/elements"
   },
   "dependencies": {
     "lit-html": "^1.1.2",
     "lit-element": "^2.2.1"
   },
   "devDependencies": {
-    "es-dev-server": "^1.23.0",
+    "@open-wc/testing": "^2.0.0",
     "@open-wc/testing-karma": "^3.0.0",
     "deepmerge": "^3.2.0",
-    "@open-wc/testing": "^2.0.0"
+    "es-dev-server": "^1.23.0",
+    "web-component-analyzer": "^1.0.3"
   },
   "publishConfig": {
     "access": "public"

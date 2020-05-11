@@ -1,3 +1,7 @@
+/*
+@license
+Copyright (c) 2020 Paul H Mason. All rights reserved.
+*/
 import { html, fixture, expect, nextFrame, defineCE, unsafeStatic } from '@open-wc/testing';
 import { ObapElement } from '../src/obap-element/obap-element.js';
 

@@ -1,4 +1,8 @@
-import { html, fixture, expect, nextFrame } from '@open-wc/testing';
+/*
+@license
+Copyright (c) 2020 Paul H Mason. All rights reserved.
+*/
+import { html, fixture, expect, nextFrame, defineCE, unsafeStatic } from '@open-wc/testing';
 import '../src/starter-element/starter-element.js';
 
 describe('starter-element', () => {

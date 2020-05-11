@@ -4,6 +4,9 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 
+/**
+ * A simple demo starter element.
+ */
 export class ObapStarterElement extends ObapElement {
     static get styles() {
         return [css`

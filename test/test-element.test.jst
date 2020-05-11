@@ -1,0 +1,25 @@
+/*
+@license
+Copyright (c) 2020 Paul H Mason. All rights reserved.
+*/
+import { html, fixture, expect, nextFrame, defineCE, unsafeStatic, oneEvent, fixtureSync, litFixture, litFixtureSync } from '@open-wc/testing';
+import './test-element.js';
+
+describe('test-element', () => {
+    it('adds slotted children to items', async () => {
+        const el = await fixture(html`
+            <test-element>
+                <div></div>
+                <div></div>
+            </test-element>
+        `);
+
+        expect(el).lightDom.to.equal(`
+            <div></div>
+            <div></div>
+        `);
+
+        expect(el.items.length).to.equal(2);
+    });
+
+});
