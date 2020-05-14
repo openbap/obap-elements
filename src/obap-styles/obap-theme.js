@@ -3,12 +3,12 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 class ObapThemeItem {
-    constructor(name, primary, primaryDark, primaryLight, secondary, window) {
+    constructor(name, primary, primaryDark, primaryLight, accent, window) {
       this.name = name;
       this.primary = primary;
       this.primaryLight = primaryLight;
       this.primaryDark = primaryDark;
-      this.secondary = secondary;
+      this.accent = accent;
       this.window = window;
     }
   
@@ -19,7 +19,7 @@ class ObapThemeItem {
       root.style.setProperty('--obap-primary-light-color', this.primaryLight);
       root.style.setProperty('--obap-primary-color', this.primary);
       root.style.setProperty('--obap-primary-dark-color', this.primaryDark);
-      root.style.setProperty('--obap-secondary-color', this.secondary);
+      root.style.setProperty('--obap-accent-color', this.accent);
   
       if (this.window) {
         root.style.setProperty('--obap-window-color', this.window);
@@ -49,8 +49,8 @@ class ObapThemeItem {
   
       root.style.setProperty('--obap-on-primary-color', '#FFFFFF');
       root.style.setProperty('--obap-on-primary-inactive-color', 'rgba(255, 255, 255, 0.7)');
-      root.style.setProperty('--obap-on-secondary-color', '#FFFFFF');
-      root.style.setProperty('--obap-on-secondary-inactive-color', 'rgba(255, 255, 255, 0.7)');
+      root.style.setProperty('--obap-on-accent-color', '#FFFFFF');
+      root.style.setProperty('--obap-on-accent-inactive-color', 'rgba(255, 255, 255, 0.7)');
       root.style.setProperty('--obap-on-background-color', 'rgba(0, 0, 0, 0.87)');
       root.style.setProperty('--obap-on-surface-color', 'rgba(0, 0, 0, 0.87)');
       root.style.setProperty('--obap-on-window-color', 'rgba(0, 0, 0, 0.87)');
@@ -87,7 +87,7 @@ class ObapThemeItem {
       root.style.removeProperty('--obap-primary-light-color');
       root.style.removeProperty('--obap-primary-color');
       root.style.removeProperty('--obap-primary-dark-color');
-      root.style.removeProperty('--obap-secondary-color');
+      root.style.removeProperty('--obap-accent-color');
       root.style.removeProperty('--obap-window-color');
   
       // Fixed
@@ -101,8 +101,8 @@ class ObapThemeItem {
   
         documentRoot.style.removeProperty('--obap-on-primary-color');
         documentRoot.style.removeProperty('--obap-on-primary-inactive-color');
-        documentRoot.style.removeProperty('--obap-on-secondary-color');
-        documentRoot.style.removeProperty('--obap-on-secondary-inactive-color');
+        documentRoot.style.removeProperty('--obap-on-accent-color');
+        documentRoot.style.removeProperty('--obap-on-accent-inactive-color');
         documentRoot.style.removeProperty('--obap-on-background-color');
         documentRoot.style.removeProperty('--obap-on-surface-color');
         documentRoot.style.removeProperty('--obap-on-window-color');
@@ -117,8 +117,8 @@ class ObapThemeItem {
       }
     }
   
-    create(name, primary, primaryDark, primaryLight, secondary, window) {
-      this.__themes[name] = new ObapThemeItem(name, primary, primaryDark, primaryLight, secondary, window);
+    create(name, primary, primaryDark, primaryLight, accent, window) {
+      this.__themes[name] = new ObapThemeItem(name, primary, primaryDark, primaryLight, accent, window);
     }
   
     getNames() {

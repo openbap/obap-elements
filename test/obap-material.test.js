@@ -6,6 +6,14 @@ import { html, fixture, expect, nextFrame } from '@open-wc/testing';
 import '../src/obap-material/obap-material.js';
 
 describe('obap-material', () => {
+    it('passes the a11y audit', async () => {
+        const el = await fixture(html`
+            <obap-material></obap-material>
+        `);
+
+        await expect(el).shadowDom.to.be.accessible();
+    });
+
     it('can set the elevation via attribute', async () => {
         const el = await fixture(html`
             <obap-material elevation="2"></obap-material>

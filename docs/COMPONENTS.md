@@ -1,6 +1,6 @@
 # Components
 
-This is the list of web components that make up the suite, and will change often until the version 1 release.
+This is the list of web components that currently make up the suite, and will change often until the version 1 release.
 
 ## Core Elements, Mixins and Modules
 

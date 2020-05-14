@@ -6,7 +6,10 @@ The Open Business Application Platform Web Components (OBAP Elements) are a coll
 
 ## Components
 
-There's a pretty long list, which you can find [here](docs/COMPONENTS.md). You can find some live demos [here](https://openbap.github.io/demo/).
+* [Completed Elements](docs/COMPONENTS.md)
+* [Demos](https://openbap.github.io/demo/)
+* [Task List](TASKS.md)
+* [Change Log](CHAMGELOG.md)
 
 ## Quick Start
 

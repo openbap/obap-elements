@@ -8,6 +8,14 @@ import '../src/obap-icons/obap-standard-icons.js';
 import '../src/obap-icon/obap-icon.js';
 
 describe('obap-icon', () => {
+    it('passes the a11y audit', async () => {
+        const el = await fixture(html`
+            <obap-icon></obap-icon>
+        `);
+
+        await expect(el).shadowDom.to.be.accessible();
+    });
+
     it('defaults to no icon', async () => {
         const el = await fixture(html`
             <obap-icon></obap-icon>

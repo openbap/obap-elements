@@ -3,6 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
+import '../../src/obap-xxx/obap-xxx.js';
 
 export class XXXDemo extends ObapElement {
     static get styles() {
@@ -27,7 +28,7 @@ export class XXXDemo extends ObapElement {
     render() {
         return html`
             <div class="container">
-            <div class="title">Demo</div>
+                <div class="title">Demo</div>
             </div>
         `;
     }

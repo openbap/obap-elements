@@ -1,6 +1,6 @@
 # obap-selector
 
-`ObapSelector` is an element that allows you to manage a list of elements that can be selected. Clicking on a element selects it, and in the case of a multi select list, a second click deselects it. The `selected` property indicates which element is selected and defaults to the index. The default is single select and you can enable multi select mode with the `multi` attribute. The collection of selected items is contained in the `selectedItems` array property.
+`ObapSelector` is an element that allows you to manage a list of elements that can be selected. Clicking on a element selects it, and in the case of a multi select list, a second click deselects it. A range select list selects a consecutive range of items between 2 clicks  The `selected` property indicates which element is selected and defaults to the index. The default is single select and you can enable multi or range select modes with the `selector-type` attribute. The collection of selected items is contained in the `selectedItems` array property for multi and range selector types.
 
 The selected item(s) can be styled by providing a selector for the `obap-selected` class, which is set on selected items by default. You can change the class name using the `selected-class` attribute, or you can style based on attribute by providing a selected attribute using the `selected-attribute` property.
 
@@ -18,7 +18,28 @@ import '@obap/obap-elements/obap-selector/obap-selector.js';
     }
 </style>
 
-<obap-selector selected="0">
+<!-- Single Select (default) -->
+<obap-selector selected="0" selector-type="single">
+    <div class="item">One</div>
+    <div class="item">Two</div>
+    <div class="item">Three</div>
+    <div class="separator" no-select></div>
+    <div class="item">Four</div>
+    <div class="item"Five</div>
+</obap-selector>
+
+<!-- Multi Select -->
+<obap-selector selector-type="multi" .selectedItems="${this.someArray}">
+    <div class="item">One</div>
+    <div class="item">Two</div>
+    <div class="item">Three</div>
+    <div class="separator" no-select></div>
+    <div class="item">Four</div>
+    <div class="item"Five</div>
+</obap-selector>
+
+<!-- Range Select -->
+<obap-selector selector-type="range" start-index="0" end-index="2">
     <div class="item">One</div>
     <div class="item">Two</div>
     <div class="item">Three</div>
@@ -28,18 +49,22 @@ import '@obap/obap-elements/obap-selector/obap-selector.js';
 </obap-selector>
 ```
 
-**Mixins:** ObapMultiSelectableMixin, ObapSelectableMixin
+**Mixins:** ObapRangeSelectableMixin, ObapMultiSelectableMixin, ObapSelectableMixin
 
 ## Properties
 
-| Property        | Attribute        | Type      | Default | Description                                      |
-|-----------------|------------------|-----------|---------|--------------------------------------------------|
-| `disabled`      | `disabled`       | `Boolean` | "false" | If true, the button will be disabled.            |
-| `items`         | `items`          | `array`   | "[]"    | (readonly) - The list of items from which a selection can be made. |
-| `multi`         | `multi`          | `boolean` | false   | If true, multiple selections are allowed..       |
-| `role`          | `role`           | `String`  | "null"  | The ARIA role of the element.                    |
-| `selectedIndex` | `selected-index` | `Number`  | "1"     | Gets or sets the selected element index.         |
-| `selectedItems` | `selected-items` | `array`   | []      | Returns an array of currently selected items.    |
+| Property        | Attribute        | Type      | Default  | Description                                      |
+|-----------------|------------------|-----------|----------|--------------------------------------------------|
+| `disabled`      | `disabled`       | `Boolean` | "false"  | If true, the button will be disabled.            |
+| `endIndex`      | `end-index`      | `number`  | -1       | The end index of the range to select.            |
+| `items`         | `items`          | `array`   | "[]"     | (readonly) - The list of items from which a selection can be made. |
+| `rangeLength`   | `range-length`   | `number`  | -1       | If this is set to a value greater than zero, then the user can select the range of that length with a single click by holding down the 'ctrl' key. |
+| `role`          | `role`           | `String`  | "null"   | The ARIA role of the element.                    |
+| `selectedIndex` | `selected-index` | `Number`  | "1"      | Gets or sets the selected element index.         |
+| `selectedItems` | `selected-items` | `array`   | []       | Returns an array of currently selected items.    |
+| `selectorType`  | `selector-type`  | `string`  | "single" | The type of selection allowed. Can be 'single' (default), 'multi' and 'range'. The last two are provided by the respective mixins. |
+| `startIndex`    | `start-index`    | `number`  | -1       | The starting index of the range to select.       |
+| `toggles`       | `toggles`        | `boolean` | false    | In single select mode, setting this to true deselects the item if you select it a second time. |
 
 ## Methods
 

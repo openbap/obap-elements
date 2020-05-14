@@ -9,15 +9,6 @@ export const ObapMultiSelectableMixin = (superClass) =>
         static get properties() {
             return {
                 /**
-                If true, multiple selections are allowed..
-                */
-                multi: {
-                    type: Boolean,
-                    attribute: 'multi',
-                    reflect: true
-                },
-
-                /**
                 Returns an array of currently selected items.
                 */
                 selectedItems: {
@@ -30,7 +21,6 @@ export const ObapMultiSelectableMixin = (superClass) =>
         constructor() {
             super();
 
-            this.multi = false;
             this.selectedItems = [];
         }
         
@@ -38,14 +28,14 @@ export const ObapMultiSelectableMixin = (superClass) =>
             super.updated(changedProperties);
 
             changedProperties.forEach((oldValue, propName) => {
-                if ((propName === 'items') && (this.multi)) {
+                if ((propName === 'items') && (this.selectorType === 'multi')) {
                     this._preselectItems();
                 }
             });
         }
 
         select(index) {
-            if (this.multi) {
+            if (this.selectorType === 'multi') {
                 this._toggleSelected(index);
             } else {
                 super.select(index);
@@ -53,7 +43,7 @@ export const ObapMultiSelectableMixin = (superClass) =>
         }
 
         _changeSelection(newIndex, oldIndex) {
-            if (this.multi) {
+            if (this.selectorType === 'multi') {
                 this._toggleSelected(newIndex);
             } else {
                 super._changeSelection(newIndex, oldIndex);

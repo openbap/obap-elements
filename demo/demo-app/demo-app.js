@@ -77,9 +77,9 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
         super();
         themeManager.create('green', '#4caf50', '#087f23', '#80e27e', '#ffc107', '#FAFAFA');
         this.theme = 'default';
-        this.selectedPage = 3;
+        this.selectedPage = 8;
     }
-    
+
     render() {
         return html`
             <div class="container typography-body">
@@ -91,8 +91,14 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
                         <div class="item">Typography</div>
                         <div class="item">Iconography</div>
                         <div class="separator" no-select>Elements</div>
-                        <div class="item">obap-selector</div>
+                        <div class="item">obap-attached-element</div>
+                        <div class="item">obap-badge</div>
+                        <div class="item">obap-callout</div>
                         <div class="item">obap-material</div>
+                        <div class="item">obap-ripple</div>
+                        <div class="item">obap-selector</div>
+                        <div class="item">obap-tabs</div>
+                        <div class="item">obap-tooltip</div>
                     </obap-selector>
                 </obap-material>
                 <obap-material class="pages">
@@ -101,13 +107,19 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
                         <elevation-demo></elevation-demo>
                         <typography-demo></typography-demo>
                         <icons-demo></icons-demo>
-                        <selector-demo></selector-demo>
+                        <attached-element-demo></attached-element-demo>
+                        <badge-demo></badge-demo>
+                        <callout-demo></callout-demo>
                         <material-demo></material-demo>
+                        <ripple-demo></ripple-demo>
+                        <selector-demo></selector-demo>
+                        <tabs-demo></tabs-demo>
+                        <tooltip-demo></tooltip-demo>
                     </obap-pages>
                 </obap-material>
             </div>
         `;
-    }
+    }    
 
     _pageSelected(e) {
         this.selectedPage = e.detail.index;

@@ -59,9 +59,9 @@ export class ThemeDemo extends ObapElement {
                 background: var(--obap-primary-dark-color);
             }
 
-            .secondary-item {
-                color: var(--obap-on-secondary-color);
-                background: var(--obap-secondary-color);
+            .accent-item {
+                color: var(--obap-on-accent-color);
+                background: var(--obap-accent-color);
             }
 
             .surface-item {
@@ -97,15 +97,15 @@ export class ThemeDemo extends ObapElement {
                 <div class="title">Theme</div>
                 <div>Demo is still to be properly implemented - needs a few other UI elements to make it nice.</div>
                 <div class="items">
-                    <div class="item light-primary-item elevation-1 typography-caption">Light Primary Color</div>
-                    <div class="item primary-item elevation-1 typography-caption">Primary Color</div>
-                    <div class="item dark-primary-item elevation-1 typography-caption">Dark Primary Color</div>
-                    <div class="item secondary-item elevation-1 typography-caption">Secondary Color</div>
-                    <div class="item surface-item elevation-1 typography-caption">Surface Color</div>
-                    <div class="item window-item elevation-1 typography-caption">Window Color</div>
-                    <div class="item notification-item elevation-1 typography-caption">Notification Color</div>
-                    <div class="item error-item elevation-1 typography-caption">Error Color</div>
-                    <div class="item selection-item elevation-1 typography-caption">Selection Color</div>
+                    <div class="item light-primary-item elevation-1 typography-caption">Light Primary</div>
+                    <div class="item primary-item elevation-1 typography-caption">Primary</div>
+                    <div class="item dark-primary-item elevation-1 typography-caption">Dark Primary</div>
+                    <div class="item accent-item elevation-1 typography-caption">Accent</div>
+                    <div class="item surface-item elevation-1 typography-caption">Surface</div>
+                    <div class="item window-item elevation-1 typography-caption">Window</div>
+                    <div class="item notification-item elevation-1 typography-caption">Notification</div>
+                    <div class="item error-item elevation-1 typography-caption">Error</div>
+                    <div class="item selection-item elevation-1 typography-caption">Selection</div>
                 </div>
                 
             </div>

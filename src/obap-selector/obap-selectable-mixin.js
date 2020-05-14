@@ -16,9 +16,9 @@ export const ObapSelectableMixin = (superClass) =>
         set selectedIndex(value) {
             const oldValue = this.selectedIndex;
 
-            if (oldValue != value) {
+            if ((oldValue != value) || (this.toggles)) {
                 this._selectedIndex = value;
-                this._changeSelection(this.selectedIndex, oldValue);
+                this._changeSelection(this._selectedIndex, oldValue);
                 this.requestUpdate('selectedIndex', oldValue);
             }
         }
@@ -52,6 +52,22 @@ export const ObapSelectableMixin = (superClass) =>
                 */
                 items: {
                     type: Array
+                },
+
+                /**
+                In single select mode, setting this to true deselects the item if you select it a second time.
+                */
+                toggles: {
+                    type: Boolean,
+                    attribute: 'toggles'
+                },
+
+                /**
+                The type of selection allowed. Can be 'single' (default), 'multi' and 'range'. The last two are provided by the respective mixins.
+                 */
+                selectorType: {
+                    type: String,
+                    attribute: 'selector-type'
                 }
             }
         }
@@ -62,7 +78,11 @@ export const ObapSelectableMixin = (superClass) =>
             this._boundHandleSelectionEvent = this._handleSelectionEvent.bind(this);
             this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
             this._selectedIndex = -1;
+            this._selectable = true;
             this._items = [];
+            this._ctrl = false;
+            this.toggles = false;
+            this.selectorType = 'single';
         }
 
         connectedCallback() {
@@ -108,49 +128,48 @@ export const ObapSelectableMixin = (superClass) =>
         }
 
         _handleSelectionEvent(e) {
-            this._changeSelection(this.items.indexOf(e.target), this.selectedIndex);
+            this._ctrl = e.ctrlKey;
+            this.select(this.items.indexOf(e.target));
+            e.stopPropagation();
+            this._ctrl = false;
         }
 
         _deselectItem(index) {
             const item = this.items[index];
 
-            if (!item) {
-                return true;
-            }
-
-            if (this._fireEvent('obap-item-deselecting', {item: item, index: index}, true)) {
+            if (item) {
                 item.removeAttribute('selected');
                 this._fireEvent('obap-item-deselected', {item: item, index: index}, false);
-
-                return true;
-            } else {
-                return false;
             }
         }
 
         _selectItem(index) {
             const item = this.items[index];
 
-            if (!item) {
-                return true;
-            }
-
-            if (this._fireEvent('obap-item-selecting', {item: item, index: index}, true)) {
+            if (item) {
                 item.setAttribute('selected', '');
                 this._fireEvent('obap-item-selected', {item: item, index: index}, false);
-                return true;
-            } else {
-                return false;
             }
         }
 
         _changeSelection(newIndex, oldIndex) {
-            if ((newIndex === -1) || (this.items.length === 0) || (newIndex === oldIndex)) {
+            if ((newIndex === -1) || (this.items.length === 0)) {
                 return;
             }
 
-            if (this._deselectItem(oldIndex) && this._selectItem(newIndex)) {
-                this.selectedIndex = newIndex;
+            if (newIndex === oldIndex) {
+                this._deselectItem(oldIndex);
+                this._selectedIndex = -1;
+                
+                return;
+            }
+
+            if (this._fireEvent('obap-item-selecting', {newIndex: newIndex, oldIndex: oldIndex}, true)) {
+                this._deselectItem(oldIndex);
+                this._selectItem(newIndex);
+                this._selectedIndex = newIndex;
+            } else {
+                this._selectedIndex = oldIndex;
             }
         }
 

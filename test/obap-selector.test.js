@@ -6,6 +6,14 @@ import { html, fixture, expect, oneEvent, nextFrame } from '@open-wc/testing';
 import '../src/obap-selector/obap-selector.js';
 
 describe('obap-selector', () => {
+    it('passes the a11y audit', async () => {
+        const el = await fixture(html`
+            <obap-selector></obap-selector>
+        `);
+
+        await expect(el).shadowDom.to.be.accessible();
+    });
+
     it('adds slotted children to items', async () => {
         const el = await fixture(html`
             <obap-selector>
@@ -108,7 +116,7 @@ describe('obap-selector', () => {
     // MULTI-SELECT 
     it('allows multi-selection', async () => {
         const el = await fixture(html`
-            <obap-selector multi>
+            <obap-selector selector-type="multi">
                 <div val="0" selected></div>
                 <div val="1" selected></div>
                 <div val="2"></div>
@@ -120,7 +128,7 @@ describe('obap-selector', () => {
 
     it('allows multi-selection toggle', async () => {
         const el = await fixture(html`
-            <obap-selector multi>
+            <obap-selector  selector-type="multi">
                 <div val="0" selected></div>
                 <div val="1" selected></div>
                 <div val="2"></div>
@@ -134,7 +142,7 @@ describe('obap-selector', () => {
 
     it('allows multi-selection toggle with a selected item index', async () => {
         const el = await fixture(html`
-            <obap-selector multi selected-index="0">
+            <obap-selector  selector-type="multi" selected-index="0">
                 <div val="0"></div>
                 <div val="1" selected></div>
                 <div val="2" selected></div>
@@ -147,7 +155,7 @@ describe('obap-selector', () => {
 
     it('sorts multi-selection indices', async () => {
         const el = await fixture(html`
-            <obap-selector multi>
+            <obap-selector  selector-type="multi">
                 <div val="0"></div>
                 <div val="1"></div>
                 <div val="2"></div>
@@ -166,6 +174,172 @@ describe('obap-selector', () => {
         expect(el.selectedItems.join(',')).to.equals('0,1,2');
     });
 
+    it('prevents item selection via the "obap-item-selecting" event', async () => {
+        const el = await fixture(html`
+            <obap-selector selected-index="1">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+            </obap-selector>
+        `);
+
+        await nextFrame();
+        expect(el.selectedIndex).to.equal(1); 
+
+        el._fireEvent = function(name, detail, cancelable) {
+            if ((name === 'obap-item-selecting') && (detail.newIndex === 2)) return false;
+
+            return true;
+        }
+
+        el.selectedIndex = 2;
+
+        await nextFrame();
+        expect(el.selectedIndex).to.equal(1);
+
+        el.selectedIndex = 0;
+        await nextFrame();
+        expect(el.selectedIndex).to.equal(0);
+    });
+
+    it('can toggle single select items if flag is set', async () => {
+        const el = await fixture(html`
+            <obap-selector toggles>
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+            </obap-selector>
+        `);
+
+        el.selectedIndex = 1;
+        await nextFrame();
+        expect(el.selectedIndex).to.equal(1); 
+
+        el.selectedIndex = 1;
+        await nextFrame();
+        expect(el.selectedIndex).to.equal(-1); 
+    });
+
+    it('cannot toggle single select items if flag is not set', async () => {
+        const el = await fixture(html`
+            <obap-selector>
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+            </obap-selector>
+        `);
+
+        el.selectedIndex = 1;
+        await nextFrame();
+        expect(el.selectedIndex).to.equal(1); 
+
+        el.selectedIndex = 1;
+        await nextFrame();
+        expect(el.selectedIndex).to.equal(1); 
+    });
+
+    // RANGE SELECT
+    it('can select ranges via start and end index', async () => {
+        const el = await fixture(html`
+            <obap-selector selector-type="range">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+                <div val="3"></div>
+                <div val="4"></div>
+            </obap-selector>
+        `);
+
+        el.startIndex = 1;
+        el.endIndex = 3;
+        await nextFrame();
+        expect(el.selectedItems.length).to.equal(3); 
+    });
+
+    it('can select ranges via select method', async () => {
+        const el = await fixture(html`
+            <obap-selector selector-type="range">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+                <div val="3"></div>
+                <div val="4"></div>
+            </obap-selector>
+        `);
+
+        el.select(1);
+        el.select(3);
+        await nextFrame();
+        expect(el.selectedItems.length).to.equal(3); 
+    });
+
+    it('selects a single item if an end index is not provided', async () => {
+        const el = await fixture(html`
+            <obap-selector selector-type="range">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+                <div val="3"></div>
+                <div val="4"></div>
+            </obap-selector>
+        `);
+
+        el.startIndex = 1;
+        await nextFrame();
+        expect(el.selectedItems.length).to.equal(1); 
+    });
+
+    it('selects a single item if only s single selection is made', async () => {
+        const el = await fixture(html`
+            <obap-selector selector-type="range">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+                <div val="3"></div>
+                <div val="4"></div>
+            </obap-selector>
+        `);
+
+        el.select(1);
+        await nextFrame();
+        expect(el.selectedItems.length).to.equal(1); 
+    });
+
+    it('selects nothing if the same item is selected twice', async () => {
+        const el = await fixture(html`
+            <obap-selector selector-type="range">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+                <div val="3"></div>
+                <div val="4"></div>
+            </obap-selector>
+        `);
+
+        el.select(1);
+        el.select(1);
+        await nextFrame();
+        expect(el.selectedItems.length).to.equal(0); 
+    });
+
+    it('a third selection removes the range and selects just the third item', async () => {
+        const el = await fixture(html`
+            <obap-selector selector-type="range">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+                <div val="3"></div>
+                <div val="4"></div>
+            </obap-selector>
+        `);
+
+        el.select(1);
+        el.select(3);
+        el.select(4);
+        await nextFrame();
+        expect(el.selectedItems.length).to.equal(1); 
+    });
+
     // EXCEPTIONS 
     it('throws an exception if items property is set directly', async () => {
         const el = await fixture(html`
@@ -176,5 +350,70 @@ describe('obap-selector', () => {
         `);
 
         expect(() => el.items = []).to.throw('"items" is read only');
+    });
+
+    it('can select a range if the ctrl key is down', async () => {
+        const el = await fixture(html`
+            <obap-selector selector-type="range" range-length="5">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+                <div val="3"></div>
+                <div val="4"></div>
+                <div val="5"></div>
+                <div val="6"></div>
+                <div val="7"></div>
+                <div val="8"></div>
+                <div val="9"></div>
+            </obap-selector>
+        `);
+        el._ctrl = true;
+
+        el.select(7);
+        await nextFrame();
+        expect(el.selectedItems.length).to.equal(5); 
+    });
+
+    it('can select a partial range if the ctrl key is down', async () => {
+        const el = await fixture(html`
+            <obap-selector selector-type="range" range-length="5">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+                <div val="3"></div>
+                <div val="4"></div>
+                <div val="5"></div>
+                <div val="6"></div>
+                <div val="7"></div>
+                <div val="8"></div>
+            </obap-selector>
+        `);
+        el._ctrl = true;
+
+        el.select(7);
+        await nextFrame();
+        expect(el.selectedItems.length).to.equal(4); 
+    });
+
+    it('cannot select an invalid range if the ctrl key is down', async () => {
+        const el = await fixture(html`
+            <obap-selector selector-type="range" range-length="5">
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+                <div val="3"></div>
+                <div val="4"></div>
+                <div val="5"></div>
+                <div val="6"></div>
+                <div val="7"></div>
+                <div val="8"></div>
+                <div val="9"></div>
+            </obap-selector>
+        `);
+        el._ctrl = true;
+
+        el.select(-10);
+        await nextFrame();
+        expect(el.selectedItems.length).to.equal(1); 
     });
 });

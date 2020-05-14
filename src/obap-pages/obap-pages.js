@@ -35,11 +35,6 @@ export class ObapPages extends ObapSelectableMixin(ObapElement) {
         `;
     }
 
-    constructor() {
-        super();
-        this.selectedClass = 'obap-page-selected';
-    }
-
     render() {
         return html`<slot></slot>`;
     }

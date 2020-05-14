@@ -5,6 +5,8 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import { body, caption } from '../../src/obap-styles/obap-typography.js';
 import '../../src/obap-selector/obap-selector.js';
+import '../../src/obap-icon/obap-icon.js';
+import '../../src/obap-callout/obap-callout.js';
 
 export class SelectorDemo extends ObapElement {
     static get styles() {
@@ -39,6 +41,36 @@ export class SelectorDemo extends ObapElement {
                 border: 1px solid var(--obap-divider-on-surface-color);
             }
 
+            obap-selector.grid {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+                gap: 4px;
+                padding: 8px;
+                width: auto;
+            }
+
+            .grid-item {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            .grid-item[selected] {
+                background: var(--obap-primary-color);
+                color: var(--obap-on-primary-color);
+            }
+
+            .grid-item:hover {
+                background: var(--obap-primary-light-color);
+                color: var(--obap-on-primary-color);
+            }
+
             .selector-container {
                 display: flex;
             }
@@ -52,12 +84,51 @@ export class SelectorDemo extends ObapElement {
             .description {
                 padding: 4px;
             }
+
+            div[no-select] {
+                color: var(--obap-text-disabled-color);
+                pointer-events: none;
+            }
+
+            div[other-month] {
+                color: var(--obap-text-disabled-color);
+            }
+
+            div[day] {
+                color: var(--obap-primary-color);
+                font-weight: 500;
+            }
+
+            div[popup] {
+                text-decoration: underline;
+            }
+
+            .callout-content {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              min-width: 64px;
+            }
+
+            obap-icon {
+                margin-bottom: 4px;
+            }
+
+            obap-callout {
+              --obap-callout-color: var(--obap-on-primary-color);
+              --obap-callout-background-color: var(--obap-primary-light-color);
+            }
         `];
     }
 
     static get properties() {
         return {
             items: {
+                type: Array
+            },
+
+            numberItems: {
                 type: Array
             },
 
@@ -94,6 +165,15 @@ export class SelectorDemo extends ObapElement {
             { caption: "Item 4", selected: false },
             { caption: "Item 5", selected: false }
         ];
+
+        this.numberItems = ['S', 'M', 'T', 'W', 'T', 'F', 'S', '29', '30'];
+
+        for (let i = 1; i <= 31; i++) {
+            this.numberItems.push(i);
+        }
+
+        this.numberItems.push(1);
+        this.numberItems.push(2);
     }
 
     render() {
@@ -111,14 +191,58 @@ export class SelectorDemo extends ObapElement {
 
                     <div class="selector-item">
                         <div class="description typography-caption">Multi Select</div>
-                        <obap-selector selected-index="${this.selectedItem}" multi @obap-item-selected="${this._multiItemSelectionChanged}" @obap-item-deselected="${this._multiItemSelectionChanged}">
+                        <obap-selector selected-index="${this.selectedItem}"  selector-type="multi" @obap-item-selected="${this._multiItemSelectionChanged}" @obap-item-deselected="${this._multiItemSelectionChanged}">
                             ${this.items.map(item => html`<div .item="${item}" class="item typography-body" ?selected="${item.selected}">${item.caption}</div>`)}
                         </obap-selector>
                         <div class="description typography-caption">${this.multiItems}</div>
                     </div>
+
+                    <div class="selector-item">
+                        <div class="description typography-caption">Range Select</div>
+                        <obap-selector  selector-type="range" @obap-item-selected="${this._multiItemSelectionChanged}" @obap-item-deselected="${this._multiItemSelectionChanged}">
+                            ${this.items.map(item => html`<div .item="${item}" class="item typography-body">${item.caption}</div>`)}
+                        </obap-selector>
+                        <div class="description typography-caption">${this.multiItems}</div>
+                    </div>
+
+                    <div class="selector-item">
+                        <div class="description typography-caption">Single Select Grid</div>
+                        <obap-selector class="grid">
+                            ${this.numberItems.map((item, index) => this._renderItem(item, index))}
+                        </obap-selector>
+                    </div>
+
+                    <div class="selector-item">
+                        <div class="description typography-caption">Multi Select Grid</div>
+                        <obap-selector class="grid"  selector-type="multi">
+                            ${this.numberItems.map((item, index) => this._renderItem(item, index))}
+                        </obap-selector>
+                    </div>
+
+                    <div class="selector-item">
+                        <div class="description typography-caption">Range Select Grid</div>
+                        <obap-selector class="grid"  selector-type="range" range-length="7">
+                            ${this.numberItems.map((item, index) => this._renderItem(item, index))}
+                        </obap-selector>
+                    </div>
                 </div>
             </div>
         `;
+    }
+
+    _renderItem(item, index) {
+        if (index === 30) {
+            return html`
+                <div class="grid-item typography-caption" tabindex="0" popup ?day="${index < 7}" ?no-select="${index < 7}" ?other-month="${(index > 6 && (index < 9)) || index > 39}">
+                    <obap-callout elevated anchor="middle-top" arrow-position="bottom" offset-y="-2">
+                        <div class="callout-content typography-caption"><obap-icon icon="android"></obap-icon><div>Android Day</div></div>
+                    </obap-callout>
+                    ${item}
+                </div>
+                `;
+        }
+
+        return html`<div class="grid-item typography-caption" tabindex="0" ?day="${index < 7}" ?no-select="${index < 7}" ?other-month="${(index > 6 && (index < 9)) || index > 39}">${item}</div>`;
     }
 
     _itemSelected(e) {

@@ -19,7 +19,7 @@ theme.create('green', '#4caf50', '#087f23', '#80e27e', '#ffc107', '#FAFAFA');
 The `theme.create` method has the following signature (the parameters are self-explanatory):
 
 ```javascript
-create(name, primary, primaryDark, primaryLight, secondary, window)
+create(name, primary, primaryDark, primaryLight, accent, window)
 ```
 
 ## Setting Themes
@@ -65,18 +65,16 @@ Since a theme is just a bunch of CSS variables, you use them the same way as any
 |--obap-primary-light-color        |Yes         |
 |--obap-primary-color              |Yes         |
 |--obap-primary-dark-color         |Yes         |
-|--obap-primary-secondary-color    |Yes         |
-|--obap-primary-window-color       |Yes         |
-|--obap-primary-window-color       |No          |
-|--obap-background-color           |No          |
+|--obap-accent-color               |Yes         |
+|--obap-window-color               |Yes         |
 |--obap-surface-color              |No          |
 |--obap-error-color                |No          |
 |--obap-notification-color         |No          | 
 |--obap-selection-color            |No          | 
 |--obap-on-primary-color           |No          |
 |--obap-on-primary-inactive-color  |No          |
-|--obap-on-secondary-color         |No          |
-|--obap-on-secondary-inactive-color|No          |
+|--obap-on-accent-color            |No          |
+|--obap-on-accent-inactive-color   |No          |
 |--obap-on-background-color        |No          |
 |--obap-on-surface-color           |No          |
 |--obap-on-window-color            |No          |

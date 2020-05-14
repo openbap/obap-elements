@@ -6,12 +6,11 @@ import { html, fixture, expect, nextFrame, defineCE, unsafeStatic } from '@open-
 import '../src/obap-pages/obap-pages.js';
 
 describe('obap-pages', () => {
-    it('sets selectedClass to obap-page-selected', async () => {
+    it('passes the a11y audit', async () => {
         const el = await fixture(html`
             <obap-pages></obap-pages>
         `);
 
-        expect(el.selectedClass).to.equal('obap-page-selected');
+        await expect(el).shadowDom.to.be.accessible();
     });
-
 });
