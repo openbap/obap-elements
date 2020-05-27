@@ -21,6 +21,7 @@ export class CalloutDemo extends ObapElement {
             .row {
               display: flex;
               flex-direction: row;
+              flex-wrap: wrap;
               align-items: center;
               padding: 16px;
             }
@@ -107,6 +108,7 @@ export class CalloutDemo extends ObapElement {
             }
 
             .container-speech {
+                position: relative;
                 display: flex;
                 flex-direction: column;
                 background: #FFF59D;

@@ -26,15 +26,12 @@ export class ObapIcon extends ObapElement {
                 --obap-icon-width: 20px;
                 --obap-icon-height: 20px;
 
-                display: flex;
+                display: inline-flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                position: relative;
-                vertical-align: middle;
-
                 fill: var(--obap-icon-fill-color);
                 stroke: var(--obap-icon-stroke-color);
-
                 width: var(--obap-icon-width);
                 height: var(--obap-icon-height);
             }

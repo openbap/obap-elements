@@ -8,10 +8,9 @@ import { caption } from '../../src/obap-styles/obap-typography.js';
 import '../../src/obap-icon/obap-icon.js';
 import '../../src/obap-tabs/obap-tabs.js';
 import '../../src/obap-pages/obap-pages.js';
+import '../../src/obap-callout/obap-callout.js';
 import '../../src/obap-selector/obap-selector-container.js';
 import { getIconNames, getIconGroups } from  '../../src/obap-icons/obap-core-icons.js';
-
-/* All these icons cause a significant performance degradation */
 import '../../src/obap-icons/obap-standard-icons.js';
 import '../../src/obap-icons/obap-av-icons.js';
 import '../../src/obap-icons/obap-communication-icons.js';
@@ -48,6 +47,14 @@ export class IconsDemo extends ObapElement {
                 flex-wrap: wrap;
             }
 
+            .icon-container {
+                padding: 4px;
+                margin: 4px;
+                background: white;
+                color: var(--obap-text-secondary-color, rgba(0, 0, 0, 0.54));
+                cursor: pointer;
+            }
+
             obap-tabs {
                 margin-bottom: 8px;
             }
@@ -56,12 +63,17 @@ export class IconsDemo extends ObapElement {
                 margin-bottom: 24px;
             }
 
-            obap-icon {
-                padding: 4px;
-                margin: 4px;
-                background: white;
-                color: var(--obap-text-secondary-color, rgba(0, 0, 0, 0.54));
-                cursor: pointer;
+            obap-callout {
+              --obap-callout-color: var(--obap-on-primary-color);
+              --obap-callout-background-color: var(--obap-primary-light-color);
+            }
+
+            .callout-content {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              min-width: 64px;
             }
         `];
     }
@@ -90,7 +102,13 @@ export class IconsDemo extends ObapElement {
                         ${this.groups.map(group => html`
                             <div class="icon-group">
                                 ${getIconNames(group).map(icon => html`
-                                    <obap-icon icon="${icon}" title="${icon}"></obap-icon>
+                                    <div class="icon-container" tabindex="0">
+                                        <obap-callout elevated anchor="middle-top" arrow-position="bottom" offset-y="-2">
+                                            <div class="callout-content typography-caption">${icon}</div>
+                                        </obap-callout>
+
+                                        <obap-icon icon="${icon}"></obap-icon>
+                                    </div>
                                 `)}
                             </div>
                         `)}

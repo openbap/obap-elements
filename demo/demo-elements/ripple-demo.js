@@ -26,6 +26,7 @@ export class RippleDemo extends ObapElement {
             .row {
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
                 align-items: center;
                 padding: 16px;
             }
@@ -53,9 +54,14 @@ export class RippleDemo extends ObapElement {
 
             .icon {
                 position: relative;
-                display: inline;
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 margin-right: 32px;
                 cursor: pointer;
+                width: 40px;
+                height: 40px;
             }
 
             .fab {
@@ -172,27 +178,27 @@ export class RippleDemo extends ObapElement {
                 <div class="row">
                     <div class="icon">
                         <obap-icon icon="menu"></obap-icon>
-                        <obap-ripple class="circle" extend="1"></obap-ripple>
+                        <obap-ripple class="circle"></obap-ripple>
                     </div>
 
                     <div class="icon">
                         <obap-icon icon="bug-report"></obap-icon>
-                        <obap-ripple class="circle" extend="1"></obap-ripple>
+                        <obap-ripple class="circle"></obap-ripple>
                     </div>
 
                     <div class="icon icon-red">
                         <obap-icon icon="delete"></obap-icon>
-                        <obap-ripple class="circle red-ripple" extend="1"></obap-ripple>
+                        <obap-ripple class="circle red-ripple"></obap-ripple>
                     </div>
 
                     <div class="icon icon-green">
                         <obap-icon icon="account-box"></obap-icon>
-                        <obap-ripple class="circle green-ripple" extend="1"></obap-ripple>
+                        <obap-ripple class="circle green-ripple"></obap-ripple>
                     </div>
 
                     <div class="icon icon-blue">
                         <obap-icon icon="android"></obap-icon>
-                        <obap-ripple class="circle blue-ripple" extend="1"></obap-ripple>
+                        <obap-ripple class="circle blue-ripple"></obap-ripple>
                     </div>
                 </div>
 

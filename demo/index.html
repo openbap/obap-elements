@@ -2,39 +2,49 @@
 <html lang="en-GB">
 
 <head>
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,500|Roboto+Mono|Roboto:300,400,500&display=swap&subset=chinese-simplified" rel="stylesheet">
-    <link rel="icon" type="image/png" href="./favicon.png"/>
-    <title>Demo</title>
-    <style>
-        html {
-          height: 100vh;
-          margin: 0;
-          padding: 0;
-          overflow: hidden;
-        }
-    
-        body {
-          font-family: 'Roboto', 'Noto Sans SC', sans-serif;
-          background: #fafafa;
-          margin: 0;
-          padding: 0;
-          height: 100vh;
-          width: 100%;
-        }
-    
-        demo-app {
-          height: 100%;
-        }
-      </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="Description" content="Obap LitElement Web Component Demo.">
+  <!--
+  <link
+    href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,500|Roboto+Mono|Roboto:300,400,500&display=swap&subset=chinese-simplified"
+    rel="stylesheet">
+  -->
+  <link rel="icon" type="image/png" href="./favicon.png" />
+  <title>Demo</title>
+  <style>
+    html {
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+      background: #fafafa;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100%;
+      user-select: none;
+    }
+
+    demo-app {
+      height: 100%;
+    }
+  </style>
 </head>
 
 <body>
-    <demo-app></demo-app>
-    
-    <script type="module">
-        import './demo-app/demo-app.js';
-    </script>
+  <demo-app></demo-app>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,500&display=swap');
+  </style>
+  <script type="module">
+    import './demo-app/demo-app.js';
+  </script>
 </body>
 
 </html>

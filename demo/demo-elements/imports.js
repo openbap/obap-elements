@@ -16,3 +16,8 @@ import './badge-demo.js';
 import './tooltip-demo.js';
 import './callout-demo.js';
 import './ripple-demo.js';
+import './button-demo.js';
+import './check-demo.js';
+import './radio-demo.js';
+import './card-demo.js';
+import './chip-demo.js';

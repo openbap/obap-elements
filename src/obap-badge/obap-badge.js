@@ -41,7 +41,7 @@ export class ObapBadge extends ObapAttachedElementMixin(ObapElement) {
                 --obap-badge-color: var(--obap-on-primary-color, #FFFFFF);
                 --obap-badge-disabled-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-badge-background-color: var(--obap-primary-color, #5c6bc0);
-                --obap-badge-icon-size: 80%;
+                --obap-badge-icon-size: 82%;
 
                 display: block;
                 position: absolute;

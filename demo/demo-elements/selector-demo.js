@@ -55,9 +55,11 @@ export class SelectorDemo extends ObapElement {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                padding: 1px 0 0 1px;
                 width: 24px;
                 height: 24px;
                 border-radius: 50%;
+                box-sizing: border-box;
                 cursor: pointer;
             }
 
@@ -73,6 +75,7 @@ export class SelectorDemo extends ObapElement {
 
             .selector-container {
                 display: flex;
+                flex-wrap: wrap;
             }
 
             .selector-item {
@@ -207,21 +210,21 @@ export class SelectorDemo extends ObapElement {
 
                     <div class="selector-item">
                         <div class="description typography-caption">Single Select Grid</div>
-                        <obap-selector class="grid">
+                        <obap-selector class="grid" enter-selects>
                             ${this.numberItems.map((item, index) => this._renderItem(item, index))}
                         </obap-selector>
                     </div>
 
                     <div class="selector-item">
                         <div class="description typography-caption">Multi Select Grid</div>
-                        <obap-selector class="grid"  selector-type="multi">
+                        <obap-selector class="grid"  selector-type="multi" enter-selects>
                             ${this.numberItems.map((item, index) => this._renderItem(item, index))}
                         </obap-selector>
                     </div>
 
                     <div class="selector-item">
                         <div class="description typography-caption">Range Select Grid</div>
-                        <obap-selector class="grid"  selector-type="range" range-length="7">
+                        <obap-selector class="grid"  selector-type="range" range-length="7" enter-selects>
                             ${this.numberItems.map((item, index) => this._renderItem(item, index))}
                         </obap-selector>
                     </div>
@@ -233,7 +236,7 @@ export class SelectorDemo extends ObapElement {
     _renderItem(item, index) {
         if (index === 30) {
             return html`
-                <div class="grid-item typography-caption" tabindex="0" popup ?day="${index < 7}" ?no-select="${index < 7}" ?other-month="${(index > 6 && (index < 9)) || index > 39}">
+                <div class="grid-item typography-caption" tabindex="${index < 7 ? -1 : 0}" popup ?day="${index < 7}" ?no-select="${index < 7}" ?other-month="${(index > 6 && (index < 9)) || index > 39}">
                     <obap-callout elevated anchor="middle-top" arrow-position="bottom" offset-y="-2">
                         <div class="callout-content typography-caption"><obap-icon icon="android"></obap-icon><div>Android Day</div></div>
                     </obap-callout>
@@ -242,7 +245,7 @@ export class SelectorDemo extends ObapElement {
                 `;
         }
 
-        return html`<div class="grid-item typography-caption" tabindex="0" ?day="${index < 7}" ?no-select="${index < 7}" ?other-month="${(index > 6 && (index < 9)) || index > 39}">${item}</div>`;
+        return html`<div class="grid-item typography-caption" tabindex="${index < 7 ? -1 : 0}" ?day="${index < 7}" ?no-select="${index < 7}" ?other-month="${(index > 6 && (index < 9)) || index > 39}">${item}</div>`;
     }
 
     _itemSelected(e) {

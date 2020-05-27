@@ -2,6 +2,9 @@
 @license
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
+
+import ResizeObserverPF from 'resize-observer-polyfill';
+
 export const ObapAttachedElementMixin = (superClass) =>
     class ObapAttachedElementMixinComponent extends superClass {
         static get properties() {
@@ -61,24 +64,25 @@ export const ObapAttachedElementMixin = (superClass) =>
 
             this._boundHandleResizeEvent = this._handleResizeEvent.bind(this);
 
-            this._resizeObserver = new ResizeObserver(entries => {
-                this.updatePosition();
-            });
+            if ('ResizeObserver' in window) {
+                this._resizeObserver = new ResizeObserver(entries => {
+                    this._positionElement();
+                });
+            } else {
+                this._resizeObserver = new ResizeObserverPF(entries => {
+                    this._positionElement();
+                });
+            }
         }
 
         connectedCallback() {
             super.connectedCallback();
             window.addEventListener('resize', this._boundHandleResizeEvent);
-
-            if (this.anchor !== 'none') {
-                this._resizeObserver.observe(this);
-            } 
-
             this._setTarget();
         }
 
         disconnectedCallback() {
-            if (this.anchor !== 'none') {
+            if ((this._resizeObserver) && (this.anchor !== 'none')) {
                 this._resizeObserver.unobserve(this);
             }
 
@@ -88,12 +92,12 @@ export const ObapAttachedElementMixin = (superClass) =>
 
         firstUpdated(changedProperties) {
             super.firstUpdated(changedProperties);
-            this.updatePosition();
+            this._positionElement();
         }
-
+    
         updated(changedProperties) {
             super.updated(changedProperties);
-            this.updatePosition();
+            this._positionElement();
         }
 
         _setTarget() {
@@ -112,19 +116,29 @@ export const ObapAttachedElementMixin = (superClass) =>
                 attachNode = parentNode;
             };
 
-            if (this.anchor === 'none') {
+            if ((this._resizeObserver) && (this.anchor !== 'none')) {
+                this._resizeObserver.observe(this);
+            } else {
                 attachNode = null;
             }
 
             this._target = attachNode;
-            this.updatePosition();
+
+            if (this._target) {
+                this._target.style.transform = 'rotate(0)';
+            }
+            this._positionElement();
         }
 
         _handleResizeEvent(e) {
-            this.updatePosition();
+            this._positionElement();
         }
 
-        updatePosition() {
+        _asyncPositionElement() {
+            window.requestAnimationFrame(() => this._positionElement());
+        }
+
+        _positionElement() {
             // SNUG-FIT: Adjust the corner positions based on the border-radius over the target and child.
             if (!this._target || !this.offsetParent || this.anchor === 'none') {
                 return;

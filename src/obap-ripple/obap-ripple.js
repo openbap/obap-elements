@@ -9,17 +9,15 @@ export class ObapRipple extends ObapElement {
         return [css`
             :host {
                 --obap-ripple-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
-
                 display: block;
                 position: absolute;
                 left: 0;
                 top: 0;
                 width: 100%;
                 height: 100%;
-
                 background: var(--obap-ripple-color);
                 opacity: 0;
-                transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: opacity 0.50s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             :host([extend="1"]) {
@@ -98,6 +96,9 @@ export class ObapRipple extends ObapElement {
             this.addEventListener('mousedown', this._boundHandleMouseDownEvent);
             this.addEventListener('mouseup', this._boundHandleMouseUpEvent);
             this.addEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
+            
+            this.addEventListener('touchstart', this._boundHandleMouseDownEvent);
+            this.addEventListener('touchend', this._boundHandleMouseUpEvent);
         }
     }
 
@@ -106,6 +107,9 @@ export class ObapRipple extends ObapElement {
             this.removeEventListener('mousedown', this._boundHandleMouseDownEvent);
             this.removeEventListener('mouseup', this._boundHandleMouseUpEvent);
             this.removeEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
+
+            this.removeEventListener('touchstart', this._boundHandleMouseDownEvent);
+            this.removeEventListener('touchend', this._boundHandleMouseUpEvent);
         }
         
         super.disconnectedCallback();
@@ -123,7 +127,6 @@ export class ObapRipple extends ObapElement {
 
     _handleMouseLeaveEvent(e) {
         this.active = false;
-        this.hasFocus = false;
     }
 }
 

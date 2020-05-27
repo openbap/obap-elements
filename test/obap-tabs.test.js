@@ -36,4 +36,46 @@ describe('obap-tabs', () => {
         expect(el.role).to.equal('tablist');
         expect(el.items[0].role).to.equal('tab');
     });
+
+    it('has a ripple if no-ink is false', async () => {
+        const el = await fixture(html`
+            <obap-tabs>
+                <obap-tab></obap-tab>
+                <obap-tab></obap-tab>
+            </obap-tabs>
+        `);
+
+        await nextFrame();
+        const ripple = el.items[0].renderRoot.querySelector('obap-ripple');
+        expect(ripple).to.not.equal(null);
+    });
+
+    it('does not have a ripple if no-ink is true', async () => {
+        const el = await fixture(html`
+            <obap-tabs>
+                <obap-tab no-ink></obap-tab>
+                <obap-tab></obap-tab>
+            </obap-tabs>
+        `);
+
+        await nextFrame();
+        const ripple = el.items[0].renderRoot.querySelector('obap-ripple');
+        expect(ripple).to.equal(null);
+    });
+
+    it('only sets the ripple focus if the tab has focus but not selected', async () => {
+        const el = await fixture(html`
+            <obap-tabs>
+                <obap-tab has-focus></obap-tab>
+                <obap-tab has-focus selected></obap-tab>
+            </obap-tabs>
+        `);
+
+        await nextFrame();
+        const ripple0 = el.items[0].renderRoot.querySelector('obap-ripple');
+        const ripple1 = el.items[1].renderRoot.querySelector('obap-ripple');
+        expect(ripple0.hasFocus).to.equal(true);
+        expect(ripple1.hasFocus).to.equal(false);
+    });
+
 });

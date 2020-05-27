@@ -16,6 +16,7 @@ export class ObapTabs extends ObapSelectableMixin(ObapElement) {
                 --obap-tabs-inactive-color: var(--obap-on-primary-inactive-color, rgba(255, 255, 255, 0.7));
                 --obap-tabs-disabled-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-tabs-background-color: var(--obap-primary-color, #5c6bc0);
+                --obap-tabs-ripple-color: var(--obap-tabs-inactive-color);
 
                 color: var(--obap-tabs-color);
                 background: var(--obap-tabs-background-color);
@@ -66,6 +67,7 @@ export class ObapTabs extends ObapSelectableMixin(ObapElement) {
         super();
         this.role = 'tablist';
         this.fill = false;
+        this.enterSelects = true;
     }
 
     render() {

@@ -88,29 +88,35 @@ export class ObapTooltip extends ObapAttachedElementMixin(ObapElement) {
         this.triggerTime = 500;
         this._showing = false;
 
-        this._boundHandleMouseEnterEvent = this._handleMouseEnterEvent.bind(this);
-        this._boundHandleMouseLeaveEvent = this._handleMouseLeaveEvent.bind(this);
         this._boundHandleFocusEvent = this._handleFocusEvent.bind(this);
-        this._boundHandleBlurEvent = this._handleBlurEvent.bind(this);
+        this._boundHandleTouchStartEvent = this._handleTouchStartEvent.bind(this);
+        this._boundShow = this.show.bind(this);
+        this._boundHide = this.hide.bind(this);
     }
 
     connectedCallback() {
         super.connectedCallback();
 
         if (this.targetElement) {
-            this.targetElement.addEventListener('mouseenter', this._boundHandleMouseEnterEvent);
-            this.targetElement.addEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
+            this.targetElement.addEventListener('mouseenter', this._boundShow);
+            this.targetElement.addEventListener('mouseleave', this._boundHide);
             this.targetElement.addEventListener('focus', this._boundHandleFocusEvent);
-            this.targetElement.addEventListener('blur', this._boundHandleBlurEvent);
+            this.targetElement.addEventListener('blur', this._boundHide);
+
+            this.targetElement.addEventListener('touchstart', this._boundHandleTouchStartEvent);
+            this.targetElement.addEventListener('touchend', this._boundHide);
         }
     }
 
     disconnectedCallback() {
         if (this.targetElement) {
-            this.targetElement.removeEventListener('mouseenter', this._boundHandleMouseEnterEvent);
-            this.targetElement.removeEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
+            this.targetElement.removeEventListener('mouseenter', this._boundShow);
+            this.targetElement.removeEventListener('mouseleave', this._boundHide);
             this.targetElement.removeEventListener('focus', this._boundHandleFocusEvent);
-            this.targetElement.removeEventListener('blur', this._boundHandleBlurEvent);
+            this.targetElement.removeEventListener('blur', this._boundHide);
+
+            this.targetElement.removeEventListener('touchstart', this._boundHandleTouchStartEvent);
+            this.targetElement.removeEventListener('touchend', this._boundHide);
         }
 
         super.disconnectedCallback();
@@ -127,21 +133,13 @@ export class ObapTooltip extends ObapAttachedElementMixin(ObapElement) {
             if (this._showing) {
                 this.setAttribute('is-visible', null);
             }
-        }, this.triggerTime);
-        
+        }, this._touching ? 0 : this.triggerTime);
     }
 
     hide() {
         this._showing = false;
+        this._touching = false;
         this.removeAttribute('is-visible');
-    }
-
-    _handleMouseEnterEvent(e) {
-        this.show();
-    }
-
-    _handleMouseLeaveEvent(e) {
-        this.hide();
     }
 
     _handleFocusEvent(e) {
@@ -152,8 +150,9 @@ export class ObapTooltip extends ObapAttachedElementMixin(ObapElement) {
         }
     }
 
-    _handleBlurEvent(e) {
-        this.hide();
+    _handleTouchStartEvent(e) {
+        this._touching = true;
+        this.show();
     }
 }
 

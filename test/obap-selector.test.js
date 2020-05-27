@@ -29,6 +29,39 @@ describe('obap-selector', () => {
 
         expect(el.items.length).to.equal(2);
     });
+
+    it('disables all children if disabled', async () => {
+        const el = await fixture(html`
+            <obap-selector>
+                <div val="0"></div>
+                <div val="1"></div>
+            </obap-selector>
+        `);
+        await nextFrame();
+        expect(el.items[0].disabled).to.equal(undefined);
+        expect(el.items[1].disabled).to.equal(undefined);
+        el.disabled = true;
+        await nextFrame();
+        expect(el.items[0].disabled).to.equal(true);
+        expect(el.items[1].disabled).to.equal(true);
+        el.disabled = false;
+        await nextFrame();
+        expect(el.items[0].disabled).to.equal(true);
+        expect(el.items[1].disabled).to.equal(true);
+    });
+
+    it('disables all children if disabled attribute is set', async () => {
+        const el = await fixture(html`
+            <obap-selector disabled>
+                <div val="0"></div>
+                <div val="1"></div>
+            </obap-selector>
+        `);
+
+        await nextFrame();
+        expect(el.items[0].disabled).to.equal(true);
+        expect(el.items[1].disabled).to.equal(true);
+    });
     
     it('selects an item', async () => {
         const el = await fixture(html`
@@ -60,6 +93,65 @@ describe('obap-selector', () => {
 
         expect(el.selectedIndex).to.equal(index);
         expect(item.getAttribute('val')).to.equal(index.toString());
+    });
+    //
+    it('does not error when provided with an invalid item', async () => {
+        const el = await fixture(html`
+            <obap-selector>
+                <div val="0"></div>
+                <div val="1"></div>
+            </obap-selector>
+        `);
+
+        el._selectItem(2);
+        await nextFrame();
+        expect(el.selectedIndex).to.equal(-1);
+
+        el._deselectItem(2);
+        await nextFrame();
+        expect(el.selectedIndex).to.equal(-1);
+    });
+
+    it('selects an item by focus', async () => {
+        const el = await fixture(html`
+            <obap-selector enter-selects>
+                <div val="0"></div>
+                <div val="1"></div>
+            </obap-selector>
+        `);
+        await nextFrame();
+        el._handleEnterEvent({target: el.items[1], key: 'Enter'});
+        await nextFrame();
+
+        expect(el.selectedIndex).to.equal(1);
+    });
+
+    it('does not select an item by focus if focus-select is false', async () => {
+        const el = await fixture(html`
+            <obap-selector>
+                <div val="0"></div>
+                <div val="1"></div>
+            </obap-selector>
+        `);
+        await nextFrame();
+        el._handleEnterEvent({target: el.items[1], key: 'Enter'});
+        await nextFrame();
+
+        expect(el.selectedIndex).to.equal(-1);
+    });
+
+    it('selects nothing by focus if target is invalid', async () => {
+        const el = await fixture(html`
+            <obap-selector enter-selects>
+                <div val="0"></div>
+                <div val="1"></div>
+            </obap-selector>
+        `);
+        await nextFrame();
+        el._handleEnterEvent({target: el.items[2], key: 'Enter'});
+        await nextFrame();
+
+        expect(el.selectedIndex).to.equal(-1);
     });
 
     it('can return index of item', async () => {

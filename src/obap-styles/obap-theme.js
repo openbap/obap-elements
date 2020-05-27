@@ -40,12 +40,15 @@ class ObapThemeItem {
   
       // Set the fixed theme items.
       let root = document.documentElement;
+
+      root.style.setProperty('-webkit-tap-highlight-color', 'transparent');
   
       root.style.setProperty('--obap-background-color', '#FFFFFF');
       root.style.setProperty('--obap-surface-color', '#FFFFFF');
       root.style.setProperty('--obap-error-color', '#e53935');
       root.style.setProperty('--obap-notification-color', '#323232');
       root.style.setProperty('--obap-selection-color', '#E0E0E0');
+      root.style.setProperty('--obap-block-color', '#ECECEC');
   
       root.style.setProperty('--obap-on-primary-color', '#FFFFFF');
       root.style.setProperty('--obap-on-primary-inactive-color', 'rgba(255, 255, 255, 0.7)');

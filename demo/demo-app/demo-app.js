@@ -21,7 +21,7 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
             .container {
                 height: 100%;
                 display: flex;
-                overflow: hidden;
+      
             }
 
             .navigator {
@@ -38,8 +38,9 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
                 margin: 8px 8px 8px 0;
                 padding: 8px;
                 border-radius: 0;
-                overflow: auto;
                 background: var(--obap-surface-color);
+                position: relative;
+                overflow: auto;
             }
 
             .separator {
@@ -77,7 +78,7 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
         super();
         themeManager.create('green', '#4caf50', '#087f23', '#80e27e', '#ffc107', '#FAFAFA');
         this.theme = 'default';
-        this.selectedPage = 8;
+        this.selectedPage = 10;
     }
 
     render() {
@@ -93,8 +94,13 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
                         <div class="separator" no-select>Elements</div>
                         <div class="item">obap-attached-element</div>
                         <div class="item">obap-badge</div>
+                        <div class="item">obap-button</div>
                         <div class="item">obap-callout</div>
+                        <div class="item">obap-card</div>
+                        <div class="item">obap-check</div>
+                        <div class="item">obap-chip</div>
                         <div class="item">obap-material</div>
+                        <div class="item">obap-radio</div>
                         <div class="item">obap-ripple</div>
                         <div class="item">obap-selector</div>
                         <div class="item">obap-tabs</div>
@@ -109,8 +115,13 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
                         <icons-demo></icons-demo>
                         <attached-element-demo></attached-element-demo>
                         <badge-demo></badge-demo>
+                        <button-demo></button-demo>
                         <callout-demo></callout-demo>
+                        <card-demo></card-demo>
+                        <check-demo></check-demo>
+                        <chip-demo></chip-demo>
                         <material-demo></material-demo>
+                        <radio-demo></radio-demo>
                         <ripple-demo></ripple-demo>
                         <selector-demo></selector-demo>
                         <tabs-demo></tabs-demo>

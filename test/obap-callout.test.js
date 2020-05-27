@@ -47,27 +47,6 @@ describe('obap-callout', () => {
         expect(el._showing).to.equal(false);
     });
 
-    it('sets to visible on mouseenter', async () => {
-        const el = await fixture(html`
-            <obap-callout>callout</obap-callout>
-        `);
-
-        el._handleMouseEnterEvent();
-
-        expect(el._showing).to.equal(true);
-    });
-
-    it('sets to hidden on mouseleave', async () => {
-        const el = await fixture(html`
-            <obap-callout>callout</obap-callout>
-        `);
-
-        el._handleMouseEnterEvent();
-        el._handleMouseLeaveEvent();
-
-        expect(el._showing).to.equal(false);
-    });
-
     it('sets to visible on focus', async () => {
         const el = await fixture(html`
             <obap-callout>callout</obap-callout>
@@ -78,17 +57,6 @@ describe('obap-callout', () => {
         expect(el._showing).to.equal(true);
     });
 
-    it('sets to hidden on blur', async () => {
-        const el = await fixture(html`
-            <obap-callout>callout</obap-callout>
-        `);
-
-        el._handleFocusEvent();
-        el._handleBlurEvent();
-
-        expect(el._showing).to.equal(false);
-    });
-
     it('does not set showing flag if fixed on focus', async () => {
         const el = await fixture(html`
             <obap-callout fixed>callout</obap-callout>
@@ -96,17 +64,6 @@ describe('obap-callout', () => {
 
         expect(el._showing).to.equal(true);
         el._handleFocusEvent();
-        expect(el._showing).to.equal(true);
-    });
-
-    it('does not set showing flag if fixed on blur', async () => {
-        const el = await fixture(html`
-            <obap-callout fixed>callout</obap-callout>
-        `);
-
-        expect(el._showing).to.equal(true);
-        el._handleFocusEvent();
-        el._handleBlurEvent();
         expect(el._showing).to.equal(true);
     });
     
@@ -130,5 +87,34 @@ describe('obap-callout', () => {
         el._showing = false;
         expect(el._showing).to.equal(false);
     });
-    
+
+    it('handles touch events', async () => {
+        const el = await fixture(html`
+            <obap-callout>callout</obap-callout>
+        `);
+
+        expect(el._touching).to.equal(false);
+        el._handleTouchStartEvent();
+        expect(el._touching).to.equal(true);
+    });
+
+    it('does not hide if fixed', async () => {
+        const el = await fixture(html`
+            <obap-callout fixed>callout</obap-callout>
+        `);
+
+        el._showing = true;
+        el.hide();
+        expect(el._showing).to.equal(true);
+    });
+
+    it('ignores touch events if fixed', async () => {
+        const el = await fixture(html`
+            <obap-callout fixed>callout</obap-callout>
+        `);
+
+        expect(el._touching).to.equal(false);
+        el._handleTouchStartEvent();
+        expect(el._touching).to.equal(false);
+    });
 });

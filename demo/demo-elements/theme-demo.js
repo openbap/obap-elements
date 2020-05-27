@@ -88,6 +88,11 @@ export class ThemeDemo extends ObapElement {
                 color: var(--obap-on-selection-color);
                 background: var(--obap-selection-color);
             }
+
+            .block-item {
+                color: var(--obap-text-secondary-color);
+                background: var(--obap-block-color);
+            }
         `];
     }
     
@@ -106,8 +111,8 @@ export class ThemeDemo extends ObapElement {
                     <div class="item notification-item elevation-1 typography-caption">Notification</div>
                     <div class="item error-item elevation-1 typography-caption">Error</div>
                     <div class="item selection-item elevation-1 typography-caption">Selection</div>
+                    <div class="item block-item elevation-1 typography-caption">Block</div>
                 </div>
-                
             </div>
         `;
     }

@@ -655,4 +655,20 @@ describe('obap-attached-element', () => {
         await expect(rect.top).to.equal(45);
         await expect(rect.left).to.equal(45);
     });
+
+    it('repositions on window size change', async () => {
+        const el = await fixture(html`
+            <test-element>
+                <div></div>
+                <obap-attached-element anchor="top-right"><div class="badge"></div></obap-attached-element>
+            </test-element>
+        `);
+        //await nextFrame();
+        
+        const target = el.items[0];
+        const attachedElement = el.items[1];
+        attachedElement._handleResizeEvent();
+
+        await expect(attachedElement.targetElement).to.equal(target);
+    });
 });

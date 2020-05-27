@@ -20,6 +20,7 @@ export const ObapSelectableMixin = (superClass) =>
                 this._selectedIndex = value;
                 this._changeSelection(this._selectedIndex, oldValue);
                 this.requestUpdate('selectedIndex', oldValue);
+
             }
         }
 
@@ -68,6 +69,14 @@ export const ObapSelectableMixin = (superClass) =>
                 selectorType: {
                     type: String,
                     attribute: 'selector-type'
+                },
+
+                /**
+                If true, items are selected on enter.
+                */
+                enterSelects: {
+                    type: Boolean,
+                    attribute: 'enter-selects'
                 }
             }
         }
@@ -77,23 +86,41 @@ export const ObapSelectableMixin = (superClass) =>
 
             this._boundHandleSelectionEvent = this._handleSelectionEvent.bind(this);
             this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
+            this._boundHandleEnterEvent = this._handleEnterEvent.bind(this);
             this._selectedIndex = -1;
             this._selectable = true;
             this._items = [];
             this._ctrl = false;
             this.toggles = false;
+            this.enterSelects = false;
             this.selectorType = 'single';
+        }
+
+        updated(changedProperties) {
+            super.updated(changedProperties);
+
+            changedProperties.forEach((oldValue, propName) => {
+                if (propName === 'disabled') {
+                    if (this.disabled) {
+                        this.items.forEach((item) => {
+                            item.disabled = this.disabled;
+                        });
+                    }
+                }
+            });
         }
 
         connectedCallback() {
             super.connectedCallback();
             this.addEventListener('click', this._boundHandleSelectionEvent);
+            this.addEventListener('keydown', this._boundHandleEnterEvent, { capture: true });
             this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
         }
 
         disconnectedCallback() {
             this.removeEventListener('click', this._boundHandleSelectionEvent);
             this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
+            this.removeEventListener('keydown', this._boundHandleEnterEvent);
             super.disconnectedCallback();
         }
 
@@ -112,10 +139,16 @@ export const ObapSelectableMixin = (superClass) =>
 
         _populateItems() {
             let slot = this.renderRoot.querySelector('slot');
- 
+
             let items = slot.assignedNodes({ flatten: true }).filter((el) => {
                 return (el.nodeType === 1) && (!el.hasAttribute('no-select'));
             });
+
+            if (this.disabled) {
+                items.forEach((item) => {
+                    item.disabled = this.disabled;
+                });
+            }
 
             const oldItems = this._items;
             this._items = items;
@@ -134,12 +167,25 @@ export const ObapSelectableMixin = (superClass) =>
             this._ctrl = false;
         }
 
-        _deselectItem(index) {
-            const item = this.items[index];
+        _handleEnterEvent(e) {
+            if ((e.key !== 'Enter') || !this.enterSelects) return;
 
-            if (item) {
-                item.removeAttribute('selected');
-                this._fireEvent('obap-item-deselected', {item: item, index: index}, false);
+            const index = this.indexOf(e.target);
+            if ((index > -1) && (!e.target.disabled)) {
+                this.select(index);
+            }
+        }
+
+        _deselectItem(index) {
+            if (index === -1) {
+                this.items.forEach(item => item.removeAttribute('selected'));
+            } else {
+                const item = this.items[index];
+
+                if (item) {
+                    item.removeAttribute('selected');
+                    this._fireEvent('obap-item-deselected', { item: item, index: index }, false);
+                }
             }
         }
 
@@ -148,7 +194,7 @@ export const ObapSelectableMixin = (superClass) =>
 
             if (item) {
                 item.setAttribute('selected', '');
-                this._fireEvent('obap-item-selected', {item: item, index: index}, false);
+                this._fireEvent('obap-item-selected', { item: item, index: index }, false);
             }
         }
 
@@ -160,11 +206,11 @@ export const ObapSelectableMixin = (superClass) =>
             if (newIndex === oldIndex) {
                 this._deselectItem(oldIndex);
                 this._selectedIndex = -1;
-                
+
                 return;
             }
 
-            if (this._fireEvent('obap-item-selecting', {newIndex: newIndex, oldIndex: oldIndex}, true)) {
+            if (this._fireEvent('obap-item-selecting', { newIndex: newIndex, oldIndex: oldIndex }, true)) {
                 this._deselectItem(oldIndex);
                 this._selectItem(newIndex);
                 this._selectedIndex = newIndex;

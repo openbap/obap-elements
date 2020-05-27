@@ -71,6 +71,7 @@ Since a theme is just a bunch of CSS variables, you use them the same way as any
 |--obap-error-color                |No          |
 |--obap-notification-color         |No          | 
 |--obap-selection-color            |No          | 
+|--obap-block-color                |No          | 
 |--obap-on-primary-color           |No          |
 |--obap-on-primary-inactive-color  |No          |
 |--obap-on-accent-color            |No          |

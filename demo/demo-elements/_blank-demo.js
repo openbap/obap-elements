@@ -22,6 +22,14 @@ export class XXXDemo extends ObapElement {
                 color: var(--obap-on-primary-color);
                 background: var(--obap-primary-color);
             }
+
+            .row {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              align-items: center;
+              padding: 0;
+            }
         `];
     }
     
@@ -29,6 +37,9 @@ export class XXXDemo extends ObapElement {
         return html`
             <div class="container">
                 <div class="title">Demo</div>
+                <div class="row">
+                    
+                </div>
             </div>
         `;
     }

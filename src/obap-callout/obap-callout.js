@@ -8,30 +8,38 @@ import { ObapAttachedElementMixin } from '../obap-attached-element/obap-attached
 /**
 `<obap-callout>` is a speech bubble element that appears on hover and focus when the user hovers over an element (defaults to above the element) with the cursor or with the keyboard. It will anchor to the element specified in the for attribute, or, if that doesn't exist the immediate previous sibling, failing that, the parent node containing it. It inherits all the `obap-attached-element` positioning propeties (anchor, inset, shift, offsetX and offsetY). It also has a positional arrow direction that can be set. You can also position it as a normal element by setting `fixed` to `true`.
 
+N.B.: Callouts use absolution positioning so they won't scroll with the container unless the container has `position` set to `relative`. This is especially apparent with fixed callouts.
+
 ## Usage
 
 ```javascript
 import '@obap/obap-elements/obap-callout/obap-callout.js';
 
+<style>
+    .container {
+        position: relative;
+    }
+</style>
+
 <!-- Positions based on id -->
-<div>
+<div class="container">
     <div id="ib_1"></div>
     <obap-callout>callout</obap-callout>
 </div>
 
 <!-- Positions to previous sibling (div) -->
-<div>
+<div class="container">
     <div class="sibling"></div>
     <obap-callout>callout</obap-callout>
 </div>
 
 <!-- Positions to the parent -->
-<div class="parent">
+<div class="parent container">
     <obap-callout>callout</obap-callout>
 </div>
 
 <!-- No anchor (regular inline element) -->
-<div>
+<div class="container">
     <obap-callout fixed>callout</obap-callout>
 </div>
 
@@ -189,30 +197,35 @@ export class ObapCallout extends ObapAttachedElementMixin(ObapElement) {
         this.inset = 'out';
         this._showing = false;
         this.triggerTime = 500;
+        this._touching = false;
 
-        this._boundHandleMouseEnterEvent = this._handleMouseEnterEvent.bind(this);
-        this._boundHandleMouseLeaveEvent = this._handleMouseLeaveEvent.bind(this);
         this._boundHandleFocusEvent = this._handleFocusEvent.bind(this);
-        this._boundHandleBlurEvent = this._handleBlurEvent.bind(this);
+        this._boundHandleTouchStartEvent = this._handleTouchStartEvent.bind(this);
+        this._boundShow = this.show.bind(this);
+        this._boundHide = this.hide.bind(this);
     }
 
     connectedCallback() {
         super.connectedCallback();
 
         if (this.targetElement && this.anchor !== 'none' && !this.fixed) {
-            this.targetElement.addEventListener('mouseenter', this._boundHandleMouseEnterEvent);
-            this.targetElement.addEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
+            this.targetElement.addEventListener('mouseenter', this._boundShow);
+            this.targetElement.addEventListener('mouseleave', this._boundHide);
             this.targetElement.addEventListener('focus', this._boundHandleFocusEvent);
-            this.targetElement.addEventListener('blur', this._boundHandleBlurEvent);
+            this.targetElement.addEventListener('blur', this._boundHide);
+            this.targetElement.addEventListener('touchstart', this._boundHandleTouchStartEvent);
+            this.targetElement.addEventListener('touchend', this._boundHide);
         }
     }
 
     disconnectedCallback() {
         if (this.targetElement && this.anchor !== 'none' && !this.fixed) {
-            this.targetElement.removeEventListener('mouseenter', this._boundHandleMouseEnterEvent);
-            this.targetElement.removeEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
+            this.targetElement.removeEventListener('mouseenter', this._boundShow);
+            this.targetElement.removeEventListener('mouseleave', this._boundHide);
             this.targetElement.removeEventListener('focus', this._boundHandleFocusEvent);
-            this.targetElement.removeEventListener('blur', this._boundHandleBlurEvent);
+            this.targetElement.removeEventListener('blur', this._boundHide);
+            this.targetElement.removeEventListener('touchstart', this._boundHandleTouchStartEvent);
+            this.targetElement.removeEventListener('touchend', this._boundHide);
         }
 
         super.disconnectedCallback();
@@ -229,9 +242,7 @@ export class ObapCallout extends ObapAttachedElementMixin(ObapElement) {
     }
 
     render() {
-        return html`
-            <div class="container" arrow-position="${this.arrowPosition}"><slot></slot></div>
-        `;
+        return html`<div class="container" arrow-position="${this.arrowPosition}"><slot></slot></div>`;
     }
 
     show() {
@@ -241,21 +252,14 @@ export class ObapCallout extends ObapAttachedElementMixin(ObapElement) {
             if (this._showing) {
                 this.setAttribute('is-visible', null);
             }
-        }, (this.anchor === 'none' || this.fixed) ? 0 : this.triggerTime);
-        
+        }, (this.anchor === 'none' || this.fixed || this._touching) ? 0 : this.triggerTime);
     }
 
     hide() {
+        this._touching = false;
+        if (this.anchor === 'none' || this.fixed) return;
         this._showing = false;
         this.removeAttribute('is-visible');
-    }
-
-    _handleMouseEnterEvent(e) {
-        this.show();
-    }
-
-    _handleMouseLeaveEvent(e) {
-        this.hide();
     }
 
     _handleFocusEvent(e) {
@@ -268,10 +272,18 @@ export class ObapCallout extends ObapAttachedElementMixin(ObapElement) {
         }
     }
 
-    _handleBlurEvent(e) {
+    _handleTouchStartEvent(e) {
         if (this.anchor === 'none' || this.fixed) return;
 
-        this.hide();
+        this._touching = true;
+        this.show();
+        /*
+        setTimeout(() => {
+            if (this._touching) {
+                this.show();
+            }
+        }, this.triggerTime);
+        */
     }
 }
 

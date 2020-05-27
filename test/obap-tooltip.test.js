@@ -47,27 +47,6 @@ describe('obap-tooltip', () => {
         expect(el._showing).to.equal(false);
     });
 
-    it('sets to visible on mouseenter', async () => {
-        const el = await fixture(html`
-            <obap-tooltip anchor="none">tooltip</obap-tooltip>
-        `);
-
-        el._handleMouseEnterEvent();
-
-        expect(el._showing).to.equal(true);
-    });
-
-    it('sets to hidden on mouseleave', async () => {
-        const el = await fixture(html`
-            <obap-tooltip anchor="none">tooltip</obap-tooltip>
-        `);
-
-        el._handleMouseEnterEvent();
-        el._handleMouseLeaveEvent();
-
-        expect(el._showing).to.equal(false);
-    });
-
     it('sets to visible on focus', async () => {
         const el = await fixture(html`
             <obap-tooltip anchor="none">tooltip</obap-tooltip>
@@ -76,17 +55,6 @@ describe('obap-tooltip', () => {
         el._handleFocusEvent();
 
         expect(el._showing).to.equal(true);
-    });
-
-    it('sets to hidden on blur', async () => {
-        const el = await fixture(html`
-            <obap-tooltip anchor="none">tooltip</obap-tooltip>
-        `);
-
-        el._handleFocusEvent();
-        el._handleBlurEvent();
-
-        expect(el._showing).to.equal(false);
     });
 
     it('toggles visible on focus', async () => {
@@ -108,5 +76,16 @@ describe('obap-tooltip', () => {
         el.show();
         el._showing = false;
         expect(el._showing).to.equal(false);
+    });
+
+    it('sets to visible on touch', async () => {
+        const el = await fixture(html`
+            <obap-tooltip anchor="none">tooltip</obap-tooltip>
+        `);
+
+        el._handleTouchStartEvent();
+
+        expect(el._showing).to.equal(true);
+        expect(el._touching).to.equal(true);
     });
 });

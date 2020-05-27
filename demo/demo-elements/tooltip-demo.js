@@ -4,6 +4,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import '../../src/obap-tooltip/obap-tooltip.js';
+import '../../src/obap-button/obap-button.js';
 
 export class TooltipDemo extends ObapElement {
     static get styles() {
@@ -25,16 +26,13 @@ export class TooltipDemo extends ObapElement {
             .row {
               display: flex;
               flex-direction: row;
+              flex-wrap: wrap;
               align-items: center;
               padding: 16px;
             }
 
             .button {
                 margin: 8px 32px 8px 0;
-                height: 40px;
-                width: 40px;
-                cursor: pointer;
-                background: lightgrey;
             }
 
             .tooltip-1 {
@@ -87,46 +85,46 @@ export class TooltipDemo extends ObapElement {
             <div class="container">
                 <div class="title">Regular Tooltips</div>
                 <div class="row">
-                    <div class="button" tabindex="0"></div>
-                    <obap-tooltip>tooltip</obap-tooltip>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
+                    <obap-tooltip offset-y="4">tooltip</obap-tooltip>
                 </div>
 
                 <div class="title">Custom Colors</div>
                 <div class="row">
-                    <div class="button" tabindex="0"></div>
-                    <obap-tooltip class="tooltip-1">tooltip</obap-tooltip>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
+                    <obap-tooltip class="tooltip-1" offset-y="4">tooltip</obap-tooltip>
 
-                    <div class="button" tabindex="0"></div>
-                    <obap-tooltip class="tooltip-2">tooltip</obap-tooltip>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
+                    <obap-tooltip class="tooltip-2" offset-y="4">tooltip</obap-tooltip>
 
-                    <div class="button" tabindex="0"></div>
-                    <obap-tooltip class="tooltip-3">tooltip</obap-tooltip>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
+                    <obap-tooltip class="tooltip-3" offset-y="4">tooltip</obap-tooltip>
 
-                    <div class="button" tabindex="0"></div>
-                    <obap-tooltip class="tooltip-4">tooltip</obap-tooltip>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
+                    <obap-tooltip class="tooltip-4" offset-y="4">tooltip</obap-tooltip>
                 </div>
 
                 <div class="title">Custom Position (can use any obap-attached-element properties)</div>
                 <div class="row">
-                    <div class="button" tabindex="0"></div>
-                    <obap-tooltip anchor="middle-top">tooltip</obap-tooltip>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
+                    <obap-tooltip anchor="middle-top" offset-y="-4">tooltip</obap-tooltip>
 
-                    <div class="button" tabindex="0"></div>
-                    <obap-tooltip anchor="middle-bottom">tooltip</obap-tooltip>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
+                    <obap-tooltip anchor="middle-bottom" offset-y="4">tooltip</obap-tooltip>
 
-                    <div class="button" tabindex="0"></div>
-                    <obap-tooltip anchor="middle-right">tooltip</obap-tooltip>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
+                    <obap-tooltip anchor="middle-right" offset-x="4">tooltip</obap-tooltip>
 
-                    <div class="button" tabindex="0"></div>
-                    <obap-tooltip anchor="middle-left">tooltip</obap-tooltip>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
+                    <obap-tooltip anchor="middle-left" offset-x="-4">tooltip</obap-tooltip>
 
-                    <div class="button" tabindex="0"></div>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
                     <obap-tooltip anchor="center">tooltip</obap-tooltip>
                 </div>
 
                 <div class="title">Custom Styling (probably don't do this)</div>
                 <div class="row">
-                    <div class="button" tabindex="0"></div>
+                    <obap-button class="button" raised label="button" tabindex="0"></obap-button>
                     <obap-tooltip offset-y="8" class="dodgy-tooltip"><div class="dodgy-tooltip-item"><obap-icon icon="android"></obap-icon><div>Don't do this!</div></div></obap-tooltip>
                 </div>
             </div>
