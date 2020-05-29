@@ -3,7 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { ObapAttachedElementMixin } from '../obap-attached-element/obap-attached-element-mixin.js';
+import { ObapAttachedElementController } from '../obap-attached-element/obap-attached-element-controller.js';
 import { caption } from '../obap-styles/obap-typography.js';
 
 /**
@@ -33,7 +33,7 @@ import '@obap/obap-elements/obap-tooltip/obap-tooltip.js';
 `
 @slot - - Default slot
  */
-export class ObapTooltip extends ObapAttachedElementMixin(ObapElement) {
+export class ObapTooltip extends ObapAttachedElementController(ObapElement) {
     static get styles() {
         return [caption, css`
             :host {

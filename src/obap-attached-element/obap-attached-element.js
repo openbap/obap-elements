@@ -3,9 +3,9 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { ObapAttachedElementMixin } from '../obap-attached-element/obap-attached-element-mixin.js';
+import { ObapAttachedElementController } from './obap-attached-element-controller.js';
 
-export class ObapAttachedElement extends ObapAttachedElementMixin(ObapElement) {
+export class ObapAttachedElement extends ObapAttachedElementController(ObapElement) {
     static get styles() {
         return [css`
             :host {
@@ -20,6 +20,10 @@ export class ObapAttachedElement extends ObapAttachedElementMixin(ObapElement) {
 
             :host([disabled]) {
                 pointer-events: none;
+            }
+
+            :host([anchor="none"]) {
+                position: inherit;
             }
         `];
     }

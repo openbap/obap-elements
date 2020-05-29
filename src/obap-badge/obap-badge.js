@@ -3,7 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { ObapAttachedElementMixin } from '../obap-attached-element/obap-attached-element-mixin.js';
+import { ObapAttachedElementController } from '../obap-attached-element/obap-attached-element-controller.js';
 import '../obap-icon/obap-icon.js';
 import { caption } from '../obap-styles/obap-typography.js';
 import { hostElevation } from '../obap-styles/obap-elevation.js';
@@ -34,7 +34,7 @@ import '@obap/obap-elements/obap-badge/obap-badge.js';
 </div>
 ```
  */
-export class ObapBadge extends ObapAttachedElementMixin(ObapElement) {
+export class ObapBadge extends ObapAttachedElementController(ObapElement) {
     static get styles() {
         return [caption, hostElevation, css`
             :host {

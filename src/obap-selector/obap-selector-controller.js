@@ -3,12 +3,12 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 /**
-@element ObapSelectableMixin
+@element ObapSelectorController
 
 @prop {Array}  [items=[]] 
 */
-export const ObapSelectableMixin = (superClass) =>
-    class ObapSelectableMixinComponent extends superClass {
+export const ObapSelectorController = (superClass) =>
+    class ObapSelectorControllerComponent extends superClass {
         get selectedIndex() {
             return this._selectedIndex;
         }
@@ -44,7 +44,8 @@ export const ObapSelectableMixin = (superClass) =>
                     attribute: 'selected-index',
                     hasChanged(newVal, oldVal) {
                         return newVal !== oldVal;
-                    }
+                    },
+                    reflect: true
                 },
 
                 /**

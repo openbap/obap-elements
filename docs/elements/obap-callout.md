@@ -36,7 +36,7 @@ import '@obap/obap-elements/obap-callout/obap-callout.js';
 <obap-callout anchor="middle-right" arrow-position="left">callout</obap-callout>
 ```
 
-**Mixins:** ObapAttachedElementMixin
+**Mixins:** ObapAttachedElementController
 
 ## Properties
 

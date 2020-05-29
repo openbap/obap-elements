@@ -3,11 +3,11 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { ObapSelectableMixin } from '../obap-selector/obap-selectable-mixin.js';
+import { ObapSelectorController } from '../obap-selector/obap-selector-controller.js';
 import { button } from '../obap-styles/obap-typography.js';
 import './obap-tab.js';
 
-export class ObapTabs extends ObapSelectableMixin(ObapElement) {
+export class ObapTabs extends ObapSelectorController(ObapElement) {
     static get styles() {
         return [button, css`
             :host {

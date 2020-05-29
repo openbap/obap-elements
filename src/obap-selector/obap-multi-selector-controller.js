@@ -2,10 +2,10 @@
 @license
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
-import { ObapSelectableMixin } from './obap-selectable-mixin.js';
+import { ObapSelectorController } from './obap-selector-controller.js';
 
-export const ObapMultiSelectableMixin = (superClass) =>
-    class ObapMultiSelectableMixinComponent extends ObapSelectableMixin(superClass) {
+export const ObapMultiSelectorController = (superClass) =>
+    class ObapMultiSelectorControllerComponent extends ObapSelectorController(superClass) {
         static get properties() {
             return {
                 /**

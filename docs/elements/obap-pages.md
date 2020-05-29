@@ -14,7 +14,7 @@ import '@obap/obap-elements/obap-pages/obap-pages.js';
 </obap-pages>
 ```
 
-**Mixins:** ObapSelectableMixin
+**Mixins:** ObapSelectorController
 
 ## Properties
 

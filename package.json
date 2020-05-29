@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
+    "go": "es-dev-server --app-index demo/index.html --node-resolve --open",
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
     "deploy": "npm publish src",

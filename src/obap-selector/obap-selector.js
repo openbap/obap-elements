@@ -3,7 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { ObapRangeSelectableMixin } from './obap-rangeselectable-mixin.js';
+import { ObapRangeSelectorController } from './obap-range-selector-controller.js';
 
 /**
  `ObapSelector` is an element that allows you to manage a list of elements that can be selected. Clicking on a element selects it, and in the case of a multi select list, a second click deselects it. A range select list selects a consecutive range of items between 2 clicks  The `selected` property indicates which element is selected and defaults to the index. The default is single select and you can enable multi or range select modes with the `selector-type` attribute. The collection of selected items is contained in the `selectedItems` array property for multi and range selector types.
@@ -57,7 +57,7 @@ import '@obap/obap-elements/obap-selector/obap-selector.js';
 
 @slot - - Default slot
  */
-class ObapSelector extends ObapRangeSelectableMixin(ObapElement) {
+class ObapSelector extends ObapRangeSelectorController(ObapElement) {
     static get styles() {
         return css`
             :host {

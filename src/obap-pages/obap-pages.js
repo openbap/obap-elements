@@ -3,7 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { ObapSelectableMixin } from '../obap-selector/obap-selectable-mixin.js';
+import { ObapSelectorController } from '../obap-selector/obap-selector-controller.js';
 
 /**
 A content switcher.  
@@ -22,7 +22,7 @@ import '@obap/obap-elements/obap-pages/obap-pages.js';
 
 @slot - - Default slot
  */
-export class ObapPages extends ObapSelectableMixin(ObapElement) {
+export class ObapPages extends ObapSelectorController(ObapElement) {
     static get styles() {
         return css`
             :host {

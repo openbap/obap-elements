@@ -32,7 +32,7 @@ export class ButtonDemo extends ObapElement {
             }
 
             obap-button {
-                margin: 16px;
+                margin: 16px; 
             }
 
             .primary {

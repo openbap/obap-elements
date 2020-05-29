@@ -3,11 +3,11 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
-import { ObapThemeableMixin, themeManager } from '../../src/obap-styles/obap-themeable-mixin.js';
+import { ObapThemeController, themeManager } from '../../src/obap-styles/obap-theme-controller.js';
 import { body } from '../../src/obap-styles/obap-typography.js';
 import '../demo-elements/imports.js';
 
-export class DemoApp extends ObapThemeableMixin(ObapElement) {
+export class DemoApp extends ObapThemeController(ObapElement) {
     static get styles() {
         return [body, css`
             :host {
@@ -40,7 +40,7 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
                 border-radius: 0;
                 background: var(--obap-surface-color);
                 position: relative;
-                overflow: auto;
+         
             }
 
             .separator {
@@ -77,8 +77,9 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
     constructor() {
         super();
         themeManager.create('green', '#4caf50', '#087f23', '#80e27e', '#ffc107', '#FAFAFA');
-        this.theme = 'default';
-        this.selectedPage = 10;
+        themeManager.apply('default');
+        //this.theme = 'default';
+        this.selectedPage = 15;
     }
 
     render() {
@@ -103,6 +104,7 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
                         <div class="item">obap-radio</div>
                         <div class="item">obap-ripple</div>
                         <div class="item">obap-selector</div>
+                        <div class="item">obap-switch</div>
                         <div class="item">obap-tabs</div>
                         <div class="item">obap-tooltip</div>
                     </obap-selector>
@@ -124,6 +126,7 @@ export class DemoApp extends ObapThemeableMixin(ObapElement) {
                         <radio-demo></radio-demo>
                         <ripple-demo></ripple-demo>
                         <selector-demo></selector-demo>
+                        <switch-demo></switch-demo>
                         <tabs-demo></tabs-demo>
                         <tooltip-demo></tooltip-demo>
                     </obap-pages>

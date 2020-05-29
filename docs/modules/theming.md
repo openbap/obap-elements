@@ -23,14 +23,14 @@ create(name, primary, primaryDark, primaryLight, accent, window)
 ```
 
 ## Setting Themes
-Setting themes should be restricted to specific elements (usually the top level application element) and is managed *via* the `ObapThemeableMixin` mixin. Typically, you'll add the mixin to your application element and create custom themes and set themes in the application element.
+Setting themes should be restricted to specific elements (usually the top level application element) and is managed *via* the `ObapThemeController` mixin. Typically, you'll add the mixin to your application element and create custom themes and set themes in the application element.
 
 
 ```javascript
 import { html, css, ObapElement } from '@obap/obap-elements/obap-element/obap-element.js';
-import { ObapThemeableMixin, themeManager } from '@obap/obap-elements/obap-styles/obap-themeable-mixin.js';
+import { ObapThemeController, themeManager } from '@obap/obap-elements/obap-styles/obap-themeable-mixin.js';
 
-export class MyApp extends ObapThemeableMixin(ObapElement) {
+export class MyApp extends ObapThemeController(ObapElement) {
     constructor() {
         super();
         

@@ -25,7 +25,7 @@ import '@obap/obap-elements/obap-tooltip/obap-tooltip.js';
 </div>
 `
 
-**Mixins:** ObapAttachedElementMixin
+**Mixins:** ObapAttachedElementController
 
 ## Properties
 

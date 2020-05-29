@@ -4,11 +4,11 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, fixture, expect, nextFrame, defineCE, unsafeStatic } from '@open-wc/testing';
 import { LitElement } from 'lit-element';
-import { ObapThemeableMixin } from '../src/obap-styles/obap-themeable-mixin.js';
+import { ObapThemeController } from '../src/obap-styles/obap-theme-controller.js';
 import { theme } from '../src/obap-styles/obap-theme.js';
 
 const tagName = defineCE(
-    class extends ObapThemeableMixin(LitElement) {
+    class extends ObapThemeController(LitElement) {
         constructor() {
             super();
         }
@@ -16,7 +16,7 @@ const tagName = defineCE(
 );
 
 const tagNameNSD = defineCE(
-    class extends ObapThemeableMixin(LitElement) {
+    class extends ObapThemeController(LitElement) {
         constructor() {
             super();
         }

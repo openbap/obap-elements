@@ -1,6 +1,6 @@
 # obap-attached-element
 
-**Mixins:** ObapAttachedElementMixin
+**Mixins:** ObapAttachedElementController
 
 ## Properties
 

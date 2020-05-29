@@ -25,7 +25,7 @@ import '@obap/obap-elements/obap-badge/obap-badge.js';
 </div>
 ```
 
-**Mixins:** ObapAttachedElementMixin
+**Mixins:** ObapAttachedElementController
 
 ## Properties
 

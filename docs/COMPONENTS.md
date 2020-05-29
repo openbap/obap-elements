@@ -27,8 +27,8 @@ These aren't elements, but rather style modules and element mixins.
 
 |Name                                                            |Description                                                |Status            |
 |----------------------------------------------------------------|-----------------------------------------------------------|:----------------:|
-|[ObapSelectableMixin](elements/ObapSelectableMixin.md)          |A mixin that can be used to enable single select behaviour.|:white_check_mark:|
-|[ObapMultiSelectableMixin](elements/ObapMultiSelectableMixin.md)|A mixin that can be used to enable multi select behaviour. |:white_check_mark:|
+|[ObapSelectorController](elements/ObapSelectorController.md)          |A mixin that can be used to enable single select behaviour.|:white_check_mark:|
+|[ObapMultiSelectorController](elements/ObapMultiSelectorController.md)|A mixin that can be used to enable multi select behaviour. |:white_check_mark:|
 
 ### Elements
 

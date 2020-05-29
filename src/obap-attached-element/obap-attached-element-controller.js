@@ -2,8 +2,8 @@
 @license
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
-export const ObapAttachedElementMixin = (superClass) =>
-    class ObapAttachedElementMixinComponent extends superClass {
+export const ObapAttachedElementController = (superClass) =>
+    class ObapAttachedElementControllerComponent extends superClass {
         static get properties() {
             return {
                 for: {
@@ -70,17 +70,13 @@ export const ObapAttachedElementMixin = (superClass) =>
             super.connectedCallback();
             window.addEventListener('resize', this._boundHandleResizeEvent);
 
-            if (this.anchor !== 'none') {
-                this._resizeObserver.observe(this);
-            } 
+            this._resizeObserver.observe(this);
 
             this._setTarget();
         }
 
         disconnectedCallback() {
-            if (this.anchor !== 'none') {
-                this._resizeObserver.unobserve(this);
-            }
+            this._resizeObserver.unobserve(this);
 
             window.removeEventListener('resize', this._boundHandleResizeEvent);
             super.disconnectedCallback();
@@ -112,10 +108,6 @@ export const ObapAttachedElementMixin = (superClass) =>
                 attachNode = parentNode;
             };
 
-            if (this.anchor === 'none') {
-                attachNode = null;
-            }
-
             this._target = attachNode;
             this.updatePosition();
         }
@@ -129,7 +121,7 @@ export const ObapAttachedElementMixin = (superClass) =>
             if (!this._target || !this.offsetParent || this.anchor === 'none') {
                 return;
             }
-
+            
             let parentRect = this.offsetParent.getBoundingClientRect();
             let targetRect = this._target.getBoundingClientRect();
             let thisRect = this.getBoundingClientRect();

@@ -4,8 +4,8 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { theme as themeManager } from './obap-theme.js';
 
-const ObapThemeableMixin = (superClass) =>
-    class ObapThemeableMixinComponent extends superClass {
+const ObapThemeController = (superClass) =>
+    class ObapThemeControllerComponent extends superClass {
         get theme() {
             return this._theme;
         }
@@ -47,6 +47,10 @@ const ObapThemeableMixin = (superClass) =>
             this._theme = null;
         }
 
+        setGlobalTheme(name) {
+            themeManager.apply(name);
+        }
+
         getThemeNames() {
             return themeManager.getNames();
         }
@@ -56,4 +60,4 @@ const ObapThemeableMixin = (superClass) =>
         }
     };
 
-    export {ObapThemeableMixin, themeManager}
+    export {ObapThemeController as ObapThemeController, themeManager}

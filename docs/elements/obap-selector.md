@@ -49,7 +49,7 @@ import '@obap/obap-elements/obap-selector/obap-selector.js';
 </obap-selector>
 ```
 
-**Mixins:** ObapRangeSelectableMixin, ObapMultiSelectableMixin, ObapSelectableMixin
+**Mixins:** ObapRangeSelectorController, ObapMultiSelectorController, ObapSelectorController
 
 ## Properties
 

@@ -3,10 +3,10 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { ObapSelectableMixin } from '../obap-selector/obap-selectable-mixin.js';
+import { ObapSelectorController } from '../obap-selector/obap-selector-controller.js';
 import './obap-radio.js';
 
-class ObapRadioGroup extends ObapSelectableMixin(ObapElement) {
+class ObapRadioGroup extends ObapSelectorController(ObapElement) {
     static get styles() {
         return css`
             :host {

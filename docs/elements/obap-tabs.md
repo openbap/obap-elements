@@ -1,6 +1,6 @@
 # obap-tabs
 
-**Mixins:** ObapSelectableMixin
+**Mixins:** ObapSelectorController
 
 ## Properties
 

@@ -25,7 +25,7 @@ Complete elements are marked with an 'X' while those that are functional, but de
 |X   |L         |obap-chip              |A Material Design chip.                                                                    |
 |X   |M         |obap-card              |A Material Design card.                                                                    |
 |    |M         |obap-spinner           |
-|    |M         |obap-switch            |
+|X   |M         |obap-switch            |
 |    |H         |obap-time-picker       |
 |    |H         |obap-date-picker       |
 |    |H         |obap-textfield         |
@@ -56,6 +56,8 @@ Complete elements are marked with an 'X' while those that are functional, but de
 |    |L         |obap-banner            |
 |    |M         |obap-snackbar          |
 
+Count: 17/50
+
 ### DROPDOWN PICKERS
 
 Lots of things could be in a dropdown container. Should there just be a generic one or multiple? They're separate from the other UI elements because I'm not too sure about them.
@@ -66,6 +68,8 @@ Lots of things could be in a dropdown container. Should there just be a generic 
 |    |M         |obap-list-select     |
 |    |L         |obap-date-select     |
 |    |L         |obap-time-select     |
+
+Count: 0/4
 
 ### APPLICATION ELEMENTS
 
@@ -78,3 +82,5 @@ These are high level elements used to construct applications.
 |    |M         |obap-translations |
 |    |M         |obap-local-storage|
 |    |M         |obap-fetch        |
+
+Count: 0/5

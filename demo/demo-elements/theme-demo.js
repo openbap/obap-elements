@@ -5,14 +5,24 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import { elevation1 } from '../../src/obap-styles/obap-elevation.js';
 import { caption } from '../../src/obap-styles/obap-typography.js';
+import { ObapThemeController } from '../../src/obap-styles/obap-theme-controller.js';
+import '../../src/obap-radio/obap-radio-group.js';
 
-export class ThemeDemo extends ObapElement {
+export class ThemeDemo extends ObapThemeController(ObapElement) {
     static get styles() {
         return [elevation1, caption, css`
             :host {
                 display: block;
                 color: var(--obap-on-surface-color);
                 background: var(--obap-surface-color);
+            }
+
+            obap-radio-group {
+                margin: 16px 8px 12px 8px;
+            }
+
+            obap-radio {
+                margin-right: 24px;
             }
     
             .container {
@@ -41,7 +51,7 @@ export class ThemeDemo extends ObapElement {
                 min-width: 120px;
                 max-width: 120px;
                 height: 40px;
-                margin: 16px 24px 0 0;
+                margin-right: 24px;
             }
 
             .light-primary-item {
@@ -95,12 +105,35 @@ export class ThemeDemo extends ObapElement {
             }
         `];
     }
+
+    static get properties() {
+        return {
+            themes: {
+                type: Array
+            },
+
+            selectedThemeIndex: {
+                type: Number
+            }
+        }
+    }
+
+    constructor() {
+        super();
+
+        this.themes = this.getThemeNames();
+        this.selectedThemeIndex = 0;
+    }
     
     render() {
         return html`
             <div class="container">
                 <div class="title">Theme</div>
-                <div>Demo is still to be properly implemented - needs a few other UI elements to make it nice.</div>
+
+                <obap-radio-group selected-index="${this.selectedThemeIndex}" @obap-item-selected="${this._themeSelected}">
+                    ${this.themes.map((name) => html`<obap-radio label="${name}"></obap-radio>`)}
+                </obap-radio-group>
+
                 <div class="items">
                     <div class="item light-primary-item elevation-1 typography-caption">Light Primary</div>
                     <div class="item primary-item elevation-1 typography-caption">Primary</div>
@@ -115,6 +148,10 @@ export class ThemeDemo extends ObapElement {
                 </div>
             </div>
         `;
+    }
+
+    _themeSelected(e) {
+        this.setGlobalTheme(e.detail.item.label);
     }
 }
 

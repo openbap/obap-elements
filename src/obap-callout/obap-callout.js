@@ -3,7 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { ObapAttachedElementMixin } from '../obap-attached-element/obap-attached-element-mixin.js';
+import { ObapAttachedElementController } from '../obap-attached-element/obap-attached-element-controller.js';
 
 /**
 `<obap-callout>` is a speech bubble element that appears on hover and focus when the user hovers over an element (defaults to above the element) with the cursor or with the keyboard. It will anchor to the element specified in the for attribute, or, if that doesn't exist the immediate previous sibling, failing that, the parent node containing it. It inherits all the `obap-attached-element` positioning propeties (anchor, inset, shift, offsetX and offsetY). It also has a positional arrow direction that can be set. You can also position it as a normal element by setting `fixed` to `true`.
@@ -51,7 +51,7 @@ import '@obap/obap-elements/obap-callout/obap-callout.js';
 ```
 @slot - - Default slot
  */
-export class ObapCallout extends ObapAttachedElementMixin(ObapElement) {
+export class ObapCallout extends ObapAttachedElementController(ObapElement) {
     static get styles() {
         return [css`
             :host {
