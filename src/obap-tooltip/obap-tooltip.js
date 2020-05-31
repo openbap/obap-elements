@@ -97,27 +97,23 @@ export class ObapTooltip extends ObapAttachedElementController(ObapElement) {
     connectedCallback() {
         super.connectedCallback();
 
-        if (this.targetElement) {
-            this.targetElement.addEventListener('mouseenter', this._boundShow);
-            this.targetElement.addEventListener('mouseleave', this._boundHide);
-            this.targetElement.addEventListener('focus', this._boundHandleFocusEvent);
-            this.targetElement.addEventListener('blur', this._boundHide);
+        this.targetElement.addEventListener('mouseenter', this._boundShow);
+        this.targetElement.addEventListener('mouseleave', this._boundHide);
+        this.targetElement.addEventListener('focus', this._boundHandleFocusEvent);
+        this.targetElement.addEventListener('blur', this._boundHide);
 
-            this.targetElement.addEventListener('touchstart', this._boundHandleTouchStartEvent);
-            this.targetElement.addEventListener('touchend', this._boundHide);
-        }
+        this.targetElement.addEventListener('touchstart', this._boundHandleTouchStartEvent);
+        this.targetElement.addEventListener('touchend', this._boundHide);
     }
 
     disconnectedCallback() {
-        if (this.targetElement) {
-            this.targetElement.removeEventListener('mouseenter', this._boundShow);
-            this.targetElement.removeEventListener('mouseleave', this._boundHide);
-            this.targetElement.removeEventListener('focus', this._boundHandleFocusEvent);
-            this.targetElement.removeEventListener('blur', this._boundHide);
+        this.targetElement.removeEventListener('mouseenter', this._boundShow);
+        this.targetElement.removeEventListener('mouseleave', this._boundHide);
+        this.targetElement.removeEventListener('focus', this._boundHandleFocusEvent);
+        this.targetElement.removeEventListener('blur', this._boundHide);
 
-            this.targetElement.removeEventListener('touchstart', this._boundHandleTouchStartEvent);
-            this.targetElement.removeEventListener('touchend', this._boundHide);
-        }
+        this.targetElement.removeEventListener('touchstart', this._boundHandleTouchStartEvent);
+        this.targetElement.removeEventListener('touchend', this._boundHide);
 
         super.disconnectedCallback();
     }

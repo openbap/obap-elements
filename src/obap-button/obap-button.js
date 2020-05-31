@@ -58,6 +58,8 @@ export class ObapButton extends ObapInputElement {
                 border-radius: 3px;
                 color: var(--obap-button-color);
                 background: var(--obap-button-background-color);
+                min-width: 64px;
+                height: 32px;
             }
     
             :host([hidden]) {
@@ -82,12 +84,12 @@ export class ObapButton extends ObapInputElement {
                 align-content: center;
                 align-items: center;
                 box-sizing: border-box;
-                min-width: 64px;
-                height: 32px;
+                height: 100%;
+                width: 100%;
                 padding: 11px 10px 9px 10px;
             }
 
-            :host([round]) > .container {
+            :host([round]) {
                 min-width: 40px;
                 height: 40px;
             }

@@ -129,6 +129,11 @@ export class CalloutDemo extends ObapElement {
     render() {
         return html`
             <div class="container">
+                <div class="title">Callouts</div>
+                <div class="row">
+                    Hover the mouse over the grey squares to see the callout, or tap on mobile.
+                </div>
+                
                 <div class="title">Regular Callouts</div>
                 <div class="row">
                     <div class="button" tabindex="0">

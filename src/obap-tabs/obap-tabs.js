@@ -5,6 +5,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { ObapSelectorController } from '../obap-selector/obap-selector-controller.js';
 import { button } from '../obap-styles/obap-typography.js';
+import '../obap-scroll-container/obap-scroll-container.js'
 import './obap-tab.js';
 
 export class ObapTabs extends ObapSelectorController(ObapElement) {
@@ -47,6 +48,8 @@ export class ObapTabs extends ObapSelectorController(ObapElement) {
             }
 
             .container {
+                --obap-scroll-container-color: var(--obap-tabs-color);
+                --obap-scroll-container-background-color: var(--obap-tabs-background-color);
                 display: flex;
                 flex-direction: row;
                 height: 100%;
@@ -59,6 +62,10 @@ export class ObapTabs extends ObapSelectorController(ObapElement) {
             fill: {
                 type: Boolean,
                 attribute: 'fill'
+            },
+            scroll: {
+                type: Boolean,
+                attribute: 'scroll'
             }
         };
     }
@@ -67,14 +74,15 @@ export class ObapTabs extends ObapSelectorController(ObapElement) {
         super();
         this.role = 'tablist';
         this.fill = false;
+        this.scroll = false;
         this.enterSelects = true;
     }
 
     render() {
         return html`
-            <div class="container typography-button" ?fill="${this.fill}">
+            <obap-scroll-container class="container typography-button" ?fill="${this.fill}" ?disable-scrolling="${this.scroll === false}" mini-buttons>
                 <slot></slot>
-            </div>
+            </obap-scroll-container>
         `;
     }
 }

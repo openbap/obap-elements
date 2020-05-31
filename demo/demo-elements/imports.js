@@ -22,3 +22,4 @@ import './radio-demo.js';
 import './card-demo.js';
 import './chip-demo.js';
 import './switch-demo.js';
+import './scroll-container-demo';

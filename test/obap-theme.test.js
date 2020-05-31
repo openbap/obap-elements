@@ -122,6 +122,15 @@ describe('obap-theme', () => {
         expect(el.shadowRoot.host.style.getPropertyValue('--obap-primary-color')).to.not.equal('');
     });
 
+    it('can apply theme to root document from an element', async () => {
+        const el = await fixture(html`
+            <${tag}></${tag}>
+        `);
+
+        el.setGlobalTheme('default');
+        expect(document.documentElement.style.getPropertyValue('--obap-primary-color')).to.not.equal('');
+    });
+
     it('can remove theme from element shadow root', async () => {
         const el = await fixture(html`
             <${tag}></${tag}>

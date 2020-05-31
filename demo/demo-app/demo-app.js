@@ -40,7 +40,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                 border-radius: 0;
                 background: var(--obap-surface-color);
                 position: relative;
-         
+                overflow: auto;
             }
 
             .separator {
@@ -79,7 +79,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
         themeManager.create('green', '#4caf50', '#087f23', '#80e27e', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
         //this.theme = 'default';
-        this.selectedPage = 15;
+        this.selectedPage = 14;
     }
 
     render() {
@@ -103,10 +103,12 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-material</div>
                         <div class="item">obap-radio</div>
                         <div class="item">obap-ripple</div>
+                        <div class="item">obap-scroll-container</div>
                         <div class="item">obap-selector</div>
                         <div class="item">obap-switch</div>
                         <div class="item">obap-tabs</div>
                         <div class="item">obap-tooltip</div>
+                        <div class="separator" no-select>Application</div>
                     </obap-selector>
                 </obap-material>
                 <obap-material class="pages">
@@ -125,6 +127,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <material-demo></material-demo>
                         <radio-demo></radio-demo>
                         <ripple-demo></ripple-demo>
+                        <scroll-container-demo></scroll-container-demo>
                         <selector-demo></selector-demo>
                         <switch-demo></switch-demo>
                         <tabs-demo></tabs-demo>

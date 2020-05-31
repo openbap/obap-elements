@@ -190,6 +190,9 @@ export class ObapChip extends ObapElement {
         e.preventDefault();
 
         const event = new CustomEvent('obap-chip-remove', {
+            detail: {
+                item: this
+            },
             bubbles: true,
             composed: true
         });

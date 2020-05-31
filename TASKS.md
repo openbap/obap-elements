@@ -14,7 +14,7 @@ Complete elements are marked with an 'X' while those that are functional, but de
 |X   |M         |obap-icons             |Manages SVG icon sets and includes all the standard material Design icons.                 |
 |X   |L         |obap-icon              |Displays a single SVG icons from an icon set managed by `obap-icons`.                      |
 |X   |L         |obap-material          |A Material Design container that looks like a lifted piece of paper.                       |
-|-   |M         |obap-tabs              |A Material Design tab set (depends on obap-scroller).                                      |
+|X   |M         |obap-tabs              |A Material Design tab set (depends on obap-scroller).                                      |
 |X   |L         |obap-badge             |A small round indicator that attaches to an element and displays a number or icon.         |
 |X   |L         |obap-tooltip           |A Material Design tooltip that is displayed on mouse hover.                                |
 |X   |M         |obap-callout           |A speech bubble type element that can either behave like a tooltip or be fixed inline.     |
@@ -24,8 +24,9 @@ Complete elements are marked with an 'X' while those that are functional, but de
 |X   |M         |obap-radio             |A Material Design radio button and group.                                                  |
 |X   |L         |obap-chip              |A Material Design chip.                                                                    |
 |X   |M         |obap-card              |A Material Design card.                                                                    |
+|-   |M         |obap-scroller          |A container with scroll buttons that allows the content to scroll.                         |
 |    |M         |obap-spinner           |
-|X   |M         |obap-switch            |
+|X   |M         |obap-switch            |A Material Design switch element.                                                          |
 |    |H         |obap-time-picker       |
 |    |H         |obap-date-picker       |
 |    |H         |obap-textfield         |
@@ -35,7 +36,6 @@ Complete elements are marked with an 'X' while those that are functional, but de
 |    |M         |obap-side-stepper      |
 |    |M         |obap-simple-stepper    |
 |    |M         |obap-topbar            |
-|    |M         |obap-scroller          |
 |    |M         |obap-section-list      |
 |    |H         |obap-overflow-container|
 |    |M         |obap-menu              |

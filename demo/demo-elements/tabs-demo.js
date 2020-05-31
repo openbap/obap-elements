@@ -27,6 +27,10 @@ export class TabsDemo extends ObapElement {
                 margin-bottom: 24px;
             }
 
+            obap-tabs[scroll] {
+                width: 260px;
+            }
+
             .custom-tabs {
                 --obap-tabs-color: var(--obap-primary-color);
                 --obap-tabs-inactive-color: var(--obap-primary-light-color);
@@ -41,6 +45,17 @@ export class TabsDemo extends ObapElement {
                 <div class="title">Regular Tabs</div>
                 <div class="tab-container">
                     <obap-tabs selected-index="0" @obap-item-selected="${this._tabSelected}" class="elevation-1">
+                        <obap-tab>Tab 1</obap-tab>
+                        <obap-tab>Tab 2</obap-tab>
+                        <obap-tab>Tab 3</obap-tab>
+                        <obap-tab>Tab 4</obap-tab>
+                        <obap-tab>Tab 5</obap-tab>
+                    </obap-tabs>
+                </div>
+
+                <div class="title">Scrolling Tabs</div>
+                <div class="tab-container">
+                    <obap-tabs scroll selected-index="0" @obap-item-selected="${this._tabSelected}" class="elevation-1">
                         <obap-tab>Tab 1</obap-tab>
                         <obap-tab>Tab 2</obap-tab>
                         <obap-tab>Tab 3</obap-tab>

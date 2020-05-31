@@ -18,6 +18,21 @@ describe('obap-tooltip', () => {
         await expect(el.items[1]).shadowDom.to.be.accessible();
     });
 
+    it('has a target element', async () => {
+        const el = await fixture(html`
+            <test-element>
+                <div id="target"></div>
+                <obap-tooltip for="target">tooltip</obap-tooltip>
+            </test-element>
+        `);
+
+        await nextFrame();
+        const tooltip = el.querySelector('obap-tooltip');
+
+        expect(tooltip).to.not.equal(null);
+        expect(tooltip.targetElement).to.not.equal(null);
+    });
+
     it('has slotted content', async () => {
         const el = await fixture(html`
             <obap-tooltip anchor="none">tooltip</obap-tooltip>

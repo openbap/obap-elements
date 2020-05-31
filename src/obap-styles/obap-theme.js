@@ -36,6 +36,7 @@ class ObapThemeItem {
       // Create the default theme.
       //this.create('default', '#8d6e63', '#5f4339', '#be9c91', '#FFCA28', '#FAFAFA');
       this.create('default', '#5c6bc0', '#26418f', '#8e99f3', '#ec407a', '#E0E0E0');
+      
       //this.create('green', '#4caf50', '#087f23', '#80e27e', '#ffc107', '#FAFAFA');
   
       // Set the fixed theme items.
