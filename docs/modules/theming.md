@@ -13,13 +13,13 @@ import { theme } from '@obap/obap-elements/obap-styles/obap-theme.js';
 You can then create a theme like so:
 
 ```javascript
-theme.create('green', '#4caf50', '#087f23', '#80e27e', '#ffc107', '#FAFAFA');
+theme.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
 ``
 
 The `theme.create` method has the following signature (the parameters are self-explanatory):
 
 ```javascript
-create(name, primary, primaryDark, primaryLight, accent, window)
+create(name, primaryLight, primary, primaryDark, accent, window)
 ```
 
 ## Setting Themes
@@ -34,7 +34,7 @@ export class MyApp extends ObapThemeController(ObapElement) {
     constructor() {
         super();
         
-        themeManager.create('green', '#4caf50', '#087f23', '#80e27e', '#ffc107', '#FAFAFA');
+        themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         this.theme = 'green';
     }
 }

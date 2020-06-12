@@ -21,6 +21,7 @@ import '@obap/obap-elements/obap-pages/obap-pages.js';
 | Property        | Attribute        | Type      | Default  | Description                                      |
 |-----------------|------------------|-----------|----------|--------------------------------------------------|
 | `disabled`      | `disabled`       | `Boolean` | "false"  | If true, the button will be disabled.            |
+| `enterSelects`  | `enter-selects`  | `boolean` | false    | If true, items are selected on enter.            |
 | `items`         | `items`          | `array`   | "[]"     | (readonly) - The list of items from which a selection can be made. |
 | `role`          | `role`           | `String`  | "null"   | The ARIA role of the element.                    |
 | `selectedIndex` | `selected-index` | `Number`  | "1"      | Gets or sets the selected element index.         |

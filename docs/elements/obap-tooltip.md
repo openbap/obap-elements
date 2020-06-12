@@ -44,10 +44,11 @@ import '@obap/obap-elements/obap-tooltip/obap-tooltip.js';
 
 ## Methods
 
-| Method | Type       |
-|--------|------------|
-| `hide` | `(): void` |
-| `show` | `(): void` |
+| Method           | Type       |
+|------------------|------------|
+| `hide`           | `(): void` |
+| `show`           | `(): void` |
+| `updatePosition` | `(): void` |
 
 ## Slots
 

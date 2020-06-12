@@ -15,3 +15,9 @@
 | `role`          | `role`     |           | `String`  | "null"  | The ARIA role of the element.         |
 | `shift`         | `shift`    |           | `string`  | "none"  |                                       |
 | `targetElement` |            | readonly  |           |         |                                       |
+
+## Methods
+
+| Method           | Type       |
+|------------------|------------|
+| `updatePosition` | `(): void` |

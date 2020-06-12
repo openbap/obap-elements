@@ -21,3 +21,7 @@ TODO.txt
 /_site/
 /dist/
 
+# working folders
+/src/_working/
+/demo/_working/
+

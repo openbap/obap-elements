@@ -63,6 +63,10 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                 background: var(--obap-selection-color);
                 color: var(--obap-on-selection-color);
             }
+
+            obap-pages {
+                height: 100%;
+            }
         `];
     }
 
@@ -76,10 +80,10 @@ export class DemoApp extends ObapThemeController(ObapElement) {
 
     constructor() {
         super();
-        themeManager.create('green', '#4caf50', '#087f23', '#80e27e', '#ffc107', '#FAFAFA');
+        themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
         //this.theme = 'default';
-        this.selectedPage = 14;
+        this.selectedPage = 12;
     }
 
     render() {
@@ -101,13 +105,16 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-check</div>
                         <div class="item">obap-chip</div>
                         <div class="item">obap-material</div>
+                        <div class="item">obap-navigation-rail</div>
                         <div class="item">obap-radio</div>
                         <div class="item">obap-ripple</div>
                         <div class="item">obap-scroll-container</div>
                         <div class="item">obap-selector</div>
+                        <div class="item">obap-spinner</div>
                         <div class="item">obap-switch</div>
                         <div class="item">obap-tabs</div>
                         <div class="item">obap-tooltip</div>
+                        <div class="item">obap-top-app-bar</div>
                         <div class="separator" no-select>Application</div>
                     </obap-selector>
                 </obap-material>
@@ -125,13 +132,16 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <check-demo></check-demo>
                         <chip-demo></chip-demo>
                         <material-demo></material-demo>
+                        <navigation-rail-demo></navigation-rail-demo>
                         <radio-demo></radio-demo>
                         <ripple-demo></ripple-demo>
                         <scroll-container-demo></scroll-container-demo>
                         <selector-demo></selector-demo>
+                        <spinner-demo></spinner-demo>
                         <switch-demo></switch-demo>
                         <tabs-demo></tabs-demo>
                         <tooltip-demo></tooltip-demo>
+                        <top-app-bar-demo></top-app-bar-demo>
                     </obap-pages>
                 </obap-material>
             </div>

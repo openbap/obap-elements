@@ -23,3 +23,6 @@ import './card-demo.js';
 import './chip-demo.js';
 import './switch-demo.js';
 import './scroll-container-demo';
+import './spinner-demo';
+import './top-app-bar-demo';
+import './navigation-rail-demo';

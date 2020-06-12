@@ -57,6 +57,7 @@ import '@obap/obap-elements/obap-selector/obap-selector.js';
 |-----------------|------------------|-----------|----------|--------------------------------------------------|
 | `disabled`      | `disabled`       | `Boolean` | "false"  | If true, the button will be disabled.            |
 | `endIndex`      | `end-index`      | `number`  | -1       | The end index of the range to select.            |
+| `enterSelects`  | `enter-selects`  | `boolean` | false    | If true, items are selected on enter.            |
 | `items`         | `items`          | `array`   | "[]"     | (readonly) - The list of items from which a selection can be made. |
 | `rangeLength`   | `range-length`   | `number`  | -1       | If this is set to a value greater than zero, then the user can select the range of that length with a single click by holding down the 'ctrl' key. |
 | `role`          | `role`           | `String`  | "null"   | The ARIA role of the element.                    |

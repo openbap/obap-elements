@@ -250,6 +250,7 @@ export class ObapCallout extends ObapAttachedElementController(ObapElement) {
 
         setTimeout(() => {
             if (this._showing) {
+                this.updatePosition();
                 this.setAttribute('is-visible', null);
             }
         }, (this.anchor === 'none' || this.fixed || this._touching) ? 0 : this.triggerTime);

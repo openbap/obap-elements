@@ -189,11 +189,11 @@ export class ObapScrollContainer extends ObapElement {
 
         if (this.vertical) {
             this._leftScrollButtonVisible = this._container.scrollTop > 0;
-            this._rightScrollButtonVisible = this._container.scrollHeight > this._container.scrollTop + this._container.clientHeight;
+            this._rightScrollButtonVisible = this._container.scrollTop < this._container.scrollHeight - this._container.clientHeight - 1;
             this._hasOverflow = this._container.scrollHeight > this._container.clientHeight;
         } else {
             this._leftScrollButtonVisible = this._container.scrollLeft > 0;
-            this._rightScrollButtonVisible = this._container.scrollWidth > this._container.scrollLeft + this._container.clientWidth;
+            this._rightScrollButtonVisible = this._container.scrollLeft < this._container.scrollWidth - this._container.clientWidth - 1;
             this._hasOverflow = this._container.scrollWidth > this._container.clientWidth;
         }
     }
