@@ -1,6 +1,6 @@
 # Open Business Application Platform Web Components
 
-> IMPORTANT: The Open Business Application Platform Web Components are a work in progress and subject to major changes until 1.0 release.
+> IMPORTANT: The Open Business Application Platform Web Components are a work in progress and subject to major changes until the 1.0 release.
 
 The Open Business Application Platform Web Components (OBAP Elements) are a collection of Web Components designed specifically for desktop browser line of business applications and implement a simplified and modified Material Design.
 
@@ -28,6 +28,22 @@ TODO
 ## Additional Resources
 
 A good starting place is the [LitElement documentation](https://lit-element.polymer-project.org/), and the [Material Web Components](https://github.com/material-components/material-components-web-components) have some useful information (since they're also based on LitElement).
+
+## Progress
+
+This suite of web components is very ambitious (have a look at the [list of elements](TASKs.md) that are proposed), so it's going to take a while. The intended release schedule is:
+
+|Version           |Features                                                                          |Status     |
+|------------------|----------------------------------------------------------------------------------|-----------|
+|0.0.x             |Lots of these, which will just be periodic commits as work pregresses.            |In Progress|
+|0.1.x             |Elements are all implemented- this is the standardization and stabilization phase.|Not Started|
+|0.2.x             |Element demo phase - complete and detailed demos will be created.                 |Not Started|
+|0.3.x             |Element documentation phase - complete and detailed documentation will be created.|Not Started|
+|0.4.x             |Application demo phase - one or more complete application demos will be created.  |Not Started|
+|0.5.x             |Developer guide phase - a complete and detailed developer guide will be created.  |Not Started|
+|1.0.0             |First release.                                                                    |Not Started|
+
+*The elements will only be usable from version 0.2.x, before that they'll be unstable and incomplete.*
 
 ## Motivation
 

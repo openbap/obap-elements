@@ -64,7 +64,7 @@ export const ObapMultiSelectorController = (superClass) =>
             const items = [];
 
             this.items.forEach((item, index) => {
-                if (item.hasAttribute('selected')) {
+                if (item.hasAttribute(this.selectedAttribute)) {
                     items.push(index);
                 }
             });

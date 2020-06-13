@@ -6,7 +6,7 @@ import { html, fixture, expect, nextFrame } from '@open-wc/testing';
 import '../src/obap-scroll-container/obap-scroll-container.js';
 import './test-element.js';
 
-describe('obap-scroll-container>', () => {
+describe('obap-scroll-container', () => {
     it('passes the a11y audit', async () => {
         const el = await fixture(html`
             <obap-scroll-container></obap-scroll-container>>

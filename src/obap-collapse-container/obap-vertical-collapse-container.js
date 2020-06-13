@@ -1,0 +1,38 @@
+/*
+@license
+Copyright (c) 2020 Paul H Mason. All rights reserved.
+*/
+import { css, ObapBaseCollapseContainer } from './obap-base-collapse-container.js';
+
+/**
+ * A vertical collapsible block of content.
+ */
+export class ObapVerticalCollapseContainer extends ObapBaseCollapseContainer {
+    static get styles() {
+        return [css`
+            :host {
+                --obap-collapse-container-transition-duration: 300ms;
+                --obap-collapse-container-max-size: 300px;
+                --obap-collapse-container-min-size: 0px;
+                transition: max-height var(--obap-collapse-container-transition-duration) linear;
+                display: block;
+                overflow: hidden; 
+                max-height: var(--obap-collapse-container-min-size);
+            }
+    
+            :host([hidden]) {
+                display: none !important;
+            }
+    
+            :host([disabled]) {
+                pointer-events: none;
+            }
+
+            :host([opened]) {
+                max-height: var(--obap-collapse-container-max-size);
+            }
+        `];
+    }
+}
+
+window.customElements.define('obap-vertical-collapse-container', ObapVerticalCollapseContainer);

@@ -78,7 +78,15 @@ export const ObapSelectorController = (superClass) =>
                 enterSelects: {
                     type: Boolean,
                     attribute: 'enter-selects'
-                }
+                },
+
+                /**
+                The attribute to indicate selections.
+                */
+               selectedAttribute: {
+                type: String,
+                attribute: 'selected-attribute'
+            }
             }
         }
 
@@ -95,6 +103,7 @@ export const ObapSelectorController = (superClass) =>
             this.toggles = false;
             this.enterSelects = false;
             this.selectorType = 'single';
+            this.selectedAttribute = 'selected';
         }
 
         updated(changedProperties) {
@@ -179,12 +188,12 @@ export const ObapSelectorController = (superClass) =>
 
         _deselectItem(index) {
             if (index === -1) {
-                this.items.forEach(item => item.removeAttribute('selected'));
+                this.items.forEach(item => item.removeAttribute(this.selectedAttribute));
             } else {
                 const item = this.items[index];
 
                 if (item) {
-                    item.removeAttribute('selected');
+                    item.removeAttribute(this.selectedAttribute);
                     this._fireEvent('obap-item-deselected', { item: item, index: index }, false);
                 }
             }
@@ -194,7 +203,7 @@ export const ObapSelectorController = (superClass) =>
             const item = this.items[index];
 
             if (item) {
-                item.setAttribute('selected', '');
+                item.setAttribute(this.selectedAttribute, '');
                 this._fireEvent('obap-item-selected', { item: item, index: index }, false);
             }
         }

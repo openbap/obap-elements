@@ -194,7 +194,7 @@ export class SelectorDemo extends ObapElement {
 
                     <div class="selector-item">
                         <div class="description typography-caption">Multi Select</div>
-                        <obap-selector selected-index="${this.selectedItem}"  selector-type="multi" @obap-item-selected="${this._multiItemSelectionChanged}" @obap-item-deselected="${this._multiItemSelectionChanged}">
+                        <obap-selector selected-index="${this.selectedItem}" selector-type="multi" @obap-item-selected="${this._multiItemSelectionChanged}" @obap-item-deselected="${this._multiItemSelectionChanged}">
                             ${this.items.map(item => html`<div .item="${item}" class="item typography-body" ?selected="${item.selected}">${item.caption}</div>`)}
                         </obap-selector>
                         <div class="description typography-caption">${this.multiItems}</div>

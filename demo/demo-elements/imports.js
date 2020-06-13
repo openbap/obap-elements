@@ -26,3 +26,6 @@ import './scroll-container-demo';
 import './spinner-demo';
 import './top-app-bar-demo';
 import './navigation-rail-demo';
+import './collapse-container-demo';
+import './expandable-card-demo';
+import './accordion-demo';

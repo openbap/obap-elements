@@ -56,11 +56,11 @@ export class NavigationRailDemo extends ObapElement {
     }
 
     _handleAction(e) {
-        console.log(e);
+        //console.log(e);
     }
 
     _handleSelection(e) {
-        console.log(e);
+        //console.log(e);
     }
 }
 

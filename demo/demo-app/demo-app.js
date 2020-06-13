@@ -83,7 +83,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
         themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
         //this.theme = 'default';
-        this.selectedPage = 12;
+        this.selectedPage = 4;
     }
 
     render() {
@@ -97,6 +97,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">Typography</div>
                         <div class="item">Iconography</div>
                         <div class="separator" no-select>Elements</div>
+                        <div class="item">obap-accordion</div>
                         <div class="item">obap-attached-element</div>
                         <div class="item">obap-badge</div>
                         <div class="item">obap-button</div>
@@ -104,6 +105,8 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-card</div>
                         <div class="item">obap-check</div>
                         <div class="item">obap-chip</div>
+                        <div class="item">obap-collapse-container</div>
+                        <div class="item">obap-expandable-card</div>
                         <div class="item">obap-material</div>
                         <div class="item">obap-navigation-rail</div>
                         <div class="item">obap-radio</div>
@@ -124,6 +127,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <elevation-demo></elevation-demo>
                         <typography-demo></typography-demo>
                         <icons-demo></icons-demo>
+                        <accordion-demo></accordion-demo>
                         <attached-element-demo></attached-element-demo>
                         <badge-demo></badge-demo>
                         <button-demo></button-demo>
@@ -131,6 +135,8 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <card-demo></card-demo>
                         <check-demo></check-demo>
                         <chip-demo></chip-demo>
+                        <collapse-container-demo></collapse-container-demo>
+                        <expandable-card-demo></expandable-card-demo>
                         <material-demo></material-demo>
                         <navigation-rail-demo></navigation-rail-demo>
                         <radio-demo></radio-demo>

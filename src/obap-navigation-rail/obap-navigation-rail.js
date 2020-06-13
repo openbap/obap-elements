@@ -17,8 +17,8 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
                 --obap-navigation-rail-color: rgba(255, 255, 255, 0.7);
                 --obap-navigation-rail-active-color: var(--obap-on-primary-color, white);
                 --obap-navigation-rail-background-color: var(--obap-primary-color, #5c6bc0);
-                --obap-navigation-rail-action-color: var(--obap-on-secondary-color, white);
-                --obap-navigation-rail-action-background-color: var(--obap-secondary-color, #ec407a);
+                --obap-navigation-rail-action-color: var(--obap-on-accent-color, white);
+                --obap-navigation-rail-action-background-color: var(--obap-accent-color, #ec407a);
                 --obap-navigation-rail-background-color: var(--obap-primary-color, #5c6bc0);
                 --obap-navigation-rail-item-size: 72px;
 
