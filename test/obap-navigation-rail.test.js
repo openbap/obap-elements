@@ -77,19 +77,19 @@ describe('obap-navigation-rail', () => {
 
         await nextFrame();
         expect(el.clientWidth).to.equal(72);
-        expect(el.collapsed).to.equal(true);
+        expect(el.expanded).to.equal(false);
 
         el._handleMouseEnterEvent();
 
         await nextFrame();
         expect(el.clientWidth).to.not.equal(72);
-        expect(el.collapsed).to.equal(false);
+        expect(el.expanded).to.equal(true);
 
         el._handleMouseLeaveEvent();
 
         await nextFrame();
         expect(el.clientWidth).to.equal(72);
-        expect(el.collapsed).to.equal(true);
+        expect(el.expanded).to.equal(false);
 
     });
 
@@ -102,31 +102,31 @@ describe('obap-navigation-rail', () => {
 
         await nextFrame();
         expect(el.clientWidth).to.equal(72);
-        expect(el.collapsed).to.equal(true);
+        expect(el.expanded).to.equal(false);
 
         el._handleMouseEnterEvent();
 
         await nextFrame();
         expect(el.clientWidth).to.equal(72);
-        expect(el.collapsed).to.equal(true);
+        expect(el.expanded).to.equal(false);
 
         el._handleMouseLeaveEvent();
 
         await nextFrame();
         expect(el.clientWidth).to.equal(72);
-        expect(el.collapsed).to.equal(true);
+        expect(el.expanded).to.equal(false);
     });
 
     it('hides action item label if collapsed', async () => {
         const el = await fixture(html`
-            <obap-navigation-rail selected-index="0" action-icon="add" action-label="Compose" collapsible collapsed>
+            <obap-navigation-rail selected-index="0" action-icon="add" action-label="Compose" collapsible>
                 <obap-navigation-rail-item icon="inbox" label="Inbox"></obap-navigation-rail-item>
             </obap-navigation-rail>
         `);
 
         await nextFrame();
         expect(el.clientWidth).to.equal(72);
-        expect(el.collapsed).to.equal(true);
+        expect(el.expanded).to.equal(false);
 
         const action = el.renderRoot.querySelector('obap-button.action-button');
 
@@ -182,12 +182,10 @@ describe('obap-navigation-rail', () => {
 
     it('displays an icon and label if not collapsed', async () => {
         const el = await fixture(html`
-            <obap-navigation-rail selected-index="0" collapsible>
+            <obap-navigation-rail selected-index="0" collapsible expanded>
                 <obap-navigation-rail-item icon="inbox" label="Inbox"></obap-navigation-rail-item>
             </obap-navigation-rail>
         `);
-
-        el.collapsed = false;
 
         await nextFrame();
         const item = el.items[0];
@@ -200,7 +198,7 @@ describe('obap-navigation-rail', () => {
 
     it('displays no icon if collapsed and no icon defined', async () => {
         const el = await fixture(html`
-            <obap-navigation-rail selected-index="0" collapsible collapsed>
+            <obap-navigation-rail selected-index="0" collapsible>
                 <obap-navigation-rail-item label="Inbox"></obap-navigation-rail-item>
             </obap-navigation-rail>
         `);
@@ -214,14 +212,12 @@ describe('obap-navigation-rail', () => {
         expect(label).to.equal(null);
     });
 
-    it('displays no icon not collapsed and no icon defined', async () => {
+    it('displays no icon if no icon defined when collapsed', async () => {
         const el = await fixture(html`
-            <obap-navigation-rail selected-index="0" collapsible>
+            <obap-navigation-rail selected-index="0">
                 <obap-navigation-rail-item label="Inbox"></obap-navigation-rail-item>
             </obap-navigation-rail>
         `);
-
-        el.collapsed = false;
 
         await nextFrame();
         const item = el.items[0];
@@ -232,9 +228,43 @@ describe('obap-navigation-rail', () => {
         expect(label).to.not.equal(null);
     });
 
-    it('displays no label not collapsed and no label defined', async () => {
+    it('displays no icon if no icon defined when expanded', async () => {
         const el = await fixture(html`
-            <obap-navigation-rail selected-index="0" collapsible>
+            <obap-navigation-rail selected-index="0" expanded>
+                <obap-navigation-rail-item label="Inbox"></obap-navigation-rail-item>
+            </obap-navigation-rail>
+        `);
+
+        await nextFrame();
+        const item = el.items[0];
+        const icon = item.renderRoot.querySelector('obap-icon');
+        const label = item.renderRoot.querySelector('div.label');
+
+        expect(icon).to.equal(null);
+        expect(label).to.not.equal(null);
+    });
+
+    it('displays no label if no label defined when collapsed', async () => {
+        const el = await fixture(html`
+            <obap-navigation-rail selected-index="0">
+                <obap-navigation-rail-item icon="inbox"></obap-navigation-rail-item>
+            </obap-navigation-rail>
+        `);
+
+        el.collapsed = false;
+
+        await nextFrame();
+        const item = el.items[0];
+        const icon = item.renderRoot.querySelector('obap-icon');
+        const label = item.renderRoot.querySelector('div.label');
+
+        expect(icon).to.not.equal(null);
+        expect(label).to.equal(null);
+    });
+
+    it('displays no label if no label defined when expanded', async () => {
+        const el = await fixture(html`
+            <obap-navigation-rail selected-index="0" expanded>
                 <obap-navigation-rail-item icon="inbox"></obap-navigation-rail-item>
             </obap-navigation-rail>
         `);
@@ -296,5 +326,49 @@ describe('obap-navigation-rail', () => {
 
         expect(icon).to.not.equal(null);
         expect(label).to.equal(null);
+    });
+
+    it('displays an icon badge', async () => {
+        const el = await fixture(html`
+            <obap-navigation-rail selected-index="0">
+                <obap-navigation-rail-item icon="inbox" label="Inbox" badge-icon="android"></obap-navigation-rail-item>
+            </obap-navigation-rail>
+        `);
+
+        await nextFrame();
+        const item = el.items[0];
+        const badge = item.renderRoot.querySelector('obap-badge');
+
+        expect(badge).to.not.equal(null);
+        expect(badge.icon).to.equal('android');
+    });
+
+    it('displays an label badge', async () => {
+        const el = await fixture(html`
+            <obap-navigation-rail selected-index="0">
+                <obap-navigation-rail-item icon="inbox" label="Inbox" badge-label="3"></obap-navigation-rail-item>
+            </obap-navigation-rail>
+        `);
+
+        await nextFrame();
+        const item = el.items[0];
+        const badge = item.renderRoot.querySelector('obap-badge');
+
+        expect(badge).to.not.equal(null);
+        expect(badge.label).to.equal('3');
+    });
+
+    it('displays no badge by default', async () => {
+        const el = await fixture(html`
+            <obap-navigation-rail selected-index="0">
+                <obap-navigation-rail-item icon="inbox" label="Inbox"></obap-navigation-rail-item>
+            </obap-navigation-rail>
+        `);
+
+        await nextFrame();
+        const item = el.items[0];
+        const badge = item.renderRoot.querySelector('obap-badge');
+
+        expect(badge).to.equal(null);
     });
 });

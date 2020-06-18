@@ -220,7 +220,9 @@ export const ObapSelectorController = (superClass) =>
                 return;
             }
 
-            if (this._fireEvent('obap-item-selecting', { newIndex: newIndex, oldIndex: oldIndex }, true)) {
+            const item = this.items[newIndex];
+
+            if (this._fireEvent('obap-item-selecting', { newIndex: newIndex, oldIndex: oldIndex, item: item }, true)) {
                 this._deselectItem(oldIndex);
                 this._selectItem(newIndex);
                 this._selectedIndex = newIndex;

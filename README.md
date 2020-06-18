@@ -9,21 +9,15 @@ The Open Business Application Platform Web Components (OBAP Elements) are a coll
 * [Completed Elements](docs/COMPONENTS.md)
 * [Demos](https://openbap.github.io/demo/)
 * [Task List](TASKS.md)
-* [Change Log](CHAMGELOG.md)
+* [Change Log](CHANGELOG.md)
 
-## Quick Start
-
-### 1) Install
+## Installation
 
 Install the components from NPM:
 
 ```
-npm i @obap/obap-elements
+npm i @obap/obap-elements --save
 ```
-
-### 2) Import the elements that you wish to use
-
-TODO
 
 ## Additional Resources
 
@@ -57,5 +51,6 @@ Obviously, none of this would be possible with shamelessly studying other excell
 * [Material Web Components](https://github.com/material-components/material-components-web-components) are an excellent LitElement resource.
 * [Material Design](https://material.io/design) - I live here.
 * [Wired Elements](https://wiredjs.com/) - Another excellent LitElement component suite to study.
+* [Microsoft Graph Toolkit](https://github.com/microsoftgraph/microsoft-graph-toolkit). Useful for [auth integration](https://docs.microsoft.com/en-us/graph/toolkit/overview).
 * [Flutter](https://flutter.dev/) - not web, but their component suite is second to none and excellent for ideas.
 * [Open Web Component Recommendations](https://open-wc.org/) - just use it, no arguments.

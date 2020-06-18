@@ -29,7 +29,6 @@ export class ObapMaterial extends ObapElement {
                 display: block;
                 border-radius: 3px;
                 box-sizing: border-box;
-                padding: 24px;
                 background: var(--obap-surface-color, #FFFFFF);
                 color: var(--obap-on-surface-color, rgba(black, 0.87));
             }

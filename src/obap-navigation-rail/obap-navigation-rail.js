@@ -4,6 +4,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { ObapSelectorController } from '../obap-selector/obap-selector-controller.js';
+import { hostElevation } from '../obap-styles/obap-elevation.js';
 import '../obap-button/obap-button.js';
 import './obap-navigation-rail-item.js';
 
@@ -12,7 +13,7 @@ import './obap-navigation-rail-item.js';
  */
 export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
     static get styles() {
-        return [css`
+        return [hostElevation, css` 
             :host {
                 --obap-navigation-rail-color: rgba(255, 255, 255, 0.7);
                 --obap-navigation-rail-active-color: var(--obap-on-primary-color, white);
@@ -20,6 +21,10 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
                 --obap-navigation-rail-action-color: var(--obap-on-accent-color, white);
                 --obap-navigation-rail-action-background-color: var(--obap-accent-color, #ec407a);
                 --obap-navigation-rail-background-color: var(--obap-primary-color, #5c6bc0);
+
+                --obap-navigation-rail-badge-color: var(--obap-primary-color, #5c6bc0);
+                --obap-navigation-rail-badge-background-color: var(--obap-on-primary-color, white);
+
                 --obap-navigation-rail-item-size: 72px;
 
                 display: inline-block;
@@ -32,7 +37,7 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
                 overflow: hidden;
             }
 
-            :host([collapsible]:not(collapsed)) {
+            :host([expanded]) {
                 width: auto;
             }
 
@@ -75,9 +80,9 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
                 reflect: true
             },
 
-            collapsed: {
+            expanded: {
                 type: Boolean,
-                attribute: 'collapsed',
+                attribute: 'expanded',
                 reflect: true
             },
 
@@ -89,6 +94,12 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
             actionLabel: {
                 type: String,
                 attribute: 'action-label'
+            },
+
+            elevation: {
+                type: Number,
+                attribute: 'elevation',
+                reflect: true
             }
         }
     }
@@ -97,9 +108,10 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
         super();
 
         this.collapsible = false;
-        this.collapsed = true;
+        this.expanded = false;
         this.actionIcon = '';
         this.actionLabel = '';
+        this.elevation = 0;
         this._boundHandleMouseEnterEvent = this._handleMouseEnterEvent.bind(this);
         this._boundHandleMouseLeaveEvent = this._handleMouseLeaveEvent.bind(this);
     }
@@ -120,7 +132,7 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
         super.updated(changedProperties);
 
         changedProperties.forEach((oldValue, propName) => {
-            if ((propName === 'items') || (propName === 'collapsible') || (propName === 'collapsed')) {
+            if ((propName === 'items') || (propName === 'collapsible') || (propName === 'expanded')) {
                 this._updateItems();
             }
         });
@@ -138,7 +150,7 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
     _renderAction(actionIcon, actionLabel) {
         return html`
             <div class="action">
-                <obap-button @click="${this._handleActionClick}" class="action-button" round raised icon="${actionIcon}" label="${this.collapsible && !this.collapsed ? this.actionLabel : ''}"></obap-button>
+                <obap-button @click="${this._handleActionClick}" class="action-button" round raised icon="${actionIcon}" label="${this.expanded ? this.actionLabel : ''}"></obap-button>
             </div>
         `;
     }
@@ -146,19 +158,19 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
     _updateItems() {
         this.items.forEach((item) => {
             item._collapsible = this.collapsible;
-            item._collapsed = this.collapsed;
+            item._expanded = this.expanded;
         });
     }
 
     _handleMouseEnterEvent(e) {
         if (this.collapsible) {
-            this.collapsed = false;
+            this.expanded = true;
         }
     }
 
     _handleMouseLeaveEvent(e) {
         if (this.collapsible) {
-            this.collapsed = true;
+            this.expanded = false;
         }
     }
 

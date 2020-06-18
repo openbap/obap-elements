@@ -24,34 +24,27 @@ export class SwitchDemo extends ObapElement {
             }
 
             .row {
-              display: flex;
-              flex-direction: row;
-              flex-wrap: wrap;
-              align-items: center;
-              padding: 0;
-              margin-bottom: 8px;
+                display: flex;
+                flex-direction: column;
+                align-items:flex-start;
+                padding: 0;
+                margin-bottom: 8px;
             }
 
             obap-switch {
-                margin-right: 16px;
-                width: 56px;
-            }
+                margin-bottom: 16px;
 
-            
+            }
 
             .custom-colors {
-                width: 64px;
-                --obap-switch-checked-track-color: white;
-                --obap-switch-checked-track-background-color: magenta;
-                --obap-switch-unchecked-track-color: cornflowerblue;
-                --obap-switch-unchecked-track-background-color: yellow;
-                --obap-switch-checked-thumb-background-color: yellow;
-                --obap-switch-unchecked-thumb-background-color: cornflowerblue;
+                --obap-switch-label-color: cornflowerblue;
+                --obap-switch-selected-label-color: yellow; 
+                --obap-switch-track-color: yellow;
+                --obap-switch-selected-track-color: cornflowerblue;
+                --obap-switch-thumb-color: cornflowerblue;
+                --obap-switch-selected-thumb-color: yellow;
             }
 
-            .no-label {
-                width: auto;
-            }
         `];
     }
     
@@ -60,8 +53,8 @@ export class SwitchDemo extends ObapElement {
             <div class="container">
                 <div class="title">Normal Switches</div>
                 <div class="row">
-                    <obap-switch class="no-label"></obap-switch>
-                    <obap-switch class="no-label" disabled checked></obap-switch>
+                    <obap-switch></obap-switch>
+                    <obap-switch disabled checked></obap-switch>
                 </div>
 
 
@@ -74,8 +67,8 @@ export class SwitchDemo extends ObapElement {
 
                 <div class="title">Custom Colors</div>
                 <div class="row">
-                    <obap-switch left-label="one" right-label="two" class="custom-colors"></obap-switch>
-                    <obap-switch class="custom-colors no-label"></obap-switch>
+                    <obap-switch left-label="thing one" right-label="thing two" class="custom-colors"></obap-switch>
+                    <obap-switch class="custom-colors"></obap-switch>
                 </div>
             </div>
         `;

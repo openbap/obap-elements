@@ -1,0 +1,18 @@
+[
+    {
+        "key": "demo_application",
+        "value": "Solicitud de demostración"
+    },
+    {
+        "key": "hello_world",
+        "value": "Hola Mundo."
+    },
+    {
+        "key": "this_is_a_sentence",
+        "value": "Esta es una frase."
+    },
+    {
+        "key": "selection",
+        "value": "Ha seleccionado {0} de {1} artículos."
+    }
+]

@@ -4,6 +4,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { title } from '../obap-styles/obap-typography.js';
+import { hostElevation } from '../obap-styles/obap-elevation.js';
 
 /**
 A Material Design top app bar that only supports a basic single height layout. The application title is set using the `caption` property/attribute, while actions can be anything, although a round flat button with an icon is what you'll usually use. Actions can be positioned using the left and right slots.
@@ -23,7 +24,7 @@ import '@obap/obap-elements/obap-button/obap-button.js';
  */
 export class ObapTopAppBar extends ObapElement {
     static get styles() {
-        return [title, css`
+        return [title, hostElevation, css`
             :host {
                 display: block;
                 --obap-top-app-bar-color: var(--obap-on-primary-color, white);
@@ -75,6 +76,12 @@ export class ObapTopAppBar extends ObapElement {
             caption: {
                 type: String,
                 attribute: 'caption'
+            },
+
+            elevation: {
+                type: Number,
+                attribute: 'elevation',
+                reflect: true
             }
         }
     }
@@ -82,10 +89,11 @@ export class ObapTopAppBar extends ObapElement {
     constructor() {
         super();
         this.caption = '';
+        this.elevation = 0;
     }
 
     render() {
-        return html`
+        return html` 
             <div class="container">
                 <div class="actions"><slot name="left"></slot></div>
                 <div class="caption typography-title">${this.caption}</div>

@@ -1,0 +1,18 @@
+[
+    {
+        "key": "demo_application",
+        "value": "Demo Application"
+    },
+    {
+        "key": "hello_world",
+        "value": "Hello world."
+    },
+    {
+        "key": "this_is_a_sentence",
+        "value": "This is a sentence."
+    },
+    {
+        "key": "selection",
+        "value": "You have selected {0} of {1} items."
+    }
+]

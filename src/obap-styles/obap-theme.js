@@ -31,6 +31,7 @@ class ObapTheme {
         root.style.setProperty('--obap-notification-color', '#323232');
         root.style.setProperty('--obap-selection-color', '#E0E0E0');
         root.style.setProperty('--obap-block-color', '#ECECEC');
+        root.style.setProperty('--obap-inactive-color', '#9E9E9E');
 
         root.style.setProperty('--obap-on-primary-color', '#FFFFFF');
         root.style.setProperty('--obap-on-primary-inactive-color', 'rgba(255, 255, 255, 0.7)');
@@ -93,6 +94,9 @@ class ObapTheme {
             documentRoot.style.removeProperty('--obap-surface-color');
             documentRoot.style.removeProperty('--obap-error-color');
             documentRoot.style.removeProperty('--obap-notification-color');
+            documentRoot.style.removeProperty('--obap-selection-color');
+            documentRoot.style.removeProperty('--obap-block-color');
+            documentRoot.style.removeProperty('--obap-inactive-color');
 
             documentRoot.style.removeProperty('--obap-on-primary-color');
             documentRoot.style.removeProperty('--obap-on-primary-inactive-color');
@@ -103,12 +107,16 @@ class ObapTheme {
             documentRoot.style.removeProperty('--obap-on-window-color');
             documentRoot.style.removeProperty('--obap-on-error-color');
             documentRoot.style.removeProperty('--obap-on-notification-color');
+            documentRoot.style.removeProperty('--obap-on-selection-color');
 
             documentRoot.style.removeProperty('--obap-text-primary-color');
             documentRoot.style.removeProperty('--obap-text-secondary-color');
             documentRoot.style.removeProperty('--obap-text-hint-color');
             documentRoot.style.removeProperty('--obap-text-disabled-color');
             documentRoot.style.removeProperty('--obap-text-icon-color');
+
+            documentRoot.style.removeProperty('--obap-divider-on-primary-color');
+            documentRoot.style.removeProperty('--obap-divider-on-surface-color');
         }
     }
 

@@ -9,19 +9,17 @@ export class ObapSwitch extends ObapElement {
     static get styles() {
         return [button, css`
             :host {
-                --obap-switch-checked-track-color: var(--obap-on-primary-color, white);
-                --obap-switch-checked-track-background-color: var(--obap-primary-light-color, #8e99f3);
-                --obap-switch-unchecked-track-color: var(--obap-on-surface-color, rgba(0, 0, 0, 0.87));
-                --obap-switch-unchecked-track-background-color: #EFEFEF;
-                --obap-switch-checked-thumb-background-color: var(--obap-primary-color, #5c6bc0);
-                --obap-switch-unchecked-thumb-background-color: var(--obap-surface-color, white);
-
+                --obap-switch-label-color: var(--obap-on-surface-color, rgba(0, 0, 0, 0.87));
+                --obap-switch-selected-label-color: var(--obap-on-primary-color, white);        
+                --obap-switch-track-color: #EFEFEF;
+                --obap-switch-selected-track-color: var(--obap-primary-light-color, #8e99f3);
+                --obap-switch-thumb-color: var(--obap-surface-color, white);
+                --obap-switch-selected-thumb-color: var(--obap-primary-color, #5c6bc0);
                 --obap-switch-disabled-color: #CCCCCC;
                 --obap-switch-disabled-background-color: #EEEEEE;
+                --obap-switch-animation-speed: 0.15s;
 
-                --obap-switch-height: 24px;
                 display: inline-block;
-                overflow: hidden;
                 cursor: pointer;
             }
     
@@ -31,91 +29,80 @@ export class ObapSwitch extends ObapElement {
     
             :host([disabled]) {
                 pointer-events: none;
-                --obap-switch-checked-track-color: var(--obap-switch-disabled-color);
-                --obap-switch-checked-track-background-color: var(--obap-switch-disabled-background-color);
-                --obap-switch-unchecked-track-color: var(--obap-switch-disabled-color);
-                --obap-switch-unchecked-track-background-color:var(--obap-switch-disabled-background-color);
-                --obap-switch-checked-thumb-background-color: var(--obap-switch-disabled-color);
-                --obap-switch-unchecked-thumb-background-color: var(--obap-switch-disabled-color);
+                --obap-switch-label-color: var(--obap-switch-disabled-color);
+                --obap-switch-track-color: var(--obap-switch-disabled-background-color);
+                --obap-switch-thumb-color: var(--obap-switch-disabled-background-color);
             }
 
             .container {
-                display: flex;
-                flex-direction: row;
-                height: var(--obap-switch-height);
                 position: relative;
-                overflow: hidden;
-                color: var(--obap-switch-checked-track-color);
-                background: var(--obap-switch-checked-track-background-color);
-                border-radius: var(--obap-switch-height);
-                padding: 0 0 0 8px;
+                height: 24px;
+                padding: 5px;
+                box-sizing: border-box;
             }
 
-            .container[position="left"] {
-                color: var(--obap-switch-unchecked-track-color);
-                background: var(--obap-switch-unchecked-track-background-color);
-                flex-direction: row-reverse;
-                padding: 0 8px 0 0;
-            }
-
-            .container[has-track] {
-                background: transparent;
-            }
-
-            .content {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                min-width: calc((var(--obap-switch-height) / 2) - 4px);
-                width: 100%;
-            }
-
-            .marker {
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                margin: 2px;
-                min-width: calc(var(--obap-switch-height) - 4px);
-                min-height: calc(var(--obap-switch-height) - 4px);
-                border-radius: 50%;
-                background: var(--obap-switch-checked-thumb-background-color);
-                z-index: 2;
-            }
-
-            .marker[position="left"] {
-                background: var(--obap-switch-unchecked-thumb-background-color);
-            }
-
-            .marker[elevate] {
-                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                0 3px 1px -2px rgba(0, 0, 0, 0.2);
+            .container[has-label] {
+                padding: 0;
             }
 
             .track {
-                position: absolute;
-                border-radius: 7px;
-                height: 14px;
-                width: calc(100% - 8px);
-                left: 4px;
-                top: calc((var(--obap-switch-height) / 2) - 7px);
-                background: var(--obap-switch-checked-track-background-color);
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                height: 100%;
+                border-radius: 12px;
+                padding: 0 10px 0 26px;
+                color: var(--obap-switch-label-color);
+                background: var(--obap-switch-track-color);
+                transition: all var(--obap-switch-animation-speed) linear;
             }
 
-            .track[position="left"] {
-                background: var(--obap-switch-unchecked-track-background-color);
+            .track[selected] {
+                flex-direction: row;
+                padding: 0 26px 0 10px;
+                color: var(--obap-switch-selected-label-color);
+                background: var(--obap-switch-selected-track-color);
+            }
+
+            .thumb {
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: var(--obap-switch-thumb-color);
+                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+                            0 1px 5px 0 rgba(0, 0, 0, 0.12),
+                            0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+                transition: all var(--obap-switch-animation-speed) linear;
+            }
+
+            .thumb[selected] {
+                top: 2px;
+                left: calc(100% - 22px);
+                background: var(--obap-switch-selected-thumb-color);
+                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+                            0 1px 5px 0 rgba(0, 0, 0, 0.12),
+                            0 3px 1px -2px rgba(0, 0, 0, 0.2);
+            }
+
+            .track:not([has-label]):not([selected]) {
+                padding: 0 10px 0 23px;
+            }
+
+            .track:not([has-label])[selected] {
+                padding: 0 23px 0 10px;
             }
         `];
     }
 
     static get properties() {
         return {
-            checked: {
+            selected: {
                 type: Boolean,
-                attribute: 'checked',
+                attribute: 'selected',
                 reflect: true
             },
 
@@ -133,27 +120,30 @@ export class ObapSwitch extends ObapElement {
 
     constructor() {
         super();
-        this.checked = false;
+        this.selected = false;
         this.leftLabel = '';
         this.rightLabel = '';
     }
 
     render() {
+        const hasLabel = (this.leftLabel && this.rightLabel);
+
         return html`
-            <div class="container typography-button" ?has-track="${!this._hideTrack()}" position="${this.checked ? 'right' : 'left'}" @click="${this._toggleClick}">
-                <div class="track" ?hidden="${this._hideTrack()}" position="${this.checked ? 'right' : 'left'}"></div>
-                <div class="content">${this.checked ? this.rightLabel : this.leftLabel}</div>
-                <div class="marker" ?elevate="${!this._hideTrack()}" position="${this.checked ? 'right' : 'left'}"></div>
+            <div class="container" ?has-label="${hasLabel}" @click="${this._toggleClick}">
+                <div class="track" ?selected="${this.selected}" ?has-label="${hasLabel}">
+                    ${hasLabel ? html`<div class="label typography-button" ?selected="${this.selected}">${this.selected ? this.leftLabel : this.rightLabel}</div>` : null}
+                </div>
+                <div class="thumb" ?selected="${this.selected}"></div>
             </div>
         `;
     }
 
     _toggleClick() {
-        this.checked = !this.checked;
+        this.selected = !this.selected;
         
         const event = new CustomEvent('change', {
             detail: {
-                checked: this.checked,
+                selected: this.selected,
                 name: this.name
             },
             bubbles: true,
@@ -161,10 +151,6 @@ export class ObapSwitch extends ObapElement {
         });
 
         this.dispatchEvent(event);
-    }
-
-    _hideTrack() {
-        return this.leftLabel || this.rightLabel;
     }
 }
 

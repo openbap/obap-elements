@@ -83,7 +83,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
         themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
         //this.theme = 'default';
-        this.selectedPage = 4;
+        this.selectedPage = 21;
     }
 
     render() {
@@ -114,19 +114,25 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-scroll-container</div>
                         <div class="item">obap-selector</div>
                         <div class="item">obap-spinner</div>
+                        <div class="item">obap-stepper</div>
                         <div class="item">obap-switch</div>
                         <div class="item">obap-tabs</div>
                         <div class="item">obap-tooltip</div>
                         <div class="item">obap-top-app-bar</div>
                         <div class="separator" no-select>Application</div>
+                        <div class="item">obap-application</div>
+                        <div class="item">obap-local-storage</div>
+                        <div class="item">obap-translations</div>
                     </obap-selector>
                 </obap-material>
                 <obap-material class="pages">
                     <obap-pages selected-index="${this.selectedPage}">
+                        <!-- STYLES -->
                         <theme-demo></theme-demo>
                         <elevation-demo></elevation-demo>
                         <typography-demo></typography-demo>
                         <icons-demo></icons-demo>
+                        <!-- ELEMENTS -->
                         <accordion-demo></accordion-demo>
                         <attached-element-demo></attached-element-demo>
                         <badge-demo></badge-demo>
@@ -144,10 +150,15 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <scroll-container-demo></scroll-container-demo>
                         <selector-demo></selector-demo>
                         <spinner-demo></spinner-demo>
+                        <stepper-demo></stepper-demo>
                         <switch-demo></switch-demo>
                         <tabs-demo></tabs-demo>
                         <tooltip-demo></tooltip-demo>
                         <top-app-bar-demo></top-app-bar-demo>
+                        <!-- APPLICATION -->
+                        <application-demo></application-demo>
+                        <local-storage-demo></local-storage-demo>
+                        <translations-demo></translations-demo>
                     </obap-pages>
                 </obap-material>
             </div>

@@ -40,12 +40,12 @@ export class AccordionDemo extends ObapElement {
 
             .content {
                 padding: 8px 16px;
-                background: #FAFAFA;
+                background: var(--obap-block-color);
             }
 
             obap-accordion {
                 width: 300px;
-                border: 1px solid lightgrey;
+                border: 1px solid var(--obap-divider-on-surface-color);
                 margin-bottom: 4px;
             }
         `];
@@ -60,19 +60,19 @@ export class AccordionDemo extends ObapElement {
                         <obap-accordion>
                             <obap-expandable-card icon="android" label="Item 1">
                                 <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est. Praesent nunc sapien, suscipit ultricies commodo vitae, semper id enim.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est.
                                 </div>
                             </obap-expandable-card>
 
                             <obap-expandable-card icon="bug-report" label="Item 2">
                                 <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est. Praesent nunc sapien, suscipit ultricies commodo vitae, semper id enim.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est.
                                 </div>
                             </obap-expandable-card>
 
                             <obap-expandable-card icon="face" label="Item 3">
                                 <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est. Praesent nunc sapien, suscipit ultricies commodo vitae, semper id enim.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est.
                                 </div>
                             </obap-expandable-card>
                         </obap-accordion>
@@ -85,19 +85,19 @@ export class AccordionDemo extends ObapElement {
                         <obap-accordion selector-type="multi">
                             <obap-expandable-card icon="android" label="Item 1">
                                 <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est. Praesent nunc sapien, suscipit ultricies commodo vitae, semper id enim.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est.
                                 </div>
                             </obap-expandable-card>
 
                             <obap-expandable-card icon="bug-report" label="Item 2">
                                 <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est. Praesent nunc sapien, suscipit ultricies commodo vitae, semper id enim.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est.
                                 </div>
                             </obap-expandable-card>
 
                             <obap-expandable-card icon="face" label="Item 3">
                                 <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est. Praesent nunc sapien, suscipit ultricies commodo vitae, semper id enim.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit consectetur est, eget lacinia quam tristique id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin ullamcorper porttitor tellus. Nulla quis leo elit. Nulla egestas, mauris vel rhoncus vehicula, erat turpis elementum mauris, ut blandit felis ante eget nunc. Integer pellentesque eros tincidunt, tincidunt tellus non, dignissim tellus. Phasellus accumsan gravida bibendum. Etiam dignissim lorem a magna sagittis vehicula. Fusce eget ultricies metus, laoreet convallis est.
                                 </div>
                             </obap-expandable-card>
                         </obap-accordion>

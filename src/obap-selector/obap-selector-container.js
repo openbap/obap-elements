@@ -59,7 +59,7 @@ export class ObapSelectorContainer extends ObapElement {
             selectedIndex: {
                 type: Number,
                 attribute: 'selected-index'
-            },
+            }
         }
     }
 
@@ -99,6 +99,7 @@ export class ObapSelectorContainer extends ObapElement {
     }
 
     _handleItemSelectedEvent(e) {
+        e.stopPropagation();
         this.selectedIndex = e.detail.index;
     }
 

@@ -14,11 +14,11 @@ class ObapIcons {
             const icons = defs.querySelectorAll('g');
 
             if (icons.length > 0) {
-                if (!window.__obap_icons[group]) {
-                    window.__obap_icons[group] = {};
+                if (!window.ObapIcons[group]) {
+                    window.ObapIcons[group] = {};
                 }
 
-                icons.forEach((icon) => window.__obap_icons[group][icon.id] = new SVGTemplateResult([`<svg viewBox="0 0 24 24">${icon.outerHTML}</svg>`], []));
+                icons.forEach((icon) => window.ObapIcons[group][icon.id] = new SVGTemplateResult([`<svg viewBox="0 0 24 24">${icon.outerHTML}</svg>`], []));
             }
         }
     }
@@ -34,11 +34,11 @@ class ObapIcons {
             iconName = iconDetails[1];
         }
 
-        if ((window.__obap_icons[iconGroup] === undefined) || (window.__obap_icons[iconGroup] === null)) {
-            window.__obap_icons[iconGroup] = {};
+        if ((window.ObapIcons[iconGroup] === undefined) || (window.ObapIcons[iconGroup] === null)) {
+            window.ObapIcons[iconGroup] = {};
         }
 
-        window.__obap_icons[iconGroup][iconName] = template;
+        window.ObapIcons[iconGroup][iconName] = template;
     }
     */
 
@@ -52,8 +52,8 @@ class ObapIcons {
             iconName = iconDetails[1];
         }
 
-        if ((window.__obap_icons[iconGroup]) && (window.__obap_icons[iconGroup][iconName])) {
-            return window.__obap_icons[iconGroup][iconName];
+        if ((window.ObapIcons[iconGroup]) && (window.ObapIcons[iconGroup][iconName])) {
+            return window.ObapIcons[iconGroup][iconName];
         }
 
         return null;
@@ -64,25 +64,28 @@ class ObapIcons {
             group = 'standard';
         }
 
-        if (window.__obap_icons[group]) {
-            return Object.getOwnPropertyNames(window.__obap_icons[group]).map((icon) => `${group}:${icon}`);
+        if (window.ObapIcons[group]) {
+            return Object.getOwnPropertyNames(window.ObapIcons[group]).map((icon) => `${group}:${icon}`);
         }
 
         return [];
     }
 
     getGroups() {
-        return Object.getOwnPropertyNames(window.__obap_icons).filter((group) => !group.startsWith('_'));
+        return Object.getOwnPropertyNames(window.ObapIcons).filter((group) => {
+            return ((group !== 'iconManager') && (group !== 'get'));
+        });
     }
 }
 
 const io = new ObapIcons();
-window.__obap_icons = window.__obap_icons || {
-    __icon_manager: io,
-    _get: io.get
+
+window.ObapIcons = window.ObapIcons || {
+    iconManager: io,
+    get: io.get
 };
 
-const obapIcons = window.__obap_icons.__icon_manager;
+const obapIcons = window.ObapIcons.iconManager;
 const getIconNames = obapIcons.getNames;
 const getIconGroups = obapIcons.getGroups;
 
