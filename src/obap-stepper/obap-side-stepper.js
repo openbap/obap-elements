@@ -6,6 +6,7 @@ import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { ObapStepperController } from './obap-stepper-controller.js';
 import { body, caption } from '../obap-styles/obap-typography.js';
 import '../obap-icon/obap-icon.js';
+import '../obap-badge/obap-badge.js';
 import '../obap-selector/obap-selector.js';
 import '../obap-selector/obap-selector-container.js';
 import './obap-stepper-step.js';
@@ -117,6 +118,10 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
                 background: var(--obap-divider-on-surface-color, rgba(0, 0, 0, 0.20));
             }
 
+            .line[custom-icons] {
+                left: 23px;
+            }
+
             .header-item {
                 display: flex;
                 flex-direction: row;
@@ -197,6 +202,35 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
                 height: 24px;
                 --obap-icon-fill-color: var(--obap-error-color, #e53935);
             }
+
+            obap-icon[large] {
+                --obap-icon-width: 32px;
+                --obap-icon-height: 32px;
+                width: 32px;
+                height: 32px;
+            }
+
+            .icon-container {
+                margin-right: 16px;
+            }
+
+            obap-badge {
+                --obap-badge-color: var(--obap-on-primary-color, #FFFFFF);
+                --obap-badge-background-color: var(--obap-inactive-color, #9E9E9E);
+            }
+
+            obap-badge[visited] {
+                --obap-badge-background-color: var(--obap-primary-color, #5c6bc0);
+            }
+
+            obap-badge[selected] {
+                --obap-badge-background-color: var(--obap-primary-dark-color, #26418f);
+            }
+
+            obap-badge[error] {
+                --obap-badge-color: var(--obap-on-error-color, #FFFFFF);
+                --obap-badge-background-color: var(--obap-error-color, #e53935);
+            }
         `];
     }
 
@@ -210,7 +244,7 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
             <obap-selector-container class="container" selected-index="0">
                 <div class="left-container">
                     <obap-selector class="navigator" @obap-item-selected="${this._stepSelected}">
-                        <div no-select class="line"></div>
+                        <div no-select class="line" ?custom-icons="${this.hasCustomIcons}"></div>
                         ${this.steps.map((step, index) => this._renderHeaderItem(step, index))}
                     </obap-selector>
                 </div>
@@ -232,10 +266,31 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
     _renderHeaderItem(step, index) {
         return html`
             <div class="header-item" ?disabled="${this.disabled || step.disabled || !step.selectable}">
-                ${this._renderHeaderBadge(step, index)}
+                ${step.icon ? this._renderHeaderIcon(step, index) : this._renderHeaderBadge(step, index)}
                 ${this._renderHeaderLabels(step)}
             </div>
         `;
+    }
+
+    _renderHeaderIcon(step, index) {
+        return html`
+            <div class="icon-container">
+                <obap-icon large icon="${step.icon}"></obap-icon>
+                ${this._renderHeaderIconBadge(step, index)}
+            </div>
+        `;
+    }
+
+    _renderHeaderIconBadge(step, index) {
+        if (step.error) {
+            return html`<obap-badge elevation="2" error ?selected="${step.selected}" offset-x="-2" offset-y="2" label="!"></obap-badge>`;
+        } else if (step.selected || !step.visited) {
+            return html`<obap-badge elevation="2" ?selected="${step.selected}" ?visited="${step.visited}" offset-x="-2" offset-y="2" label="${index + 1}"></obap-badge>`;
+        } else if (step.editable || step.optional) {
+            return html`<obap-badge elevation="2" ?selected="${step.selected}" ?visited="${step.visited}" offset-x="-2" offset-y="2" icon="core:edit"></obap-badge>`;
+        } else {
+            return html`<obap-badge elevation="2" ?selected="${step.selected}" ?visited="${step.visited}" offset-x="-2" offset-y="2" icon="core:check"></obap-badge>`;
+        }
     }
 
     _renderHeaderBadge(step, index) {

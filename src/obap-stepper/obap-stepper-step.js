@@ -43,6 +43,12 @@ export class ObapStepperStep extends ObapElement {
                 attribute: 'sub-label'
             },
 
+            // Optional icon used only by the side-stepper.
+            icon: {
+                type: String,
+                attribute: 'icon'
+            },
+
             errorLabel: {
                 type: String,
                 attribute: 'error-label'
@@ -94,6 +100,7 @@ export class ObapStepperStep extends ObapElement {
         this.label = '';
         this.subLabel = '';
         this.errorLabel = '';
+        this.icon = '';
         this.slot = 'step';
     }
 

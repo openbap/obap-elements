@@ -83,7 +83,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
         themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
         //this.theme = 'default';
-        this.selectedPage = 21;
+        this.selectedPage = 13;
     }
 
     render() {
@@ -106,10 +106,13 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-check</div>
                         <div class="item">obap-chip</div>
                         <div class="item">obap-collapse-container</div>
+                        <div class="item">obap-dialog</div>
                         <div class="item">obap-expandable-card</div>
                         <div class="item">obap-material</div>
                         <div class="item">obap-navigation-rail</div>
+                        <div class="item">obap-pill-navigator</div>
                         <div class="item">obap-radio</div>
+                        <div class="item">obap-rating</div>
                         <div class="item">obap-ripple</div>
                         <div class="item">obap-scroll-container</div>
                         <div class="item">obap-selector</div>
@@ -142,10 +145,13 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <check-demo></check-demo>
                         <chip-demo></chip-demo>
                         <collapse-container-demo></collapse-container-demo>
+                        <dialog-demo></dialog-demo>
                         <expandable-card-demo></expandable-card-demo>
                         <material-demo></material-demo>
                         <navigation-rail-demo></navigation-rail-demo>
+                        <pill-navigator-demo></pill-navigator-demo>
                         <radio-demo></radio-demo>
+                        <rating-demo></rating-demo>
                         <ripple-demo></ripple-demo>
                         <scroll-container-demo></scroll-container-demo>
                         <selector-demo></selector-demo>

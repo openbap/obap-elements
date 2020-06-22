@@ -83,10 +83,10 @@ export const ObapSelectorController = (superClass) =>
                 /**
                 The attribute to indicate selections.
                 */
-               selectedAttribute: {
-                type: String,
-                attribute: 'selected-attribute'
-            }
+                selectedAttribute: {
+                    type: String,
+                    attribute: 'selected-attribute'
+                }
             }
         }
 
@@ -110,12 +110,11 @@ export const ObapSelectorController = (superClass) =>
             super.updated(changedProperties);
 
             changedProperties.forEach((oldValue, propName) => {
-                if (propName === 'disabled') {
-                    if (this.disabled) {
-                        this.items.forEach((item) => {
-                            item.disabled = this.disabled;
-                        });
-                    }
+                if ((propName === 'disabled') && (oldValue !== this.disabled)) {
+                    this.items.forEach((item) => {
+                        item.disabled = this.disabled;
+                    });
+
                 }
             });
         }
@@ -171,10 +170,16 @@ export const ObapSelectorController = (superClass) =>
         }
 
         _handleSelectionEvent(e) {
-            this._ctrl = e.ctrlKey;
-            this.select(this.items.indexOf(e.target));
-            e.stopPropagation();
-            this._ctrl = false;
+            const index = this.items.indexOf(e.target);
+
+            if (index > -1) {
+                this._ctrl = e.ctrlKey;
+                this.select(index);
+                //e.stopPropagation();
+                //e.stopImmediatePropagation();
+                //e.preventDefault();
+                this._ctrl = false;
+            }
         }
 
         _handleEnterEvent(e) {

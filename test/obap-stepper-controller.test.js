@@ -46,6 +46,7 @@ describe('obap-stepper-step', () => {
         expect(step.label).to.equal('');
         expect(step.subLabel).to.equal('');
         expect(step.errorLabel).to.equal('');
+        expect(step.icon).to.equal('');
         expect(step.slot).to.equal('step');
     });
 
@@ -579,5 +580,17 @@ describe('obap-stepper-controller', () => {
         expect(el.canMoveForward()).to.equal(false);
         el.steps[2].optional = true;
         expect(el.canMoveForward()).to.equal(true);
+    });
+
+    it('determines if steps have custom icons', async () => {
+        const el = await fixture(html`
+            <test-stepper>
+                <obap-stepper-step name="one" icon="android"></obap-stepper-step>
+                <obap-stepper-step name="two" icon="android"></obap-stepper-step>
+                <obap-stepper-step name="three" icon="android"></obap-stepper-step>
+            </test-stepper>
+        `);
+
+        expect(el.hasCustomIcons).to.equal(true);
     });
 });

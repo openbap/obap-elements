@@ -32,7 +32,10 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |X   |M         |obap-collapse-container|A collapsible block of content (horizontal and vertical variants).                         |
 |X   |M         |obap-expandable-card   |A Material Design card that expands to display additional content.                         |
 |X   |M         |obap-accordion         |An expandable card list.                                                                   |
-|-   |M         |obap-linear-progress   |A linear progress bar element.                                                             |
+|X   |L         |obap-pill-navigator    |A navigation element that uses small circles as navigation items (like on a carousel).     |
+|X   |L         |obap-rating            |A star rating element.                                                                     |
+|X   |H         |obap-dialog            |A Material Design dialog that can be modal or non-modal.                                   |
+|    |M         |obap-linear-progress   |A linear progress bar element.                                                             |
 |    |M         |obap-circular-progress |A circular progress/busy element.                                                          |
 |X   |H         |obap-horizontal-stepper|A horizontal Material Design Stepper (wizard). Step labels are at the top.                 |
 |X   |M         |obap-side-stepper      |A Material Design Stepper (wizard) where the step labels are on the left.                  |
@@ -53,8 +56,7 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |M         |obap-list-item         |A Material Design list item.                                                               |
 |    |M         |obap-data-list         |A simple Material Design data table with minimal features and suitable for small data sets.|
 |    |H         |obap-data-table        |A complex Material Design data table suitable for large data sets.                         |
-|    |H         |obap-charts            |A collection of commonly used chart types.                                                 |
-|    |H         |obap-dialog            |A Material Design dialog that can be modal or non-modal                                    |
+|    |H         |obap-chart             |A collection of commonly used chart types.                                                 |
 |    |L         |obap-image             |An image wrapper element.                                                                  |
 |    |M         |obap-carousel          |A content carousel that supports overlays.                                                 |
 |    |L         |obap-banner            |A banner/jumbotron element.                                                                |
@@ -62,7 +64,7 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                          |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                    |
 
-Count: 28/55
+Count: 31/57
 
 ### DROPDOWN PICKERS
 
@@ -103,13 +105,15 @@ Count: 4/9
 
 These are unlikely to happen any time soon, but would be really nice to have.
 
-|Done|Complexity|Name              |Notes                                          |
-|:--:|:--------:|------------------|-----------------------------------------------|
-|    |H         |obap-scheduler    |A calender scheduler like the Outlook calendar.|
-|    |H         |obap-task-board   |A kanban/trello board and tasks.               |
-|    |H         |obap-gantt-chart  |A gantt chart element.                         |
-|    |H         |obap-dashboard    |A drag & drop dashbard control for cards.      |
-|    |H         |obap-diagram      |A diagram editor, like Lucid.                  |
-|    |H         |obap-workflow     |A workflow builder.                            |
+|Done|Complexity|Name                |Notes                                          |
+|:--:|:--------:|--------------------|-----------------------------------------------|
+|    |H         |obap-scheduler      |A calender scheduler like the Outlook calendar.|
+|    |H         |obap-task-board     |A kanban/trello board and tasks.               |
+|    |H         |obap-gantt-chart    |A gantt chart element.                         |
+|    |H         |obap-dashboard      |A drag & drop dashbard control for cards.      |
+|    |H         |obap-diagram        |A diagram editor, like Lucid.                  |
+|    |H         |obap-workflow       |A workflow builder.                            |
+|    |H         |obap-markdown-viewer|A markdown viewer.                             |
+|    |H         |obap-markdown-editor|A markdown editor, based on ProseMirror.       |
 
-Count: 0/6
+Count: 0/8

@@ -103,6 +103,11 @@ export class ThemeDemo extends ObapThemeController(ObapElement) {
                 color: var(--obap-text-secondary-color);
                 background: var(--obap-block-color);
             }
+
+            .inactive-item {
+                color: white;
+                background: var(--obap-inactive-color);
+            }
         `];
     }
 
@@ -145,6 +150,7 @@ export class ThemeDemo extends ObapThemeController(ObapElement) {
                     <div class="item error-item elevation-1 typography-caption">Error</div>
                     <div class="item selection-item elevation-1 typography-caption">Selection</div>
                     <div class="item block-item elevation-1 typography-caption">Block</div>
+                    <div class="item inactive-item elevation-1 typography-caption">Inactive</div>
                 </div>
             </div>
         `;

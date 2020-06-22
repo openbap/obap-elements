@@ -147,7 +147,11 @@ export class SelectorDemo extends ObapElement {
                 type: String
             },
 
-            multiItems: {
+            multiItems1: {
+                type: String
+            },
+
+            multiItems2: {
                 type: String
             }
         }
@@ -159,7 +163,8 @@ export class SelectorDemo extends ObapElement {
         this.selectedItem = 0;
         this.currentItem = 'null';
         this.previousItem = 'null';
-        this.multiItems = '';
+        this.multiItems1 = '';
+        this.multiItems2 = '';
 
         this.items = [
             { caption: "Item 1", selected: false },
@@ -194,18 +199,18 @@ export class SelectorDemo extends ObapElement {
 
                     <div class="selector-item">
                         <div class="description typography-caption">Multi Select</div>
-                        <obap-selector selected-index="${this.selectedItem}" selector-type="multi" @obap-item-selected="${this._multiItemSelectionChanged}" @obap-item-deselected="${this._multiItemSelectionChanged}">
+                        <obap-selector selected-index="${this.selectedItem}" selector-type="multi" @obap-item-selected="${this._multiItem1SelectionChanged}" @obap-item-deselected="${this._multiItem1SelectionChanged}">
                             ${this.items.map(item => html`<div .item="${item}" class="item typography-body" ?selected="${item.selected}">${item.caption}</div>`)}
                         </obap-selector>
-                        <div class="description typography-caption">${this.multiItems}</div>
+                        <div class="description typography-caption">${this.multiItems1}</div>
                     </div>
 
                     <div class="selector-item">
                         <div class="description typography-caption">Range Select</div>
-                        <obap-selector  selector-type="range" @obap-item-selected="${this._multiItemSelectionChanged}" @obap-item-deselected="${this._multiItemSelectionChanged}">
+                        <obap-selector  selector-type="range" @obap-item-selected="${this._multiItem2SelectionChanged}" @obap-item-deselected="${this._multiItem2SelectionChanged}">
                             ${this.items.map(item => html`<div .item="${item}" class="item typography-body">${item.caption}</div>`)}
                         </obap-selector>
-                        <div class="description typography-caption">${this.multiItems}</div>
+                        <div class="description typography-caption">${this.multiItems2}</div>
                     </div>
 
                     <div class="selector-item">
@@ -264,8 +269,12 @@ export class SelectorDemo extends ObapElement {
         }
     }
 
-    _multiItemSelectionChanged(e) {
-        this.multiItems = e.target.selectedItems.map((index) => {return this.items[index].caption}).join(', ');
+    _multiItem1SelectionChanged(e) {
+        this.multiItems1 = e.target.selectedItems.map((index) => {return this.items[index].caption}).join(', ');
+    }
+
+    _multiItem2SelectionChanged(e) {
+        this.multiItems2 = e.target.selectedItems.map((index) => {return this.items[index].caption}).join(', ');
     }
 }
 

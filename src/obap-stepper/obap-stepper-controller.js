@@ -79,6 +79,7 @@ export const ObapStepperController = (superClass) =>
             this.finishText = 'Finish';
             this.errorText = 'Error';
             this.summaryPosition = 'top';
+            this.hasCustomIcons = false;
         }
 
         connectedCallback() {
@@ -249,6 +250,10 @@ export const ObapStepperController = (superClass) =>
         _updateSteps() {
             this.steps.forEach((step, index) => {
                 step.disabled = this.disabled || (this.linear && !step.visited);
+
+                if (step.icon) {
+                    this.hasCustomIcons = true;
+                }
             });
 
             this.requestUpdate();

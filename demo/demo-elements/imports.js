@@ -33,3 +33,6 @@ import './local-storage-demo.js';
 import './translations-demo.js';
 import './application-demo.js';
 import './stepper-demo.js';
+import './pill-navigator-demo.js';
+import './rating-demo.js';
+import './dialog-demo.js';

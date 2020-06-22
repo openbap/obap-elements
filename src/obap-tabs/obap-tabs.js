@@ -42,14 +42,13 @@ export class ObapTabs extends ObapSelectorController(ObapElement) {
                 border-bottom: 2px transparent solid;
             }
 
-            ::slotted(obap-tab[selected]) {
+            ::slotted(obap-tab[selected]:not([disabled])) {
                 color: var(--obap-tabs-color);
                 border-bottom: 2px var(--obap-tabs-color) solid;
             }
 
             .container {
                 --obap-scroll-container-color: var(--obap-tabs-color);
-                --obap-scroll-container-background-color: var(--obap-tabs-background-color);
                 display: flex;
                 flex-direction: row;
                 height: 100%;

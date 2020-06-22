@@ -46,8 +46,8 @@ describe('obap-selector', () => {
         expect(el.items[1].disabled).to.equal(true);
         el.disabled = false;
         await nextFrame();
-        expect(el.items[0].disabled).to.equal(true);
-        expect(el.items[1].disabled).to.equal(true);
+        expect(el.items[0].disabled).to.equal(false);
+        expect(el.items[1].disabled).to.equal(false);
     });
 
     it('disables all children if disabled attribute is set', async () => {

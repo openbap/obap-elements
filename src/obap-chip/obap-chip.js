@@ -142,29 +142,6 @@ export class ObapChip extends ObapElement {
         this.showCheck = false;
     }
 
-    connectedCallback() {
-        super.connectedCallback();
-
-    }
-
-    disconnectedCallback() {
-
-        super.disconnectedCallback();
-    }
-
-    firstUpdated(changedProperties) {
-        super.firstUpdated(changedProperties);
-
-    }
-
-    updated(changedProperties) {
-        super.updated(changedProperties);
-
-        changedProperties.forEach((oldValue, propName) => {
-            //
-        });
-    }
-
     render() {
         return html`
             <div class="container typography-body" @click="${this._onClickhandler}">

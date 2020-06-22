@@ -96,17 +96,6 @@ export class TabsDemo extends ObapElement {
                         <obap-tab>Tab 5</obap-tab>
                     </obap-tabs>
                 </div>
-
-                <div class="title">Individual Disabled Tabs</div>
-                <div class="tab-container">
-                    <obap-tabs selected-index="0" @obap-item-selected="${this._tabSelected}" class="elevation-1">
-                        <obap-tab>Tab 1</obap-tab>
-                        <obap-tab>Tab 2</obap-tab>
-                        <obap-tab disabled>Tab 3</obap-tab>
-                        <obap-tab disabled>Tab 4</obap-tab>
-                        <obap-tab>Tab 5</obap-tab>
-                    </obap-tabs>
-                </div>
             </div>
         `;
     }

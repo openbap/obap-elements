@@ -4,6 +4,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, fixture, expect, oneEvent, nextFrame } from '@open-wc/testing';
 import '../src/obap-stepper/obap-side-stepper.js';
+import '../src/obap-icons/obap-standard-icons.js';
 
 describe('obap-side-stepper', () => {
     it('passes the a11y audit', async () => {
@@ -244,5 +245,47 @@ describe('obap-side-stepper', () => {
         await nextFrame();
 
         expect(detail).to.not.equal(null);
+    });
+
+    it('creates custom icons, if specified', async () => {  
+        const el = await fixture(html`
+           <obap-side-stepper>
+                <obap-stepper-step name="step-1" label="Step One" sub-label="step one" icon="android"></obap-stepper-step>
+                <obap-stepper-step name="step-2" label="Step Two" sub-label="step two" icon="face"></obap-stepper-step>
+                <obap-stepper-step name="step-3" label="Step Three" sub-label="step three" icon="bug-report"></obap-stepper-step>
+            </obap-side-stepper>
+        `);
+
+        await nextFrame();
+
+        expect(el.hasCustomIcons).to.equal(true);
+    });
+
+    it('creates badges if custom icons are specified', async () => {  
+        const el = await fixture(html`
+           <obap-side-stepper>
+                <obap-stepper-step name="step-1" label="Step One" sub-label="step one" icon="android" error></obap-stepper-step>
+                <obap-stepper-step name="step-2" label="Step Two" sub-label="step two" icon="face" editable></obap-stepper-step>
+                <obap-stepper-step name="step-3" label="Step Three" sub-label="step three" icon="bug-report" optional></obap-stepper-step>
+                <obap-stepper-step name="step-4" label="Step Four" sub-label="step four" icon="bug-report"></obap-stepper-step>
+                <obap-stepper-step name="step-5" label="Step Five" sub-label="step five" icon="bug-report"></obap-stepper-step>
+            </obap-side-stepper>
+        `);
+
+        await nextFrame();
+        el.nextStep();
+        el.nextStep();
+        el.nextStep();
+        el.nextStep();
+        await nextFrame();
+
+        const badges = el.renderRoot.querySelectorAll('obap-badge');
+
+        expect(badges.length).to.equal(5);
+        expect(badges[0].label).to.equal('!');
+        expect(badges[1].icon).to.equal('core:edit');
+        expect(badges[2].icon).to.equal('core:edit');
+        expect(badges[3].icon).to.equal('core:check');
+        expect(badges[4].label).to.equal('5');
     });
 });

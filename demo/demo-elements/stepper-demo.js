@@ -74,7 +74,7 @@ export class StepperDemo extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <obap-selector-container selected-index="2">
+                <obap-selector-container selected-index="1">
                     <obap-tabs>
                         <obap-tab>Horizontal</obap-tab>
                         <obap-tab>Side</obap-tab>
@@ -100,10 +100,10 @@ export class StepperDemo extends ObapElement {
     _renderSteps() {
         return html`
             <div class="summary" slot="summary">Summary</div>
-            <obap-stepper-step name="select-campaign-settings" label="Select campaign settings" sub-label="Configure the campaign"><div class="step-content">Select campaign settings</div></obap-stepper-step>
-            <obap-stepper-step name="create-an-ad-group" label="Create an ad group" optional><div class="step-content">Create an ad group</div></obap-stepper-step>
-            <obap-stepper-step name="create-an-ad" label="Create an ad" sub-label="Configure an ad from scratch" optional editable><div class="step-content">Create an ad</div></obap-stepper-step>
-            <obap-stepper-step name="schedule-campaign" label="Schedule campaign" sub-label="Set when the campaign runs" editable><div class="step-content">Schedule campaign</div></obap-stepper-step>
+            <obap-stepper-step icon="android" name="select-campaign-settings" label="Select campaign settings" sub-label="Configure the campaign"><div class="step-content">Select campaign settings</div></obap-stepper-step>
+            <obap-stepper-step icon="android" name="create-an-ad-group" label="Create an ad group" optional><div class="step-content">Create an ad group</div></obap-stepper-step>
+            <obap-stepper-step icon="android" name="create-an-ad" label="Create an ad" sub-label="Configure an ad from scratch" optional editable><div class="step-content">Create an ad</div></obap-stepper-step>
+            <obap-stepper-step icon="android" name="schedule-campaign" label="Schedule campaign" sub-label="Set when the campaign runs" editable><div class="step-content">Schedule campaign</div></obap-stepper-step>
         `;
     }
 }
