@@ -40,16 +40,19 @@ export class BadgeDemo extends ObapElement {
             .red {
                 --obap-badge-color: white;
                 --obap-badge-background-color: red;
+                --obap-badge-border-width: 2px;
             }
 
             .green {
                 --obap-badge-color: white;
                 --obap-badge-background-color: green;
+                --obap-badge-border-width: 2px;
             }
 
             .magenta {
                 --obap-badge-color: white;
                 --obap-badge-background-color: magenta;
+                --obap-badge-border-width: 2px;
             }
 
             .filled {
@@ -120,15 +123,15 @@ export class BadgeDemo extends ObapElement {
                 <div class="row">
                     <div class="badge-parent">
                         <obap-button raised label="button" class="button"></obap-button>
-                        <obap-badge class="red" label="7"></obap-badge>
+                        <obap-badge class="red" label="7" elevation="4"></obap-badge>
                     </div>
                     <div class="badge-parent">
                         <obap-button raised label="button" class="button"></obap-button>
-                        <obap-badge class="green" icon="bug-report"></obap-badge>
+                        <obap-badge class="green" icon="bug-report" elevation="4"></obap-badge>
                     </div>
                     <div class="badge-parent">
                         <obap-button raised label="button" class="button"></obap-button>
-                        <obap-badge class="magenta" label="8"></obap-badge>
+                        <obap-badge class="magenta" label="8" elevation="4"></obap-badge>
                     </div>
                 </div>
 

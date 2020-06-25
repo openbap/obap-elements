@@ -36,3 +36,7 @@ import './stepper-demo.js';
 import './pill-navigator-demo.js';
 import './rating-demo.js';
 import './dialog-demo.js';
+import './linear-progress-demo.js';
+import './circular-progress-demo.js';
+import './sparkline-demo.js';
+import './activity-indicator-demo.js';

@@ -35,8 +35,10 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |X   |L         |obap-pill-navigator    |A navigation element that uses small circles as navigation items (like on a carousel).     |
 |X   |L         |obap-rating            |A star rating element.                                                                     |
 |X   |H         |obap-dialog            |A Material Design dialog that can be modal or non-modal.                                   |
-|    |M         |obap-linear-progress   |A linear progress bar element.                                                             |
-|    |M         |obap-circular-progress |A circular progress/busy element.                                                          |
+|X   |M         |obap-linear-progress   |A linear progress bar element.                                                             |
+|X   |M         |obap-circular-progress |A circular progress element.                                                               |
+|-   |M         |obap-activity-indicator|A circular, linear or typing busy/activity indicator.                                      |
+|-   |H         |obap-sparkline         |A very small chart, drawn without adornments or other chart-specific elements.             |
 |X   |H         |obap-horizontal-stepper|A horizontal Material Design Stepper (wizard). Step labels are at the top.                 |
 |X   |M         |obap-side-stepper      |A Material Design Stepper (wizard) where the step labels are on the left.                  |
 |    |M         |obap-compact-stepper   |A compact Material Design Stepper (wizard) where the only the active label is displayed.   |
@@ -64,18 +66,18 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                          |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                    |
 
-Count: 31/57
+Count: 34/59
 
 ### DROPDOWN PICKERS
 
 Lots of things could be in a dropdown container. Should there just be a generic one or multiple? They're separate from the other UI elements because I'm not too sure about them.
 
-|Done|Complexity|Name                 |Notes                                          |
-|:--:|:--------:|---------------------|-----------------------------------------------|
-|    |H         |obap-select (generic)|                                               |
-|    |M         |obap-list-select     |                                               |
-|    |L         |obap-date-select     |                                               |
-|    |L         |obap-time-select     |                                               |
+|Done|Complexity|Name            |Notes                                          |
+|:--:|:--------:|----------------|-----------------------------------------------|
+|    |H         |obap-select     |Generic container select.                      |
+|    |M         |obap-list-select|                                               |
+|    |L         |obap-date-select|                                               |
+|    |L         |obap-time-select|                                               |
 
 Count: 0/4
 
@@ -105,15 +107,15 @@ Count: 4/9
 
 These are unlikely to happen any time soon, but would be really nice to have.
 
-|Done|Complexity|Name                |Notes                                          |
-|:--:|:--------:|--------------------|-----------------------------------------------|
-|    |H         |obap-scheduler      |A calender scheduler like the Outlook calendar.|
-|    |H         |obap-task-board     |A kanban/trello board and tasks.               |
-|    |H         |obap-gantt-chart    |A gantt chart element.                         |
-|    |H         |obap-dashboard      |A drag & drop dashbard control for cards.      |
-|    |H         |obap-diagram        |A diagram editor, like Lucid.                  |
-|    |H         |obap-workflow       |A workflow builder.                            |
-|    |H         |obap-markdown-viewer|A markdown viewer.                             |
-|    |H         |obap-markdown-editor|A markdown editor, based on ProseMirror.       |
+|Done|Complexity|Name                 |Notes                                             |
+|:--:|:--------:|---------------------|--------------------------------------------------|
+|    |H         |obap-scheduler       |A calender scheduler like the Outlook calendar.   |
+|    |H         |obap-task-board      |A kanban/trello board and tasks.                  |
+|    |H         |obap-gantt-chart     |A gantt chart element.                            |
+|    |H         |obap-dashboard       |A drag & drop dashbard control for cards.         |
+|    |H         |obap-diagram         |A diagram editor, like Lucid.                     |
+|    |H         |obap-workflow        |A workflow builder.                               |
+|    |H         |obap-markdown-viewer |A markdown viewer.                                |
+|    |H         |obap-markdown-editor |A markdown editor, based on ProseMirror.          |
 
 Count: 0/8

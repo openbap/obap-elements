@@ -39,14 +39,16 @@ export class ObapBadge extends ObapAttachedElementController(ObapElement) {
         return [caption, hostElevation, css`
             :host {
                 --obap-badge-color: var(--obap-on-primary-color, #FFFFFF);
+                --obap-badge-border-color: var(--obap-on-primary-color, #FFFFFF);
                 --obap-badge-disabled-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-badge-background-color: var(--obap-primary-color, #5c6bc0);
                 --obap-badge-icon-size: 82%;
+                --obap-badge-border-width: 0;
 
                 display: block;
                 position: absolute;
                 pointer-events: none;
-                box-sizing: border-box;
+               
                 overflow: hidden;
                 user-select: none;
                 width: 20px;
@@ -54,6 +56,7 @@ export class ObapBadge extends ObapAttachedElementController(ObapElement) {
                 border-radius: 50%;
                 color: var(--obap-badge-color);
                 background: var(--obap-badge-background-color);
+                border: var(--obap-badge-border-width) solid var(--obap-badge-border-color);
             }
 
             :host([anchor="none"]) {
