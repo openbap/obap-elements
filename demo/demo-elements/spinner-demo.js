@@ -120,7 +120,7 @@ export class SpinnerDemo extends ObapElement {
         this.customValues = [];
 
         for (let i = 1; i <= 14; i++) {
-            this.customValues.push(`../demo/images/minions/${i}.png`);
+            this.customValues.push(`./images/minions/${i}.png`);
         }
     }
     

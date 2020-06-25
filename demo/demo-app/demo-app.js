@@ -82,7 +82,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
         super();
         themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
-        this.selectedPage = 0;
+        this.selectedPage = 26;
     }
 
     render() {

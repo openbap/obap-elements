@@ -37,8 +37,8 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |X   |H         |obap-dialog            |A Material Design dialog that can be modal or non-modal.                                   |
 |X   |M         |obap-linear-progress   |A linear progress bar element.                                                             |
 |X   |M         |obap-circular-progress |A circular progress element.                                                               |
-|-   |M         |obap-activity-indicator|A circular, linear or typing busy/activity indicator.                                      |
-|-   |H         |obap-sparkline         |A very small chart, drawn without adornments or other chart-specific elements.             |
+|X   |M         |obap-activity-indicator|A circular, linear or typing busy/activity indicator.                                      |
+|X   |H         |obap-sparkline         |A very small chart, drawn without adornments or other chart-specific elements.             |
 |X   |H         |obap-horizontal-stepper|A horizontal Material Design Stepper (wizard). Step labels are at the top.                 |
 |X   |M         |obap-side-stepper      |A Material Design Stepper (wizard) where the step labels are on the left.                  |
 |    |M         |obap-compact-stepper   |A compact Material Design Stepper (wizard) where the only the active label is displayed.   |
@@ -66,7 +66,7 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                          |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                    |
 
-Count: 34/59
+Count: 35/59
 
 ### DROPDOWN PICKERS
 

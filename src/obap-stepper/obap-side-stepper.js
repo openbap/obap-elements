@@ -206,6 +206,7 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
             obap-icon[large] {
                 --obap-icon-width: 32px;
                 --obap-icon-height: 32px;
+                --obap-icon-fill-color: var(--obap-text-secondary-color, rgba(0, 0, 0, 0.54));
                 width: 32px;
                 height: 32px;
             }
@@ -217,6 +218,7 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
             obap-badge {
                 --obap-badge-color: var(--obap-on-primary-color, #FFFFFF);
                 --obap-badge-background-color: var(--obap-inactive-color, #9E9E9E);
+                --obap-badge-border-width: 2px;
             }
 
             obap-badge[visited] {
