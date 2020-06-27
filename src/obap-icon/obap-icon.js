@@ -14,7 +14,7 @@ Displays a single svg icon.
 import '@obap/obap-elements/obap-icons/obap-device-icons.js';
 import '@obap/obap-elements/obap-icon/obap-icon.js';
 
-<obap-icon icon="device:bluetooth"></obap-material>
+<obap-icon icon="device:bluetooth"></obap-icon>
 ```
  */
 export class ObapIcon extends ObapElement {

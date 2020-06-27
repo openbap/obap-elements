@@ -41,8 +41,14 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
                 background: var(--obap-surface-color, #FFFFFF);
             }
 
-            .container {
+            .main-container {
                 height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .container {
+                flex: 1;
                 display: flex;
             }
 
@@ -245,25 +251,29 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
 
     render() {
         return html`
-            <obap-selector-container class="container" selected-index="0">
-                <div class="left-container">
-                    <obap-selector class="navigator" @obap-item-selected="${this._stepSelected}">
-                        <div no-select class="line" ?custom-icons="${this.hasCustomIcons}"></div>
-                        ${this.steps.map((step, index) => this._renderHeaderItem(step, index))}
-                    </obap-selector>
-                </div>
-   
-                <div class="right-container">
-                    <div class="pages" summary-position="${this.summaryPosition}">
-                        <slot name="summary"></slot>
-                        <obap-pages selected-index="${this.selected}"><slot name="step"></slot></obap-pages>
+            <div class="main-container">
+                <obap-selector-container class="container" selected-index="0">
+                    <div class="left-container">
+                        <obap-selector class="navigator" @obap-item-selected="${this._stepSelected}">
+                            <div no-select class="line" ?custom-icons="${this.hasCustomIcons}"></div>
+                            ${this.steps.map((step, index) => this._renderHeaderItem(step, index))}
+                        </obap-selector>
                     </div>
+    
+                    <div class="right-container">
+                        <div class="pages" summary-position="${this.summaryPosition}">
+                            <slot name="summary"></slot>
+                            <obap-pages selected-index="${this.selected}"><slot name="step"></slot></obap-pages>
+                        </div>
 
-                    <div class="actions">
-                        ${this._renderActions()}
+                        
                     </div>
+                    
+                </obap-selector-container>
+                <div class="actions">
+                    ${this._renderActions()}
                 </div>
-            </obap-selector-container>
+            </div>
         `;
     }
 

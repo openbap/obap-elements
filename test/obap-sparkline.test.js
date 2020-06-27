@@ -389,4 +389,17 @@ describe('obap-bullet-sparkline', () => {
 
         expect(el).to.not.equal(null);
     });
+
+    it('creates a rectange for each range', async () => {
+        const percentageRanges = [40, 70, 85, 100];
+       
+        const el = await fixture(html`
+            <obap-bullet-sparkline .percentageRanges="${percentageRanges}"></obap-bullet-sparkline>
+        `);
+
+        await nextFrame();
+        const ranges = el.renderRoot.querySelectorAll('rect.range');
+
+        expect(ranges.length).to.equal(4);
+    });
 });

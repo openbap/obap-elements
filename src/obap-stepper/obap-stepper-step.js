@@ -101,7 +101,7 @@ export class ObapStepperStep extends ObapElement {
         this.subLabel = '';
         this.errorLabel = '';
         this.icon = '';
-        this.slot = 'step';
+        this.slot = 'step'; 
     }
 
     updated(changedProperties) {

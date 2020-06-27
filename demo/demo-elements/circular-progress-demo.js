@@ -4,7 +4,6 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import '../../src/obap-circular-progress/obap-circular-progress.js';
-import '../../src/obap-material/obap-material.js';
 
 export class CircularProgressDemo extends ObapElement {
     static get styles() {

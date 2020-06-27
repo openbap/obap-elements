@@ -5,6 +5,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import '../../src/obap-tabs/obap-tabs.js';
 import '../../src/obap-pages/obap-pages.js';
+import '../../src/obap-material/obap-material.js';
 import '../../src/obap-selector/obap-selector-container.js';
 import '../../src/obap-stepper/obap-horizontal-stepper.js'; 
 import '../../src/obap-stepper/obap-side-stepper.js'; 
@@ -29,10 +30,6 @@ export class StepperDemo extends ObapElement {
                 display: flex;
                 flex-direction: column;
                 height: 100%;
-            }
-
-            obap-material {
-                border-radius: 0;
             }
 
             obap-pages {
@@ -75,9 +72,14 @@ export class StepperDemo extends ObapElement {
                 padding: 56px;
             }
 
+            .compact {
+                width: 300px;
+                height: 600px;
+            }
+
             obap-compact-stepper {
-                width: 300px !important;
-                height: 600px !important;
+                width: 100%;
+                height: 100%;
             }
         `];
     }
@@ -85,7 +87,7 @@ export class StepperDemo extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <obap-selector-container selected-index="2">
+                <obap-selector-container selected-index="0">
                     <obap-tabs>
                         <obap-tab>Horizontal</obap-tab>
                         <obap-tab>Side</obap-tab>
@@ -101,7 +103,9 @@ export class StepperDemo extends ObapElement {
                             <obap-side-stepper>${this._renderSteps()}</obap-side-stepper>
                         </div>
                         <div class="page">
-                            <obap-compact-stepper>${this._renderSteps()}</obap-compact-stepper>
+                            <obap-material class="compact" elevation="1">
+                                <obap-compact-stepper>${this._renderSteps()}</obap-compact-stepper>
+                            </obap-material>
                         </div>
                         <div class="page">Vertical</div>
                     </obap-pages>

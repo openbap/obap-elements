@@ -239,7 +239,7 @@ export const ObapStepperController = (superClass) =>
                 if (this.steps[i].selectable) return true;
             }
 
-            return false;
+            return false; 
         }
 
         canFinish() {

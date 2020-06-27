@@ -143,4 +143,18 @@ describe('obap-button', () => {
         await nextFrame();
         expect(el.hasFocus).to.equal(false);
     });
+
+    it('supports touch events', async () => {
+        const el = await fixture(html`
+            <obap-button label="label" raised></obap-button>
+        `);
+
+        el._handleTouchStartEvent(new Event('touchstart'));
+        await nextFrame();
+        expect(el.getAttribute('elevation')).to.equal('6');
+
+        el._handleTouchEndEvent(new Event('touchend'));
+        await nextFrame();
+        expect(el.getAttribute('elevation')).to.equal('2');
+    });
 });

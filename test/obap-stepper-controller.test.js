@@ -384,11 +384,12 @@ describe('obap-stepper-controller', () => {
 
         await nextFrame();
         expect(el.selected).to.equal(2);
+        el.steps[1].optional = true;
         el.setStep(1);
         el.nextStep();
         expect(el.selected).to.equal(1);
     });
-
+ 
     it('skips inaccessible steps on "previousStep"', async () => {
         const el = await fixture(html`
             <test-stepper>
@@ -564,7 +565,7 @@ describe('obap-stepper-controller', () => {
     it('correctly determines if it can move forward a step', async () => {
         const el = await fixture(html`
             <test-stepper>
-                <obap-stepper-step name="one"></obap-stepper-step>
+                <obap-stepper-step name="one" optional></obap-stepper-step>
                 <obap-stepper-step name="two"></obap-stepper-step>
                 <obap-stepper-step name="three"></obap-stepper-step>
             </test-stepper>
@@ -575,9 +576,11 @@ describe('obap-stepper-controller', () => {
         expect(el.canMoveForward()).to.equal(true);
         el.nextStep();
         expect(el.canMoveForward()).to.equal(false);
-
+        
         el.setStep(0);
         expect(el.canMoveForward()).to.equal(false);
+        expect(el.selected).to.equal(0);
+        
         el.steps[2].optional = true;
         expect(el.canMoveForward()).to.equal(true);
     });

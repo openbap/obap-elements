@@ -18,11 +18,6 @@ export class ObapApplicationView extends ObapElement {
                 background: transparent;
             }
 
-            obap-material {
-                border-radius: 0;
-                padding: 0;
-            }
-
             obap-pages {
                 height: 100%;
             }

@@ -94,7 +94,7 @@ export class SparklineDemo extends ObapElement {
         super();
 
         this.colors = ['indianred', 'seagreen', 'cornflowerblue', 'hotpink'];
-        this.bulletRanges = [40, 70, 85, 100]
+        this.bulletRanges = [40, 70, 85, 100];
         this.values2 = [2,4,3];
         this.values1 = [-7, -9, -5, -2, 9, 11, 15, 10, 10, 17, 19, 17, 10, 22, 25, 10, 9, 10, 26, 28, 27, 10, 10, 30, 10, -3, -6, -3, 4, 10];
     }

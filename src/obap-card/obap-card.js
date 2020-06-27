@@ -25,6 +25,7 @@ export class ObapCard extends ObapElement {
             obap-material {
                 padding: 0;
                 height: 100%;
+                border-radius: 3px;
                 box-sizing: border-box;
                 background: var(--obap-surface-color, white);
             }

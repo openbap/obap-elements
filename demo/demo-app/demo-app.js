@@ -28,7 +28,6 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                 min-width: 200px;
                 margin: 8px;
                 padding: 8px;
-                border-radius: 0;
                 overflow: auto;
                 background: var(--obap-surface-color);
             }
@@ -37,7 +36,6 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                 flex: 1;
                 margin: 8px 8px 8px 0;
                 padding: 8px;
-                border-radius: 0;
                 background: var(--obap-surface-color);
                 position: relative;
                 overflow: auto;
