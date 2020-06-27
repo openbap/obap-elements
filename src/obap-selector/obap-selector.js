@@ -25,7 +25,7 @@ import '@obap/obap-elements/obap-selector/obap-selector.js';
 </style>
 
 <!-- Single Select (default) -->
-<obap-selector selected="0" selector-type="single">
+<obap-selector selected-index="0" selector-type="single">
     <div class="item">One</div>
     <div class="item">Two</div>
     <div class="item">Three</div>

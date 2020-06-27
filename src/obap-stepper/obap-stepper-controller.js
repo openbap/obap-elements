@@ -60,7 +60,11 @@ export const ObapStepperController = (superClass) =>
                 summaryPosition: {
                     type: String,
                     attribute: 'summary-position'
-                }
+                },
+
+                disabledSteps: {
+                    type: Array
+                },
             }
         }
 
@@ -72,6 +76,7 @@ export const ObapStepperController = (superClass) =>
             this.canCancel = true;
             this.selected = -1;
             this.steps = [];
+            this.disabledSteps = [];
             this.optionalText = 'Optional';
             this.backText = 'Back';
             this.cancelText = 'Cancel';
@@ -115,10 +120,13 @@ export const ObapStepperController = (superClass) =>
 
         setStep(index) {
             if (index === this.selected) {
-                return;
+                return false;
             }
 
             const newStepIndex = index;
+
+            if (!this.steps[newStepIndex].selectable) return false;
+            
             const newStepName = this.steps[newStepIndex].name;
             const oldStepIndex = this.selected;
             let oldStepName = '';
@@ -128,7 +136,7 @@ export const ObapStepperController = (superClass) =>
             }
 
             if (!this.canSetStep(newStepIndex, oldStepIndex, newStepName, oldStepName)) {
-                return;
+                return false;
             }
 
             this.steps.forEach((step, idx) => {
@@ -138,7 +146,6 @@ export const ObapStepperController = (superClass) =>
                 } else {
                     step.selected = false;
                 }
-
             });
 
             this._updateSteps();
@@ -150,6 +157,8 @@ export const ObapStepperController = (superClass) =>
                 newStepName: newStepName,
                 oldStepName: oldStepName
             });
+
+            return true;
         }
 
         getStep(index) {

@@ -99,8 +99,9 @@ export class ObapSelectorContainer extends ObapElement {
     }
 
     _handleItemSelectedEvent(e) {
-        e.stopPropagation();
         this.selectedIndex = e.detail.index;
+        e.stopPropagation();
+        e.preventDefault();
     }
 
     _handleSlotChangeEvent(e) {

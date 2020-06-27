@@ -219,6 +219,8 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
                 --obap-badge-color: var(--obap-on-primary-color, #FFFFFF);
                 --obap-badge-background-color: var(--obap-inactive-color, #9E9E9E);
                 --obap-badge-border-width: 2px;
+                --obap-badge-size: 22px;
+                --obap-badge-icon-size: 75%;
             }
 
             obap-badge[visited] {
@@ -254,7 +256,7 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
                 <div class="right-container">
                     <div class="pages" summary-position="${this.summaryPosition}">
                         <slot name="summary"></slot>
-                        <obap-pages selected="${this.selected}"><slot name="step"></slot></obap-pages>
+                        <obap-pages selected-index="${this.selected}"><slot name="step"></slot></obap-pages>
                     </div>
 
                     <div class="actions">

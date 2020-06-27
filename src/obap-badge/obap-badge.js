@@ -43,20 +43,28 @@ export class ObapBadge extends ObapAttachedElementController(ObapElement) {
                 --obap-badge-disabled-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-badge-background-color: var(--obap-primary-color, #5c6bc0);
                 --obap-badge-icon-size: 82%;
-                --obap-badge-border-width: 0;
+                --obap-badge-border-width: 0px;
+                --obap-badge-size: 20px;
 
-                display: block;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 position: absolute;
                 pointer-events: none;
+                font-size: 11px;
                
                 overflow: hidden;
                 user-select: none;
-                width: 20px;
-                height: 20px;
+                width: calc(var(--obap-badge-size) + var(--obap-badge-border-width));
+                height: calc(var(--obap-badge-size) + var(--obap-badge-border-width));
                 border-radius: 50%;
                 color: var(--obap-badge-color);
                 background: var(--obap-badge-background-color);
                 border: var(--obap-badge-border-width) solid var(--obap-badge-border-color);
+
+                box-sizing: border-box;
+                padding-top: 2px;
             }
 
             :host([anchor="none"]) {
@@ -73,8 +81,9 @@ export class ObapBadge extends ObapAttachedElementController(ObapElement) {
             }
 
             obap-icon {
-                --obap-icon-width: var(--obap-badge-icon-size);
-                --obap-icon-height: var(--obap-badge-icon-size);
+                margin-top: -2px;
+                --obap-icon-width: calc(var(--obap-badge-icon-size) + var(--obap-badge-border-width));
+                --obap-icon-height: calc(var(--obap-badge-icon-size) + var(--obap-badge-border-width));
             }
 
             .container {
@@ -105,7 +114,6 @@ export class ObapBadge extends ObapAttachedElementController(ObapElement) {
 
     constructor() {
         super();
-
         this.anchor = 'top-right';
         this.icon = '';
         this.label = '';
@@ -113,9 +121,9 @@ export class ObapBadge extends ObapAttachedElementController(ObapElement) {
 
     render() {
         if (this.icon !== '') {
-            return html`<div class="container"><obap-icon icon="${this.icon}"></obap-icon></div>`;
+            return html`<obap-icon icon="${this.icon}"></obap-icon>`;
         } else {
-            return html`<div class="typography-caption container">${this.label}</div>`;
+            return html`${this.label}`;
         }
     }
 }

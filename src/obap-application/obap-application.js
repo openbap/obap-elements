@@ -171,7 +171,6 @@ export class ObapApplication extends ObapApplicationController(ObapElement) {
     }
 
     _handleFabClick(e) {
-        console.log(e)
         let viewName = e.target.getAttribute('action-view-name');
         this.showView(viewName);
     }

@@ -6,6 +6,7 @@ import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { ObapStepperController } from './obap-stepper-controller.js';
 import { body, caption } from '../obap-styles/obap-typography.js';
 import '../obap-icon/obap-icon.js';
+import '../obap-pages/obap-pages.js';
 import '../obap-selector/obap-selector.js';
 import '../obap-selector/obap-selector-container.js';
 import './obap-stepper-step.js';
@@ -200,7 +201,7 @@ export class ObapHorizontalStepper extends ObapStepperController(ObapElement) {
    
                 <div class="pages" summary-position="${this.summaryPosition}">
                     <slot name="summary"></slot>
-                    <obap-pages selected="${this.selected}"><slot name="step"></slot></obap-pages>
+                    <obap-pages selected-index="${this.selected}"><slot name="step"></slot></obap-pages>
                 </div>
 
                 <div class="actions">

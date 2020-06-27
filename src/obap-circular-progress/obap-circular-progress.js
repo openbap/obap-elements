@@ -71,7 +71,7 @@ export class ObapCircularProgress extends ObapElement {
 
             circle.indeterminate {
                 transform-origin: 50% 50%;
-                animation: indeterminate-stroke var(--obap-circular-progress-indeterminate-duration) infinite linear, indeterminate-flip var(--obap-circular-progress-indeterminate-duration) infinite steps(1);
+                animation: indeterminate-stroke var(--obap-circular-progress-indeterminate-duration) infinite ease-in, indeterminate-flip var(--obap-circular-progress-indeterminate-duration) infinite steps(1);
 
             }
 

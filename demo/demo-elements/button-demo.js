@@ -79,19 +79,19 @@ export class ButtonDemo extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <div class="title">Regular Buttons</div>
+                <div class="title"  @click="${this._click}">Regular Buttons</div>
                 <div class="row">
-                    <obap-button label="flat"></obap-button>
-                    <obap-button label="raised" raised></obap-button>
-                    <obap-button label="no ink" no-ink raised></obap-button>
-                    <obap-button label="toggle" raised toggle></obap-button>
-                    <obap-button label="disabled" disabled></obap-button>
+                    <obap-button @click="${this._click}" label="flat"></obap-button>
+                    <obap-button @click="${this._click}" label="raised" raised></obap-button>
+                    <obap-button @click="${this._click}" label="no ink" no-ink raised></obap-button>
+                    <obap-button @click="${this._click}" label="toggle" raised toggle></obap-button>
+                    <obap-button @click="${this._click}" label="disabled" disabled></obap-button>
 
-                    <obap-button label="flat" icon="android"></obap-button>
-                    <obap-button label="raised" raised icon="face"></obap-button>
-                    <obap-button label="no ink" no-ink raised icon="bug-report"></obap-button>
-                    <obap-button label="toggle" raised toggle icon="settings"></obap-button>
-                    <obap-button label="disabled" icon="add" disabled></obap-button>
+                    <obap-button @click="${this._click}" label="flat" icon="android"></obap-button>
+                    <obap-button @click="${this._click}" label="raised" raised icon="face"></obap-button>
+                    <obap-button @click="${this._click}" label="no ink" no-ink raised icon="bug-report"></obap-button>
+                    <obap-button @click="${this._click}" label="toggle" raised toggle icon="settings"></obap-button>
+                    <obap-button @click="${this._click}" label="disabled" icon="add" disabled></obap-button>
                 </div>
 
                 <div class="title">Floating Action Buttons</div>
@@ -122,6 +122,10 @@ export class ButtonDemo extends ObapElement {
                 </div>
             </div>
         `;
+    }
+
+    _click() {
+        //console.log('CLICK');
     }
 }
 

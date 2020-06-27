@@ -146,7 +146,7 @@ export class ObapDialog extends ObapElement {
     }
 
     _handleClick(e) {
-        const path = e.path;
+        const path = e.path || (e.composedPath && e.composedPath());
         const endIndex = path.indexOf(this);
 
         for (let i = 0; i < endIndex; i++) {
@@ -161,7 +161,9 @@ export class ObapDialog extends ObapElement {
     }
 
     _handleDocumentClickEvent(e) {
-        if (e.path.indexOf(this) === -1) {
+        const path = e.path || (e.composedPath && e.composedPath());
+
+        if (path.indexOf(this) === -1) {
             this.opened = false;
             e.stopPropagation();
         }

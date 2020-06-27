@@ -36,6 +36,10 @@ export class ObapPillNavigator extends ObapElement {
                 pointer-events: none;
             }
 
+            :host([readonly]) {
+                pointer-events: none;
+            }
+
             :host([disabled]) > .container > .pill {
                 width: var(--obap-pill-size);
                 height: var(--obap-pill-size);
@@ -46,6 +50,7 @@ export class ObapPillNavigator extends ObapElement {
             .container {
                 display: flex;
                 align-items: center;
+                justify-content: center;
             }
 
             .pill {
@@ -90,6 +95,17 @@ export class ObapPillNavigator extends ObapElement {
             selected: {
                 type: Number,
                 attribute: 'selected'
+            },
+
+            readonly: {
+                type: Boolean,
+                attribute: 'readonly',
+                reflect: true
+            },
+
+            disabledPills: {
+                type: Array,
+                attribute: 'disabled-pills'
             }
         }
     }
@@ -103,32 +119,34 @@ export class ObapPillNavigator extends ObapElement {
 
         if ((oldValue !== value) && (!this.disabled)) {
             this._selected = value;
-
-            let event = new CustomEvent('obap-pill-navigator-change', {
-                detail: {
-                    oldValue: oldValue,
-                    newValue: this._selected
-                },
-                bubbles: true,
-                composed: true
-            });
-
-            this.dispatchEvent(event);
-
+            this._fireEvent('obap-pill-navigator-change', { oldValue: oldValue, newValue: this._selected }, false);
             this.requestUpdate('selected', oldValue);
         }
+    }
+
+    _fireEvent(name, detail, cancelable) {
+        const event = new CustomEvent(name, {
+            bubbles: true,
+            composed: true,
+            cancelable: cancelable,
+            detail: detail
+        });
+
+        return this.dispatchEvent(event);
     }
 
     constructor() {
         super();
         this.count = 0;
+        this.readonly = false;
+        this.disabledPills = [];
         this._selected = -1;
     }
     
     render() {
         return html`
             <obap-selector class="container" selected-index="${this.selected}" @obap-item-selected="${this._selectedHandler}">
-                ${[...Array(this.count)].map(_ => html`<div class="pill"></div>`)}
+                ${[...Array(this.count)].map((_, index) => html`<div class="pill" ?no-select="${this.disabledPills.indexOf(index) > -1}"></div>`)}
             </obap-selector>
         `;
     }
@@ -159,6 +177,9 @@ export class ObapPillNavigator extends ObapElement {
 
     _selectedHandler(e) {
         this.selected = e.detail.index;
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+        e.preventDefault();
     }
 }
 

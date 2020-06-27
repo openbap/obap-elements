@@ -81,7 +81,7 @@ export class RatingDemo extends ObapElement {
     }
 
     _handleRatingChange(e) {
-        console.log(`${e.detail.oldValue} -> ${e.detail.newValue}`);
+        //console.log(`${e.detail.oldValue} -> ${e.detail.newValue}`);
     }
 }
 

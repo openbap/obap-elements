@@ -8,6 +8,7 @@ import '../../src/obap-pages/obap-pages.js';
 import '../../src/obap-selector/obap-selector-container.js';
 import '../../src/obap-stepper/obap-horizontal-stepper.js'; 
 import '../../src/obap-stepper/obap-side-stepper.js'; 
+import '../../src/obap-stepper/obap-compact-stepper.js'; 
 
 export class StepperDemo extends ObapElement {
     static get styles() {
@@ -43,11 +44,16 @@ export class StepperDemo extends ObapElement {
             }
 
             .page {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 height: 100%;
             }
 
             .page > * {
                 height: 100%;
+                width: 100%;
             }
 
             .step-content {
@@ -68,13 +74,18 @@ export class StepperDemo extends ObapElement {
                 color: var(--obap-text-secondary-color);
                 padding: 56px;
             }
+
+            obap-compact-stepper {
+                width: 300px !important;
+                height: 600px !important;
+            }
         `];
     }
     
     render() {
         return html`
             <div class="container">
-                <obap-selector-container selected-index="1">
+                <obap-selector-container selected-index="2">
                     <obap-tabs>
                         <obap-tab>Horizontal</obap-tab>
                         <obap-tab>Side</obap-tab>
@@ -89,7 +100,9 @@ export class StepperDemo extends ObapElement {
                         <div class="page">
                             <obap-side-stepper>${this._renderSteps()}</obap-side-stepper>
                         </div>
-                        <div class="page">Compact</div>
+                        <div class="page">
+                            <obap-compact-stepper>${this._renderSteps()}</obap-compact-stepper>
+                        </div>
                         <div class="page">Vertical</div>
                     </obap-pages>
                 </obap-selector-container>
@@ -102,7 +115,7 @@ export class StepperDemo extends ObapElement {
             <div class="summary" slot="summary">Summary</div>
             <obap-stepper-step icon="android" name="select-campaign-settings" label="Select campaign settings" sub-label="Configure the campaign"><div class="step-content">Select campaign settings</div></obap-stepper-step>
             <obap-stepper-step icon="android" name="create-an-ad-group" label="Create an ad group" optional><div class="step-content">Create an ad group</div></obap-stepper-step>
-            <obap-stepper-step icon="android" name="create-an-ad" label="Create an ad" sub-label="Configure an ad from scratch" optional editable><div class="step-content">Create an ad</div></obap-stepper-step>
+            <obap-stepper-step error icon="android" name="create-an-ad" label="Create an ad" sub-label="Configure an ad from scratch" optional editable><div class="step-content">Create an ad</div></obap-stepper-step>
             <obap-stepper-step icon="android" name="schedule-campaign" label="Schedule campaign" sub-label="Set when the campaign runs" editable><div class="step-content">Schedule campaign</div></obap-stepper-step>
         `;
     }

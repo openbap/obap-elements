@@ -187,6 +187,8 @@ export class ObapButton extends ObapInputElement {
 
         this._boundHandleMouseUpEvent = this._handleMouseUpEvent.bind(this);
         this._boundHandleMouseDownEvent = this._handleMouseDownEvent.bind(this);
+        this._boundHandleTouchStartEvent = this._handleTouchStartEvent.bind(this);
+        this._boundHandleTouchEndEvent = this._handleTouchEndEvent.bind(this);
     }
 
     connectedCallback() {
@@ -194,16 +196,16 @@ export class ObapButton extends ObapInputElement {
         this.addEventListener('mousedown', this._boundHandleMouseDownEvent);
         this.addEventListener('mouseup', this._boundHandleMouseUpEvent);
 
-        this.addEventListener('touchstart', this._boundHandleMouseDownEvent);
-        this.addEventListener('touchend', this._boundHandleMouseUpEvent);
+        this.addEventListener('touchstart', this._boundHandleTouchStartEvent);
+        this.addEventListener('touchend', this._boundHandleTouchEndEvent);
     }
 
     disconnectedCallback() {
         this.removeEventListener('mousedown', this._boundHandleMouseDownEvent);
         this.removeEventListener('mouseup', this._boundHandleMouseUpEvent);
 
-        this.removeEventListener('touchstart', this._boundHandleMouseDownEvent);
-        this.removeEventListener('touchend', this._boundHandleMouseUpEvent);
+        this.removeEventListener('touchstart', this._boundHandleTouchStartEvent);
+        this.removeEventListener('touchend', this._boundHandleTouchEndEvent);
         super.disconnectedCallback();
     }
 
@@ -246,7 +248,29 @@ export class ObapButton extends ObapInputElement {
 
     _handleMouseDownEvent(e) {
         e.preventDefault();
+        this._handleDown();
+        
+    }
 
+    _handleMouseUpEvent(e) {
+        e.preventDefault();
+        this._handleUp();
+    }
+
+    _handleTouchStartEvent(e) {
+        //e.preventDefault();
+        e.stopPropagation();
+        this._handleDown();
+        
+    }
+
+    _handleTouchEndEvent(e) {
+        //e.preventDefault();
+        e.stopPropagation();
+        this._handleUp();
+    }
+
+    _handleDown() {
         if (this.raised) {
             if (this.toggle) {
                 this.selected = !this.selected;
@@ -261,9 +285,7 @@ export class ObapButton extends ObapInputElement {
         }
     }
 
-    _handleMouseUpEvent(e) {
-        e.preventDefault();
-
+    _handleUp() {
         if ((this.raised) && (!this.toggle)) {
             this.setAttribute('elevation', 2);
         }
