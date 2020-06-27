@@ -41,8 +41,9 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |X   |H         |obap-sparkline         |A very small chart, drawn without adornments or other chart-specific elements.             |
 |X   |H         |obap-horizontal-stepper|A horizontal Material Design Stepper (wizard). Step labels are at the top.                 |
 |X   |M         |obap-side-stepper      |A Material Design Stepper (wizard) where the step labels are on the left.                  |
-|-   |M         |obap-compact-stepper   |A compact Material Design Stepper (wizard) where the only the active label is displayed.   |
+|X   |M         |obap-compact-stepper   |A compact Material Design Stepper (wizard) where the only the active label is displayed.   |
 |    |H         |obap-vertical-stepper  |A vertical Material Design Stepper (wizard). Step labels are inline.                       |
+|X   |L         |obap-banner            |A Material Design banner/jumbotron element.                                                |
 |    |M         |obap-time-picker       |A Material Design time picker (not the mobile type).                                       |
 |    |H         |obap-date-picker       |A Material Design date picker (not the mobile type).                                       |
 |    |M         |obap-date-time-picker  |A combined date and time picker (may just add an optional time picker to obap-date-picker).|
@@ -60,13 +61,12 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |H         |obap-data-table        |A complex Material Design data table suitable for large data sets.                         |
 |    |L         |obap-image             |An image wrapper element.                                                                  |
 |    |M         |obap-carousel          |A content carousel that supports overlays.                                                 |
-|    |L         |obap-banner            |A banner/jumbotron element.                                                                |
 |    |M         |obap-snackbar          |A popup toast notification element.                                                        |
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                          |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                    |
 |    |H         |obap-chart             |A collection of commonly used chart types.                                                 |
 
-Count: 35/59
+Count: 37/59
 
 ### DROPDOWN PICKERS
 

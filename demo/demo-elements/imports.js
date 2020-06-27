@@ -40,3 +40,4 @@ import './linear-progress-demo.js';
 import './circular-progress-demo.js';
 import './sparkline-demo.js';
 import './activity-indicator-demo.js';
+import './banner-demo.js';
