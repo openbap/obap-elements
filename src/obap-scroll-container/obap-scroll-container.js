@@ -164,9 +164,17 @@ export class ObapScrollContainer extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <div class="button-container" ?hidden="${this.disableScrolling || !this._hasOverflow}"><obap-button round ?mini="${this.miniButtons}" ?not-visible="${!this._leftScrollButtonVisible}" icon="${this._getIconName(true)}" @mousedown="${this._scrollLeft}" @mouseup="${this._endScroll}"></obap-button></div>
+                <div class="button-container" ?hidden="${this.disableScrolling || !this._hasOverflow}">
+                    <obap-button round ?mini="${this.miniButtons}" ?not-visible="${!this._leftScrollButtonVisible}" icon="${this._getIconName(true)}" 
+                        @mousedown="${this._scrollLeft}" @mouseup="${this._endScroll}" @touchstart="${this._scrollLeft}" @touchend="${this._endScroll}">
+                    </obap-button>
+                </div>
                 <div class="content-container" id="contentContainer"><slot></slot></div>
-                <div class="button-container" ?hidden="${this.disableScrolling || !this._hasOverflow}"><obap-button round ?mini="${this.miniButtons}" ?not-visible="${!this._rightScrollButtonVisible}" icon="${this._getIconName(false)}" @mousedown="${this._scrollRight}" @mouseup="${this._endScroll}"></obap-button></div>
+                <div class="button-container" ?hidden="${this.disableScrolling || !this._hasOverflow}">
+                    <obap-button round ?mini="${this.miniButtons}" ?not-visible="${!this._rightScrollButtonVisible}" icon="${this._getIconName(false)}" 
+                        @mousedown="${this._scrollRight}" @mouseup="${this._endScroll}" @touchstart="${this._scrollRight}" @touchend="${this._endScroll}">
+                    </obap-button>
+                </div>
             </div>
         `;
     }
