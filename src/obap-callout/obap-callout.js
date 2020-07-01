@@ -250,8 +250,8 @@ export class ObapCallout extends ObapAttachedElementController(ObapElement) {
 
         setTimeout(() => {
             if (this._showing) {
-                this.updatePosition();
                 this.setAttribute('is-visible', null);
+                this.updatePosition();
             }
         }, (this.anchor === 'none' || this.fixed || this._touching) ? 0 : this.triggerTime);
     }
@@ -271,7 +271,7 @@ export class ObapCallout extends ObapAttachedElementController(ObapElement) {
         } else {
             this.hide();
         }
-    }
+    } 
 
     _handleTouchStartEvent(e) {
         if (this.anchor === 'none' || this.fixed) return;

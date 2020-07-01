@@ -125,7 +125,7 @@ export class ButtonDemo extends ObapElement {
     }
 
     _click() {
-        //console.log('CLICK');
+        console.log('CLICK');
     }
 }
 

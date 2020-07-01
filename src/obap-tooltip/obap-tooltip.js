@@ -31,7 +31,7 @@ import '@obap/obap-elements/obap-tooltip/obap-tooltip.js';
     <obap-tooltip>tooltip</obap-tooltip>
 </div>
 `
-@slot - - Default slot
+@slot - - Default slot 
  */
 export class ObapTooltip extends ObapAttachedElementController(ObapElement) {
     static get styles() {

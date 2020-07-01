@@ -15,6 +15,7 @@ export class TooltipDemo extends ObapElement {
     
             .container {
                 height: 100%;
+                position: relative;
             }
 
             .title {

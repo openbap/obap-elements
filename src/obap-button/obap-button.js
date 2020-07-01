@@ -249,7 +249,6 @@ export class ObapButton extends ObapInputElement {
     _handleMouseDownEvent(e) {
         e.preventDefault();
         this._handleDown();
-        
     }
 
     _handleMouseUpEvent(e) {
@@ -258,16 +257,14 @@ export class ObapButton extends ObapInputElement {
     }
 
     _handleTouchStartEvent(e) {
-        //e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault();
         this._handleDown();
-        
     }
 
     _handleTouchEndEvent(e) {
-        //e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault();
         this._handleUp();
+        this.click();
     }
 
     _handleDown() {

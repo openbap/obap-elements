@@ -16,6 +16,7 @@ export class CalloutDemo extends ObapElement {
     
             .container {
                 height: 100%;
+                position: relative;
             }
 
             .row {

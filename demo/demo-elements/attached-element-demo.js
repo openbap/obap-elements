@@ -32,6 +32,7 @@ export class AttachedElementDemo extends ObapElement {
     
             .container {
                 height: 100%;
+                position: relative;
             }
 
             .title {
