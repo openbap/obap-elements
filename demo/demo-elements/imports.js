@@ -41,3 +41,5 @@ import './circular-progress-demo.js';
 import './sparkline-demo.js';
 import './activity-indicator-demo.js';
 import './banner-demo.js';
+import './data-table-layout-demo.js';
+import './data-list-demo.js';

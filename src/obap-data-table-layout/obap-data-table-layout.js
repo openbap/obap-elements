@@ -7,25 +7,125 @@ import { html, css, ObapElement } from '../obap-element/obap-element.js';
 /**
  * A helper container element to simplify creating complex data table elements. You normally wouldn't use this element directly, but rather use it if you need to create a data table with a complex layout. It isn't actualy a table, but rather a way of laying out table parts that are fixed and scrolling.
  *
+ * ## Content Positioning
+ * 
  * All the part of the table are positioned using named slots:
  * 
- * 'header'             - the main header area for titles, etc. (this isn't the column header).
- * 'header-fixed-left'  - the area containing the left fixed column headers (for frozen columns and row selector checkboxes).
- * 'header-scroll'      - the area containing scrolling column headers.
- * 'header-fixed-right' - the area containing the right fixed column headers (for frozen action menus, etc.).
- * 'body-fixed-left'    - the area containing the left fixed data rows (for frozen columns and row selector checkboxes).
- * 'body-scroll'        - the area containing scrolling data rows.
- * 'body-fixed-right'   - the area containing the right fixed data rows (for frozen action menus, etc.).
- * 'footer-fixed-left'  - the area containing the left fixed column footers (for counts and aggregations).
- * 'footer-scroll'      - the area containing scrolling column footers.
- * 'footer-fixed-right' - the area containing the right fixed column footers (for counts and aggregations).
- * 'footer'             - the main footer area for pagers, etc. (this isn't the column footer).
+ * |Slot              |Description                                                                                        |
+ * |------------------|---------------------------------------------------------------------------------------------------|
+ * |grouper           |The area for column grouping, etc.                                                                 |
+ * |header-fixed-left |The area containing the left fixed column headers (for frozen columns and row selector checkboxes).|
+ * |header-scroll     |The area containing scrolling column headers.                                                      |
+ * |header-fixed-right|The area containing the right fixed column headers (for frozen action menus, etc.).                |
+ * |body-fixed-left   |The area containing the left fixed data rows (for frozen columns and row selector checkboxes).     |
+ * |body-scroll       |The area containing scrolling data rows.                                                           |
+ * |body-fixed-right  |The area containing the right fixed data rows (for frozen action menus, etc.).                     |
+ * |footer-fixed-left |The area containing the left fixed column footers (for counts and aggregations).                   |
+ * |footer-scroll     |The area containing scrolling column footers.                                                      |
+ * |footer-fixed-right|The area containing the right fixed column footers (for counts and aggregations).                  |
+ * |pager             |The area for pagers, etc.                                                                          |
+ * 
+ * ## Content Styling
+ * 
+ * The overall background and foreground colors are set by the following 2 CSS variables:
+ * 
+ * |Variable                                 |Default Value                                 |
+ * |-----------------------------------------|----------------------------------------------|
+ * |--obap-data-table-layout-color           |--obap-text-primary-color, rgba(0, 0, 0, 0.87)|
+ * |--obap-data-table-layout-background-color|transparent                                   |
+ * 
+ * You can also set a top level border color and style and then just set the border widths on the individual parts, or override the color and style per part.
+ * 
+ * |Variable                             |Default Value                                       |
+ * |-------------------------------------|----------------------------------------------------|
+ * |--obap-data-table-layout-border-color|--obap-divider-on-surface-color, rgba(0, 0, 0, 0.20)|
+ * |--obap-data-table-layout-border-style|solid                                               |
+ * 
+ * Each slotted part inherits the overall background and foreground colors, but you can override them individually, and set the border properties. They are named according to the following rules:
+ * 
+ * |Variable                                                  |Default Value                        |
+ * |----------------------------------------------------------|-------------------------------------|
+ * |--obap-data-table-layout-{part-slot-name}-color           |inherit                              |
+ * |--obap-data-table-layout-{part-slot-name}-background-color|inherit                              |
+ * |--obap-data-table-layout-{part-slot-name}-border-color    |--obap-data-table-layout-border-color|
+ * |--obap-data-table-layout-{part-slot-name}-border-style    |--obap-data-table-layout-border-style|
+ * |--obap-data-table-layout-{part-slot-name}-border-width    |0                                    |
  */
 export class ObapDataTableLayout extends ObapElement {
     static get styles() {
         return [css`
             :host {
-                --obap-data-table-layout-background-color: var(--obap-block-color, #ECECEC);
+                --obap-data-table-layout-color: var(--obap-text-primary-color, rgba(0, 0, 0, 0.87));
+                --obap-data-table-layout-background-color: transparent;
+                --obap-data-table-layout-border-color: var(--obap-divider-on-surface-color, rgba(0, 0, 0, 0.20));
+                --obap-data-table-layout-border-style: solid;
+
+                --obap-data-table-layout-grouper-color: inherit;
+                --obap-data-table-layout-grouper-background-color: inherit;
+                --obap-data-table-layout-grouper-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-grouper-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-grouper-border-width: 0;
+
+                --obap-data-table-layout-header-fixed-left-color: inherit;
+                --obap-data-table-layout-header-fixed-left-background-color: inherit;
+                --obap-data-table-layout-header-fixed-left-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-header-fixed-left-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-header-fixed-left-border-width: 0;
+
+                --obap-data-table-layout-header-scroll-color: inherit;
+                --obap-data-table-layout-header-scroll-background-color: inherit;
+                --obap-data-table-layout-header-scroll-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-header-scroll-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-header-scroll-border-width: 0;
+
+                --obap-data-table-layout-header-fixed-right-color: inherit;
+                --obap-data-table-layout-header-fixed-right-background-color: inherit;
+                --obap-data-table-layout-header-fixed-right-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-header-fixed-right-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-header-fixed-right-border-width: 0;
+
+                --obap-data-table-layout-body-fixed-left-color: inherit;
+                --obap-data-table-layout-body-fixed-left-background-color: inherit;
+                --obap-data-table-layout-body-fixed-left-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-body-fixed-left-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-body-fixed-left-border-width: 0;
+
+                --obap-data-table-layout-body-scroll-color: inherit;
+                --obap-data-table-layout-body-scroll-background-color: inherit;
+                --obap-data-table-layout-body-scroll-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-body-scroll-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-body-scroll-border-width: 0;
+
+                --obap-data-table-layout-body-fixed-right-color: inherit;
+                --obap-data-table-layout-body-fixed-right-background-color: inherit;
+                --obap-data-table-layout-body-fixed-right-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-body-fixed-right-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-body-fixed-right-border-width: 0;
+
+                --obap-data-table-layout-footer-fixed-left-color: inherit;
+                --obap-data-table-layout-footer-fixed-left-background-color: inherit;
+                --obap-data-table-layout-footer-fixed-left-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-footer-fixed-left-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-footer-fixed-left-border-width: 0;
+
+                --obap-data-table-layout-footer-scroll-color: inherit;
+                --obap-data-table-layout-footer-scroll-background-color: inherit;
+                --obap-data-table-layout-footer-scroll-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-footer-scroll-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-footer-scroll-border-width: 0;
+
+                --obap-data-table-layout-footer-fixed-right-color: inherit;
+                --obap-data-table-layout-footer-fixed-right-background-color: inherit;
+                --obap-data-table-layout-footer-fixed-right-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-footer-fixed-right-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-footer-fixed-right-border-width: 0;
+
+                --obap-data-table-layout-pager-color: inherit;
+                --obap-data-table-layout-pager-background-color: inherit;
+                --obap-data-table-layout-pager-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-pager-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-pager-border-width: 0;
+                
                 display: block;
             }
     
@@ -41,15 +141,17 @@ export class ObapDataTableLayout extends ObapElement {
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
+                color: var(--obap-data-table-layout-color);
                 background: var(--obap-data-table-layout-background-color);
                 display: grid;
-                grid-template-columns: auto 1fr auto;
+                
+                grid-template-columns: auto 1fr auto; 
                 grid-template-rows: auto auto 1fr auto auto;
-                grid-template-areas: "header            header        header"
+                grid-template-areas: "grouper           grouper        grouper"
                                      "header-fixed-left header-scroll header-fixed-right"
                                      "body-fixed-left   body-scroll   body-fixed-right"
                                      "footer-fixed-left footer-scroll footer-fixed-right"
-                                     "footer            footer        footer"
+                                     "pager             pager         pager"
             }
 
             .grid-part {
@@ -58,61 +160,105 @@ export class ObapDataTableLayout extends ObapElement {
                 overflow: hidden;
                 box-sizing: border-box;
                 outline: 0;
-                /*border: 0.5px dotted lightgrey;*/
             }
 
-            .header {
-                grid-area: header;
+            .grouper {
+                grid-area: grouper;
+                color: var(--obap-data-table-layout-grouper-color);
+                background: var(--obap-data-table-layout-grouper-background-color);
+                border-color: var(--obap-data-table-layout-grouper-border-color);
+                border-style: var(--obap-data-table-layout-grouper-border-style);
+                border-width: var(--obap-data-table-layout-grouper-border-width);
             }
 
             .header-fixed-left {
                 grid-area: header-fixed-left;
-                border-bottom: 1px solid lightgrey;
+                color: var(--obap-data-table-layout-header-fixed-left-color);
+                background: var(--obap-data-table-layout-header-fixed-left-background-color);
+                border-color: var(--obap-data-table-layout-header-fixed-left-border-color);
+                border-style: var(--obap-data-table-layout-header-fixed-left-border-style);
+                border-width: var(--obap-data-table-layout-header-fixed-left-border-width);
             }
 
             .header-scroll {
                 grid-area: header-scroll;
-                border-bottom: 1px solid lightgrey;
+                color: var(--obap-data-table-layout-header-scroll-color);
+                background: var(--obap-data-table-layout-header-scroll-background-color);
+                border-color: var(--obap-data-table-layout-header-scroll-border-color);
+                border-style: var(--obap-data-table-layout-header-scroll-border-style);
+                border-width: var(--obap-data-table-layout-header-scroll-border-width);
             }
 
             .header-fixed-right {
                 grid-area: header-fixed-right;
-                border-bottom: 1px solid lightgrey;
+                color: var(--obap-data-table-layout-header-fixed-right-color);
+                background: var(--obap-data-table-layout-header-fixed-right-background-color);
+                border-color: var(--obap-data-table-layout-header-fixed-right-border-color);
+                border-style: var(--obap-data-table-layout-header-fixed-right-border-style);
+                border-width: var(--obap-data-table-layout-header-fixed-right-border-width);
             }
 
             .body-fixed-left {
                 grid-area: body-fixed-left;
-                border-right: 1px solid lightgrey;
+                color: var(--obap-data-table-layout-body-fixed-left-color);
+                background: var(--obap-data-table-layout-body-fixed-left-background-color);
+                border-color: var(--obap-data-table-layout-body-fixed-left-border-color);
+                border-style: var(--obap-data-table-layout-body-fixed-left-border-style);
+                border-width: var(--obap-data-table-layout-body-fixed-left-border-width);
             }
 
             .body-scroll {
                 grid-area: body-scroll;
+                color: var(--obap-data-table-layout-body-scroll-color);
+                background: var(--obap-data-table-layout-body-scroll-background-color);
+                border-color: var(--obap-data-table-layout-body-scroll-border-color);
+                border-style: var(--obap-data-table-layout-body-scroll-border-style);
+                border-width: var(--obap-data-table-layout-body-scroll-border-width);
             }
 
             .body-fixed-right {
                 grid-area: body-fixed-right;
-                border-left: 1px solid lightgrey;
+                color: var(--obap-data-table-layout-body-fixed-right-color);
+                background: var(--obap-data-table-layout-body-fixed-right-background-color);
+                border-color: var(--obap-data-table-layout-body-fixed-right-border-color);
+                border-style: var(--obap-data-table-layout-body-fixed-right-border-style);
+                border-width: var(--obap-data-table-layout-body-fixed-right-border-width);
             }
 
             .footer-fixed-left {
                 grid-area: footer-fixed-left;
-                border-right: 1px solid lightgrey;
-                border-top: 1px solid lightgrey;
+                color: var(--obap-data-table-layout-footer-fixed-left-color);
+                background: var(--obap-data-table-layout-footer-fixed-left-background-color);
+                border-color: var(--obap-data-table-layout-footer-fixed-left-border-color);
+                border-style: var(--obap-data-table-layout-footer-fixed-left-border-style);
+                border-width: var(--obap-data-table-layout-footer-fixed-left-border-width);
             }
 
             .footer-scroll {
                 grid-area: footer-scroll;
-                border-top: 1px solid lightgrey;
+                color: var(--obap-data-table-layout-footer-scroll-color);
+                background: var(--obap-data-table-layout-footer-scroll-background-color);
+                border-color: var(--obap-data-table-layout-footer-scroll-border-color);
+                border-style: var(--obap-data-table-layout-footer-scroll-border-style);
+                border-width: var(--obap-data-table-layout-footer-scroll-border-width);
             }
 
             .footer-fixed-right {
                 grid-area: footer-fixed-right;
-                border-left: 1px solid lightgrey;
-                border-top: 1px solid lightgrey;
+                color: var(--obap-data-table-layout-footer-fixed-right-color);
+                background: var(--obap-data-table-layout-footer-fixed-right-background-color);
+                border-color: var(--obap-data-table-layout-footer-fixed-right-border-color);
+                border-style: var(--obap-data-table-layout-footer-fixed-right-border-style);
+                border-width: var(--obap-data-table-layout-footer-fixed-right-border-width);
             }
 
-            .footer {
-                grid-area: footer;
+            .pager {
+                grid-area: pager;
+                color: var(--obap-data-table-layout-pager-color);
+                background: var(--obap-data-table-layout-pager-background-color);
+                border-color: var(--obap-data-table-layout-pager-border-color);
+                border-style: var(--obap-data-table-layout-pager-border-style);
+                border-width: var(--obap-data-table-layout-pager-border-width);
             }
 
             ::slotted([slot="body-fixed-left"]), ::slotted([slot="body-scroll"]), ::slotted([slot="body-fixed-right"]) {
@@ -128,50 +274,75 @@ export class ObapDataTableLayout extends ObapElement {
                 width: 0;
                 height: 0;
             }
+
+            .empty {
+                border: 0;
+            }
         `];
     }
 
     constructor() {
         super();
+        this._slotLayoutComplete = false;
         this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
         this._boundHScrollHandler = this._hScrollHandler.bind(this);
         this._boundVScrollHandler = this._vScrollHandler.bind(this);
+
+        this._resizeObserver = new ResizeObserver(entries => {
+            requestAnimationFrame(() => this._positionScrollAreas());
+            this.dispatchEvent(new CustomEvent('obap-data-table-layout-size-changed', { bubbles: true, composed: true }));
+        });
     }
 
     connectedCallback() {
         super.connectedCallback();
+        this._scrollbarWidth = this._getScrollbarWidth();
+        this._scrollbarStyle = this._hasScrollbarStyle();
         this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
+        this._resizeObserver.observe(this);
     }
 
     disconnectedCallback() {
         this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
+        this._resizeObserver.unobserve(this);
         super.disconnectedCallback();
     }
 
     render() {
         return html`
             <div class="container">
-                <div tabindex="0" class="grid-part header"><slot name="header"></slot></div>
+                <div tabindex="0" class="grid-part grouper" no-scroll><slot name="grouper"></slot></div>
                 
-                <div tabindex="0" class="grid-part header-fixed-left"><slot name="header-fixed-left"></slot></div>
+                <div tabindex="0" class="grid-part header-fixed-left" no-scroll><slot name="header-fixed-left"></slot></div>
                 <div tabindex="0" class="grid-part header-scroll" h-scroll><slot name="header-scroll"></slot></div>
-                <div tabindex="0" class="grid-part header-fixed-right"><slot name="header-fixed-right"></slot></div>
+                <div tabindex="0" class="grid-part header-fixed-right" no-scroll><slot name="header-fixed-right"></slot></div>
                 
                 <div tabindex="0" class="grid-part body-fixed-left" v-scroll><slot name="body-fixed-left"></slot></div>
                 <div tabindex="0" class="grid-part body-scroll" v-scroll h-scroll><slot name="body-scroll"></slot></div>
                 <div tabindex="0" class="grid-part body-fixed-right" v-scroll><slot name="body-fixed-right"></slot></div>
                 
-                <div tabindex="0" class="grid-part footer-fixed-left"><slot name="footer-fixed-left"></slot></div>
+                <div tabindex="0" class="grid-part footer-fixed-left" no-scroll><slot name="footer-fixed-left"></slot></div>
                 <div tabindex="0" class="grid-part footer-scroll" h-scroll><slot name="footer-scroll"></slot></div>
-                <div tabindex="0" class="grid-part footer-fixed-right"><slot name="footer-fixed-right"></slot></div>
+                <div tabindex="0" class="grid-part footer-fixed-right" no-scroll><slot name="footer-fixed-right"></slot></div>
                 
-                <div tabindex="0" class="grid-part footer"><slot name="footer"></slot></div>
+                <div tabindex="0" class="grid-part pager" no-scroll><slot name="pager"></slot></div>
             </div>
         `;
     }
 
     _handleSlotChangeEvent(e) {
+        if (this._slotLayoutComplete) return;
+        this._slotLayoutComplete = true;
+
         this._positionScrollAreas();
+
+        let emptyElements = [...this.renderRoot.querySelectorAll('slot')].filter((slot => slot.assignedElements().length === 0)).map((slot) => slot.parentElement);
+
+        emptyElements.forEach((el) => {
+            if (el.hasAttribute('no-scroll') && ((el.clientWidth <= 1) || (el.clientHeight <= 1))) {
+                el.classList.add('empty'); 
+            }
+        });
     }
 
     _hScrollHandler(e) {
@@ -201,7 +372,6 @@ export class ObapDataTableLayout extends ObapElement {
             return;
         }
 
-
         this._vElements.forEach((el) => {
             if ((el !== src) && (el.scrollTop !== src.scrollTop)) {
                 this._scrollTop(el, src.scrollTop);
@@ -209,15 +379,34 @@ export class ObapDataTableLayout extends ObapElement {
         });
     }
 
-    _positionScrollAreas() {
-        if (this._scrollPositionsSet) return;
+    _hasScrollbarStyle() {
+        const style = getComputedStyle(this);
+        return style.scrollbarWidth; // This basically identifies Firefox.
+    }
 
+    _positionScrollAreas() {
         // Vertical scrollbar on right body-xxx.
-        this._vElements = [...this.renderRoot.querySelectorAll('div[v-scroll]')].filter((el) => el.children[0].assignedElements().length > 0);
+        this._vElements = [...this.renderRoot.querySelectorAll('div[v-scroll]')];
         const lastVIndex = this._vElements.length - 1;
+        const maxHeight = Math.max(...this._vElements.map((el) => el.scrollHeight));
 
         this._vElements.forEach((el, index) => {
-            el.style.overflowY = 'scroll';
+            el.style.overflowY = 'auto';
+
+            if (el.children[0].assignedElements().length === 0) {
+                //el.classList.add('empty');
+
+                let div = el.querySelector('div.scroll-spacer');
+
+                if (!div) {
+                    div = document.createElement('div');
+                    div.classList.add('scroll-spacer');
+                    el.appendChild(div);
+                }
+
+                div.style.height = maxHeight + 'px';
+                div.style.width = (maxHeight - el.clientHeight > 0) && this._scrollbarStyle && (index === lastVIndex) ? this._scrollbarWidth : '0.1px';
+            }
 
             if (index !== lastVIndex) {
                 el.classList.add('hidden-scrollbar');
@@ -227,11 +416,27 @@ export class ObapDataTableLayout extends ObapElement {
         });
 
         // Horizontal scrollbar on bottom xxx-scroll.
-        this._hElements = [...this.renderRoot.querySelectorAll('div[h-scroll]')].filter((el) => el.children[0].assignedElements().length > 0);
+        this._hElements = [...this.renderRoot.querySelectorAll('div[h-scroll]')];
         const lastHIndex = this._hElements.length - 1;
+        const maxWidth = Math.max(...this._hElements.map((el) => el.scrollWidth));
 
         this._hElements.forEach((el, index) => {
-            el.style.overflowX = 'scroll';
+            el.style.overflowX = 'auto';
+
+            if (el.children[0].assignedElements().length === 0) {
+                //el.classList.add('empty');
+
+                let div = el.querySelector('div.scroll-spacer');
+
+                if (!div) {
+                    div = document.createElement('div');
+                    div.classList.add('scroll-spacer');
+                    el.appendChild(div);
+                }
+
+                div.style.width = maxWidth + 'px';
+                div.style.height = '0.1px';
+            }
 
             if (index !== lastHIndex) {
                 el.classList.add('hidden-scrollbar');
@@ -239,8 +444,6 @@ export class ObapDataTableLayout extends ObapElement {
 
             el.addEventListener('scroll', this._boundHScrollHandler, { passive: true });
         });
-
-        this._scrollPositionsSet = true;
     }
 
     _scrollLeft(el, value) {
@@ -253,18 +456,26 @@ export class ObapDataTableLayout extends ObapElement {
         el.scrollTop = value;
     }
 
-    /*
-    _throttle(fn, wait) {
-        var time = Date.now();
+    _getScrollbarWidth() {
+        // Creating invisible container
+        const outer = document.createElement('div');
+        outer.style.visibility = 'hidden';
+        outer.style.overflow = 'scroll'; // forcing scrollbar to appear
+        outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
+        document.body.appendChild(outer);
 
-        return function (e) {
-            if ((time + wait - Date.now()) < 0) {
-                fn(e);
-                time = Date.now();
-            }
-        }
+        // Creating inner element and placing it in the container
+        const inner = document.createElement('div');
+        outer.appendChild(inner);
+
+        // Calculating difference between container's full width and the child width
+        const scrollbarWidth = (outer.offsetWidth - inner.offsetWidth);
+
+        // Removing temporary elements from the DOM
+        outer.parentNode.removeChild(outer);
+
+        return scrollbarWidth + 'px';
     }
-    */
 }
 
 window.customElements.define('obap-data-table-layout', ObapDataTableLayout);
