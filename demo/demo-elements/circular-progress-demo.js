@@ -51,9 +51,14 @@ export class CircularProgressDemo extends ObapElement {
     render() {
         return html`
             <div class="container">
-            <div class="title">Normal</div>
+                <div class="title">Normal</div>
                 <div class="row">
                     <obap-circular-progress value="33"></obap-circular-progress>
+                </div>
+
+                <div class="title">Icon</div>
+                <div class="row">
+                    <obap-circular-progress indeterminate icon="settings"></obap-circular-progress>
                 </div>
 
                 <div class="title">Indeterminate</div>
@@ -78,7 +83,7 @@ export class CircularProgressDemo extends ObapElement {
 
                 <div class="title">Custom Colors and Size</div>
                 <div class="row">
-                    <obap-circular-progress value="30" secondary-value="50" class="custom-colors"></obap-circular-progress>
+                    <obap-circular-progress value="30" secondary-value="50" class="custom-colors" icon="settings"></obap-circular-progress>
                 </div>
             </div>
         `;

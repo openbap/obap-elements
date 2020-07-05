@@ -118,6 +118,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-rating</div>
                         <div class="item">obap-ripple</div>
                         <div class="item">obap-scroll-container</div>
+                        <div class="item">obap-select</div>
                         <div class="item">obap-selector</div>
                         <div class="item">obap-sparkline</div>
                         <div class="item">obap-spinner</div>
@@ -164,6 +165,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <rating-demo></rating-demo>
                         <ripple-demo></ripple-demo>
                         <scroll-container-demo></scroll-container-demo>
+                        <select-demo></select-demo>
                         <selector-demo></selector-demo>
                         <sparkline-demo></sparkline-demo>
                         <spinner-demo></spinner-demo>

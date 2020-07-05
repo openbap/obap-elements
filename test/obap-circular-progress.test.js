@@ -76,4 +76,26 @@ describe('obap-circular-progress', () => {
 
         expect(indeterminateBar).to.equal(null);
     });
+
+    it('can display an icon', async () => {
+        const el = await fixture(html`
+            <obap-circular-progress min="0" max="0" value="1" icon="core:check"></obap-circular-progress>
+        `);
+
+        await nextFrame();
+        const icon = el.renderRoot.querySelector('obap-icon');
+
+        expect(icon).to.not.equal(null);
+    });
+
+    it('does not display an icon by default', async () => {
+        const el = await fixture(html`
+            <obap-circular-progress min="0" max="0" value="1"></obap-circular-progress>
+        `);
+
+        await nextFrame();
+        const icon = el.renderRoot.querySelector('obap-icon');
+
+        expect(icon).to.equal(null);
+    });
 });

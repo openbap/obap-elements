@@ -121,9 +121,34 @@ export class ObapCheck extends ObapInputElement {
         };
     }
 
+    get selected() {
+        return this._selected;
+    }
+
+    set selected(value) {
+        const oldValue = this.selected;
+
+        if (oldValue !== value) {
+            this._selected = value;
+
+            this.requestUpdate('selected', oldValue);
+
+            const event = new CustomEvent('obap-item-selected-change', {
+                detail: {
+                    selected: this._selected,
+                    name: this.name
+                },
+                bubbles: true,
+                composed: true
+            });
+
+            this.dispatchEvent(event);
+        }
+    }
+
     constructor() {
         super();
-        this.selected = false;
+        this._selected = false;
         this.indeterminate = false;
         this.noInk = false;
         this.role = 'checkbox';
@@ -159,18 +184,7 @@ export class ObapCheck extends ObapInputElement {
             this.indeterminate = false;
         }
 
-        const event = new CustomEvent('obap-item-selected-change', {
-            detail: {
-                selected: this.selected,
-                name: this.name
-            },
-            bubbles: true,
-            composed: true
-        });
-
         this.hasFocus = false;
-
-        this.dispatchEvent(event);
     }
 }
 

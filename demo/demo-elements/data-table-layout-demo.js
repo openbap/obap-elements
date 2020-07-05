@@ -33,6 +33,7 @@ export class DataTableLayoutDemo extends ObapElement {
 
             obap-data-table-layout {
                 /*--obap-data-table-layout-background-color: var(--obap-block-color, #ECECEC);*/
+
                 --obap-data-table-layout-grouper-color: var(--obap-on-primary-color);
                 --obap-data-table-layout-grouper-background-color: var(--obap-primary-color);
 
@@ -66,6 +67,13 @@ export class DataTableLayoutDemo extends ObapElement {
                 --obap-data-table-layout-pager-color: var(--obap-on-primary-color);
                 --obap-data-table-layout-pager-background-color: var(--obap-primary-color);
 
+                --obap-data-table-layout-header-action-left-background-color: lightyellow;
+                --obap-data-table-layout-body-action-left-background-color: lightyellow;
+                --obap-data-table-layout-footer-action-left-background-color: lightyellow;
+                --obap-data-table-layout-header-action-right-background-color: lightyellow;
+                --obap-data-table-layout-body-action-right-background-color: lightyellow;
+                --obap-data-table-layout-footer-action-right-background-color: lightyellow;
+
                 width: 1000px;
                 height: 600px;
             }
@@ -84,15 +92,17 @@ export class DataTableLayoutDemo extends ObapElement {
                 white-space: nowrap;
             }
 
-            .header-scroll, .header-fixed-left, .header-fixed-right {
+            .header-scroll, .header-fixed-left, .header-fixed-right, .header-action-left, .header-action-right,
+            .footer-scroll, .footer-fixed-left, .footer-fixed-right, .footer-action-left, .footer-action-right {
                 border-bottom: 1px solid silver;
             }
 
-            .footer-scroll, .footer-fixed-left, .footer-fixed-right {
+            .footer-scroll, .footer-fixed-left, .footer-fixed-right, .footer-action-left, .footer-action-right {
                 border-top: 1px solid silver;
             }
 
-            .header-fixed-left, .body-fixed-left, .footer-fixed-left {
+            .header-fixed-left, .body-fixed-left, .footer-fixed-left, .header-action-left, .footer-action-left, 
+            .body-action-left, .header-fixed-right, .footer-fixed-right, .body-fixed-right {
                 border-right: 1px solid silver;
             }
 
@@ -119,6 +129,10 @@ export class DataTableLayoutDemo extends ObapElement {
                     <obap-data-table-layout>
                         <div class="grouper part" slot="grouper">grouper</div>
 
+                        <div class="header-action-left part" slot="header-action-left">header-action-left</div>  
+                        <div class="body-action-left part large-v" slot="body-action-left">body-action-left</div> 
+                        <div class="footer-action-left part" slot="footer-action-left">footer-action-left</div>
+
                         <div class="header-fixed-left part" slot="header-fixed-left">header-fixed-left</div>  
                         <div class="body-fixed-left part large-v" slot="body-fixed-left">body-fixed-left</div> 
                         <div class="footer-fixed-left part" slot="footer-fixed-left">footer-fixed-left</div>
@@ -130,6 +144,10 @@ export class DataTableLayoutDemo extends ObapElement {
                         <div class="header-fixed-right part" slot="header-fixed-right">header-fixed-right</div>
                         <div class="body-fixed-right part large-v" slot="body-fixed-right">body-fixed-right</div>
                         <div class="footer-fixed-right part" slot="footer-fixed-right">footer-fixed-right</div>
+
+                        <div class="header-action-right part" slot="header-action-right">header-action-right</div>
+                        <div class="body-action-right part large-v" slot="body-action-right">body-action-right</div>
+                        <div class="footer-action-right part" slot="footer-action-right">footer-action-right</div>
                         
                         <div class="pager part" slot="pager">pager</div>
                     </obap-data-table-layout>

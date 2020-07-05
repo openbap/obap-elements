@@ -5,7 +5,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { repeat } from 'lit-html/directives/repeat.js';
-import {classMap} from 'lit-html/directives/class-map.js';
+import { classMap } from 'lit-html/directives/class-map.js';
 import { caption, body } from '../obap-styles/obap-typography.js';
 import { ObapDataTableController } from '../obap-data-table-layout/obap-data-table-controller.js';
 import '../obap-data-table-layout/obap-data-table-layout.js';
@@ -45,8 +45,9 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
     static get styles() {
         return [caption, body, css`
             :host {
-                --obap-data-list-background-color: var(--obap-surface---obap-data-list-action-color, #FFFFFF);
-                --obap-data-list-fixed-background-color: #EEEEEE;
+                --obap-data-list-background-color: var(--obap-surface-color, #FFFFFF);
+                --obap-data-list-hover-background-color: #F5F5F5;
+                --obap-data-list-fixed-background-color: #F5F5F5;
                 --obap-data-list-action-color: var(--obap-primary-color, #5c6bc0);
                 --obap-data-list-disabled-action-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-data-list-true-color: var(--obap-text-primary-color, rgba(0, 0, 0, 0.87));
@@ -69,28 +70,28 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
             }
 
             obap-data-table-layout {
-                --obap-data-table-layout-header-fixed-left-border-width: 0 1px 1px 0;
+                --obap-data-table-layout-header-action-left-border-width: 0 1px 1px 0;
                 --obap-data-table-layout-header-scroll-border-width: 0 0 1px 0;
-                --obap-data-table-layout-header-fixed-right-border-width: 0 0 1px 1px;
+                --obap-data-table-layout-header-action-right-border-width: 0 0 1px 1px;
 
-                --obap-data-table-layout-body-fixed-left-border-width: 0 1px 0 0;
-                --obap-data-table-layout-footer-fixed-left-border-width: 1px 1px 0 0;
+                --obap-data-table-layout-body-action-left-border-width: 0 1px 0 0;
+                --obap-data-table-layout-footer-action-left-border-width: 1px 1px 0 0;
                 
-                /*
+                
                 --obap-data-table-layout-background-color: var(--obap-data-list-fixed-background-color);
 
-                --obap-data-table-layout-header-fixed-left-color: inherit;
-                --obap-data-table-layout-header-fixed-left-background-color: var(--obap-data-list-fixed-background-color);
+                --obap-data-table-layout-header-action-left-color: inherit;
+                --obap-data-table-layout-header-action-left-background-color: var(--obap-data-list-fixed-background-color);
 
-                --obap-data-table-layout-body-fixed-left-color: inherit;
-                --obap-data-table-layout-body-fixed-left-background-color: var(--obap-data-list-fixed-background-color);
+                --obap-data-table-layout-body-action-left-color: inherit;
+                --obap-data-table-layout-body-action-left-background-color: var(--obap-data-list-fixed-background-color);
 
                 --obap-data-table-layout-header-scroll-color: inherit;
                 --obap-data-table-layout-header-scroll-background-color: var(--obap-data-list-fixed-background-color);
 
                 --obap-data-table-layout-body-scroll-color: inherit;
                 --obap-data-table-layout-body-scroll-background-color: var(--obap-data-list-background-color);
-                */
+                
                 height: 100%;
             }
 
@@ -154,6 +155,10 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
 
             .header-cell-label[type="boolean"], .header-cell-label[type="action"] {
                 text-align: center;
+            }
+            
+            .body-row:hover {
+                background: var(--obap-data-list-hover-background-color);
             }
 
             .body-cell-container {
@@ -233,22 +238,35 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
 
     render() {
         return html`
-            <obap-data-table-layout @obap-data-table-layout-size-changed="${() => requestAnimationFrame(() => this._resizeHeaderCells())}">
-                ${(this.selectionMode === 'multiple') ? 
+            <obap-data-table-layout @obap-item-selected-change="${this._rowCheck}" @obap-data-table-layout-size-changed="${() => requestAnimationFrame(() => this._resizeHeaderCells())}">
+                <!-- Left Actions -->
+                ${(this.selectionMode === 'single') ?
                 html`
-                    <div class="header-fixed-left" slot="header-fixed-left">
-                        <table id="header-fixed-table">
-                            ${this._renderFixedHeader(true)}
-                        </table>
-                    </div>  
-                    <div class="body-fixed-left" slot="body-fixed-left">
-                        <table id="body-fixed-table">
-                            ${this._renderFixedBody()}
-                        </table>
-                    </div>
-                ` : null
-                }
+                        <div class="header-action-left" slot="header-action-left"></div>  
+                        <div class="body-action-left" slot="body-action-left">
+                            <table id="body-action-table">
+                                ${this._renderActionLeftBody()}
+                            </table>
+                        </div>
+                    ` : null
+            }
+                
+                ${(this.selectionMode === 'multiple') ?
+                html`
+                        <div class="header-action-left" slot="header-action-left">
+                            <table id="header-action-table">
+                                ${this._renderActionLeftHeader()}
+                            </table>
+                        </div>  
+                        <div class="body-action-left" slot="body-action-left">
+                            <table id="body-action-table">
+                                ${this._renderActionLeftBody()}
+                            </table>
+                        </div>
+                    ` : null
+            }
 
+                <!-- Scroll Columns -->
                 <div id="header-scroll" class="header-scroll" slot="header-scroll">
                     <table id="header-scroll-table">
                         ${this._renderScrollHeader(true)}
@@ -278,15 +296,12 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
         `;
     }
 
-    _renderFixedHeader(visible) {
-        const id = visible ? 'visible-header' : 'invisible-header';
-        let classes = { collapse: !visible, 'header-cell-container': true };
-
+    _renderActionLeftHeader() {
         return html`
             <thead>
-                <tr class=${classMap(classes)}>
+                <tr>
                     <th class="compact">
-                        <div class=${classMap(classes)} style="pointer-events: all;"><obap-check no-ink></obap-check></div>
+                        <div class="header-cell-container" style="pointer-events: all;"><obap-check no-ink ?indeterminate="${(this.selectedRows.length > 0) && (this.selectedRows.length < this.rows.length)}" ?selected="${this.selectedRows.length === this.rows.length}"></obap-check></div>
                     </th>
                 </tr>
             </thead>
@@ -297,18 +312,20 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
         return html`
             <tbody>
                 ${repeat(this.sortedRows, (row) => row[this.idField], (row, rowIndex) => html`
-                    <tr>${this.columns.map((column, columnIndex) => this._renderBodyCell(column, row, columnIndex, rowIndex))}</tr>
+                    <tr class="body-row">${this.columns.map((column, columnIndex) => this._renderBodyCell(column, row, columnIndex, rowIndex))}</tr>
                 `)}
             </tbody>
         `;
     }
 
-    _renderFixedBody() {
+    _renderActionLeftBody() {
+        const _selectedRows = this.selectionMode === 'multiple' ? this.selectedRows : (this.selectedRows.length > 0) ? [this.selectedRows[0]] : [];
+
         return html`
             <tbody>
                 ${repeat(this.sortedRows, (row) => row[this.idField], (row, rowIndex) => html`
                     <tr>
-                        <td class="compact"><div class="body-cell-container"><obap-check no-ink></obap-check></div></td>
+                        <td class="compact"><div class="body-cell-container"><obap-check no-ink row-index="${rowIndex}" ?selected="${_selectedRows.indexOf(row) > -1}"></obap-check></div></td>
                     </tr>
                 `)}
             </tbody>
@@ -319,7 +336,7 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
         let classes = { 'header-cell-container': true, collapse: !visible };
 
         return html`
-            <th .columnIndex="${column.sortable ? index : -1}" ?sortable="${column.sortable}" @click="${visible ? this._onColumnClick : null}">
+            <th .columnIndex="${(column.sortable && visible) ? index : -1}" ?sortable="${column.sortable}" @click="${visible ? this._onColumnClick : null}">
                 <div class=${classMap(classes)}>
                     ${column.sortable ? html`<obap-icon class="header-cell-icon" ?active="${index === this.sortIndex}" icon="${this._getSortIcon(column, index)}"></obap-icon>` : null}
                     <div type="${column.type}" class="header-cell-label">${column.label}</div>
@@ -342,7 +359,8 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
                         <div class="body-cell-container" type="${column.type}">
                             <obap-icon class="body-cell-icon" ?is-true="${value}" icon="${value ? this.trueIcon : this.falseIcon}"></obap-icon>
                         </div>
-                    </td>`;
+                    </td>
+                `;
             }
 
             case 'action': {
@@ -351,7 +369,18 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
                         <div class="body-cell-container" type="${column.type}" .columnIndex="${columnIndex}" .rowIndex="${rowIndex}" @click="${this._onActionClick}">
                             ${column.actionLabel}
                         </div>
-                    </td>`;
+                    </td>
+                `;
+            }
+
+            case 'number': {
+                const num = column.prefix + (Number.isInteger(column.decimals) ? Number(value).toFixed(column.decimals) : value) + column.suffix;
+
+                return html`
+                    <td>
+                        <div class="body-cell-container" type="${column.type}">${num}</div>
+                    </td>
+                `;
             }
 
             default: {
@@ -360,30 +389,27 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
                         <div class="body-cell-container" type="${column.type}">
                             ${column.prefix + value + column.suffix}
                         </div>
-                    </td>`;
+                    </td>
+                `;
             }
         }
     }
 
     _getSortIcon(column, index) {
-        if (column.sortable) {
-            if (this.sortIndex === index) {
-                return this.sortDescending ? 'core:arrow-down' : 'core:arrow-up';
-            }
-
-            return 'core:arrow-up';
+        if (this.sortIndex === index) {
+            return this.sortDescending ? 'core:arrow-down' : 'core:arrow-up';
         }
 
         return '';
     }
 
     _onActionClick(e) {
-        this._fireEvent('obap-data-list-action', {
+        this._fireEvent('obap-data-action', {
             rowIndex: e.target.rowIndex,
             columnIndex: e.target.columnIndex
         });
     }
-    
+
     _onColumnClick(e) {
         const columnIndex = e.target.columnIndex;
 
@@ -404,6 +430,21 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
         for (let i = 0; i < invisibleCells.length; i++) {
             visibleCells[i].style.width = invisibleCells[i].clientWidth + 'px';
         }
+    }
+
+    _rowCheck(e) {
+        e.preventDefault();
+        const target = e.target;
+        const selected = e.detail.selected;
+
+        if (target.hasAttribute('row-index')) {
+            const rowIndex = Number(target.getAttribute('row-index'));
+            (selected) ? this.selectRow(rowIndex) : this.deselectRow(rowIndex);
+        } else {
+            (selected) ? this.selectAllRows() : this.deselectAllRows();
+        }
+
+        this.requestUpdate();
     }
 }
 

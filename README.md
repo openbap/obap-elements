@@ -27,17 +27,18 @@ A good starting place is the [LitElement documentation](https://lit-element.poly
 
 This suite of web components is very ambitious (have a look at the [list of elements](TASKs.md) that are proposed), so it's going to take a while. The intended release schedule is:
 
-|Version           |Features                                                                           |Status     |
-|------------------|-----------------------------------------------------------------------------------|-----------|
-|0.0.x             |Lots of these, which will just be periodic commits as work pregresses.             |In Progress|
-|0.1.x             |Elements are all implemented - this is the standardization and stabilization phase.|Not Started|
-|0.2.x             |Element demo phase - complete and detailed demos will be created.                  |Not Started|
-|0.3.x             |Element documentation phase - complete and detailed documentation will be created. |Not Started|
-|0.4.x             |Application demo phase - one or more complete application demos will be created.   |Not Started|
-|0.5.x             |Developer guide phase - a complete and detailed developer guide will be created.   |Not Started|
-|1.0.0             |First release.                                                                     |Not Started|
+|Version           |Features                                                                              |Status     |
+|------------------|--------------------------------------------------------------------------------------|-----------|
+|0.0.x             |Lots of these, which will just be periodic commits as work pregresses.                |In Progress|
+|0.1.x             |Elements are all implemented - this is the standardization and stabilization phase.   |Not Started|
+|0.2.x             |Accessibility phase - ensure that everything is accessible, has keyboard support, etc.|Not Started|
+|0.3.x             |Element demo phase - complete and detailed demos will be created.                     |Not Started|
+|0.4.x             |Element documentation phase - complete and detailed documentation will be created.    |Not Started|
+|0.5.x             |Application demo phase - one or more complete application demos will be created.      |Not Started|
+|0.6.x             |Developer guide phase - a complete and detailed developer guide will be created.      |Not Started|
+|1.0.0             |First release.                                                                        |Not Started|
 
-*The elements will only be usable from version 0.2.x, before that they'll be unstable and incomplete.*
+*The elements will only be usable from version 0.3.x, before that they'll be unstable and incomplete.*
 
 ## Motivation
 

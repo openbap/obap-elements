@@ -51,6 +51,23 @@ export class ObapScrollContainer extends ObapElement {
                 flex: 1;
                 display: flex;
                 flex-direction: row;
+                overflow-y: hidden;
+                overflow-x: scroll;
+                scrollbar-width: none;
+                outline: 0;
+            }
+
+            :host([vertical]) * > .content-container {
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+
+            .content-container::-webkit-scrollbar {
+                width: 0;
+                height: 0;
+            }
+
+            .content-container[no-scroll] {
                 overflow: hidden;
             }
 
@@ -169,7 +186,7 @@ export class ObapScrollContainer extends ObapElement {
                         @mousedown="${this._scrollLeft}" @mouseup="${this._endScroll}" @touchstart="${this._scrollLeft}" @touchend="${this._endScroll}">
                     </obap-button>
                 </div>
-                <div class="content-container" id="contentContainer"><slot></slot></div>
+                <div class="content-container" id="contentContainer" tabindex="0" @scroll="${this._onScroll}" ?no-scroll="${this.disableScrolling}"><slot></slot></div>
                 <div class="button-container" ?hidden="${this.disableScrolling || !this._hasOverflow}">
                     <obap-button round ?mini="${this.miniButtons}" ?not-visible="${!this._rightScrollButtonVisible}" icon="${this._getIconName(false)}" 
                         @mousedown="${this._scrollRight}" @mouseup="${this._endScroll}" @touchstart="${this._scrollRight}" @touchend="${this._endScroll}">
@@ -318,6 +335,10 @@ export class ObapScrollContainer extends ObapElement {
         } else {
             this._endScroll();
         }
+    }
+
+    _onScroll() {
+        this._calculateButtonVisibility();
     }
 
     _handleSlotChangeEvent(e) {

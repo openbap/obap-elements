@@ -79,8 +79,11 @@ class ObapElement extends LitElement {
         this._disabled = false;
         this.role = null;
     }
-}
 
-//window.customElements.define('obap-element', ObapElement);
+    getCssVariableValue(computedStyle, variableName, defaultValue) {
+        let val = computedStyle.getPropertyValue(variableName);
+        return val ? val : defaultValue;
+    }
+}
 
 export { html, css, svg, ObapElement } 

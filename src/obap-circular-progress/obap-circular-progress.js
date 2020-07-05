@@ -3,6 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
+import '../obap-icon/obap-icon.js';
 
 /**
  * A circular progress element.
@@ -14,6 +15,7 @@ export class ObapCircularProgress extends ObapElement {
                 --obap-circular-progress-backround-color: transparent;
                 --obap-circular-progress-primary-color: var(--obap-primary-color, #5c6bc0);
                 --obap-circular-progress-secondary-color: var(--obap-primary-light-color, #8e99f3);
+                --obap-circular-progress-icon-color: var(--obap-primary-color, #5c6bc0);
 
                 --obap-circular-progress-disabled-backround-color: transparent;
                 --obap-circular-progress-disabled-primary-color: #757575;
@@ -33,6 +35,15 @@ export class ObapCircularProgress extends ObapElement {
     
             :host([disabled]) {
                 pointer-events: none;
+            }
+
+            obap-icon {
+                --obap-icon-width: calc(var(--obap-circular-progress-size) - (var(--obap-circular-progress-stroke-width) * 2) - 4px);
+                --obap-icon-height: calc(var(--obap-circular-progress-size) - (var(--obap-circular-progress-stroke-width) * 2) - 4px);
+                position: absolute;
+                left: calc(var(--obap-circular-progress-stroke-width) + 2px);
+                top: calc(var(--obap-circular-progress-stroke-width) + 2px);
+                fill: var(--obap-circular-progress-icon-color);
             }
 
             .container {
@@ -152,6 +163,11 @@ export class ObapCircularProgress extends ObapElement {
             indeterminate: {
                 type: Boolean,
                 attribute: 'indeterminate'
+            },
+
+            icon: {
+                type: String,
+                attribute: 'icon'
             }
         }
     }
@@ -163,17 +179,19 @@ export class ObapCircularProgress extends ObapElement {
         this.value = 0;
         this.secondaryValue = 0;
         this.indeterminate = false;
+        this.icon = '';
         this._lineWidth = 2;
         this._size = 32;
     }
 
     render() {
         const cs = getComputedStyle(this);
-        this._lineWidth = Number(cs.getPropertyValue('--obap-circular-progress-stroke-width').replace('px', '')) / 2.0;
-        this._size = Number(cs.getPropertyValue('--obap-circular-progress-size').replace('px', ''));
+        this._lineWidth = Number(this.getCssVariableValue(cs, '--obap-circular-progress-stroke-width', '4px').replace('px', '')) / 2.0;
+        this._size = Number(this.getCssVariableValue(cs, '--obap-circular-progress-size', '28px').replace('px', ''));
 
         return html`
             <div class="container">
+                ${this.icon ? html`<obap-icon icon="${this.icon}"></obap-icon>` : null}
                 ${this.indeterminate ? this._renderIndeterminateCircle(this.disabled) : [this._renderCircle(this.secondaryValue, true), this._renderCircle(this.value, false)]}
             </div>
         `;

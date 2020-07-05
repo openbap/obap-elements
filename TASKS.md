@@ -50,9 +50,6 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |H         |obap-textfield         |A Material Design text field with floating label.                                               |
 |    |H         |obap-textarea          |A Material Design text area with floating label.                                                |
 |    |M         |obap-section-list      |A scrollable horizontal list of name/value items.                                               |
-|    |H         |obap-overflow-container|A list element that displays overflow elements in a popup overflow menu.                        |
-|    |M         |obap-menu              |A top level application menu bar element.                                                       |
-|    |H         |obap-popup-menu        |A popup menu item.                                                                              |
 |    |H         |obap-slider            |Sliders allow users to make selections from a range of values.                                  |
 |    |M         |obap-navigation-drawer |A slide out drawer that can be anchored to the top, bottom or side.                             |
 |    |M         |obap-list              |A scrollable list of items that can optionally be selectable.                                   |
@@ -62,7 +59,17 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                               |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                         |
 
-Count: 37/55
+Count: 37/52
+
+### MENU ELEMENTS
+
+|Done|Complexity|Name                   |Notes                                                                                           |
+|:--:|:--------:|-----------------------|------------------------------------------------------------------------------------------------|
+|    |H         |obap-overflow-container|A list element that displays overflow elements in a popup overflow menu.                        |
+|    |H         |obap-popup-menu        |A popup menu item.                                                                              |
+|    |H         |obap-menu              |A top level application menu bar element.                                                       |
+
+Count: 0/3
 
 ### DROPDOWN PICKERS
 
@@ -70,7 +77,7 @@ Lots of things could be in a dropdown container. Should there just be a generic 
 
 |Done|Complexity|Name            |Notes                                          |
 |:--:|:--------:|----------------|-----------------------------------------------|
-|    |H         |obap-select     |Generic container select.                      |
+|    |H         |obap-select     |A generic popup selection container.           |
 |    |M         |obap-list-select|                                               |
 |    |L         |obap-date-select|                                               |
 |    |L         |obap-time-select|                                               |
@@ -79,12 +86,12 @@ Count: 0/4
 
 ### DATA TABLE ELEMENTS
 
-|Done|Complexity|Name                  |Notes                                                                                           |
-|:--:|:--------:|----------------------|------------------------------------------------------------------------------------------------|
-|X   |H         |obap-data-table-layout|A helper container element to simplify creating complex data table elements.                    |
-|-   |H         |obap-data-list        |A simple Material Design data table with minimal features which is suitable for small data sets.|
-|    |H         |obap-data-table       |A complex Material Design data table suitable for large data sets.                              |
-|    |M         |obap-data-pager       |A page switcher element for tables with a lot of data.                                          |
+|Done|Complexity|Name                  |Notes                                                                                                          |
+|:--:|:--------:|----------------------|---------------------------------------------------------------------------------------------------------------|
+|X   |H         |obap-data-table-layout|A helper container element to simplify creating complex data table elements.                                   |
+|X   |H         |obap-data-list        |A simple Material Design data table with minimal features which is suitable for small data sets.               |
+|    |M         |obap-data-pager       |A page switcher element for tables with a lot of data (required by `obap-data-table`). Needs dropdown selector.|
+|    |H         |obap-data-table       |A complex Material Design data table suitable for large data sets.                                             |
 
 Count: 1/4
 

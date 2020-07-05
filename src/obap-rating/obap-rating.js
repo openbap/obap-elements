@@ -127,7 +127,11 @@ export class ObapRating extends ObapElement {
     render() {
         return html`
             <div class="container" ?read-only="${this.readOnly}">
-                ${[...Array(this.count)].map((_, index) => html`<div class="item" index="${index}" @click="${this._starClick}">${this._renderImage(index, this.rating)}</div>`)}
+                ${[...Array(this.count)].map((_, index) => html`
+                    <div class="item" index="${index}" @click="${this._starClick}">  
+                        ${this._renderImage(index, this.rating)}
+                    </div>
+                `)}
             </div>`;
     }
 
