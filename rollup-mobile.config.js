@@ -7,7 +7,7 @@ import { createSpaConfig } from '@open-wc/building-rollup';
 
 const baseConfig = createSpaConfig({
     // use the outputdir option to modify where files are output
-    outputDir: 'dist',
+    outputDir: 'dist-mobile',
 
     // if you need to support older browsers, such as IE11, set the legacyBuild
     // option to generate an additional build just for this browser
@@ -24,7 +24,7 @@ const baseConfig = createSpaConfig({
 export default merge(baseConfig, {
     // if you use createSpaConfig, you can use your index.html as entrypoint,
     // any <script type="module"> inside will be bundled by rollup
-    input: './demo/index.html',
+    input: './demo-mobile/index.html',
 
     // alternatively, you can use your JS as entrypoint for rollup and
     // optionally set a HTML template manually

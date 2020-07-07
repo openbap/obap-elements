@@ -95,6 +95,10 @@ export const ObapApplicationController = (superClass) =>
             }
         }
 
+        showDefaultView() {
+            this.showView(this.defaultViewName);
+        }
+
         canViewActivate(name) {
             let view = null;
 

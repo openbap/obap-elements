@@ -14,13 +14,15 @@
   "scripts": {
     "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "go": "es-dev-server --app-index demo/index.html --node-resolve --open",
+    "go-mobile": "es-dev-server --app-index demo-mobile/index.html --node-resolve --open",
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
-    "test-current": "karma start --grep test/obap-data-list.test.js --coverage",
+    "test-current": "karma start --grep test/obap-select.test.js --coverage",
     "deploy": "npm publish src",
     "testdeploy": "npm publish src --dry-run",
     "doc": "./node_modules/.bin/wca analyze src --format markdown --outDir docs/elements",
-    "build": "rimraf dist && rollup -c rollup.config.js"
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "build-mobile": "rimraf dist && rollup -c rollup-mobile.config.js"
   },
   "dependencies": {
     "lit-element": "^2.2.1",

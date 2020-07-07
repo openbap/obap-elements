@@ -83,7 +83,7 @@ export class IconsDemo extends ObapElement {
         return html`
             <div class="container">
                 <obap-selector-container selected-index="${this.selectedTabIndex}">
-                    <obap-tabs class="elevation-1">
+                    <obap-tabs class="elevation-1" scroll hide-scroll-buttons>
                         ${this.groups.map(group => html`<obap-tab>${group}</obap-tab>`)}
                     </obap-tabs>
                     <obap-pages>

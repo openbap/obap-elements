@@ -62,9 +62,15 @@ export class ObapTabs extends ObapSelectorController(ObapElement) {
                 type: Boolean,
                 attribute: 'fill'
             },
+
             scroll: {
                 type: Boolean,
                 attribute: 'scroll'
+            },
+
+            hideScrollButtons: {
+                type: Boolean,
+                attribute: 'hide-scroll-buttons'
             }
         };
     }
@@ -74,12 +80,14 @@ export class ObapTabs extends ObapSelectorController(ObapElement) {
         this.role = 'tablist';
         this.fill = false;
         this.scroll = false;
+        this.hideScrollButtons = false;
         this.enterSelects = true;
     }
 
     render() {
         return html`
-            <obap-scroll-container class="container typography-button" ?fill="${this.fill}" ?disable-scrolling="${this.scroll === false}" mini-buttons>
+            <obap-scroll-container class="container typography-button" ?fill="${this.fill}" ?disable-scrolling="${this.scroll === false}"
+                                   ?hide-buttons="${this.hideScrollButtons}" mini-buttons>
                 <slot></slot>
             </obap-scroll-container>
         `;

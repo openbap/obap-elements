@@ -86,8 +86,8 @@ export class ObapPieSparkline extends ObapElement {
     render() {
         if (this.colors.length === 0) {
             const cs = getComputedStyle(this);
-
-            this.colors.push(this.getCssVariableValue(cs, '--obap-pie-section-color', 'var(--obap-primary-color, #5c6bc0)'));
+            //this.colors.push(this.getCssVariableValue(cs, '--obap-pie-section-color', 'var(--obap-primary-color, #5c6bc0)'));
+            this.colors.push('var(--obap-pie-section-color)');
         }
 
         this._colorCount = this.colors.length;

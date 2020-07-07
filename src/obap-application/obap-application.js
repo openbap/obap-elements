@@ -9,7 +9,7 @@ import '../obap-pages/obap-pages.js';
 import '../obap-navigation-rail/obap-navigation-rail.js';
 import '../obap-button/obap-button.js';
 import '../obap-top-app-bar/obap-top-app-bar.js';
-import '../obap-icon/obap-icon.js';
+import '../obap-icon/obap-icon.js'; 
 
 export class ObapApplication extends ObapApplicationController(ObapElement) {
     static get styles() {

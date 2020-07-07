@@ -114,6 +114,11 @@ export class ObapScrollContainer extends ObapElement {
                 attribute: 'disable-scrolling'
             },
 
+            hideButtons: {
+                type: Boolean,
+                attribute: 'hide-buttons'
+            },
+
             miniButtons: {
                 type: Boolean,
                 attribute: 'mini-buttons'
@@ -139,6 +144,7 @@ export class ObapScrollContainer extends ObapElement {
         this.scrollSpeed = 2;
         this.itemStep = false;
         this.disableScrolling = false;
+        this.hideButtons = false;
         this._scrolling = false;
         this._scrollDirection = 'none';
         this._container = null;
@@ -181,13 +187,13 @@ export class ObapScrollContainer extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <div class="button-container" ?hidden="${this.disableScrolling || !this._hasOverflow}">
+                <div class="button-container" ?hidden="${this.disableScrolling || this.hideButtons || !this._hasOverflow}">
                     <obap-button round ?mini="${this.miniButtons}" ?not-visible="${!this._leftScrollButtonVisible}" icon="${this._getIconName(true)}" 
                         @mousedown="${this._scrollLeft}" @mouseup="${this._endScroll}" @touchstart="${this._scrollLeft}" @touchend="${this._endScroll}">
                     </obap-button>
                 </div>
                 <div class="content-container" id="contentContainer" tabindex="0" @scroll="${this._onScroll}" ?no-scroll="${this.disableScrolling}"><slot></slot></div>
-                <div class="button-container" ?hidden="${this.disableScrolling || !this._hasOverflow}">
+                <div class="button-container" ?hidden="${this.disableScrolling || this.hideButtons || !this._hasOverflow}">
                     <obap-button round ?mini="${this.miniButtons}" ?not-visible="${!this._rightScrollButtonVisible}" icon="${this._getIconName(false)}" 
                         @mousedown="${this._scrollRight}" @mouseup="${this._endScroll}" @touchstart="${this._scrollRight}" @touchend="${this._endScroll}">
                     </obap-button>

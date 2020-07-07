@@ -94,29 +94,6 @@ export class ObapExpandableCard extends ObapElement {
         this.opened = false;
         this.hideExpander = false;
     }
-
-    connectedCallback() {
-        super.connectedCallback();
-
-    }
-
-    disconnectedCallback() {
-
-        super.disconnectedCallback();
-    }
-
-    firstUpdated(changedProperties) {
-        super.firstUpdated(changedProperties);
-
-    }
-
-    updated(changedProperties) {
-        super.updated(changedProperties);
-
-        changedProperties.forEach((oldValue, propName) => {
-            //
-        });
-    }
     
     render() {
         return html`

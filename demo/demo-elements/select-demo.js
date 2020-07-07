@@ -25,10 +25,13 @@ export class SelectDemo extends ObapElement {
 
             .row {
               display: flex;
-              flex-direction: row;
-              flex-wrap: wrap;
-              align-items: center;
-              padding: 0;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: flex-start;
+            }
+
+            obap-select {
+                margin-bottom: 4px;
             }
         `];
     }
@@ -38,7 +41,8 @@ export class SelectDemo extends ObapElement {
             <div class="container">
                 <div class="title">Demo</div>
                 <div class="row">
-                    <obap-select></obap-select>
+                    <obap-select border-style="underline" filled></obap-select>
+                    <obap-select border-style="outline"></obap-select>
                 </div>
             </div>
         `;

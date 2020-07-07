@@ -4,6 +4,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { obapIcons } from '../obap-icons/obap-icons.js';
+import '../obap-icons/obap-core-icons.js';
 
 /**
 Displays a single svg icon.  

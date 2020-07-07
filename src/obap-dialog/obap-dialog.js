@@ -53,6 +53,12 @@ export class ObapDialog extends ObapElement {
             this._opened = value;
             this.requestUpdate('opened', oldValue);
 
+            if (this.opened) {
+                window.addEventListener('popstate', this._boundHandleOnPopStateEvent);
+            } else {
+                window.removeEventListener('popstate', this._boundHandleOnPopStateEvent);
+            }
+
             if (!this.modal) {
                 if (this._opened) {
                     window.addEventListener('click', this._boundHandleDocumentClickEvent, false);
@@ -109,6 +115,7 @@ export class ObapDialog extends ObapElement {
         this.noCancelOnEscKey = false;
         this._boundHandleDocumentClickEvent = this._handleDocumentClickEvent.bind(this);
         this._boundHandleGlobalKeyPressEvent = this._handleGlobalKeyPressEvent.bind(this);
+        this._boundHandleOnPopStateEvent = this._handleOnPopStateEvent.bind(this);
     }
 
     updated(changedProperties) {
@@ -174,6 +181,10 @@ export class ObapDialog extends ObapElement {
             this.opened = false;
             e.stopImmediatePropagation();
         }
+    }
+
+    _handleOnPopStateEvent(e) {
+        this.opened = false;
     }
 }
 

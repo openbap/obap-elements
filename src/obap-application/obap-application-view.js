@@ -143,6 +143,11 @@ export class ObapApplicationView extends ObapElement {
                 attribute: 'has-side-views',
                 reflect: true
             },
+
+            hideSubViewScrollButtons: {
+                type: Boolean,
+                attribute: 'hide-sub-view-scroll-buttons'
+            }
         }
     }
 
@@ -247,7 +252,7 @@ export class ObapApplicationView extends ObapElement {
         if (this.subViews.length > 1) {
             return html`
                 <obap-material class="sub-view-navigator" elevation="1">
-                    <obap-tabs selected-index="${this.selectedSubViewIndex}" @obap-item-selected="${this._handleSubViewSelect}">
+                    <obap-tabs scroll ?hide-scroll-buttons="${this.hideSubViewScrollButtons}" selected-index="${this.selectedSubViewIndex}" @obap-item-selected="${this._handleSubViewSelect}">
                         ${this.subViews.map(item => html`<obap-tab sub-view-name="${item.name}">${item.label}</obap-tab>`)}
                     </obap-tabs>
                 </obap-material>

@@ -46,6 +46,7 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |M         |obap-snackbar          |A popup toast notification element.                                                             |
 |    |M         |obap-time-picker       |A Material Design time picker (not the mobile type).                                            |
 |    |H         |obap-date-picker       |A Material Design date picker (not the mobile type).                                            |
+|    |H         |obap-color-picker      |A Material Design color picker.                                                                 |
 |    |M         |obap-date-time-picker  |A combined date and time picker (may just add an optional time picker to obap-date-picker).     |
 |    |H         |obap-textfield         |A Material Design text field with floating label.                                               |
 |    |H         |obap-textarea          |A Material Design text area with floating label.                                                |
@@ -59,7 +60,7 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                               |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                         |
 
-Count: 37/52
+Count: 37/53
 
 ### MENU ELEMENTS
 
@@ -75,25 +76,27 @@ Count: 0/3
 
 Lots of things could be in a dropdown container. Should there just be a generic one or multiple? They're separate from the other UI elements because I'm not too sure about them.
 
-|Done|Complexity|Name            |Notes                                          |
-|:--:|:--------:|----------------|-----------------------------------------------|
-|    |H         |obap-select     |A generic popup selection container.           |
-|    |M         |obap-list-select|                                               |
-|    |L         |obap-date-select|                                               |
-|    |L         |obap-time-select|                                               |
+|Done|Complexity|Name                 |Notes                               |
+|:--:|:--------:|---------------------|------------------------------------|
+|-   |H         |obap-select-container|A generic popup selection container.|
+|-   |M         |obap-select          |A single option dropdown selector.  |
+|    |M         |obap-multi-select    |A multi option dropdown selector.   |
+|    |L         |obap-date-select     |                                    |
+|    |L         |obap-time-select     |                                    |
+|    |L         |obap-color-select    |                                    |
 
-Count: 0/4
+Count: 0/6
 
 ### DATA TABLE ELEMENTS
 
-|Done|Complexity|Name                  |Notes                                                                                                          |
-|:--:|:--------:|----------------------|---------------------------------------------------------------------------------------------------------------|
-|X   |H         |obap-data-table-layout|A helper container element to simplify creating complex data table elements.                                   |
-|X   |H         |obap-data-list        |A simple Material Design data table with minimal features which is suitable for small data sets.               |
-|    |M         |obap-data-pager       |A page switcher element for tables with a lot of data (required by `obap-data-table`). Needs dropdown selector.|
-|    |H         |obap-data-table       |A complex Material Design data table suitable for large data sets.                                             |
+|Done|Complexity|Name                  |Notes                                                                                                      |
+|:--:|:--------:|----------------------|-----------------------------------------------------------------------------------------------------------|
+|X   |H         |obap-data-table-layout|A helper container element to simplify creating complex data table elements.                               |
+|X   |H         |obap-data-list        |A simple Material Design data table with minimal features which is suitable for small data sets.           |
+|    |M         |obap-data-pager       |A page switcher element for tables with a lot of data (required by `obap-data-table`). Needs `obap-select`.|
+|    |H         |obap-data-table       |A complex Material Design data table suitable for large data sets. Needs `obap-data-pager`.                |
 
-Count: 1/4
+Count: 2/4
 
 ### CHART ELEMENTS
 
@@ -114,23 +117,24 @@ Count: 5/6
 
 These are high level elements used to construct applications. 
 
-|Done|Complexity|Name                  |Notes                                             |
-|:--:|:--------:|----------------------|--------------------------------------------------|
-|X   |M         |obap-router           |A simple view router for obap-application.        |
-|X   |M         |obap-translations     |A translation module for obap-application.        |
-|X   |M         |obap-local-storage    |A helper library for local storage.               |
-|X   |M         |obap-fetch            |A helper library to simplify the fetch API.       |
-|-   |H         |obap-application      |A view based application framework.               |
-|    |H         |obap-messaging        |A messaging system for obap-application views.    |
-|    |H         |obap-application-state|A Flux-like state manager.                        |
-|    |H         |obap-identity         |Handles a user OpenID Connect account, login, etc.|
-|    |H         |obap-access-policy    |Handles application feature access for users.     |
+|Done|Complexity|Name                   |Notes                                             |
+|:--:|:--------:|-----------------------|--------------------------------------------------|
+|X   |M         |obap-router            |A simple view router for obap-application.        |
+|X   |M         |obap-translations      |A translation module for obap-application.        |
+|X   |M         |obap-local-storage     |A helper library for local storage.               |
+|X   |M         |obap-fetch             |A helper library to simplify the fetch API.       |
+|-   |H         |obap-application       |A view based desktop application framework.       |
+|-   |H         |obap-mobile-application|A view based mobile application framework.        |
+|    |H         |obap-messaging         |A messaging system for obap-application views.    |
+|    |H         |obap-application-state |A Flux-like state manager.                        |
+|    |H         |obap-identity          |Handles a user OpenID Connect account, login, etc.|
+|    |H         |obap-access-policy     |Handles application feature access for users.     |
 
 *There is no "policy" standard, so `obap-access-policy` will define a standard based on the OBAP Policy Server. The `obap-identity` modules will support the OBAP Identity Server (OIDC) and allow providers (`obap-identity-provider`) to be written for other identity provider types.*
 
 *`obap-application` development will be ongoing, with new features being added as requirements are collected and other elements completed.*
 
-Count: 4/9
+Count: 4/10
 
 ### NICE TO HAVE
 

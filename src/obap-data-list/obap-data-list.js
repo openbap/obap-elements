@@ -6,7 +6,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { repeat } from 'lit-html/directives/repeat.js';
 import { classMap } from 'lit-html/directives/class-map.js';
-import { caption, body } from '../obap-styles/obap-typography.js';
+import { body } from '../obap-styles/obap-typography.js';
 import { ObapDataTableController } from '../obap-data-table-layout/obap-data-table-controller.js';
 import '../obap-data-table-layout/obap-data-table-layout.js';
 import '../obap-icon/obap-icon.js';
@@ -43,7 +43,7 @@ import '../obap-check/obap-check.js';
  */
 export class ObapDataList extends ObapDataTableController(ObapElement) {
     static get styles() {
-        return [caption, body, css`
+        return [body, css`
             :host {
                 --obap-data-list-background-color: var(--obap-surface-color, #FFFFFF);
                 --obap-data-list-hover-background-color: #F5F5F5;
@@ -238,7 +238,7 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
 
     render() {
         return html`
-            <obap-data-table-layout @obap-item-selected-change="${this._rowCheck}" @obap-data-table-layout-size-changed="${() => requestAnimationFrame(() => this._resizeHeaderCells())}">
+            <obap-data-table-layout class="typography-body" @obap-item-selected-change="${this._rowCheck}" @obap-data-table-layout-size-changed="${() => requestAnimationFrame(() => this._resizeHeaderCells())}">
                 <!-- Left Actions -->
                 ${(this.selectionMode === 'single') ?
                 html`
@@ -434,6 +434,7 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
 
     _rowCheck(e) {
         e.preventDefault();
+
         const target = e.target;
         const selected = e.detail.selected;
 
@@ -441,7 +442,11 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
             const rowIndex = Number(target.getAttribute('row-index'));
             (selected) ? this.selectRow(rowIndex) : this.deselectRow(rowIndex);
         } else {
-            (selected) ? this.selectAllRows() : this.deselectAllRows();
+            if (!target.indeterminate) {
+                (selected) ? this.selectAllRows() : this.deselectAllRows();
+            }  else if (target.selected && target.indeterminate) {
+                this.selectAllRows();
+            }
         }
 
         this.requestUpdate();

@@ -16,7 +16,7 @@ export class ApplicationDemo extends ObapElement {
             obap-application {
                 height: 100%;
             }
-        `];
+        `]; 
     }
     
     render() {

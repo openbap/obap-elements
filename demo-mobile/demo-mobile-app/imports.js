@@ -1,0 +1,25 @@
+import '../app-icons/app-icons.js';
+
+// Styles
+import '../demo-elements/styles/demo-styles-elevation.js';
+import '../demo-elements/styles/demo-styles-iconography.js';
+import '../demo-elements/styles/demo-styles-theming.js';
+import '../demo-elements/styles/demo-styles-typography.js';
+
+// Buttons
+import '../demo-elements/buttons/demo-buttons-normal.js';
+import '../demo-elements/buttons/demo-buttons-fab.js';
+import '../demo-elements/buttons/demo-buttons-custom.js';
+
+// Dialogs
+import '../demo-elements/dialogs/demo-dialogs.js';
+
+// Tables
+import '../demo-elements/tables/demo-tables.js';
+
+// Charts - Sparkline
+import '../demo-elements/sparkline-charts/demo-sparkline-line.js';
+import '../demo-elements/sparkline-charts/demo-sparkline-bar.js';
+import '../demo-elements/sparkline-charts/demo-sparkline-winloss.js';
+import '../demo-elements/sparkline-charts/demo-sparkline-bullet.js';
+import '../demo-elements/sparkline-charts/demo-sparkline-pie.js';

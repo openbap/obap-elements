@@ -3,7 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { title } from '../obap-styles/obap-typography.js';
+import { subtitle } from '../obap-styles/obap-typography.js';
 import { hostElevation } from '../obap-styles/obap-elevation.js';
 
 /**
@@ -24,7 +24,7 @@ import '@obap/obap-elements/obap-button/obap-button.js';
  */
 export class ObapTopAppBar extends ObapElement {
     static get styles() {
-        return [title, hostElevation, css`
+        return [subtitle, hostElevation, css`
             :host {
                 display: block;
                 --obap-top-app-bar-color: var(--obap-on-primary-color, white);
@@ -96,7 +96,7 @@ export class ObapTopAppBar extends ObapElement {
         return html` 
             <div class="container">
                 <div class="actions"><slot name="left"></slot></div>
-                <div class="caption typography-title">${this.caption}</div>
+                <div class="caption typography-subtitle">${this.caption}</div>
                 <div class="actions"><slot name="right"></slot></div>
             </div>
       `;
