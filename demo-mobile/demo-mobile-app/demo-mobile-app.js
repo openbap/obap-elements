@@ -36,11 +36,12 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
             }
 
             .demo {
-                
+                width: 100%;
             }
 
-            obap-application-content {
+            obap-application-view, obap-application-content {
                 background: var(--obap-window-color);
+                width: 100%;
             }
         `];
     }
@@ -53,7 +54,7 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
     
     render() {
         return html`
-            <obap-mobile-application label="OBAP Elements" icon="app:polymer">
+            <obap-mobile-application label="OBAP Elements" icon="app:polymer" disable-routing>
                 <obap-application-view name="styles" label="Styles" icon="app:styles" hide-sub-view-scroll-buttons>
                     <obap-application-content name="styles-elevation" label="Elevation"><demo-styles-elevation class="demo"></demo-styles-elevation></obap-application-content>
                     <obap-application-content name="styles-iconography" label="Iconography"><demo-styles-iconography class="demo"></demo-styles-iconography></obap-application-content>
@@ -68,11 +69,11 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
                 </obap-application-view>
 
                 <obap-application-view name="cards" label="Cards" icon="app:cards" hide-sub-view-scroll-buttons>
-                    <obap-application-content><div class="content">Cards</div></obap-application-content>
+                    <obap-application-content><demo-cards class="demo"></demo-cards></obap-application-content>
                 </obap-application-view>
 
                 <obap-application-view name="chips" label="Chips" icon="app:chips" hide-sub-view-scroll-buttons>
-                    <obap-application-content><div class="content">Chips</div></obap-application-content>
+                    <obap-application-content><demo-chips class="demo"></demo-chips></obap-application-content>
                 </obap-application-view>
 
                 <obap-application-view name="data-tables" label="Data Tables" icon="app:data-tables" hide-sub-view-scroll-buttons>
@@ -84,11 +85,13 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
                 </obap-application-view>
 
                 <obap-application-view name="progress-indicators" label="Progress Indicators" icon="app:progress-indicators" hide-sub-view-scroll-buttons>
-                    <obap-application-content><div class="content">Progress Indicators</div></obap-application-content>
+                    <obap-application-content name="progress-indicators-linear" label="Linear"><demo-progress-indicators-linear class="demo"></demo-progress-indicators-linear></obap-application-content>
+                    <obap-application-content name="progress-indicators-circular" label="Circular"><demo-progress-indicators-circular class="demo"></demo-progress-indicators-circular></obap-application-content>
+                    <obap-application-content name="progress-indicators-activity" label="Activity"><demo-progress-indicators-activity class="demo"></demo-progress-indicators-activity></obap-application-content>
                 </obap-application-view>
 
                 <obap-application-view name="selection" label="Selection Controls" icon="app:selection" hide-sub-view-scroll-buttons>
-                    <obap-application-content><div class="content">Selection Controls</div></obap-application-content>
+                    <obap-application-content><demo-selection class="demo"></demo-selection></obap-application-content>
                 </obap-application-view>
 
                 <obap-application-view name="charts-sparkline" label="Sparkline Charts" icon="app:charts" hide-sub-view-scroll-buttons>
@@ -100,7 +103,7 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
                 </obap-application-view>
 
                 <obap-application-view name="tabs" label="Tabs" icon="app:tabs" hide-sub-view-scroll-buttons>
-                    <obap-application-content><div class="content">Tabs</div></obap-application-content>
+                    <obap-application-content><obap-application-content><demo-tabs class="demo"></demo-tabs></obap-application-content></obap-application-content>
                 </obap-application-view>
 
                 <obap-application-view name="tooltips-callouts" label="Tooltips & Callouts" icon="app:tooltips-callouts" hide-sub-view-scroll-buttons>

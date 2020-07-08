@@ -3,15 +3,12 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
-import { body } from '../../src/obap-styles/obap-typography.js';
-import  '../../src/obap-material/obap-material.js';
-import  './demo-box.js';
+import { caption } from '../../src/obap-styles/obap-typography.js';
 
-export class DemoPanel extends ObapElement {
+export class DemoBox extends ObapElement {
     static get styles() {
-        return [body, css`
+        return [caption, css`
             :host {
-                --demo-panel-padding: 8px;
                 display: block;
             }
     
@@ -26,17 +23,19 @@ export class DemoPanel extends ObapElement {
             .container {
                 display: flex;
                 flex-direction: column;
-                padding: var(--demo-panel-padding);
+                justify-content: center;
                 color: var(--obap-text-primary-color);
-                background: var(--obap-surface-color);
             }
 
             .label {
-                margin-bottom: 8px;
-                font-weight: 500;
+                margin-top: 8px;
+                line-height: auto;
+                text-align: center;
             }
 
             .content {
+                display: flex;
+                justify-content: center;
                 flex: 1;
             }
         `];
@@ -47,11 +46,6 @@ export class DemoPanel extends ObapElement {
             label: {
                 type: String,
                 attribute: 'label'
-            },
-
-            elevation: {
-                type: Number,
-                attribute: 'elevation'
             }
         }
     }
@@ -59,17 +53,16 @@ export class DemoPanel extends ObapElement {
     constructor() {
         super();
         this.label = '';
-        this.elevation = 1;
     }
     
     render() {
         return html`
-            <obap-material class="container" elevation="${this.elevation}">
-                ${this.label ? html`<div class="typography-body label">${this.label}</div>` : null}
+            <div class="container">
                 <div class="content"><slot></slot></div>
-            </obap-material>
+                ${this.label ? html`<div class="typography-caption label">${this.label}</div>` : null}
+            </div>
         `;
     }
 }
 
-window.customElements.define('demo-panel', DemoPanel);
+window.customElements.define('demo-box', DemoBox);

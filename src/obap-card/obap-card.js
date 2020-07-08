@@ -45,17 +45,15 @@ export class ObapCard extends ObapElement {
             }
 
             .title {
-       
+                color: var(--obap-text-primary-color, rgba(0, 0, 0, 0.87));
             }
 
             .subtitle {
-   
                 color: var(--obap-text-secondary-color, rgba(0, 0, 0, 0.54));
             }
 
             .content {
                 flex: 1;
-   
                 color: var(--obap-text-secondary-color, rgba(0, 0, 0, 0.54));
             }
             

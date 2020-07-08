@@ -29,6 +29,11 @@ const ObapRouterController = (superClass) =>
             return {
                 routes: {
                     type: Object
+                },
+
+                disableRouting: {
+                    type: Boolean,
+                    attribute: 'disable-routing'
                 }
             }
         }
@@ -45,7 +50,9 @@ const ObapRouterController = (superClass) =>
                 this._currentRoute = value;
 
                 if (!this._popping) {
-                    history.pushState(this._currentParameters, '', this._buildUrl());
+                    if (!this.disableRouting) {
+                        history.pushState(this._currentParameters, '', this._buildUrl());
+                    }
                 }
             }
         }
@@ -54,6 +61,7 @@ const ObapRouterController = (superClass) =>
             super();
 
             this.routes = {};
+            this.disableRouting = false;
             this._defaultRouteName = null;
             this._path = null;
             this._currentRoute = null;
@@ -64,8 +72,10 @@ const ObapRouterController = (superClass) =>
 
         connectedCallback() {
             super.connectedCallback();
-            window.addEventListener('popstate', this._boundHandleOnPopStateEvent);
-            window.addEventListener('obap-change-route', this._boundHandleChangeRouteEvent);
+            if (!this.disableRouting) {
+                window.addEventListener('popstate', this._boundHandleOnPopStateEvent);
+                window.addEventListener('obap-change-route', this._boundHandleChangeRouteEvent);
+            }
         }
 
         disconnectedCallback() {
@@ -104,14 +114,20 @@ const ObapRouterController = (superClass) =>
         }
 
         navigateBack() {
+            if (this.disableRouting) return;
+
             history.back();
         }
 
         navigateForward() {
+            if (this.disableRouting) return;
+
             history.forward();
         }
 
         navigateToDefault(override) {
+            if (this.disableRouting) return;
+
             if (this._getRouteCount() === 0) {
                 return;
             }
@@ -126,6 +142,8 @@ const ObapRouterController = (superClass) =>
         }
 
         setCurrentRoute(name) {
+            if (this.disableRouting) return;
+
             if ((this.currentRoute) && (this.currentRoute.name === name)) {
                 return;
             }

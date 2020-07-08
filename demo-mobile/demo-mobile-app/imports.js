@@ -23,3 +23,20 @@ import '../demo-elements/sparkline-charts/demo-sparkline-bar.js';
 import '../demo-elements/sparkline-charts/demo-sparkline-winloss.js';
 import '../demo-elements/sparkline-charts/demo-sparkline-bullet.js';
 import '../demo-elements/sparkline-charts/demo-sparkline-pie.js';
+
+// Tabs
+import '../demo-elements/tabs/demo-tabs.js';
+
+// Progress Indicators
+import '../demo-elements/progress-indicators/demo-progress-indicators-activity.js';
+import '../demo-elements/progress-indicators/demo-progress-indicators-circular.js';
+import '../demo-elements/progress-indicators/demo-progress-indicators-linear.js';
+
+// Selection
+import '../demo-elements/selection/demo-selection.js';
+
+// Cards
+import '../demo-elements/cards/demo-cards.js';
+
+// Chips
+import '../demo-elements/chips/demo-chips.js';

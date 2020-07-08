@@ -32,22 +32,18 @@ export class DemoSparklineLine extends ObapElement {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-            }
-
-            demo-panel {
-                margin-bottom: 8px;
-            }
-
-            demo-panel:last-of-type {
-                margin-bottom: 0;
+                margin-bottom: 24px;
             }
 
             obap-check {
                 margin-right: 24px;
             }
 
-            obap-line-sparkline {
-                width: 100%;
+            .center {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
             }
         `];
     }
@@ -83,15 +79,12 @@ export class DemoSparklineLine extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <demo-panel>
+                <demo-panel class="center">
                     <div class="check-group" @obap-item-selected-change="${this._checkChanged}">
                         <obap-check name="line" label="Line" selected></obap-check>
                         <obap-check name="marker" label="Marker" selected></obap-check>
                         <obap-check name="area" label="Area" selected></obap-check>
                     </div>
-                </demo-panel>
-
-                <demo-panel>
                     <obap-line-sparkline .values="${this.values}" ?show-line="${this.showLine}" ?show-markers="${this.showMarkers}" ?show-area="${this.showArea}"></obap-line-sparkline>
                 </demo-panel>
             </div>

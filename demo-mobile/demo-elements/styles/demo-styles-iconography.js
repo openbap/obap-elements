@@ -35,6 +35,15 @@ export class DemoStylesIconography extends ObapElement {
                 justify-items: center;
             }
 
+            demo-panel {
+                margin-bottom: 8px;
+            }
+
+            demo-panel:last-of-type {
+                margin-bottom: 0;
+            }
+
+
             obap-icon {
                 --obap-icon-fill-color: var(--obap-text-secondary-color);
             }
@@ -44,17 +53,15 @@ export class DemoStylesIconography extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <demo-panel>
+                ${getIconGroups().map(group => html`
+                <demo-panel label="${group}">
                     <div class="inner-container">
-                        ${getIconNames('core').map(icon => html`
-                            <obap-icon icon="${icon}" title="${icon}"></obap-icon>
-                        `)}
-
-                        ${getIconNames('app').map(icon => html`
-                            <obap-icon icon="${icon}" title="${icon}"></obap-icon>
+                        ${getIconNames(group).map(icon => html`
+                                    <obap-icon icon="${icon}" title="${icon}"></obap-icon>
                         `)}
                     </div>
                 </demo-panel>
+                `)}
             </div>
         `;
     }

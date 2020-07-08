@@ -24,6 +24,7 @@ export class ObapApplicationView extends ObapElement {
 
             .page-container {
                 flex: 1;
+                width: 100%;
             }
 
             .container {
@@ -31,6 +32,7 @@ export class ObapApplicationView extends ObapElement {
                 flex-direction: column;
                 flex: 1;
                 height: 100%;
+                width: 100%;
             }
 
             .side {
@@ -47,6 +49,7 @@ export class ObapApplicationView extends ObapElement {
                 display: flex;
                 flex-direction: row;
                 height: 100%;
+                width: 100%;
             }
 
             .sub-view-navigator {

@@ -31,7 +31,7 @@ export const ObapApplicationContentController = (superClass) =>
 
         connectedCallback() {
             super.connectedCallback();
-            this.setAttribute('application-content', null);
+            this.setAttribute('application-content', '');
         }
 
         _canActivate() {

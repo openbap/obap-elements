@@ -37,8 +37,11 @@ export class DemoSparklineBar extends ObapElement {
                 margin-bottom: 8px;
             }
 
-            obap-bar-sparkline {
-                width: 100%;
+            .center {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
             }
         `];
     }
@@ -59,7 +62,7 @@ export class DemoSparklineBar extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <demo-panel>
+                <demo-panel class="center">
                     <obap-bar-sparkline .values="${this.values}"></obap-bar-sparkline>
                 </demo-panel>
             </div>

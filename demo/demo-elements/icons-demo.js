@@ -68,7 +68,7 @@ export class IconsDemo extends ObapElement {
 
     static get properties() {
         return {
-            groups: { type: Array },
+            groups: { type: Array }, 
             selectedTabIndex: { type: Number }
         }
     }

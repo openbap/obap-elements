@@ -37,8 +37,11 @@ export class DemoSparklineWinLoss extends ObapElement {
                 margin-bottom: 8px;
             }
 
-            obap-winloss-sparkline {
-                width: 100%;
+            .center {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
             }
         `];
     }
@@ -59,7 +62,7 @@ export class DemoSparklineWinLoss extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <demo-panel>
+                <demo-panel class="center">
                     <obap-winloss-sparkline .values="${this.values}"></obap-winloss-sparkline>
                 </demo-panel>
             </div>

@@ -37,8 +37,11 @@ export class DemoSparklineBullet extends ObapElement {
                 margin-bottom: 8px;
             }
 
-            obap-bullet-sparkline {
-                width: 100%;
+            .center {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
             }
         `];
     }
@@ -59,7 +62,7 @@ export class DemoSparklineBullet extends ObapElement {
     render() {
         return html`
             <div class="container">
-                <demo-panel>
+                <demo-panel class="center">
                     <obap-bullet-sparkline class="sparkline" .percentageRanges="${this.bulletRanges}" value="60" target-value="50" max-value="100"></obap-bullet-sparkline>
                 </demo-panel>
             </div>
