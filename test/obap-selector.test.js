@@ -278,7 +278,7 @@ describe('obap-selector', () => {
         await nextFrame();
         expect(el.selectedIndex).to.equal(1); 
 
-        el._fireEvent = function(name, detail, cancelable) {
+        el.fireMessage = function(name, detail, cancelable) {
             if ((name === 'obap-item-selecting') && (detail.newIndex === 2)) return false;
 
             return true;
@@ -507,5 +507,74 @@ describe('obap-selector', () => {
         el.select(-10);
         await nextFrame();
         expect(el.selectedItems.length).to.equal(1); 
+    });
+
+    it('activates an item', async () => {
+        const el = await fixture(html`
+            <obap-selector>
+                <div val="0"></div>
+                <div val="1"></div>
+            </obap-selector>
+        `);
+
+        expect(el.activeIndex).to.equal(-1);
+        el.activate(1);
+        expect(el.activeIndex).to.equal(1);
+        el.activatePrevious();
+        expect(el.activeIndex).to.equal(0);
+        el.activateNext();
+        expect(el.activeIndex).to.equal(1);
+    });
+
+    it('ignores invalid activation indices', async () => {
+        const el = await fixture(html`
+            <obap-selector>
+                <div val="0"></div>
+                <div val="1"></div>
+            </obap-selector>
+        `);
+
+        expect(el.activeIndex).to.equal(-1);
+        el.activate(1);
+        expect(el.activeIndex).to.equal(1);
+        el.activate(-1);
+        expect(el.activeIndex).to.equal(-1);
+        el.activate(4);
+        expect(el.activeIndex).to.equal(-1);
+    });
+
+    it('wrap activation indices', async () => {
+        const el = await fixture(html`
+            <obap-selector>
+                <div val="0"></div>
+                <div val="1"></div>
+                <div val="2"></div>
+            </obap-selector>
+        `);
+
+        el.activate(1);
+        expect(el.activeIndex).to.equal(1);
+    
+        el.activateNext();
+        expect(el.activeIndex).to.equal(2);
+        el.activateNext();
+        expect(el.activeIndex).to.equal(0);
+        el.activatePrevious();
+        expect(el.activeIndex).to.equal(2);
+    });
+
+    it('does not error if there are no items to activate', async () => {
+        const el = await fixture(html`
+            <obap-selector>
+            </obap-selector>
+        `);
+
+        expect(el.activeIndex).to.equal(-1);
+        el.activate(0);
+        expect(el.activeIndex).to.equal(-1);
+        el.activateNext();
+        expect(el.activeIndex).to.equal(-1);
+        el.activatePrevious();
+        expect(el.activeIndex).to.equal(-1);
     });
 });

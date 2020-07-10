@@ -404,7 +404,7 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
     }
 
     _onActionClick(e) {
-        this._fireEvent('obap-data-action', {
+        this.fireMessage('obap-data-action', {
             rowIndex: e.target.rowIndex,
             columnIndex: e.target.columnIndex
         });

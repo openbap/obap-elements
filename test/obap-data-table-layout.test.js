@@ -154,7 +154,7 @@ describe('obap-data-table-controller', () => {
 
         await nextFrame();
 
-        setTimeout(() => el._fireEvent('test-event', {}));
+        setTimeout(() => el.fireMessage('test-event', {}));
 
         const { detail } = await oneEvent(el, 'test-event');
 

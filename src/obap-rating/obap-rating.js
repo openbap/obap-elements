@@ -99,16 +99,10 @@ export class ObapRating extends ObapElement {
         if ((value >= 0) && (value <= this.count) && (oldValue !== value) && (!this.disabled)) {
             this._rating = value;
 
-            let event = new CustomEvent('obap-rating-change', {
-                detail: {
-                    oldValue: oldValue,
-                    newValue: this._rating
-                },
-                bubbles: true,
-                composed: true
+            this.fireMessage('obap-rating-change', {
+                oldValue: oldValue,
+                newValue: this._rating
             });
-
-            this.dispatchEvent(event);
 
             this.requestUpdate('rating', oldValue);
         }

@@ -76,16 +76,15 @@ Count: 0/3
 
 Lots of things could be in a dropdown container. Should there just be a generic one or multiple? They're separate from the other UI elements because I'm not too sure about them.
 
-|Done|Complexity|Name                 |Notes                               |
-|:--:|:--------:|---------------------|------------------------------------|
-|-   |H         |obap-select-container|A generic popup selection container.|
-|-   |M         |obap-select          |A single option dropdown selector.  |
-|    |M         |obap-multi-select    |A multi option dropdown selector.   |
-|    |L         |obap-date-select     |                                    |
-|    |L         |obap-time-select     |                                    |
-|    |L         |obap-color-select    |                                    |
+|Done|Complexity|Name                 |Notes                                   |
+|:--:|:--------:|---------------------|----------------------------------------|
+|X   |H         |obap-select-container|A generic popup selection container.    |
+|X   |M         |obap-select          |A single/multi option dropdown selector.|
+|    |L         |obap-date-select     |                                        |
+|    |L         |obap-time-select     |                                        |
+|    |L         |obap-color-select    |                                        |
 
-Count: 0/6
+Count: 2/5
 
 ### DATA TABLE ELEMENTS
 

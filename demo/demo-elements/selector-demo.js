@@ -36,6 +36,10 @@ export class SelectorDemo extends ObapElement {
                 color: var(--obap-on-selection-color);
             }
 
+            .item[active] {
+                background: #FAFAFA;
+            }
+
             obap-selector {
                 width: 200px;
                 border: 1px solid var(--obap-divider-on-surface-color);

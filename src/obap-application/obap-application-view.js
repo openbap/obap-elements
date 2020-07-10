@@ -303,16 +303,6 @@ export class ObapApplicationView extends ObapElement {
 
         this.requestUpdate();
     }
-
-    _fireEvent(eventName, detail) {
-        let event = new CustomEvent(eventName, {
-            detail: detail,
-            bubbles: true,
-            composed: true
-        });
-
-        this.dispatchEvent(event);
-    }
 }
 
 window.customElements.define('obap-application-view', ObapApplicationView);

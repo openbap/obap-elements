@@ -40,3 +40,11 @@ import '../demo-elements/cards/demo-cards.js';
 
 // Chips
 import '../demo-elements/chips/demo-chips.js';
+
+// Pickers
+import '../demo-elements/pickers/demo-pickers-select.js';
+
+// Tooltips & Callouts
+import '../demo-elements/tooltips-callouts/demo-tooltips.js';
+import '../demo-elements/tooltips-callouts/demo-callouts.js';
+import '../demo-elements/tooltips-callouts/demo-conversation.js';

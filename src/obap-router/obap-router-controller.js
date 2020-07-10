@@ -159,16 +159,6 @@ const ObapRouterController = (superClass) =>
             }
         }
 
-        _fireEvent(eventName, detail) {
-            let event = new CustomEvent(eventName, {
-                detail: detail,
-                bubbles: true,
-                composed: true
-            });
-
-            this.dispatchEvent(event);
-        }
-
         _getRouteCount() {
             return Object.keys(this.routes).length;
         }

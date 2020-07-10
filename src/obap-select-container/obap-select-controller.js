@@ -14,6 +14,16 @@ export const ObapSelectController = (superClass) =>
                     attribute: 'label'
                 },
 
+                icon: {
+                    type: String,
+                    attribute: 'icon'
+                },
+
+                value: {
+                    type: String,
+                    attribute: 'value'
+                },
+
                 // 'none' (default), 'underline', 'outline'
                 borderStyle: {
                     type: String,
@@ -21,15 +31,9 @@ export const ObapSelectController = (superClass) =>
                     reflect: true
                 },
 
-                filled: {
+                noFloatLabel: {
                     type: Boolean,
-                    attribute: 'filled',
-                    reflect: true
-                },
-
-                floatLabel: {
-                    type: Boolean,
-                    attribute: 'float-label'
+                    attribute: 'no-float-label'
                 },
 
                 opened: {
@@ -39,12 +43,27 @@ export const ObapSelectController = (superClass) =>
             }
         }
 
+        get opened() {
+            return this._opened;
+        }
+
+        set opened(value) {
+            const oldValue = this.opened;
+
+            if (oldValue !== value) {
+                this._opened = value;
+                value ? this.fireMessage('obap-select-action', { action: 'opened' }) : this.fireMessage('obap-select-action', { action: 'closed' })
+                this.requestUpdate('opened', oldValue);
+            }
+        }
+
         constructor() {
             super();
             this.label = '';
+            this.icon = '';
+            this.value = '';
             this.borderStyle = 'none';
-            this.filled = false;
-            this.floatLabel = false;
-            this.opened = false;
+            this.noFloatLabel = false;
+            this._opened = false; 
         }
     };

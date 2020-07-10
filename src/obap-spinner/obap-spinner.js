@@ -404,7 +404,7 @@ export class ObapSpinner extends ObapElement {
         if (this.value != newVal) {
             const oldValue = this.value;
             this.value = newVal;
-            this._fireEvent('obap-spinner-value-changed', { oldValue: oldValue, newValue: newVal});
+            this.fireMessage('obap-spinner-value-changed', { oldValue: oldValue, newValue: newVal});
         }
     }
 
@@ -443,7 +443,7 @@ export class ObapSpinner extends ObapElement {
         if (this.value != newVal) {
             const oldValue = this.value;
             this.value = newVal;
-            this._fireEvent('obap-spinner-value-changed', { oldValue: oldValue, newValue: newVal});
+            this.fireMessage('obap-spinner-value-changed', { oldValue: oldValue, newValue: newVal});
         }
     }
 
@@ -457,7 +457,7 @@ export class ObapSpinner extends ObapElement {
         if ((val >= this.minValue) && (val <= this.maxValue)) {
             const oldValue = this.value;
             this.value = val;
-            this._fireEvent('obap-spinner-value-changed', { oldValue: oldValue, newValue: this.value});
+            this.fireMessage('obap-spinner-value-changed', { oldValue: oldValue, newValue: this.value});
         } else if (val !== '') {
             e.target.value = this.value;
         }
@@ -473,22 +473,6 @@ export class ObapSpinner extends ObapElement {
                 e.stopPropagation();
             }
         }
-    }
-
-    _fireEvent(eventName, detail, cancelable) {
-        const body = {
-            bubbles: true,
-            composed: true,
-            cancelable: cancelable ? true : false
-        }
-
-        if (detail) {
-            body.detail = detail;
-        }
-
-        let event = new CustomEvent(eventName, body);
-
-        return this.dispatchEvent(event);
     }
 }
 

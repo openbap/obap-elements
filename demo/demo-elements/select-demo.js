@@ -25,24 +25,78 @@ export class SelectDemo extends ObapElement {
 
             .row {
               display: flex;
-              flex-direction: column;
-              align-items: flex-start;
+              flex-direction: row;
+              align-items: center;
               justify-content: flex-start;
+              margin: 16px 0;
             }
 
             obap-select {
-                margin-bottom: 4px;
+                margin-right: 16px;
+                min-width: 100px;
             }
         `];
+    }
+
+    static get properties() {
+        return {
+            items: {
+                type: Array
+            },
+
+            selectedItemIndexes: {
+                type: Array
+            }
+        } 
+    }
+
+    constructor() {
+        super();
+        this.items = ['one', 'two', 'three', 'four', 'five'];
+        this.selectedItemIndexes = [1, 2];
     }
     
     render() {
         return html`
             <div class="container">
-                <div class="title">Demo</div>
+                <div class="title">Normal</div>
                 <div class="row">
-                    <obap-select border-style="underline" filled></obap-select>
-                    <obap-select border-style="outline"></obap-select>
+                    <obap-select border-style="none" .items="${this.items}"></obap-select>
+                    <obap-select border-style="underline" .items="${this.items}"></obap-select>
+                    <obap-select border-style="outline" .items="${this.items}"></obap-select>
+                </div>
+
+                <div class="title">Label</div>
+                <div class="row">
+                    <obap-select no-float-label label="select" border-style="none" .items="${this.items}"></obap-select>
+                    <obap-select no-float-label label="select" border-style="underline" .items="${this.items}"></obap-select>
+                    <obap-select no-float-label label="select" border-style="outline" .items="${this.items}"></obap-select>
+                </div>
+
+                <div class="title">Floating Label</div>
+                <div class="row">
+                    <obap-select label="select" border-style="none" .items="${this.items}"></obap-select>
+                    <obap-select label="select" border-style="underline" .items="${this.items}"></obap-select>
+                    <obap-select label="select" border-style="outline" .items="${this.items}"></obap-select>
+                </div>
+
+                <div class="title">Icon</div>
+                <div class="row">
+                    <obap-select icon="android" label="select" border-style="none" .items="${this.items}"></obap-select>
+                    <obap-select icon="android" label="select" border-style="underline" .items="${this.items}"></obap-select>
+                    <obap-select icon="android" label="select" border-style="outline" .items="${this.items}"></obap-select>
+                </div>
+
+                <div class="title">Multi Select</div>
+                <div class="row">
+                    <obap-select icon="android" label="select" multi border-style="outline" .items="${this.items}" .selectedItemIndexes="${this.selectedItemIndexes}"></obap-select>
+                </div>
+
+                <div class="title">Disabled</div>
+                <div class="row">
+                    <obap-select disabled icon="android" label="select" border-style="none" .items="${this.items}"></obap-select>
+                    <obap-select disabled icon="android" label="select" border-style="underline" .items="${this.items}"></obap-select>
+                    <obap-select disabled icon="android" label="select" border-style="outline" .items="${this.items}"></obap-select>
                 </div>
             </div>
         `;

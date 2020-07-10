@@ -90,7 +90,7 @@ export const ObapDataTableController = (superClass) =>
 
             if ((row) && (this.selectedRows.indexOf(row) === -1)) {
                 this.selectedRows.push(row);
-                this._fireEvent('obap-data-selection-changed');
+                this.fireMessage('obap-data-selection-changed');
             }
         }
 
@@ -109,7 +109,7 @@ export const ObapDataTableController = (superClass) =>
                         this.selectedRows.splice(existingIndex, 1);
                     }
 
-                    this._fireEvent('obap-data-selection-changed');
+                    this.fireMessage('obap-data-selection-changed');
                 }
             }
         } 
@@ -117,12 +117,12 @@ export const ObapDataTableController = (superClass) =>
         selectAllRows() {
             if (this.selectionMode !== 'multiple') return;
             this.selectedRows = [...this.rows];
-            this._fireEvent('obap-data-selection-changed');
+            this.fireMessage('obap-data-selection-changed');
         }
 
         deselectAllRows() {
             this.selectedRows.length = 0;
-            this._fireEvent('obap-data-selection-changed');
+            this.fireMessage('obap-data-selection-changed');
         }
 
         compareAsc(a, b) {
@@ -177,15 +177,5 @@ export const ObapDataTableController = (superClass) =>
             if (av < bv) return 1;
             if (av > bv) return -1;
             return 0;
-        }
-
-        _fireEvent(name, detail) {
-            const event = new CustomEvent(name, {
-                bubbles: true,
-                composed: true,
-                detail: detail
-            });
-
-            return this.dispatchEvent(event);
         }
     };

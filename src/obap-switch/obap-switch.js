@@ -140,17 +140,11 @@ export class ObapSwitch extends ObapElement {
 
     _toggleClick() {
         this.selected = !this.selected;
-        
-        const event = new CustomEvent('change', {
-            detail: {
-                selected: this.selected,
-                name: this.name
-            },
-            bubbles: true,
-            composed: true
-        });
 
-        this.dispatchEvent(event);
+        this.fireMessage('change', {
+            selected: this.selected,
+            name: this.name
+        });
     }
 }
 

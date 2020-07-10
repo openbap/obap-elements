@@ -386,7 +386,7 @@ export class ObapDataTableLayout extends ObapElement {
 
         this._resizeObserver = new ResizeObserver(entries => {
             requestAnimationFrame(() => this._positionScrollAreas());
-            this.dispatchEvent(new CustomEvent('obap-data-table-layout-size-changed', { bubbles: true, composed: true }));
+            this.fireMessage('obap-data-table-layout-size-changed');
         });
     }
 

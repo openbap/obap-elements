@@ -75,15 +75,7 @@ export class ObapDialog extends ObapElement {
                 }
             }
 
-            let event = new CustomEvent('obap-dialog-opened-changed', {
-                detail: {
-                    opened: this._opened
-                },
-                bubbles: true,
-                composed: true
-            });
-
-            this.dispatchEvent(event);
+            this.fireMessage('obap-dialog-opened-changed', { opened: this._opened });
         });
     }
 
@@ -126,8 +118,8 @@ export class ObapDialog extends ObapElement {
                 this._updateBackdrop();
             }
         });
-    }
-
+    } 
+    
     render() {
         return html`
             <div class="container elevation-24" @click="${this._handleClick}">

@@ -31,7 +31,7 @@ import '@obap/obap-elements/obap-selector/obap-selector.js';
     <div class="item">Three</div>
     <div class="separator" no-select></div>
     <div class="item">Four</div>
-    <div class="item"Five</div>
+    <div class="item">Five</div>
 </obap-selector>
 
 <!-- Multi Select -->
@@ -41,7 +41,7 @@ import '@obap/obap-elements/obap-selector/obap-selector.js';
     <div class="item">Three</div>
     <div class="separator" no-select></div>
     <div class="item">Four</div>
-    <div class="item"Five</div>
+    <div class="item">Five</div>
 </obap-selector>
 
 <!-- Range Select -->
@@ -51,7 +51,7 @@ import '@obap/obap-elements/obap-selector/obap-selector.js';
     <div class="item">Three</div>
     <div class="separator" no-select></div>
     <div class="item">Four</div>
-    <div class="item"Five</div>
+    <div class="item">Five</div>
 </obap-selector>
 ```
 

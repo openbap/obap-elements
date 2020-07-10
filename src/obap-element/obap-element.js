@@ -84,6 +84,17 @@ class ObapElement extends LitElement {
         let val = computedStyle.getPropertyValue(variableName);
         return val ? val : defaultValue;
     }
+
+    fireMessage(name, detail, cancelable) {
+        const event = new CustomEvent(name, {
+            bubbles: true,
+            composed: true,
+            cancelable: cancelable,
+            detail: detail
+        });
+
+        return this.dispatchEvent(event);
+    }
 }
 
 export { html, css, svg, ObapElement } 

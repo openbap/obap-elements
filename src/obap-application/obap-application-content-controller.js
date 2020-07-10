@@ -57,7 +57,7 @@ export const ObapApplicationContentController = (superClass) =>
                 if (this.activate) {
                     this.activate();
                 } else {
-                    this._fireEvent('obap-view-activate');
+                    this.fireMessage('obap-view-activate');
                 }
             }
         }
@@ -67,19 +67,10 @@ export const ObapApplicationContentController = (superClass) =>
                 if (this.deactivate) {
                     this.deactivate();
                 } else {
-                    this._fireEvent('obap-view-deactivate');
+                    this.fireMessage('obap-view-deactivate');
                 }
 
                 this._active = false;
             }
-        }
-
-        _fireEvent(eventName) {
-            let event = new CustomEvent(eventName, {
-                bubbles: false, 
-                composed: false
-            });
-
-            this.dispatchEvent(event);
         }
     };

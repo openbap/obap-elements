@@ -110,7 +110,7 @@ export const ObapStepperController = (superClass) =>
         }
 
         canSetStep(newStepIndex, oldStepIndex, newStepName, oldStepName) {
-            return this._fireEvent('obap-stepper-step-can-change', {
+            return this.fireMessage('obap-stepper-step-can-change', {
                 newStepIndex: newStepIndex,
                 oldStepIndex: oldStepIndex,
                 newStepName: newStepName,
@@ -151,7 +151,7 @@ export const ObapStepperController = (superClass) =>
             this._updateSteps();
             this.selected = index;
 
-            this._fireEvent('obap-stepper-step-change', {
+            this.fireMessage('obap-stepper-step-change', {
                 newStepIndex: newStepIndex,
                 oldStepIndex: oldStepIndex,
                 newStepName: newStepName,
@@ -214,12 +214,12 @@ export const ObapStepperController = (superClass) =>
             this._updateSteps();
 
             this.setStep(0);
-            this._fireEvent('obap-stepper-cancel', { index: this.selected });
+            this.fireMessage('obap-stepper-cancel', { index: this.selected });
         }
 
         finish() {
             if (this.canFinish()) {
-                this._fireEvent('obap-stepper-finish', { index: this.selected });
+                this.fireMessage('obap-stepper-finish', { index: this.selected });
                 return true;
             }
             
@@ -295,18 +295,5 @@ export const ObapStepperController = (superClass) =>
             if ((e.detail.props.length === 1) && (e.detail.props.indexOf('error') > -1)) {
                 this.requestUpdate();
             }
-        }
-
-        _fireEvent(eventName, detail, cancelable) {
-            const body = {
-                detail: detail,
-                bubbles: true,
-                composed: true,
-                cancelable: cancelable ? true : false
-            }
-
-            let event = new CustomEvent(eventName, body);
-
-            return this.dispatchEvent(event);
         }
     };

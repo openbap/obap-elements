@@ -175,14 +175,7 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
     }
 
     _handleActionClick() {
-        this.dispatchEvent(new CustomEvent('obap-navigation-rail-action', {
-            bubbles: true,
-            composed: true,
-            detail: {
-                selectedIndex: this.selectedIndex,
-                selectedItem: this.items[this.selectedIndex]
-            }
-        }));
+        this.fireMessage('obap-navigation-rail-action', { selectedIndex: this.selectedIndex, selectedItem: this.items[this.selectedIndex] });
     }
 }
 

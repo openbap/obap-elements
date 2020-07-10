@@ -113,17 +113,10 @@ export class ObapStepperStep extends ObapElement {
             props.push(propName);
         });
 
-        // Fire state changed message.
-        let event = new CustomEvent('obap-stepper-step-state-change', {
-            detail: {
-                stepName: this.name,
-                props: props
-            },
-            bubbles: true,
-            composed: true
+        this.fireMessage('obap-stepper-step-state-change', {
+            stepName: this.name,
+            props: props
         });
-
-        this.dispatchEvent(event);
     }
 
     render() {

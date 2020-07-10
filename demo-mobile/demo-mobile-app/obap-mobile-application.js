@@ -2,15 +2,15 @@
 @license
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
-import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import { ObapApplicationController } from './obap-application-controller.js';
-import { body } from '../obap-styles/obap-typography.js';
-import '../obap-button/obap-button.js';
-import '../obap-top-app-bar/obap-top-app-bar.js';
-import '../obap-icon/obap-icon.js'; 
-import './obap-application-view.js';
-import '../obap-pages/obap-pages.js';
-import '../obap-material/obap-material.js';
+import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
+import { ObapApplicationController } from '../../src/obap-application/obap-application-controller.js';
+import { body } from '../../src/obap-styles/obap-typography.js';
+import '../../src/obap-button/obap-button.js';
+import '../../src/obap-top-app-bar/obap-top-app-bar.js';
+import '../../src/obap-icon/obap-icon.js'; 
+import '../../src/obap-application/obap-application-view.js';
+import '../../src/obap-pages/obap-pages.js';
+import '../../src/obap-material/obap-material.js';
 /**
  * A view based mobile application framework.
  */
@@ -59,7 +59,6 @@ export class ObapMobileApplication extends ObapApplicationController(ObapElement
 
             .navigator {
                 height: 100%;
-                margin-top: 8px;
                 box-sizing: border-box;
                 overflow-y: auto;
             }
@@ -71,10 +70,16 @@ export class ObapMobileApplication extends ObapApplicationController(ObapElement
                 box-sizing: border-box;
             }
 
+            .navigator-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 8px;
+                padding: 8px;
+            }
+
             .navigator-item {
                 display: flex;
                 align-items: center;
-                margin: 0 8px 8px 8px;
                 padding: 8px;
                 cursor: pointer;
             }
@@ -150,7 +155,7 @@ export class ObapMobileApplication extends ObapApplicationController(ObapElement
 
     _renderNavigator() {
         return html`
-            <div>
+            <div class="navigator-container">
                 ${this.views.map((view, index) => html`
                     <obap-material elevation="1" class="navigator-item" index="${index}" @click="${this._navigatorClick}">
                         ${view.icon ? html`<obap-icon class="navigator-icon" icon="${view.icon}"></obap-icon>` : null}

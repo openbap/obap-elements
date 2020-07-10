@@ -104,22 +104,13 @@ export class ObapBanner extends ObapElement {
         if (this.confirmAction || this.dismissAction) {
             return html`
                 <div class="actions">
-                    ${this.dismissAction ? html`<obap-button label="${this.dismissAction}" @click="${() => this._fireEvent('obap-banner-dismiss')}"></obap-button>` : null}
-                    ${this.confirmAction ? html`<obap-button label="${this.confirmAction}" @click="${() => this._fireEvent('obap-banner-confirm')}"></obap-button>` : null}
+                    ${this.dismissAction ? html`<obap-button label="${this.dismissAction}" @click="${() => this.fireMessage('obap-banner-dismiss')}"></obap-button>` : null}
+                    ${this.confirmAction ? html`<obap-button label="${this.confirmAction}" @click="${() => this.fireMessage('obap-banner-confirm')}"></obap-button>` : null}
                 </div>
             `;
         }
 
         return null;
-    }
-
-    _fireEvent(name) {
-        const event = new CustomEvent(name, {
-            bubbles: true,
-            composed: true
-        });
-
-        this.dispatchEvent(event);
     }
 }
 

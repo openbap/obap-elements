@@ -35,6 +35,11 @@ export class ObapPages extends ObapSelectorController(ObapElement) {
         `;
     }
 
+    constructor() {
+        super();
+        this.disableManualSelection = true;
+    }
+
     render() {
         return html`<slot></slot>`;
     }

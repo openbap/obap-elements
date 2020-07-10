@@ -309,4 +309,22 @@ describe('obap-dialog', () => {
         await nextFrame();
         expect(el.opened).to.equal(true);
     });
+
+    it('is dismissed on navigation event', async () => {
+        const el = await fixture(html`
+            <obap-dialog modal>
+            </obap-dialog>
+        `);
+
+        await nextFrame();
+        el.open();
+
+        await nextFrame();
+        expect(el.opened).to.equal(true);
+
+        el._handleOnPopStateEvent();
+
+        await nextFrame();
+        expect(el.opened).to.equal(false);
+    });
 });

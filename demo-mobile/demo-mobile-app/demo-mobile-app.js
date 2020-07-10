@@ -3,7 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
-import '../../src/obap-application/obap-mobile-application.js';
+import './obap-mobile-application.js';
 import { ObapThemeController, themeManager } from '../../src/obap-styles/obap-theme-controller.js';
 import './imports.js';
 
@@ -84,6 +84,10 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
                     <obap-application-content><demo-dialogs class="demo"></demo-dialogs></obap-application-content>
                 </obap-application-view>
 
+                <obap-application-view name="pickers" label="Pickers" icon="app:pickers" hide-sub-view-scroll-buttons>
+                    <obap-application-content name="pickers-select" label="Select"><demo-pickers-select class="demo"></demo-pickers-select></obap-application-content>
+                </obap-application-view>
+
                 <obap-application-view name="progress-indicators" label="Progress Indicators" icon="app:progress-indicators" hide-sub-view-scroll-buttons>
                     <obap-application-content name="progress-indicators-linear" label="Linear"><demo-progress-indicators-linear class="demo"></demo-progress-indicators-linear></obap-application-content>
                     <obap-application-content name="progress-indicators-circular" label="Circular"><demo-progress-indicators-circular class="demo"></demo-progress-indicators-circular></obap-application-content>
@@ -103,11 +107,13 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
                 </obap-application-view>
 
                 <obap-application-view name="tabs" label="Tabs" icon="app:tabs" hide-sub-view-scroll-buttons>
-                    <obap-application-content><obap-application-content><demo-tabs class="demo"></demo-tabs></obap-application-content></obap-application-content>
+                    <obap-application-content><demo-tabs class="demo"></demo-tabs></obap-application-content>
                 </obap-application-view>
 
                 <obap-application-view name="tooltips-callouts" label="Tooltips & Callouts" icon="app:tooltips-callouts" hide-sub-view-scroll-buttons>
-                    <obap-application-content><div class="content">Tooltips & Callouts</div></obap-application-content>
+                    <obap-application-content name="tooltips-callouts-tooltips" label="Tooltips"><demo-tooltips class="demo"></demo-tooltips></obap-application-content>
+                    <obap-application-content name="tooltips-callouts-callouts" label="Callouts"><demo-callouts class="demo"></demo-callouts></obap-application-content>
+                    <obap-application-content name="tooltips-callouts-conversation" label="Conversation"><demo-conversation class="demo"></demo-conversation></obap-application-content>
                 </obap-application-view>
             </obap-mobile-application>
         `;

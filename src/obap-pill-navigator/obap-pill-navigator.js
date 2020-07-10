@@ -119,20 +119,9 @@ export class ObapPillNavigator extends ObapElement {
 
         if ((oldValue !== value) && (!this.disabled)) {
             this._selected = value;
-            this._fireEvent('obap-pill-navigator-change', { oldValue: oldValue, newValue: this._selected }, false);
+            this.fireMessage('obap-pill-navigator-change', { oldValue: oldValue, newValue: this._selected });
             this.requestUpdate('selected', oldValue);
         }
-    }
-
-    _fireEvent(name, detail, cancelable) {
-        const event = new CustomEvent(name, {
-            bubbles: true,
-            composed: true,
-            cancelable: cancelable,
-            detail: detail
-        });
-
-        return this.dispatchEvent(event);
     }
 
     constructor() {

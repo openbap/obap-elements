@@ -130,19 +130,11 @@ export class ObapCheck extends ObapInputElement {
 
         if (oldValue !== value) {
             this._selected = value;
-
             this.requestUpdate('selected', oldValue);
-
-            const event = new CustomEvent('obap-item-selected-change', {
-                detail: {
-                    selected: this._selected,
-                    name: this.name
-                },
-                bubbles: true,
-                composed: true
+            this.fireMessage('obap-item-selected-change', {
+                selected: this._selected,
+                name: this.name
             });
-
-            this.dispatchEvent(event);
         }
     }
 
