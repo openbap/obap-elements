@@ -44,3 +44,4 @@ import './banner-demo.js';
 import './data-table-layout-demo.js';
 import './data-list-demo.js';
 import './select-demo.js';
+import './data-pager-demo.js';

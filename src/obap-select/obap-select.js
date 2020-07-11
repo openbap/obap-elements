@@ -123,9 +123,18 @@ export class ObapSelect extends ObapSelectController(ObapElement) {
         this._selector = this.renderRoot.getElementById('selector');
 
         changedProperties.forEach((oldValue, propName) => {
-            if ((propName === 'selectedIndex') && (this.selectedIndex !== -1)) {
-                this._updateValue();
-                this.requestUpdate();
+            if (propName === 'selectedIndex') {
+                if (this.selectedIndex !== -1) {
+                    this._updateValue();
+                    this.requestUpdate();
+                }
+
+                if (this.selectedIndex !== oldValue) {
+                    this.fireMessage('obap-select-changed', {
+                        selectedIndex: this.selectedIndex,
+                        selectedIndexes: this.selectedItemIndexes
+                    });
+                }
             }
         });
     }

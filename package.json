@@ -17,7 +17,7 @@
     "go-mobile": "es-dev-server --app-index demo-mobile/index.html --node-resolve --open",
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
-    "test-current": "karma start --grep test/obap-select.test.js --coverage",
+    "test-current": "karma start --grep test/obap-data-pager.test.js --coverage",
     "deploy": "npm publish src",
     "testdeploy": "npm publish src --dry-run",
     "doc": "./node_modules/.bin/wca analyze src --format markdown --outDir docs/elements",

@@ -15,7 +15,8 @@ import '../demo-elements/buttons/demo-buttons-custom.js';
 import '../demo-elements/dialogs/demo-dialogs.js';
 
 // Tables
-import '../demo-elements/tables/demo-tables.js';
+import '../demo-elements/tables/demo-data-list.js';
+import '../demo-elements/tables/demo-data-pager.js';
 
 // Charts - Sparkline
 import '../demo-elements/sparkline-charts/demo-sparkline-line.js';

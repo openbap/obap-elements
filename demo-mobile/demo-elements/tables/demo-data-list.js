@@ -6,7 +6,7 @@ import { html, css, ObapElement } from '../../../src/obap-element/obap-element.j
 import '../../../src/obap-material/obap-material.js';
 import '../../../src/obap-data-list/obap-data-list.js';
 
-export class DemoTables extends ObapElement {
+export class DemoDataList extends ObapElement {
     static get styles() {
         return [css`
             :host {
@@ -92,4 +92,4 @@ export class DemoTables extends ObapElement {
     
 }
 
-window.customElements.define('demo-tables', DemoTables);
+window.customElements.define('demo-data-list', DemoDataList);

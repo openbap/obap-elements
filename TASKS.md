@@ -92,7 +92,7 @@ Count: 2/5
 |:--:|:--------:|----------------------|-----------------------------------------------------------------------------------------------------------|
 |X   |H         |obap-data-table-layout|A helper container element to simplify creating complex data table elements.                               |
 |X   |H         |obap-data-list        |A simple Material Design data table with minimal features which is suitable for small data sets.           |
-|    |M         |obap-data-pager       |A page switcher element for tables with a lot of data (required by `obap-data-table`). Needs `obap-select`.|
+|-   |M         |obap-data-pager       |A page switcher element for tables with a lot of data (required by `obap-data-table`). Needs `obap-select`.|
 |    |H         |obap-data-table       |A complex Material Design data table suitable for large data sets. Needs `obap-data-pager`.                |
 
 Count: 2/4
@@ -123,7 +123,7 @@ These are high level elements used to construct applications.
 |X   |M         |obap-local-storage     |A helper library for local storage.               |
 |X   |M         |obap-fetch             |A helper library to simplify the fetch API.       |
 |-   |H         |obap-application       |A view based desktop application framework.       |
-|-   |H         |obap-mobile-application|A view based mobile application framework.        |
+|    |H         |obap-mobile-application|A view based mobile application framework.        |
 |    |H         |obap-messaging         |A messaging system for obap-application views.    |
 |    |H         |obap-application-state |A Flux-like state manager.                        |
 |    |H         |obap-identity          |Handles a user OpenID Connect account, login, etc.|

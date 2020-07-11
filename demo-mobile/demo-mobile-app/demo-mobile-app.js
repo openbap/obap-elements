@@ -77,7 +77,8 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
                 </obap-application-view>
 
                 <obap-application-view name="data-tables" label="Data Tables" icon="app:data-tables" hide-sub-view-scroll-buttons>
-                    <obap-application-content><demo-tables class="demo"></demo-tables></obap-application-content>
+                    <obap-application-content name="data-tables-list" label="Data List"><demo-data-list class="demo"></demo-data-list></obap-application-content>
+                    <obap-application-content name="data-tables-pager" label="Data Pager"><demo-data-pager class="demo"></demo-data-pager></obap-application-content>
                 </obap-application-view>
 
                 <obap-application-view name="dialogs" label="Dialogs" icon="app:dialogs" hide-sub-view-scroll-buttons>
