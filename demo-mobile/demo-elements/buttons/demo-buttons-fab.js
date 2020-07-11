@@ -49,6 +49,7 @@ export class DemoButtonsFab extends ObapElement {
             <demo-panel>
                 <div class="container">
                     <obap-button round icon="app:android"></obap-button>
+                    <obap-button round icon="app:android" outline></obap-button>
                     <obap-button round icon="app:polymer" raised></obap-button>
                     <obap-button round icon="app:styles" no-ink raised></obap-button>
                     <obap-button round icon="app:charts" toggle raised></obap-button>
@@ -59,6 +60,7 @@ export class DemoButtonsFab extends ObapElement {
             <demo-panel>
                 <div class="container">
                     <obap-button round label="Flat" icon="app:android"></obap-button>
+                    <obap-button round label="Outline" icon="app:android" outline></obap-button>
                     <obap-button round label="Raised" icon="app:polymer" raised></obap-button>
                     <obap-button round label="No Ink" icon="app:styles" no-ink raised></obap-button>
                     <obap-button round label="Toggle" icon="app:charts" toggle raised></obap-button>

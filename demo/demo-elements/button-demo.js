@@ -82,12 +82,14 @@ export class ButtonDemo extends ObapElement {
                 <div class="title"  @click="${this._click}">Regular Buttons</div>
                 <div class="row">
                     <obap-button @click="${this._click}" label="flat"></obap-button>
+                    <obap-button @click="${this._click}" label="outline" outline></obap-button>
                     <obap-button @click="${this._click}" label="raised" raised></obap-button>
                     <obap-button @click="${this._click}" label="no ink" no-ink raised></obap-button>
                     <obap-button @click="${this._click}" label="toggle" raised toggle></obap-button>
                     <obap-button @click="${this._click}" label="disabled" disabled></obap-button>
 
                     <obap-button @click="${this._click}" label="flat" icon="android"></obap-button>
+                    <obap-button @click="${this._click}" label="outline" icon="android" outline></obap-button>
                     <obap-button @click="${this._click}" label="raised" raised icon="face"></obap-button>
                     <obap-button @click="${this._click}" label="no ink" no-ink raised icon="bug-report"></obap-button>
                     <obap-button @click="${this._click}" label="toggle" raised toggle icon="settings"></obap-button>
@@ -97,12 +99,14 @@ export class ButtonDemo extends ObapElement {
                 <div class="title">Floating Action Buttons</div>
                 <div class="row">
                     <obap-button round icon="android"></obap-button>
+                    <obap-button round icon="android" outline></obap-button>
                     <obap-button round raised icon="face"></obap-button>
                     <obap-button round no-ink raised icon="bug-report"></obap-button>
                     <obap-button round raised toggle icon="settings"></obap-button>
                     <obap-button round icon="add" disabled></obap-button>
 
                     <obap-button label="flat" round icon="android"></obap-button>
+                    <obap-button label="outline" round icon="android" outline></obap-button>
                     <obap-button label="raised" round raised icon="face"></obap-button>
                     <obap-button label="no ink" round no-ink raised icon="bug-report"></obap-button>
                     <obap-button label="toggle" round raised toggle icon="settings"></obap-button>

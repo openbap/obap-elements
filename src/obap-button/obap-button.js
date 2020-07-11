@@ -42,11 +42,13 @@ export class ObapButton extends ObapInputElement {
         return [button, hostElevation2, hostElevation6, css`
             :host {
                 --obap-button-color: var(--obap-text-primary-color, rgba(0, 0, 0, 0.87));
+                --obap-button-outline-color: var(--obap-text-primary-color, rgba(0, 0, 0, 0.87));
                 --obap-button-disabled-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-button-split-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-button-background-color: var(--obap-surface-color,#FFFFFF);
                 --obap-button-disabled-background-color: transparent;
                 --obap-button-ripple-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
+                --obap-button-outline-size: 1px;
                 
                 display: inline-block;
                 position: relative;
@@ -75,6 +77,10 @@ export class ObapButton extends ObapInputElement {
 
             :host([round]) {
                 border-radius: 20px;
+            }
+
+            :host([outline]) {
+                border: var(--obap-button-outline-size) solid var(--obap-button-outline-color);
             }
 
             .container {
@@ -139,6 +145,15 @@ export class ObapButton extends ObapInputElement {
             },
 
             /**
+             * Whether or not the button has an outline.
+             */
+            outline: {
+                type: Boolean,
+                attribute: 'outline',
+                reflect: true
+            },
+
+            /**
              * Whether or not the button is a toggle button.
              */
             toggle: {
@@ -181,6 +196,7 @@ export class ObapButton extends ObapInputElement {
         this.round = false;
         this.toggle = false;
         this.selected = false;
+        this.outline = false;
         this.icon = '';
         this.label = '';
         this.role = 'button';

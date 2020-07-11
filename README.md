@@ -29,7 +29,7 @@ This suite of web components is very ambitious (have a look at the [list of elem
 
 |Version           |Features                                                                              |Status     |
 |------------------|--------------------------------------------------------------------------------------|-----------|
-|0.0.x             |Lots of these, which will just be periodic commits as work pregresses.                |In Progress|
+|0.0.x             |Lots of these, which will just be periodic commits as work progresses.                |In Progress|
 |0.1.x             |Elements are all implemented - this is the standardization and stabilization phase.   |Not Started|
 |0.2.x             |Accessibility phase - ensure that everything is accessible, has keyboard support, etc.|Not Started|
 |0.3.x             |Element demo phase - complete and detailed demos will be created.                     |Not Started|
