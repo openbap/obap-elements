@@ -24,6 +24,7 @@ export class DemoPanel extends ObapElement {
             }
 
             .container {
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 padding: var(--demo-panel-padding);
@@ -38,6 +39,7 @@ export class DemoPanel extends ObapElement {
 
             .content {
                 flex: 1;
+                width: 100%;
             }
         `];
     }

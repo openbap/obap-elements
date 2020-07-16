@@ -49,3 +49,6 @@ import '../demo-elements/pickers/demo-pickers-select.js';
 import '../demo-elements/tooltips-callouts/demo-tooltips.js';
 import '../demo-elements/tooltips-callouts/demo-callouts.js';
 import '../demo-elements/tooltips-callouts/demo-conversation.js';
+
+// Slider
+import '../demo-elements/slider/demo-slider.js';

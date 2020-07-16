@@ -43,6 +43,7 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |X   |M         |obap-side-stepper      |A Material Design Stepper (wizard) where the step labels are on the left.                       |
 |X   |M         |obap-compact-stepper   |A compact Material Design Stepper (wizard) where the only the active label is displayed.        |
 |    |H         |obap-vertical-stepper  |A vertical Material Design Stepper (wizard). Step labels are inline.                            |
+|-   |H         |obap-slider            |Sliders allow users to make selections from a range of values.                                  |
 |    |M         |obap-snackbar          |A popup toast notification element.                                                             |
 |    |M         |obap-time-picker       |A Material Design time picker (not the mobile type).                                            |
 |    |H         |obap-date-picker       |A Material Design date picker (not the mobile type).                                            |
@@ -51,7 +52,6 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |H         |obap-textfield         |A Material Design text field with floating label.                                               |
 |    |H         |obap-textarea          |A Material Design text area with floating label.                                                |
 |    |M         |obap-section-list      |A scrollable horizontal list of name/value items.                                               |
-|    |H         |obap-slider            |Sliders allow users to make selections from a range of values.                                  |
 |    |M         |obap-navigation-drawer |A slide out drawer that can be anchored to the top, bottom or side.                             |
 |    |M         |obap-list              |A scrollable list of items that can optionally be selectable.                                   |
 |    |M         |obap-list-item         |A Material Design list item.                                                                    |
@@ -59,8 +59,9 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |M         |obap-carousel          |A content carousel that supports overlays.                                                      |
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                               |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                         |
+|    |H         |obap-treeview          |A Material Design heirarchical treeview.                                                        |
 
-Count: 37/53
+Count: 37/54
 
 ### MENU ELEMENTS
 
@@ -92,14 +93,14 @@ Count: 2/5
 |:--:|:--------:|----------------------|-----------------------------------------------------------------------------------------------------------|
 |X   |H         |obap-data-table-layout|A helper container element to simplify creating complex data table elements.                               |
 |X   |H         |obap-data-list        |A simple Material Design data table with minimal features which is suitable for small data sets.           |
-|-   |M         |obap-data-pager       |A page switcher element for tables with a lot of data (required by `obap-data-table`). Needs `obap-select`.|
+|X   |M         |obap-data-pager       |A page switcher element for tables with a lot of data (required by `obap-data-table`). Needs `obap-select`.|
 |    |H         |obap-data-table       |A complex Material Design data table suitable for large data sets. Needs `obap-data-pager`.                |
 
-Count: 2/4
+Count: 3/4
 
 ### CHART ELEMENTS
 
-Sparklines are very small charts, drawn without adornments, interactivity or other chart-specific elements. The `obap-chart` elements are the more complex charts.
+Sparklines are very small charts, drawn without adornments, interactivity or other chart-specific elements.
 
 |Done|Complexity|Name                  |Notes                                                                                          |
 |:--:|:--------:|----------------------|-----------------------------------------------------------------------------------------------|
@@ -108,6 +109,11 @@ Sparklines are very small charts, drawn without adornments, interactivity or oth
 |X   |H         |obap-line-sparkline   |A simple line chart element that supports lines, markers (scatter) and area styles.            |
 |X   |H         |obap-pie-sparkline    |A simple pie or donut chart.                                                                   |
 |X   |H         |obap-winloss-sparkline|A simple win-loss chart.                                                                       |
+
+The `obap-chart` elements are the more complex charts.
+
+|Done|Complexity|Name                  |Notes                                                                                          |
+|:--:|:--------:|----------------------|-----------------------------------------------------------------------------------------------|
 |    |H         |obap-xxx-chart        |A collection of commonly used chart types - this will be separated into individual chart types.|
 
 Count: 5/6

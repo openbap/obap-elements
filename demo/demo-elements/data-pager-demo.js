@@ -32,16 +32,38 @@ export class DataPagerDemo extends ObapElement {
             }
         `];
     }
+
+    static get properties() {
+        return {
+            options: {
+                type: Array
+            }
+        }
+    }
+
+    constructor() {
+        super();
+        this.options = [15];
+    }
     
     render() {
         return html`
             <div class="container">
-                <div class="title">Demo</div>
-                <div class="row">
+                <div class="title">Default Page Size Options</div>
+                <div class="row" @obap-data-pager-change="${this._onChange}">
                     <obap-data-pager count="100"></obap-data-pager>
+                </div>
+
+                <div class="title">Fixed Page Size</div>
+                <div class="row" @obap-data-pager-change="${this._onChange}">
+                    <obap-data-pager .rowsPerPageOptions="${this.options}" count="150"></obap-data-pager>
                 </div>
             </div>
         `;
+    }
+
+    _onChange(e) {
+        console.log(e.detail);
     }
 }
 

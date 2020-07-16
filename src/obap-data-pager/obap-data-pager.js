@@ -67,9 +67,9 @@ export class ObapDataPager extends ObapElement {
                 attribute: 'rows-per-page-label'
             },
 
-            rowsPerPageCounts: {
+            rowsPerPageOptions: {
                 type: Array,
-                attribute: 'rows-per-page-counts'
+                attribute: 'rows-per-page-options'
             },
 
             positionLabel: {
@@ -110,6 +110,32 @@ export class ObapDataPager extends ObapElement {
         }
     }
 
+    get page() {
+        return this._page;
+    }
+
+    set page(value) {
+        const oldValue = this.page;
+
+        if (oldValue !== value) {
+            this._page = value;
+            this._updateValues();
+
+            requestAnimationFrame(() => {
+                this.fireMessage('obap-data-pager-change', {
+                    page: this._page,
+                    pageSize: this.pageSize,
+                    startItem: this.startItem,
+                    endItem: this.endItem
+                });
+            });
+
+            this.requestUpdate('page', oldValue);
+        } else {
+            this._updateValues();
+        }
+    }
+
     get startItem() {
         return this._startItem;
     }
@@ -129,11 +155,11 @@ export class ObapDataPager extends ObapElement {
     constructor() {
         super();
         this.rowsPerPageLabel = 'Rows per page:';
-        this.rowsPerPageCounts = [10, 25, 50];
+        this.rowsPerPageOptions = [10, 25, 50];
         this.positionLabel = '{0} - {1} of {2}';
         this.count = 0;
-        this.page = 1;
-        this.defaultPageSize = 25;
+        this.defaultPageSize = 10;
+        this._page = 1;
         this._startItem = 0;
         this._endItem = 0;
         this._pageCount = 0;
@@ -144,17 +170,16 @@ export class ObapDataPager extends ObapElement {
         super.updated(changedProperties);
 
         changedProperties.forEach((oldValue, propName) => {
-            if (propName === 'rowsPerPageCounts') {
-                if (this.rowsPerPageCounts.length === 1) {
-                    this._pageSize = this.rowsPerPageCounts[0];
+            if ((propName === 'pageSize') || (propName === 'count') || (propName === 'rowsPerPageOptions'))
+            {
+                if (propName === 'rowsPerPageOptions') {
+                    if (this.rowsPerPageOptions && this.rowsPerPageOptions.length > 0) {
+                        const old = this._pageSize;
+                        this._pageSize = this.rowsPerPageOptions[0];
+                        this.requestUpdate('pageSize', old);
+                    }
                 }
-            }
-            if ((propName === 'pageSize') || (propName === 'count')) {
                 this.page = 1;
-            }
-
-            if ((propName === 'pageSize') || (propName === 'count') || (propName === 'page') || (propName === 'defaultPageSize')) {
-                this._updateValues();
             }
         });
     }
@@ -172,24 +197,20 @@ export class ObapDataPager extends ObapElement {
     }
 
     _renderPageCountSelector() {
-        if (this.rowsPerPageCounts && this.rowsPerPageCounts.length > 0) {
-            if (this.rowsPerPageCounts.length > 1) {
-                return html`
-                    <div class="inner-container left">
-                        <div>${this.rowsPerPageLabel}</div>
-                        <obap-select border-style="none" .items="${this.rowsPerPageCounts}" selected-index="0" @obap-select-changed="${this._rowsPerPageChanged}"></obap-select>
-                    </div>
-                `;
-            } else {
-                return html`
-                    <div class="inner-container left">
-                        <div>${this.rowsPerPageLabel} ${this._pageSize}</div>
-                    </div>
-                `;
-            }
+        if (this.rowsPerPageOptions && this.rowsPerPageOptions.length > 1) {
+            return html`
+                <div class="inner-container left">
+                    <div>${this.rowsPerPageLabel}</div>
+                    <obap-select border-style="none" .items="${this.rowsPerPageOptions}" selected-index="0" @obap-select-changed="${this._rowsPerPageChanged}"></obap-select>
+                </div>
+            `;
+        } else {
+            return html`
+                <div class="inner-container left">
+                    <div>${this.rowsPerPageLabel} ${this._pageSize}</div>
+                </div>
+            `;
         }
-
-        return null;
     }
 
     previousPage() {
@@ -205,10 +226,8 @@ export class ObapDataPager extends ObapElement {
     }
 
     _updateValues() {
-        if (this.pageSize <= 0) {
-            this._pageSize = this.defaultPageSize;
-        }
-
+        this._pageSize = (this.pageSize > 0) ? this.pageSize : this.defaultPageSize;
+        
         this._pageCount = Math.ceil(this.count / this.pageSize);
 
         if ((this.pageCount > 0) && (this.page > 0) && (this.page <= this.pageCount)) {
@@ -225,15 +244,13 @@ export class ObapDataPager extends ObapElement {
 
     _rowsPerPageChanged(e) {
         const oldValue = this._pageSize;
-        this._pageSize = this.rowsPerPageCounts[e.detail.selectedIndex];
+        this._pageSize = this.rowsPerPageOptions[e.detail.selectedIndex];
         this.requestUpdate('pageSize', oldValue);
     }
 
     _format(value, params) {
-        if (params) {
-            for (var i = 0; i < params.length; i++) {
-                value = value.replace(new RegExp("\\{" + i + "\\}", "gi"), params[i]);
-            }
+        for (var i = 0; i < params.length; i++) {
+            value = value.replace(new RegExp("\\{" + i + "\\}", "gi"), params[i]);
         }
 
         return value;
