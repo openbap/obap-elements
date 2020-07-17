@@ -23,7 +23,6 @@ export class ObapSlider extends ObapElement {
 
                 display: block;
                 height: 40px;
-                /*outline: 1px dotted lightgrey;*/
                 user-select: false;
                 color: var(--obap-slider-color);
                 background: var(--obap-slider-background-color);
@@ -93,7 +92,6 @@ export class ObapSlider extends ObapElement {
                 position: absolute;
                 left: 6px;
                 top: -6px;
-                padding: 2px 8px;
                 color: white;
                 border-radius: 3px;
                 background: var(--obap-slider-thumb-color);
@@ -115,6 +113,10 @@ export class ObapSlider extends ObapElement {
                 margin-bottom: -4px;
             }
 
+            .balloon-content {
+                padding: 2px 4px;
+            }
+
             .thumb[dragging] > .balloon, .thumb:focus > .balloon {
                 display: block;
                 left: 10px;
@@ -126,11 +128,11 @@ export class ObapSlider extends ObapElement {
                 height: 4px;
                 top: -1px;
                 transform: translate(-50%, 0);
-                background: var(--obap-slider-active-track-color);
+                background: var(--obap-slider-inactive-track-color);
             }
 
             .stop[active] {
-                background: var(--obap-slider-inactive-track-color);
+                background: var(--obap-slider-active-track-color);
             }
 
             .stop-label {
@@ -239,19 +241,83 @@ export class ObapSlider extends ObapElement {
             discrete: {
                 type: Boolean,
                 attribute: 'discrete'
+            },
+
+            floatingLabelDecimalPoints: {
+                type: Number,
+                attribute: 'floating-label-decimal-points'
+            },
+
+            labelFormat: {
+                type: String,
+                attribute: 'label-format'
             }
+        }
+    }
+
+    get value() {
+        return this._value;
+    }
+
+    set value(value) {
+        const oldValue = this.value;
+
+        if (value !== oldValue) {
+            this._value = Number(value);
+            requestAnimationFrame(() => this.requestUpdate('value', oldValue));
+        }
+    }
+
+    get startValue() {
+        return this._startValue;
+    }
+
+    set startValue(value) {
+        const oldValue = this.startValue;
+
+        if (value !== oldValue) {
+            this._startValue = Number(value);
+            requestAnimationFrame(() => this.requestUpdate('startValue', oldValue));
+        }
+    }
+
+    get endValue() {
+        return this._endValue;
+    }
+
+    set endValue(value) {
+        const oldValue = this.endValue;
+
+        if (value !== oldValue) {
+            this._endValue = Number(value);
+            requestAnimationFrame(() => this.requestUpdate('endValue', oldValue));
+        }
+    }
+
+    get stops() {
+        return this._stops;
+    }
+
+    set stops(value) {
+        const oldValue = this.stops;
+
+        if (value !== oldValue) {
+            this._stops = value;
+            this._stopValues = this._stops.map((stop) => stop.value);
+            this.requestUpdate('stops', oldValue);
         }
     }
 
     constructor() {
         super();
-        //this.tabIndex = 0;
-        this.value = 0;
-        this.startValue = 0;
-        this.endValue = 0;
+
+        this._value = 0;
+        this._startValue = 0;
+        this._endValue = 0;
         this.minValue = 0;
         this.maxValue = 100;
-        this.stops = [];
+        this._stops = [];
+        this._stopValues = [];
         this.startIcon = '';
         this.endIcon = '';
         this.valueIcon = '';
@@ -263,6 +329,8 @@ export class ObapSlider extends ObapElement {
         this.showStopLabels = false;
         this.range = false;
         this.discrete = false;
+        this.floatingLabelDecimalPoints = 0;
+        this.labelFormat = '';
 
         this._boundHandleMouseDownEvent = this._handleMouseDownEvent.bind(this);
         this._boundHandleMouseMoveEvent = this._handleMouseMoveEvent.bind(this);
@@ -330,13 +398,13 @@ export class ObapSlider extends ObapElement {
 
             if (this.range) {
                 return this.stops.map((stop) => html`
-                    <div class="stop" ?active="${(stop > this.startValue) && (stop < this.endValue)}" style="left: ${stop * scale}%;"></div>
-                    ${this.showStopLabels ? html`<div class="stop-label typography-caption" style="left: ${stop * scale}%;">${stop}</div>` : null}
+                    <div class="stop" ?active="${(stop.value > this.startValue) && (stop.value < this.endValue)}" style="left: ${stop.value * scale}%;"></div>
+                    ${this.showStopLabels ? html`<div class="stop-label typography-caption" style="left: ${stop.value * scale}%;">${stop.label ? stop.label : this._formatValue(stop.value)}</div>` : null}
                 `);
             } else {
                 return this.stops.map((stop) => html`
-                    <div class="stop" ?active="${stop < this.value}" style="left: ${stop * scale}%;"></div>
-                    ${this.showStopLabels ? html`<div class="stop-label typography-caption" style="left: ${stop * scale}%;">${stop}</div>` : null}
+                    <div class="stop" ?active="${stop.value < this.value}" style="left: ${stop.value * scale}%;"></div>
+                    ${this.showStopLabels ? html`<div class="stop-label typography-caption" style="left: ${stop.value * scale}%;">${stop.label ? stop.label : this._formatValue(stop.value)}</div>` : null}
                 `);
             }
         }
@@ -367,17 +435,23 @@ export class ObapSlider extends ObapElement {
         if (this.range) {
             return html`
                 <div id="thumb-start" thumb tabindex="0" class="thumb" style="left: ${this.startValue * scale}%;">
-                    ${this.showFloatingLabel ? html`<div class="balloon">${this.startValue}</div>` : null}  
+                    ${this.showFloatingLabel ? html`
+                        <div class="balloon"><slot name="start-value"><div class="balloon-content">${this._formatValue(this.startValue.toFixed(this.floatingLabelDecimalPoints))}</div></slot></div>
+                    ` : null}  
                 </div>
                 
                 <div id="thumb-end" thumb tabindex="0" class="thumb" style="left: ${this.endValue * scale}%;">
-                    ${this.showFloatingLabel ? html`<div class="balloon">${this.endValue}</div>` : null}
+                    ${this.showFloatingLabel ? html`
+                        <div class="balloon"><slot name="end-value"><div class="balloon-content">${this._formatValue(this.endValue.toFixed(this.floatingLabelDecimalPoints))}</div></slot></div>
+                    ` : null}
                 </div>
             `;
         } else {
             return html`
                 <div id="thumb" thumb tabindex="0" class="thumb" style="left: ${this.value * scale}%;">
-                    ${this.showFloatingLabel ? html`<div class="balloon">${this.value}</div>` : null}
+                    ${this.showFloatingLabel ? html`
+                        <div class="balloon"><slot name="value"><div class="balloon-content">${this._formatValue(this.value.toFixed(this.floatingLabelDecimalPoints))}</div></slot></div>
+                    ` : null}
                 </div>
             `;
         }
@@ -391,7 +465,7 @@ export class ObapSlider extends ObapElement {
             return html`
                 <div class="end typography-caption">
                     ${showIcon ? html`<obap-icon class="end-icon" icon="${icon}"></obap-icon>` : null}
-                    ${showlabel ? html`<div class="end-label">${label}</div>` : null}
+                    ${showlabel ? html`<div class="end-label">${this._formatValue(label)}</div>` : null}
                 </div>
             `;
         }
@@ -547,7 +621,6 @@ export class ObapSlider extends ObapElement {
             if (this._dragTarget) {
                 const newValue = (e.type === 'touchend') ? this._mouseToValue(e.changedTouches[0].clientX) : this._mouseToValue(e.clientX);
                 this._move(newValue);
-
                 this._dragTarget.removeAttribute('dragging');
                 this._dragTarget.blur();
                 this._dragTarget = null;
@@ -558,7 +631,6 @@ export class ObapSlider extends ObapElement {
             if (this._dragTargetStart && this._dragTargetEnd) {
                 const newValue = (e.type === 'touchend') ? this._mouseToValue(e.changedTouches[0].clientX) : this._mouseToValue(e.clientX);
                 this._moveRange(newValue);
-
                 this._dragTargetStart.removeAttribute('dragging');
                 this._dragTargetEnd.removeAttribute('dragging');
                 this._dragTargetStart.blur();
@@ -614,7 +686,7 @@ export class ObapSlider extends ObapElement {
         const rangeRatio = actualRange / displayRange;
         const elementX = mouseX - rect.x;
 
-        return this._clampValue(Math.round(rangeRatio * elementX));
+        return this._clampValue(rangeRatio * elementX);
     }
 
     _snapValues() {
@@ -637,32 +709,36 @@ export class ObapSlider extends ObapElement {
             result = this.maxValue;
         }
 
-        if ((this.discrete) && (result !== this.minValue) && (result !== this.maxValue) && (this.stops) && (this.stops.length > 0)) {
+        if ((this.discrete) && (result !== this.minValue) && (result !== this.maxValue) && (this._stopValues) && (this._stopValues.length > 0)) {
 
             if (skip) {
                 if (skip === 'backward') {
-                    for (let i = this.stops.length - 1; i >= 0; i--) {
-                        if (this.stops[i] < result) {
-                            result = this.stops[i];
+                    for (let i = this._stopValues.length - 1; i >= 0; i--) {
+                        if (this._stopValues[i] < result) {
+                            result = this._stopValues[i];
                             break;
                         }
                     }
                 } else {
-                    for (let i = 0; i < this.stops.length; i++) {
-                        if (this.stops[i] > result) {
-                            result = this.stops[i];
+                    for (let i = 0; i < this._stopValues.length; i++) {
+                        if (this._stopValues[i] > result) {
+                            result = this._stopValues[i];
                             break;
                         }
                     }
                 }
             } else {
-                result = this.stops.reduce((previous, current) => {
+                result = this._stopValues.reduce((previous, current) => {
                     return (Math.abs(current - result) < Math.abs(previous - result) ? current : previous);
                 });
             }
         }
 
         return result;
+    }
+
+    _formatValue(value) {
+        return this.labelFormat ? this.labelFormat.replace('{}', value) : value;
     }
 }
 

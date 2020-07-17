@@ -48,7 +48,24 @@ export class SliderDemo extends ObapElement {
 
     constructor() {
         super();
-        this.stops = [0, 25, 50, 75, 100];
+
+        this._normalStops = [
+            {value: 0}, 
+            {value: 25}, 
+            {value: 50}, 
+            {value: 75}, 
+            {value: 100}
+        ];
+
+        this._customStops = [
+            {value: 0, label: 'min'}, 
+            {value: 25, label: 'small'}, 
+            {value: 50, label: 'medium'}, 
+            {value: 75, label: 'large'}, 
+            {value: 100, label: 'max'}
+        ];
+
+        this.stops = this._normalStops;
     }
     
     render() {
