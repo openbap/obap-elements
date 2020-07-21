@@ -80,7 +80,7 @@ export class DemoSparklineLine extends ObapElement {
         return html`
             <div class="container">
                 <demo-panel class="center">
-                    <div class="check-group" @obap-item-selected-change="${this._checkChanged}">
+                    <div class="check-group" @obap-item-selected="${this._checkChanged}">
                         <obap-check name="line" label="Line" selected></obap-check>
                         <obap-check name="marker" label="Marker" selected></obap-check>
                         <obap-check name="area" label="Area" selected></obap-check>

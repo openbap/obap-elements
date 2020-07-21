@@ -52,3 +52,6 @@ import '../demo-elements/tooltips-callouts/demo-conversation.js';
 
 // Slider
 import '../demo-elements/slider/demo-slider.js';
+
+// Treeview
+import '../demo-elements/treeview/demo-treeview.js';

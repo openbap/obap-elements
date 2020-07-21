@@ -43,7 +43,8 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |X   |M         |obap-side-stepper      |A Material Design Stepper (wizard) where the step labels are on the left.                       |
 |X   |M         |obap-compact-stepper   |A compact Material Design Stepper (wizard) where the only the active label is displayed.        |
 |    |H         |obap-vertical-stepper  |A vertical Material Design Stepper (wizard). Step labels are inline.                            |
-|-   |H         |obap-slider            |Sliders allow users to make selections from a range of values.                                  |
+|X   |H         |obap-slider            |Sliders allow users to make selections from a range of values.                                  |
+|X   |H         |obap-treeview          |A Material Design heirarchical treeview.                                                        |
 |    |M         |obap-snackbar          |A popup toast notification element.                                                             |
 |    |M         |obap-time-picker       |A Material Design time picker (not the mobile type).                                            |
 |    |H         |obap-date-picker       |A Material Design date picker (not the mobile type).                                            |
@@ -59,9 +60,8 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |M         |obap-carousel          |A content carousel that supports overlays.                                                      |
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                               |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                         |
-|    |H         |obap-treeview          |A Material Design heirarchical treeview.                                                        |
 
-Count: 37/54
+Count: 38/54
 
 ### MENU ELEMENTS
 

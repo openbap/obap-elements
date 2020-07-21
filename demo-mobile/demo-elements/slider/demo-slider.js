@@ -171,20 +171,20 @@ export class DemoSlider extends ObapElement {
             <div class="container">
                 <demo-panel>
                     <div class="options">
-                        <obap-check name="range" label="Range" @obap-item-selected-change="${this._optionChange}"></obap-check>
-                        <obap-check name="discrete" label="Discrete" @obap-item-selected-change="${this._optionChange}"></obap-check>
-                        <obap-check name="decimal" label="Decimal" @obap-item-selected-change="${this._optionChange}"></obap-check>
-                        <obap-check name="stop-labels" label="Stop Labels" @obap-item-selected-change="${this._optionChange}"></obap-check>
-                        <obap-check name="floating-label" label="Floating Label" @obap-item-selected-change="${this._optionChange}"></obap-check>
+                        <obap-check name="range" label="Range" @obap-item-selected="${this._optionChange}"></obap-check>
+                        <obap-check name="discrete" label="Discrete" @obap-item-selected="${this._optionChange}"></obap-check>
+                        <obap-check name="decimal" label="Decimal" @obap-item-selected="${this._optionChange}"></obap-check>
+                        <obap-check name="stop-labels" label="Stop Labels" @obap-item-selected="${this._optionChange}"></obap-check>
+                        <obap-check name="floating-label" label="Floating Label" @obap-item-selected="${this._optionChange}"></obap-check>
 
-                        <obap-check name="start-label" label="Start Label" @obap-item-selected-change="${this._optionChange}"></obap-check>
-                        <obap-check name="end-label" label="End Label" @obap-item-selected-change="${this._optionChange}"></obap-check>
-                        <obap-check name="start-icon" label="Start Icon" @obap-item-selected-change="${this._optionChange}"></obap-check>
-                        <obap-check name="end-icon" label="End Icon" @obap-item-selected-change="${this._optionChange}"></obap-check>
+                        <obap-check name="start-label" label="Start Label" @obap-item-selected="${this._optionChange}"></obap-check>
+                        <obap-check name="end-label" label="End Label" @obap-item-selected="${this._optionChange}"></obap-check>
+                        <obap-check name="start-icon" label="Start Icon" @obap-item-selected="${this._optionChange}"></obap-check>
+                        <obap-check name="end-icon" label="End Icon" @obap-item-selected="${this._optionChange}"></obap-check>
 
-                        <obap-check name="custom-stops" label="Custom Stops" @obap-item-selected-change="${this._optionChange}"></obap-check>
-                        <obap-check name="label-format" label="Label Format" @obap-item-selected-change="${this._optionChange}"></obap-check>
-                        <obap-check name="custom-balloons" label="Balloons" @obap-item-selected-change="${this._optionChange}"></obap-check>
+                        <obap-check name="custom-stops" label="Custom Stops" @obap-item-selected="${this._optionChange}"></obap-check>
+                        <obap-check name="label-format" label="Label Format" @obap-item-selected="${this._optionChange}"></obap-check>
+                        <obap-check name="custom-balloons" label="Balloons" @obap-item-selected="${this._optionChange}"></obap-check>
                     </div>
                 </demo-panel>
 

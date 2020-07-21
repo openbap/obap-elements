@@ -46,3 +46,4 @@ import './data-list-demo.js';
 import './select-demo.js';
 import './data-pager-demo.js';
 import './slider-demo.js';
+import './treeview-demo.js';

@@ -20,6 +20,8 @@ export class ObapSlider extends ObapElement {
                 --obap-slider-thumb-color: var(--obap-primary-color, #5c6bc0);
                 --obap-slider-icon-color: var(--obap-text-icon-color, rgba(0, 0, 0, 0.38));
                 --obap-slider-icon-size: 16px;
+                --obap-slider-callout-color: #FFFFFF;
+                --obap-slider-callout-background-color: rgba(97, 97, 97, 0.85);
 
                 display: block;
                 height: 40px;
@@ -53,13 +55,13 @@ export class ObapSlider extends ObapElement {
             .inactive-track {
                 position: relative;
                 flex: 1;
-                height: 2px;
+                height: 3px;
                 background: var(--obap-slider-inactive-track-color);
             }
 
             .active-track {
                 position: absolute;
-                height: 2px;
+                height: 3px;
                 background: var(--obap-slider-active-track-color);
                 left: 0;
                 top: 0;
@@ -94,7 +96,8 @@ export class ObapSlider extends ObapElement {
                 top: -6px;
                 color: white;
                 border-radius: 3px;
-                background: var(--obap-slider-thumb-color);
+                color: var(--obap-slider-callout-color);
+                background: var(--obap-slider-callout-background-color);
                 transform: translate(-50%, -100%);
                 font-size: 11px;
             }
@@ -107,7 +110,7 @@ export class ObapSlider extends ObapElement {
                 width: 0;
                 height: 0;
                 border: 4px solid transparent;
-                border-top-color: var(--obap-slider-thumb-color);
+                border-top-color: var(--obap-slider-callout-background-color);
                 border-bottom: 0;
                 margin-left: -4px;
                 margin-bottom: -4px;
@@ -122,18 +125,7 @@ export class ObapSlider extends ObapElement {
                 left: 10px;
             }
 
-            .stop {
-                position: absolute;
-                width: 2px;
-                height: 4px;
-                top: -1px;
-                transform: translate(-50%, 0);
-                background: var(--obap-slider-inactive-track-color);
-            }
-
-            .stop[active] {
-                background: var(--obap-slider-active-track-color);
-            }
+           
 
             .stop-label {
                 position: absolute;
@@ -153,6 +145,19 @@ export class ObapSlider extends ObapElement {
                 --obap-icon-fill-color: var(--obap-slider-icon-color);
                 width: var(--obap-slider-icon-size);
                 height: var(--obap-slider-icon-size);
+            }
+
+            .stop {
+                position: absolute;
+                width: 1px;
+                height: 7px;
+                top: -2px;
+                transform: translate(-50%, 0);
+                background: var(--obap-slider-inactive-track-color);
+            }
+
+            .stop[active] {
+                background: var(--obap-slider-active-track-color);
             }
         `];
     }
@@ -308,6 +313,24 @@ export class ObapSlider extends ObapElement {
         }
     }
 
+    get discrete() {
+        return this._discrete;
+    }
+
+    set discrete(value) {
+        const oldValue = this.discrete;
+
+        if (value !== oldValue) {
+            this._discrete = value;
+
+            if (value) {
+                this._snapValues();
+            }
+
+            this.requestUpdate('discrete', oldValue);
+        }
+    }
+
     constructor() {
         super();
 
@@ -328,9 +351,13 @@ export class ObapSlider extends ObapElement {
         this.showFloatingLabel = false;
         this.showStopLabels = false;
         this.range = false;
-        this.discrete = false;
+        this._discrete = false;
         this.floatingLabelDecimalPoints = 0;
         this.labelFormat = '';
+
+        this._dragging = false;
+        this._rangeDragging = false;
+        this._rangeDragPreviousValue = 0;
 
         this._boundHandleMouseDownEvent = this._handleMouseDownEvent.bind(this);
         this._boundHandleMouseMoveEvent = this._handleMouseMoveEvent.bind(this);
@@ -362,10 +389,6 @@ export class ObapSlider extends ObapElement {
         super.updated(changedProperties);
 
         changedProperties.forEach((oldValue, propName) => {
-            if (propName === 'discrete' && this.discrete) {
-                this._snapValues();
-            }
-
             if ((propName === 'value') || (propName === 'startValue') || (propName === 'endValue')) {
                 this.fireMessage('obap-slider-change', {
                     value: this.value,
@@ -573,7 +596,6 @@ export class ObapSlider extends ObapElement {
             this.addEventListener('mousemove', this._boundHandleMouseMoveEvent);
             this.addEventListener('touchmove', this._boundHandleMouseMoveEvent);
         } else {
-
             if (this.range) {
                 const val = (e.type === 'touchstart') ? this._mouseToValue(e.changedTouches[0].clientX) : this._mouseToValue(e.clientX);
 
@@ -690,13 +712,11 @@ export class ObapSlider extends ObapElement {
     }
 
     _snapValues() {
-        if (this.discrete) {
-            if (this.range) {
-                this.startValue = this._clampValue(this.startValue);
-                this.endValue = this._clampValue(this.endValue);
-            } else {
-                this.value = this._clampValue(this.value);
-            }
+        if (this.range) {
+            this.startValue = this._clampValue(this.startValue);
+            this.endValue = this._clampValue(this.endValue);
+        } else {
+            this.value = this._clampValue(this.value);
         }
     }
 
@@ -710,7 +730,6 @@ export class ObapSlider extends ObapElement {
         }
 
         if ((this.discrete) && (result !== this.minValue) && (result !== this.maxValue) && (this._stopValues) && (this._stopValues.length > 0)) {
-
             if (skip) {
                 if (skip === 'backward') {
                     for (let i = this._stopValues.length - 1; i >= 0; i--) {

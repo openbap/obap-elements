@@ -79,10 +79,19 @@ export class ObapCheck extends ObapInputElement {
                 user-select: none;
                 height: 12px;
                 width: 12px;
-                margin-right: 8px;
                 border-radius: 2px;
                 background: transparent;
                 border: 2px solid var(--obap-check-unselected-color);
+            }
+
+            /*
+            .check-container[no-label] {
+                margin-right: 0;
+            }
+            */
+
+            .label {
+                margin-left: 8px;
             }
 
             .check {
@@ -131,7 +140,7 @@ export class ObapCheck extends ObapInputElement {
         if (oldValue !== value) {
             this._selected = value;
             this.requestUpdate('selected', oldValue);
-            this.fireMessage('obap-item-selected-change', {
+            this.fireMessage('obap-item-selected', {
                 selected: this._selected,
                 name: this.name
             });
@@ -153,7 +162,7 @@ export class ObapCheck extends ObapInputElement {
                     <div class="check">${this._getCheck()}</div>
                     ${this.noInk ? null : html`<obap-ripple extend="2" ?has-focus="${this.hasFocus}"></obap-ripple>`}
                 </div>
-                ${this.label}
+                ${this.label ? html`<div class="label">${this.label}</div>` : null}
             </div>
         `;
     }
@@ -177,6 +186,8 @@ export class ObapCheck extends ObapInputElement {
         }
 
         this.hasFocus = false;
+        e.preventDefault();
+        e.stopPropagation();
     }
 }
 

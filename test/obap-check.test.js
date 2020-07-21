@@ -90,7 +90,7 @@ describe('obap-check', () => {
             <obap-check label="label"></obap-check>
         `);
 
-        el._clickHandler();
+        el._clickHandler(new Event('click'));
         expect(el.selected).to.equal(true);
     });
 
@@ -99,10 +99,10 @@ describe('obap-check', () => {
             <obap-check label="label"></obap-check>
         `);
 
-        el._clickHandler();
+        el._clickHandler(new Event('click'));
         expect(el.selected).to.equal(true);
 
-        el._clickHandler();
+        el._clickHandler(new Event('click'));
         expect(el.selected).to.equal(false);
     });
 
@@ -112,7 +112,7 @@ describe('obap-check', () => {
         `);
 
         expect(el.indeterminate).to.equal(true);
-        el._clickHandler();
+        el._clickHandler(new Event('click'));
         expect(el.selected).to.equal(true);
         expect(el.indeterminate).to.equal(false);
     });

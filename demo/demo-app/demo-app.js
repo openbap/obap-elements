@@ -80,7 +80,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
         super();
         themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
-        this.selectedPage = 31;
+        this.selectedPage = 0;
     }
 
     render() {
@@ -129,6 +129,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-tabs</div>
                         <div class="item">obap-tooltip</div>
                         <div class="item">obap-top-app-bar</div>
+                        <div class="item">obap-treeview</div>
                         <div class="separator" no-select>Application</div>
                         <div class="item">obap-application</div>
                         <div class="item">obap-local-storage</div>
@@ -178,6 +179,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <tabs-demo></tabs-demo>
                         <tooltip-demo></tooltip-demo>
                         <top-app-bar-demo></top-app-bar-demo>
+                        <treeview-demo></treeview-demo>
                         <!-- APPLICATION -->
                         <application-demo></application-demo>
                         <local-storage-demo></local-storage-demo>

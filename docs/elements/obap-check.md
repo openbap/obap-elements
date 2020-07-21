@@ -38,4 +38,4 @@ import '@obap/obap-elements/obap-check/obap-check.js';
 
 | Event                       |
 |-----------------------------|
-| `obap-item-selected-change` |
+| `obap-item-selected` |

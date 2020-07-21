@@ -120,6 +120,10 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
                     <obap-application-content name="tooltips-callouts-callouts" label="Callouts"><demo-callouts class="demo"></demo-callouts></obap-application-content>
                     <obap-application-content name="tooltips-callouts-conversation" label="Conversation"><demo-conversation class="demo"></demo-conversation></obap-application-content>
                 </obap-application-view>
+
+                <obap-application-view name="treeview" label="Treeview" icon="app:treeview" hide-sub-view-scroll-buttons>
+                    <obap-application-content><demo-treeview class="demo"></demo-treeview></obap-application-content>
+                </obap-application-view>
             </obap-mobile-application>
         `;
     }

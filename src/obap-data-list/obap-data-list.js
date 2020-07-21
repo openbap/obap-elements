@@ -69,6 +69,10 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
                 height: 14px;
             }
 
+            obap-check {
+                margin-right: 8px;
+            }
+
             obap-data-table-layout {
                 --obap-data-table-layout-header-action-left-border-width: 0 1px 1px 0;
                 --obap-data-table-layout-header-scroll-border-width: 0 0 1px 0;
@@ -238,7 +242,7 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
 
     render() {
         return html`
-            <obap-data-table-layout class="typography-body" @obap-item-selected-change="${this._rowCheck}" @obap-data-table-layout-size-changed="${() => requestAnimationFrame(() => this._resizeHeaderCells())}">
+            <obap-data-table-layout class="typography-body" @obap-item-selected="${this._rowCheck}" @obap-data-table-layout-size-changed="${() => requestAnimationFrame(() => this._resizeHeaderCells())}">
                 <!-- Left Actions -->
                 ${(this.selectionMode === 'single') ?
                 html`
