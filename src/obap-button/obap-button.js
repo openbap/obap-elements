@@ -206,24 +206,12 @@ export class ObapButton extends ObapInputElement {
         this._boundHandleMouseDownEvent = this._handleMouseDownEvent.bind(this);
         this._boundHandleTouchStartEvent = this._handleTouchStartEvent.bind(this);
         this._boundHandleTouchEndEvent = this._handleTouchEndEvent.bind(this);
-    }
 
-    connectedCallback() {
-        super.connectedCallback();
         this.addEventListener('mousedown', this._boundHandleMouseDownEvent);
         this.addEventListener('mouseup', this._boundHandleMouseUpEvent);
 
         this.addEventListener('touchstart', this._boundHandleTouchStartEvent);
         this.addEventListener('touchend', this._boundHandleTouchEndEvent);
-    }
-
-    disconnectedCallback() {
-        this.removeEventListener('mousedown', this._boundHandleMouseDownEvent);
-        this.removeEventListener('mouseup', this._boundHandleMouseUpEvent);
-
-        this.removeEventListener('touchstart', this._boundHandleTouchStartEvent);
-        this.removeEventListener('touchend', this._boundHandleTouchEndEvent);
-        super.disconnectedCallback();
     }
 
     updated(changedProperties) {

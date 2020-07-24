@@ -114,7 +114,7 @@ const overline = css`
 const code = css`
   .typography-code {
     font-family: 'Roboto Mono', monospace;
-    font-size: 0.875rem;
+    font-size: .8125rem;
     line-height: 1.25rem;
     letter-spacing: normal;
     font-weight: 400;

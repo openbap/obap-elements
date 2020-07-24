@@ -145,19 +145,20 @@ Count: 4/10
 
 These are elements to make creating documented demos easily, kind of like the Polymer demo helper elements.
 
-|Done|Complexity|Name                |Notes                                                                                   |
-|:--:|:--------:|--------------------|----------------------------------------------------------------------------------------|
-|X   |H         |obap-markdown-viewer|A markdown viewer, based on Marked.                                                     |
-|-   |H         |obap-demo-snippet   |A helper element that displays the source of a code snippet and its rendered demo.      |
-|    |H         |obap-property-viewer|A helper element that displays a custom elements properties, etc.                       |
-|    |H         |obap-property-editor|A helper element that displays and allowes editing of a custom elements properties, etc.|
+|Done|Complexity|Name                         |Notes                                                                                                                  |
+|:--:|:--------:|-----------------------------|-----------------------------------------------------------------------------------------------------------------------|
+|X   |M         |obap-markdown-viewer         |A markdown viewer, based on Marked.                                                                                    |
+|X   |M         |obap-demo-snippet            |A helper element that displays the source of a code snippet and its rendered demo.                                     |
+|    |H         |obap-property-viewer         |A helper element that displays a custom elements properties, etc.                                                      |
+|    |H         |obap-property-editor         |A helper element that displays and allowes editing of a custom elements properties, etc.                               |
+|    |H         |obap-interactive-demo-snippet|A helper element that displays the source of a code snippet and its rendered demo, and allows properties to be changed.|
 
 **Dependencies**
 
 * [Marked Library](https://marked.js.org/#/README.md)
 * custom-elements.json
 
-Count: 1/4
+Count: 2/5
 
 ### NICE TO HAVE
 

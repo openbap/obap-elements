@@ -55,3 +55,6 @@ import '../demo-elements/slider/demo-slider.js';
 
 // Treeview
 import '../demo-elements/treeview/demo-treeview.js';
+
+// Demo Snippet
+import '../demo-elements/demo/demo-snippet.js';

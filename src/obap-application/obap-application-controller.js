@@ -61,16 +61,8 @@ export const ObapApplicationController = (superClass) =>
             this._selectedViewIndex = null;
             this._previousViewIndex = null;
             this._navigatorCounts = {};
-        }
 
-        connectedCallback() {
-            super.connectedCallback();
             this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
-        }
-
-        disconnectedCallback() {
-            this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
-            super.disconnectedCallback();
         }
 
         updated(changedProperties) {

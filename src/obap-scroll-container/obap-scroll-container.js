@@ -157,6 +157,7 @@ export class ObapScrollContainer extends ObapElement {
         this._children = [];
 
         this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
+        this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
 
         this._resizeObserver = new ResizeObserver(entries => {
             this._setScrollInfo();
@@ -166,15 +167,11 @@ export class ObapScrollContainer extends ObapElement {
 
     connectedCallback() {
         super.connectedCallback();
-
         this._resizeObserver.observe(this);
-        this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
     }
 
     disconnectedCallback() {
         this._resizeObserver.unobserve(this);
-        this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
-
         super.disconnectedCallback();
     }
 

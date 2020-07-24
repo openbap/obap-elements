@@ -363,26 +363,12 @@ export class ObapSlider extends ObapElement {
         this._boundHandleMouseMoveEvent = this._handleMouseMoveEvent.bind(this);
         this._boundHandleMouseUpEvent = this._handleMouseUpEvent.bind(this);
         this._boundHandleKeyDownEvent = this._handleKeyDownEvent.bind(this);
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
         this.addEventListener('mousedown', this._boundHandleMouseDownEvent);
         this.addEventListener('mouseup', this._boundHandleMouseUpEvent);
         this.addEventListener('mouseleave', this._boundHandleMouseUpEvent);
         this.addEventListener('touchstart', this._boundHandleMouseDownEvent);
         this.addEventListener('touchend', this._boundHandleMouseUpEvent);
         this.addEventListener('keydown', this._boundHandleKeyDownEvent);
-    }
-
-    disconnectedCallback() {
-        this.removeEventListener('mousedown', this._boundHandleMouseDownEvent);
-        this.removeEventListener('mouseup', this._boundHandleMouseUpEvent);
-        this.removeEventListener('mouseleave', this._boundHandleMouseUpEvent);
-        this.removeEventListener('touchstart', this._boundHandleMouseDownEvent);
-        this.removeEventListener('touchend', this._boundHandleMouseUpEvent);
-        this.removeEventListener('keydown', this._boundHandleKeyDownEvent);
-        super.disconnectedCallback();
     }
 
     updated(changedProperties) {

@@ -114,18 +114,8 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
         this.elevation = 0;
         this._boundHandleMouseEnterEvent = this._handleMouseEnterEvent.bind(this);
         this._boundHandleMouseLeaveEvent = this._handleMouseLeaveEvent.bind(this);
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
         this.addEventListener('mouseenter', this._boundHandleMouseEnterEvent);
         this.addEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
-    }
-
-    disconnectedCallback() {
-        this.removeEventListener('mouseenter', this._boundHandleMouseEnterEvent);
-        this.removeEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
-        super.disconnectedCallback();
     }
 
     updated(changedProperties) {

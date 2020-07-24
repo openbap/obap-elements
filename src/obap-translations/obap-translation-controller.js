@@ -22,16 +22,7 @@ const ObapTranslationController = (superClass) =>
         constructor() {
             super();
             this._boundHandleTranslationsChangedEvent = this._handleTranslationsChangedEvent.bind(this);
-        }
-
-        connectedCallback() {
-            super.connectedCallback();
             this.addEventListener('obap-translations-changed', this._boundHandleTranslationsChangedEvent);
-        }
-
-        disconnectedCallback() {
-            this.removeEventListener('obap-translations-changed', this._boundHandleTranslationsChangedEvent);
-            super.disconnectedCallback();
         }
 
         _handleTranslationsChangedEvent(e) {

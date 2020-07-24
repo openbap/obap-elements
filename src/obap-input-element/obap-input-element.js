@@ -26,6 +26,8 @@ class ObapInputElement extends ObapElement {
         this.tabIndex = 0;
         this._boundHandleFocusEvent = this._handleFocusEvent.bind(this);
         this._boundHandleBlurEvent = this._handleBlurEvent.bind(this);
+        this.addEventListener('focus', this._boundHandleFocusEvent);
+        this.addEventListener('blur', this._boundHandleBlurEvent);
     }
 
     updated(changedProperties) {
@@ -36,18 +38,6 @@ class ObapInputElement extends ObapElement {
                 this.disabled ?  this.tabIndex = -1 :  this.tabIndex = 0;
             }
         });
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
-        this.addEventListener('focus', this._boundHandleFocusEvent);
-        this.addEventListener('blur', this._boundHandleBlurEvent);
-    }
-
-    disconnectedCallback() {
-        this.removeEventListener('focus', this._boundHandleFocusEvent);
-        this.removeEventListener('blur', this._boundHandleBlurEvent);
-        super.disconnectedCallback();
     }
 
     _handleFocusEvent(e) {

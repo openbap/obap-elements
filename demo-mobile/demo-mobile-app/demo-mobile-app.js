@@ -103,6 +103,10 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
                     <obap-application-content><demo-slider class="demo"></demo-slider></obap-application-content>
                 </obap-application-view>
 
+                <obap-application-view name="snippets" label="Snippets" icon="app:snippets" hide-sub-view-scroll-buttons>
+                    <obap-application-content><demo-snippet class="demo"></demo-snippet></obap-application-content>
+                </obap-application-view>
+
                 <obap-application-view name="charts-sparkline" label="Sparkline Charts" icon="app:charts" hide-sub-view-scroll-buttons>
                     <obap-application-content name="line" label="Line"><demo-sparkline-line class="demo"></demo-sparkline-line></obap-application-content>
                     <obap-application-content name="bar" label="Bar"><demo-sparkline-bar class="demo"></demo-sparkline-bar></obap-application-content>

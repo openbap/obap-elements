@@ -82,6 +82,19 @@ export class ObapMarkdownViewer extends ObapElement {
         }
     }
 
+    get markdown() {
+        return this._markdown;
+    }
+
+    set markdown(value) {
+        const oldValue = this.markdown;
+
+        if (oldValue !== value) {
+            this._markdown = this.unindent(value);
+            this.requestUpdate('markdown', oldValue);
+        }
+    }
+
     get src() {
         return this._src;
     }
@@ -99,7 +112,7 @@ export class ObapMarkdownViewer extends ObapElement {
     constructor() {
         super();
         this._scriptTag = null;
-        this.markdown = '';
+        this._markdown = '';
         this.breaks = false;
         this.pedantic = false;
         this.sanitize = false;
@@ -107,16 +120,7 @@ export class ObapMarkdownViewer extends ObapElement {
         this.disableRemoteSanitization = false;
         this._src = '';
         this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
         this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
-    }
-
-    disconnectedCallback() {
-        this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
-        super.disconnectedCallback();
     }
 
     updated(changedProperties) {
@@ -130,6 +134,31 @@ export class ObapMarkdownViewer extends ObapElement {
                 }
             }
         });
+    }
+
+    unindent(text) {
+        if (!text) return text;
+
+        let lines = text.replace(/\t/g, '  ').split('\n');
+
+        let indent = lines.reduce(function (prev, line) {
+            if (/^\s*$/.test(line)) {
+                return prev;  // Completely ignore blank lines.
+            }
+
+            let lineIndent = line.match(/^(\s*)/)[0].length;
+            
+            if (prev === null) {
+                return lineIndent;
+            }
+
+            return lineIndent < prev ? lineIndent : prev;
+        }, null);
+
+        return lines
+            .map(function (l) {
+                return l.substr(indent);
+            }).join('\n');
     }
 
     render() {

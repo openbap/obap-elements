@@ -241,16 +241,7 @@ export class ObapSpinner extends ObapElement {
         this.nextValueLabel = 'Next value';
         this.previousValueLabel = 'Previous value';
         this._pages = null;
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
         this.addEventListener('keyup', this._boundHandleKeyPressEvent);
-    }
-
-    disconnectedCallback() {
-        this.removeEventListener('keyup', this._boundHandleKeyPressEvent);
-        super.disconnectedCallback();
     }
 
     firstUpdated(changedProperties) {

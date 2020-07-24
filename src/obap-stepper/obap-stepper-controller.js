@@ -85,18 +85,8 @@ export const ObapStepperController = (superClass) =>
             this.errorText = 'Error';
             this.summaryPosition = 'top';
             this.hasCustomIcons = false;
-        }
-
-        connectedCallback() {
-            super.connectedCallback();
             this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
             this.renderRoot.addEventListener('obap-stepper-step-state-change', this._boundStepperStepStateChangeEvent);
-        }
-
-        disconnectedCallback() {
-            this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
-            this.renderRoot.removeEventListener('obap-stepper-step-state-change', this._boundStepperStepStateChangeEvent);
-            super.disconnectedCallback();
         }
 
         updated(changedProperties) {

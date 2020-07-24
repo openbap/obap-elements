@@ -70,18 +70,8 @@ export class ObapSelectorContainer extends ObapElement {
         this._selectable = true;
         this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
         this._boundHandleItemSelectedEvent = this._handleItemSelectedEvent.bind(this);
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
         this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
         this.addEventListener('obap-item-selected', this._boundHandleItemSelectedEvent);
-    }
-
-    disconnectedCallback() {
-        this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
-        this.removeEventListener('obap-item-selected', this._boundHandleItemSelectedEvent);
-        super.disconnectedCallback();
     }
 
     updated(changedProperties) {

@@ -58,7 +58,7 @@ export class RadioDemo extends ObapElement {
             <div class="container">
                 <div class="title">Normal Radio Buttons</div>
                 <div class="row">
-                    <obap-radio-group selected-index="0">
+                    <obap-radio-group selected-index="0"> 
                         <obap-radio label="One"></obap-radio>
                         <obap-radio label="Two"></obap-radio>
                         <obap-radio label="Three"></obap-radio>

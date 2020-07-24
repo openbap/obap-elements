@@ -383,6 +383,7 @@ export class ObapDataTableLayout extends ObapElement {
         this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
         this._boundHScrollHandler = this._hScrollHandler.bind(this);
         this._boundVScrollHandler = this._vScrollHandler.bind(this);
+        this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
 
         this._resizeObserver = new ResizeObserver(entries => {
             requestAnimationFrame(() => this._positionScrollAreas());
@@ -394,12 +395,10 @@ export class ObapDataTableLayout extends ObapElement {
         super.connectedCallback();
         this._scrollbarWidth = this._getScrollbarWidth();
         this._scrollbarStyle = this._hasScrollbarStyle();
-        this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
         this._resizeObserver.observe(this);
     }
 
     disconnectedCallback() {
-        this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
         this._resizeObserver.unobserve(this);
         super.disconnectedCallback();
     }

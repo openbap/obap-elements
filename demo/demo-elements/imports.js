@@ -48,3 +48,4 @@ import './data-pager-demo.js';
 import './slider-demo.js';
 import './treeview-demo.js';
 import './markdown-viewer-demo.js';
+import './demo-snippet-demo.js';

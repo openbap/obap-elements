@@ -161,19 +161,18 @@ export class ObapSelectContainer extends ObapSelectController(ObapElement) {
         this.tabIndex = 0;
         this._boundHandleGlobalKeyPressEvent = this._handleGlobalKeyPressEvent.bind(this);
         this._boundCloseOnEvent = this._closeOnEvent.bind(this);
+        this.addEventListener('blur', this._boundCloseOnEvent);
     }
 
     connectedCallback() {
         super.connectedCallback();
         window.addEventListener('click', this._boundCloseOnEvent);
         window.addEventListener('keydown', this._boundHandleGlobalKeyPressEvent, false);
-        this.addEventListener('blur', this._boundCloseOnEvent);
     }
 
     disconnectedCallback() {
         window.removeEventListener('click', this._boundCloseOnEvent);
         window.removeEventListener('keydown', this._boundHandleGlobalKeyPressEvent);
-        this.removeEventListener('blur', this._boundCloseOnEvent);
         super.disconnectedCallback();
     }
 

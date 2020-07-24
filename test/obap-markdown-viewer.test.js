@@ -5,7 +5,7 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 import { html, fixture, expect, nextFrame, oneEvent } from '@open-wc/testing';
 import '../src/obap-markdown-viewer/obap-markdown-viewer.js';
 
-describe('obap-card', () => {
+describe('obap-markdown-viewer', () => {
     it('passes the a11y audit', async () => {
         const el = await fixture(html`
             <obap-markdown-viewer></obap-markdown-viewer>

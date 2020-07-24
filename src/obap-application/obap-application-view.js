@@ -171,16 +171,7 @@ export class ObapApplicationView extends ObapElement {
         this.associations = [];
         this.hasSideViews = false;
         this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
         this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
-    }
-
-    disconnectedCallback() {
-        this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
-        super.disconnectedCallback();
     }
 
     notifyViewActivate() {

@@ -29,16 +29,7 @@ export class TestElement extends LitElement {
         super();
         this.items = [];
         this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
         this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
-    }
-
-    disconnectedCallback() {
-        this.renderRoot.removeEventListener('slotchange', this._boundHandleSlotChangeEvent);
-        super.disconnectedCallback();
     }
 
     _handleSlotChangeEvent() {

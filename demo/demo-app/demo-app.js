@@ -109,6 +109,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-data-list</div>
                         <div class="item">obap-data-pager</div>
                         <div class="item">obap-data-table-layout</div>
+                        <div class="item">obap-demo-snippet</div>
                         <div class="item">obap-dialog</div>
                         <div class="item">obap-expandable-card</div>
                         <div class="item">obap-linear-progress</div>
@@ -160,6 +161,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <data-list-demo></data-list-demo>
                         <data-pager-demo></data-pager-demo>
                         <data-table-layout-demo></data-table-layout-demo>
+                        <demo-snippet-demo></demo-snippet-demo>
                         <dialog-demo></dialog-demo>
                         <expandable-card-demo></expandable-card-demo>
                         <linear-progress-demo></linear-progress-demo>
