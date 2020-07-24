@@ -112,6 +112,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-dialog</div>
                         <div class="item">obap-expandable-card</div>
                         <div class="item">obap-linear-progress</div>
+                        <div class="item">obap-markdown-viewer</div>
                         <div class="item">obap-material</div>
                         <div class="item">obap-navigation-rail</div>
                         <div class="item">obap-pill-navigator</div>
@@ -162,6 +163,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <dialog-demo></dialog-demo>
                         <expandable-card-demo></expandable-card-demo>
                         <linear-progress-demo></linear-progress-demo>
+                        <markdown-viewer-demo></markdown-viewer-demo>
                         <material-demo></material-demo>
                         <navigation-rail-demo></navigation-rail-demo>
                         <pill-navigator-demo></pill-navigator-demo>

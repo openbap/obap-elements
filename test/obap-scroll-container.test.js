@@ -15,49 +15,16 @@ describe('obap-scroll-container', () => {
         await expect(el).shadowDom.to.be.accessible();
     });
 
-    /*
-    it('calculates if there is overflow', async () => {
+    it('calculates if there no overflow', async () => {
         const el = await fixture(html`
-            <test-element style="width: 100px; height: 32px;">
-                <style>
-                    obap-scroll-container {
-                        width: 100px; 
-                        height: 32px;
-                    }
-
-                    .item {
-                        width: 64px; 
-                        height: 32px;
-                        min-width: 64px; 
-                        min-height: 32px;
-                    }
-                </style>
-                <obap-scroll-container>
-                    <div class="item"></div>
-                    <div class="item"></div>
-                    <div class="item"></div>
-                    <div class="item"></div>
-                    <div class="item"></div>
-                </obap-scroll-container>
-            </test-element>
-        `);
-
-        await nextFrame();
-        const sc = el.items[1];
-        expect(sc._hasOverflow).to.equal(false);
-    });
-    */
-    
-   it('calculates if there no overflow', async () => {
-    const el = await fixture(html`
         <obap-scroll-container style="width: 100px; height: 32px;">
             <div style="width: 64px; height: 32px; min-width: 64px; min-height: 32px;"></div>
         </obap-scroll-container>
     `);
 
-    await nextFrame();
-    expect(el._hasOverflow).to.equal(false);
-});
+        await nextFrame();
+        expect(el._hasOverflow).to.equal(false);
+    });
 
     it('calculates if there is overflow', async () => {
         const el = await fixture(html`
@@ -73,7 +40,7 @@ describe('obap-scroll-container', () => {
         await nextFrame();
         expect(el._hasOverflow).to.equal(true);
     });
-    
+
     it('returns the correct horizontal icon names', async () => {
         const el = await fixture(html`
             <obap-scroll-container style="width: 100px; height: 32px;">
@@ -97,7 +64,7 @@ describe('obap-scroll-container', () => {
         expect(el._getIconName(true)).to.equal('core:chevron-up');
         expect(el._getIconName(false)).to.equal('core:chevron-down');
     });
-    
+
     /* Horizontal Scrolling */
     it('can scroll right (smooth) - horizontal', async () => {
         const el = await fixture(html`
@@ -170,7 +137,7 @@ describe('obap-scroll-container', () => {
         expect(el._container.scrollLeft).to.equal(0);
     });
 
-    
+
     it('can scroll right (item) - horizontal', async () => {
         const el = await fixture(html`
             <obap-scroll-container item-step style="width: 100px; height: 32px;">
@@ -284,7 +251,7 @@ describe('obap-scroll-container', () => {
         expect(el._container.scrollTop).to.equal(0);
     });
 
-    
+
     it('can scroll right (item) - vertical', async () => {
         const el = await fixture(html`
             <obap-scroll-container vertical item-step style="width: 100px; height: 32px;">

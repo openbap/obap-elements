@@ -141,6 +141,24 @@ These are high level elements used to construct applications.
 
 Count: 4/10
 
+### DEMO & DOCUMENTATION ELEMENTS
+
+These are elements to make creating documented demos easily, kind of like the Polymer demo helper elements.
+
+|Done|Complexity|Name                |Notes                                                                                   |
+|:--:|:--------:|--------------------|----------------------------------------------------------------------------------------|
+|X   |H         |obap-markdown-viewer|A markdown viewer, based on Marked.                                                     |
+|-   |H         |obap-demo-snippet   |A helper element that displays the source of a code snippet and its rendered demo.      |
+|    |H         |obap-property-viewer|A helper element that displays a custom elements properties, etc.                       |
+|    |H         |obap-property-editor|A helper element that displays and allowes editing of a custom elements properties, etc.|
+
+**Dependencies**
+
+* [Marked Library](https://marked.js.org/#/README.md)
+* custom-elements.json
+
+Count: 1/4
+
 ### NICE TO HAVE
 
 These are unlikely to happen any time soon, but would be really nice to have.
@@ -153,7 +171,6 @@ These are unlikely to happen any time soon, but would be really nice to have.
 |    |H         |obap-dashboard       |A drag & drop dashbard control for cards.         |
 |    |H         |obap-diagram         |A diagram editor, like Lucid.                     |
 |    |H         |obap-workflow        |A workflow builder.                               |
-|    |H         |obap-markdown-viewer |A markdown viewer.                                |
 |    |H         |obap-markdown-editor |A markdown editor, based on ProseMirror.          |
 
-Count: 0/8
+Count: 0/7

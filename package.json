@@ -17,26 +17,34 @@
     "go-mobile": "es-dev-server --app-index demo-mobile/index.html --node-resolve --open",
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
-    "test-current": "karma start --grep test/obap-slider.test.js --coverage",
+    "test-current": "karma start --grep test/obap-markdown-viewer.test.js --coverage",
     "deploy": "npm publish src",
     "testdeploy": "npm publish src --dry-run",
     "doc": "./node_modules/.bin/wca analyze src --format markdown --outDir docs/elements",
+    "doc-wc": "./node_modules/.bin/wca analyze src --outFiles custom-elements.json",
     "build": "rimraf dist && rollup -c rollup.config.js",
-    "build-mobile": "rimraf dist && rollup -c rollup-mobile.config.js"
+    "build-mobile": "rimraf dist && rollup -c rollup-mobile.config.js",
+    "storybook": "start-storybook",
+    "storybook:build": "build-storybook"
   },
   "dependencies": {
     "lit-element": "^2.2.1",
-    "lit-html": "^1.1.2"
+    "lit-html": "^1.1.2",
+    "marked": "^1.1.1",
+    "prismjs": "^1.20.0"
   },
   "devDependencies": {
+    "@open-wc/building-rollup": "^1.0.0",
+    "@open-wc/demoing-storybook": "^2.0.0",
     "@open-wc/testing": "^2.0.0",
     "@open-wc/testing-karma": "^3.0.0",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/theming": "^5.3.19",
     "deepmerge": "^3.2.0",
     "es-dev-server": "^1.23.0",
-    "web-component-analyzer": "^1.0.3",
-    "@open-wc/building-rollup": "^1.0.0",
     "rimraf": "^2.6.3",
-    "rollup": "^2.9.1"
+    "rollup": "^2.9.1",
+    "web-component-analyzer": "^1.0.3"
   },
   "publishConfig": {
     "access": "public"

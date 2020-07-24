@@ -100,7 +100,7 @@ export class ObapDataList extends ObapDataTableController(ObapElement) {
             }
 
             table {
-                border-spacing: 0;
+                border-spacing: 0; 
                 color: var(--obap-text-primary-color, rgba(0, 0, 0, 0.87));
             }
 
