@@ -32,7 +32,7 @@ export class DemoStylesElevation extends ObapElement {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 grid-template-rows: 60px 60px 60px;
-                grid-gap: 16px;
+                gap: 16px;
                 width: 100%;
                 height: 100%;
             }

@@ -73,7 +73,7 @@ export class ObapMobileApplication extends ObapApplicationController(ObapElement
             .navigator-container {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                grid-gap: 8px;
+                gap: 8px;
                 padding: 8px;
             }
 

@@ -63,6 +63,19 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 
 Count: 38/54
 
+### LAYOUT ELEMENTS
+
+These are end-user elements (won't be used by framework elements), possibly for use with a wireframe designer, and wrap simple container elements that use flexbox and grid layout. They'll be grouped under `obap-layout`. Not sure if a grid layout is required.
+
+|Done|Complexity|Name                |Notes                                             |
+|:--:|:--------:|--------------------|--------------------------------------------------|
+|-   |L         |obap-row-layout     |A single horizontal row layout (can wrap).        |
+|-   |L         |obap-column-layout  |A single vertical column layout (can wrap).       |
+|-   |L         |obap-position-layout|Positions a single child in a particular position.|
+|    |M         |obap-grid-layout    |A grid (multiple column/row) layout.              |
+
+Count: 0/3
+
 ### MENU ELEMENTS
 
 |Done|Complexity|Name                   |Notes                                                                                           |

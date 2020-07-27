@@ -2,7 +2,7 @@
 @license
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
-import { html, css, svg, LitElement } from 'lit-element';
+import { html, css, unsafeCSS, svg, LitElement } from 'lit-element';
 /**
 `ObapElement` is a LitElement decendent class that's used as the base class for all the OBAP elements.
  
@@ -97,4 +97,4 @@ class ObapElement extends LitElement {
     }
 }
 
-export { html, css, svg, ObapElement } 
+export { html, css, unsafeCSS, svg, ObapElement } 

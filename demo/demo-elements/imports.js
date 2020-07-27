@@ -49,3 +49,4 @@ import './slider-demo.js';
 import './treeview-demo.js';
 import './markdown-viewer-demo.js';
 import './demo-snippet-demo.js';
+import './layout-demo.js';

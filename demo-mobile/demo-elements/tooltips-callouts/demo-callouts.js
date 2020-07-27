@@ -46,7 +46,7 @@ export class DemoCallouts extends ObapElement {
             .container {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
-                grid-gap: 16px;
+                gap: 16px;
                 justify-items: center;
                 padding: 8px 8px 16px 8px;
             }

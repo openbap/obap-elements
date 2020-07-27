@@ -37,7 +37,7 @@ export class DemoPickersSelect extends ObapElement {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
        
-                grid-gap: 16px;
+                gap: 16px;
                 justify-items: stretch;
                 padding: 8px 8px 16px 8px;
             }
