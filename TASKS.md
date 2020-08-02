@@ -60,8 +60,9 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |M         |obap-carousel          |A content carousel that supports overlays.                                                      |
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                               |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                         |
+|    |M         |obap-splitter-container|A horizontal or vertical container with a splitter that allows two content items to be resized. |
 
-Count: 38/54
+Count: 38/55
 
 ### LAYOUT ELEMENTS
 
@@ -74,7 +75,7 @@ These are end-user elements (won't be used by framework elements), possibly for 
 |-   |L         |obap-position-layout|Positions a single child in a particular position.|
 |    |M         |obap-grid-layout    |A grid (multiple column/row) layout.              |
 
-Count: 0/3
+Count: 0/4
 
 ### MENU ELEMENTS
 
@@ -102,12 +103,12 @@ Count: 2/5
 
 ### DATA TABLE ELEMENTS
 
-|Done|Complexity|Name                  |Notes                                                                                                      |
-|:--:|:--------:|----------------------|-----------------------------------------------------------------------------------------------------------|
-|X   |H         |obap-data-table-layout|A helper container element to simplify creating complex data table elements.                               |
-|X   |H         |obap-data-list        |A simple Material Design data table with minimal features which is suitable for small data sets.           |
-|X   |M         |obap-data-pager       |A page switcher element for tables with a lot of data (required by `obap-data-table`). Needs `obap-select`.|
-|    |H         |obap-data-table       |A complex Material Design data table suitable for large data sets. Needs `obap-data-pager`.                |
+|Done|Complexity|Name                  |Notes                                                                                                                      |
+|:--:|:--------:|----------------------|---------------------------------------------------------------------------------------------------------------------------|
+|X   |H         |obap-data-table-layout|A helper container element to simplify creating complex data table elements.                                               |
+|X   |M         |obap-data-pager       |A page switcher element for tables with a lot of data (required by `obap-data-table`). Needs `obap-select`.                |
+|X   |H         |obap-data-table-lite  |A simple Material Design data table with minimal features which is suitable for small data sets. Replaces `obap-data-list`.|
+|    |H         |obap-data-table       |A complex Material Design data table suitable for large data sets. Needs `obap-data-pager`.                                |
 
 Count: 3/4
 
@@ -130,6 +131,18 @@ The `obap-chart` elements are the more complex charts.
 |    |H         |obap-xxx-chart        |A collection of commonly used chart types - this will be separated into individual chart types.|
 
 Count: 5/6
+
+### PORTALS
+
+This allows DOM content to be projected to different places in a page, while keeping the data context intact.
+
+|Done|Complexity|Name       |Notes                                                       |
+|:--:|:--------:|-----------|------------------------------------------------------------|
+|    |H         |obap-portal|A source and destination element for projecting DOM content.|
+
+Based on this [article](https://dev.to/westbrook/your-portal-content-through-a-litelement-5h8b).
+
+Count: 0/1
 
 ### APPLICATION ELEMENTS
 

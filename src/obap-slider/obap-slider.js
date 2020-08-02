@@ -111,7 +111,7 @@ export class ObapSlider extends ObapElement {
                 height: 0;
                 border: 4px solid transparent;
                 border-top-color: var(--obap-slider-callout-background-color);
-                border-bottom: 0;
+                border-bottom: none;
                 margin-left: -4px;
                 margin-bottom: -4px;
             }

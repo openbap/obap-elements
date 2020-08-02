@@ -112,7 +112,7 @@ export class ObapCallout extends ObapAttachedElementController(ObapElement) {
                 height: 0;
                 border: var(--obap-callout-arrow-size) solid transparent;
                 border-right-color: var(--obap-callout-background-color);
-                border-left: 0;
+                border-left: none;
                 margin-top: calc(var(--obap-callout-arrow-size) * -1);
                 margin-left: calc(var(--obap-callout-arrow-size) * -1);
             }
@@ -126,7 +126,7 @@ export class ObapCallout extends ObapAttachedElementController(ObapElement) {
                 height: 0;
                 border: var(--obap-callout-arrow-size) solid transparent;
                 border-left-color: var(--obap-callout-background-color);
-                border-right: 0;
+                border-right: none;
                 margin-top: calc(var(--obap-callout-arrow-size) * -1);
                 margin-right: calc(var(--obap-callout-arrow-size) * -1);
             }
@@ -140,7 +140,7 @@ export class ObapCallout extends ObapAttachedElementController(ObapElement) {
                 height: 0;
                 border: var(--obap-callout-arrow-size) solid transparent;
                 border-bottom-color: var(--obap-callout-background-color);
-                border-top: 0;
+                border-top: none;
                 margin-left: calc(var(--obap-callout-arrow-size) * -1);
                 margin-top: calc(var(--obap-callout-arrow-size) * -1);
             }
@@ -154,7 +154,7 @@ export class ObapCallout extends ObapAttachedElementController(ObapElement) {
                 height: 0;
                 border: var(--obap-callout-arrow-size) solid transparent;
                 border-top-color: var(--obap-callout-background-color);
-                border-bottom: 0;
+                border-bottom: none;
                 margin-left: calc(var(--obap-callout-arrow-size) * -1);
                 margin-bottom: calc(var(--obap-callout-arrow-size) * -1);
             }

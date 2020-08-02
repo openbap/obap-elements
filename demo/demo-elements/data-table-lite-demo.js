@@ -3,10 +3,10 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
-import '../../src/obap-data-list/obap-data-list.js';
+import '../../src/obap-data-table/obap-data-table-lite.js';
 import '../../src/obap-material/obap-material.js';
 
-export class DataListDemo extends ObapElement {
+export class DataTableLiteDemo extends ObapElement {
     static get styles() {
         return [css`
             :host {
@@ -35,9 +35,17 @@ export class DataListDemo extends ObapElement {
                 margin: 16px 0;
             }
 
-            obap-data-list {
+            obap-data-table-lite {
+                --obap-data-table-true-color: green;
+                --obap-data-table-false-color: red;
                 height: 213px;
                 width: 670px;
+            }
+
+            .custom-cell {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color: blue;
             }
         `];
     }
@@ -62,21 +70,41 @@ export class DataListDemo extends ObapElement {
         }
     }
 
+    currencyFormatter(value) {
+        return `$${value.toFixed(2)}`;
+    }
+
+    percentageFormatter(value) {
+        return `${value}%`;
+    }
+
+    numberFormatterFactory(decimals) {
+        return (value) => {
+            return Number(value).toFixed(decimals);
+        }
+    }
+
+    customRenderer(value, column) {
+        return html`
+            <div style="text-overflow: ellipsis; white-space: nowrap;">${value}</div>
+        `;
+    } 
+    
     constructor() {
         super();
 
         this.columns = [
-            { label: 'Dessert (100g serving)', field: 'dessert',   type: 'text',    suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true },
-            { label: 'Price',                  field: 'price',     type: 'number',  suffix: '',  prefix: '$', actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true, decimals: 2 },
-            { label: 'Calories',               field: 'calories',  type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Fat (g)',                field: 'fat',       type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Carbs (g)',              field: 'carbs',     type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Protein (g)',            field: 'protein',   type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Sodium (mg)',            field: 'sodium',    type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Calcium (%)',            field: 'calcium',   type: 'number',  suffix: '%', prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Iron (%)',               field: 'iron',      type: 'number',  suffix: '%', prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'In Stock',               field: 'available', type: 'boolean', suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true },
-            { label: 'Add to Cart',            field: '',          type: 'action',  suffix: '',  prefix: '',  actionLabel: 'Add', trueIcon: '', falseIcon: '', sortable: false }
+            { label: 'Dessert (100g serving)', field: 'dessert',   type: 'text',    actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true },
+            { label: 'Price',                  field: 'price',     type: 'number',  formatter: this.currencyFormatter, actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true},
+            { label: 'Calories',               field: 'calories',  type: 'number',  renderer: this.customRenderer, actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Fat (g)',                field: 'fat',       type: 'number',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Carbs (g)',              field: 'carbs',     type: 'number',  formatter: this.numberFormatterFactory(2),  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Protein (g)',            field: 'protein',   type: 'number',  formatter: this.numberFormatterFactory(4),  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Sodium (mg)',            field: 'sodium',    type: 'number',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Calcium (%)',            field: 'calcium',   type: 'number',  formatter: this.percentageFormatter ,  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Iron (%)',               field: 'iron',      type: 'number',  formatter: this.percentageFormatter,   actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'In Stock',               field: 'available', type: 'boolean', actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true },
+            { label: 'Add to Cart',            field: '',          type: 'action',   actionLabel: 'Add', trueIcon: '', falseIcon: '', sortable: false }
         ];
 
         this.rows = [
@@ -101,22 +129,22 @@ export class DataListDemo extends ObapElement {
             <div class="container">
                 <div class="title">No Selection</div>
                 <div class="row">
-                    <obap-material elevation="1" @obap-data-action="${this._onAction}">
-                        <obap-data-list .columns="${this.columns}" .rows="${this.rows}" id-field="id" selection-mode="none" sort-index="4"></obap-data-list>
+                    <obap-material elevation="1" @obap-data-table-action="${this._onAction}">
+                        <obap-data-table-lite .columns="${this.columns}" .rows="${this.rows}" id-field="id" selection-mode="none" sort-index="4"></obap-data-table-lite>
                     </obap-material>
                 </div>
 
                 <div class="title">Single Selection</div>
                 <div class="row">
-                    <obap-material elevation="1" @obap-data-action="${this._onAction}">
-                        <obap-data-list .columns="${this.columns}" .rows="${this.rows}" .selectedRows="${this.selectedRowsSingle}" id-field="id" selection-mode="single" sort-index="4"></obap-data-list>
+                    <obap-material elevation="1" @obap-data-table-action="${this._onAction}">
+                        <obap-data-table-lite .columns="${this.columns}" .rows="${this.rows}" .selectedRows="${this.selectedRowsSingle}" id-field="id" selection-mode="single" sort-index="4"></obap-data-table-lite>
                     </obap-material>
                 </div>
 
                 <div class="title">Multiple Selection</div>
                 <div class="row">
-                    <obap-material elevation="1" @obap-data-action="${this._onAction}">
-                        <obap-data-list .columns="${this.columns}" .rows="${this.rows}" .selectedRows="${this.selectedRowsMultiple}" id-field="id" selection-mode="multiple" sort-index="4"></obap-data-list>
+                    <obap-material elevation="1" @obap-data-table-action="${this._onAction}">
+                        <obap-data-table-lite .columns="${this.columns}" .rows="${this.rows}" .selectedRows="${this.selectedRowsMultiple}" id-field="id" selection-mode="multiple" sort-index="4"></obap-data-table-lite>
                     </obap-material>
                 </div>
             </div>
@@ -128,4 +156,4 @@ export class DataListDemo extends ObapElement {
     }
 }
 
-window.customElements.define('data-list-demo', DataListDemo);
+window.customElements.define('data-table-lite-demo', DataTableLiteDemo);

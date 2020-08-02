@@ -4,9 +4,9 @@ Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../../src/obap-element/obap-element.js';
 import '../../../src/obap-material/obap-material.js';
-import '../../../src/obap-data-list/obap-data-list.js';
+import '../../../src/obap-data-table/obap-data-table-lite.js';
 
-export class DemoDataList extends ObapElement {
+export class DemoDataTableLite extends ObapElement {
     static get styles() {
         return [css`
             :host {
@@ -48,21 +48,29 @@ export class DemoDataList extends ObapElement {
         }
     }
 
+    currencyFormatter(value) {
+        return `$${value.toFixed(2)}`;
+    }
+
+    percentageFormatter(value) {
+        return `${value}%`;
+    }
+
     constructor() {
         super();
 
         this.columns = [
-            { label: 'Dessert (100g serving)', field: 'dessert',   type: 'text',    suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true },
-            { label: 'Price',                  field: 'price',     type: 'number',  suffix: '',  prefix: '$', actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true, decimals: 2 },
-            { label: 'Calories',               field: 'calories',  type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Fat (g)',                field: 'fat',       type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Carbs (g)',              field: 'carbs',     type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Protein (g)',            field: 'protein',   type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Sodium (mg)',            field: 'sodium',    type: 'number',  suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Calcium (%)',            field: 'calcium',   type: 'number',  suffix: '%', prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'Iron (%)',               field: 'iron',      type: 'number',  suffix: '%', prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
-            { label: 'In Stock',               field: 'available', type: 'boolean', suffix: '',  prefix: '',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true },
-            { label: 'Add to Cart',            field: '',          type: 'action',  suffix: '',  prefix: '',  actionLabel: 'Add', trueIcon: '', falseIcon: '', sortable: false }
+            { label: 'Dessert (100g serving)', field: 'dessert',   type: 'text',    actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true },
+            { label: 'Price',                  field: 'price',     type: 'number',  formatter: this.currencyFormatter,  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true },
+            { label: 'Calories',               field: 'calories',  type: 'number',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Fat (g)',                field: 'fat',       type: 'number',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Carbs (g)',              field: 'carbs',     type: 'number',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Protein (g)',            field: 'protein',   type: 'number',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Sodium (mg)',            field: 'sodium',    type: 'number',  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Calcium (%)',            field: 'calcium',   type: 'number',  formatter: this.percentageFormatter,  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'Iron (%)',               field: 'iron',      type: 'number',  formatter: this.percentageFormatter,  actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true  },
+            { label: 'In Stock',               field: 'available', type: 'boolean', actionLabel: '',    trueIcon: '', falseIcon: '', sortable: true },
+            { label: 'Add to Cart',            field: '',          type: 'action',  actionLabel: 'Add', trueIcon: '', falseIcon: '', sortable: false }
         ];
 
         this.rows = [
@@ -83,7 +91,7 @@ export class DemoDataList extends ObapElement {
         return html`
             <div class="container">
                 <obap-material elevation="1" @obap-data-action="${this._onAction}">
-                    <obap-data-list .columns="${this.columns}" .rows="${this.rows}" id-field="id" selection-mode="multiple" sort-index="4"></obap-data-list>
+                    <obap-data-table-lite .columns="${this.columns}" .rows="${this.rows}" id-field="id" selection-mode="multiple" sort-index="4"></obap-data-table-lite>
                 </obap-material>
             </div>
         `;
@@ -92,4 +100,4 @@ export class DemoDataList extends ObapElement {
     
 }
 
-window.customElements.define('demo-data-list', DemoDataList);
+window.customElements.define('demo-data-table-lite', DemoDataTableLite);

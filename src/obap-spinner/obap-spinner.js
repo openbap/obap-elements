@@ -71,7 +71,7 @@ export class ObapSpinner extends ObapElement {
 
             .content[compact] {
                 padding: 0;
-                border: 0;
+                border: none;
             }
 
             .content:hover {
@@ -111,8 +111,8 @@ export class ObapSpinner extends ObapElement {
             }
 
             input {
-                border: 0;
-                outline: 0;
+                border: none;
+                outline: none;
                 width: 100%;
                 height: 100%;
                 /*color: var(--obap-spinner-content-color);*/

@@ -44,7 +44,7 @@ export class ObapPillNavigator extends ObapElement {
                 width: var(--obap-pill-size);
                 height: var(--obap-pill-size);
                 background: var(--obap-pill-disabled-color);
-                border: 0;
+                border: none;
             }
 
             .container {

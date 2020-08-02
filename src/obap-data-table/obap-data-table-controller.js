@@ -42,7 +42,7 @@ export const ObapDataTableController = (superClass) =>
                 sortDescending: {
                     type: Boolean,
                     attribute: 'sort-descending'
-                },
+                }
             }
         }
 
@@ -82,6 +82,21 @@ export const ObapDataTableController = (superClass) =>
             return this.rows;
         }
 
+        get effectiveSelectedRows() {
+            return this.selectionMode === 'multiple' ? this.selectedRows : (this.selectedRows.length > 0) ? [this.selectedRows[0]] : [];
+        }
+
+        sortColumn(columnIndex) {
+            if ((columnIndex > -1) && (columnIndex < this.columns.length)) {
+                if (columnIndex === this.sortIndex) {
+                    this.sortDescending = !this.sortDescending;
+                } else {
+                    this.sortIndex = columnIndex;
+                    this.sortDescending = false;
+                }
+            }
+        }
+
         selectRow(index) {
             if (this.selectionMode === 'none') return;
             if (this.selectionMode === 'single') this.selectedRows.length = 0;
@@ -112,7 +127,7 @@ export const ObapDataTableController = (superClass) =>
                     this.fireMessage('obap-data-selection-changed');
                 }
             }
-        } 
+        }
 
         selectAllRows() {
             if (this.selectionMode !== 'multiple') return;

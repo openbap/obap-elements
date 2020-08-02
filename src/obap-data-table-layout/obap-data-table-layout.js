@@ -9,7 +9,7 @@ import { html, css, ObapElement } from '../obap-element/obap-element.js';
  *
  * ## Content Positioning
  * 
- * All the part of the table are positioned using named slots:
+ * All the parts of the table are positioned using named slots:
  * 
  * |Slot               |Description                                                                      |
  * |-------------------|---------------------------------------------------------------------------------|
@@ -372,7 +372,7 @@ export class ObapDataTableLayout extends ObapElement {
             }
 
             .empty {
-                border: 0;
+                border: none;
             }
         `];
     }
