@@ -23,9 +23,7 @@
     "doc": "./node_modules/.bin/wca analyze src --format markdown --outDir docs/elements",
     "doc-wc": "./node_modules/.bin/wca analyze src --outFiles custom-elements.json",
     "build": "rimraf dist && rollup -c rollup.config.js",
-    "build-mobile": "rimraf dist && rollup -c rollup-mobile.config.js",
-    "storybook": "start-storybook",
-    "storybook:build": "build-storybook"
+    "build-mobile": "rimraf dist && rollup -c rollup-mobile.config.js"
   },
   "dependencies": {
     "lit-element": "^2.2.1",
@@ -35,11 +33,8 @@
   },
   "devDependencies": {
     "@open-wc/building-rollup": "^1.0.0",
-    "@open-wc/demoing-storybook": "^2.0.0",
     "@open-wc/testing": "^2.0.0",
     "@open-wc/testing-karma": "^3.0.0",
-    "@storybook/addons": "^5.3.19",
-    "@storybook/theming": "^5.3.19",
     "deepmerge": "^3.2.0",
     "es-dev-server": "^1.23.0",
     "rimraf": "^2.6.3",
