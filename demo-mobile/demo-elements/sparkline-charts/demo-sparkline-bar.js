@@ -37,6 +37,10 @@ export class DemoSparklineBar extends ObapElement {
                 margin-bottom: 8px;
             }
 
+            obap-bar-sparkline {
+                width: 100%;
+            }
+
             .center {
                 display: flex;
                 flex-direction: row;

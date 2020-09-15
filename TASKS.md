@@ -45,6 +45,8 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |H         |obap-vertical-stepper  |A vertical Material Design Stepper (wizard). Step labels are inline.                            |
 |X   |H         |obap-slider            |Sliders allow users to make selections from a range of values.                                  |
 |X   |H         |obap-treeview          |A Material Design heirarchical treeview.                                                        |
+|X   |M         |obap-splitter          |A splitter element that resizes its adjacent siblings relative to each other.                   |
+|X   |L         |obap-splitter-container|A horizontal or vertical container with a splitter that allows content areas to be resized.     |
 |    |M         |obap-snackbar          |A popup toast notification element.                                                             |
 |    |M         |obap-time-picker       |A Material Design time picker (not the mobile type).                                            |
 |    |H         |obap-date-picker       |A Material Design date picker (not the mobile type).                                            |
@@ -60,9 +62,9 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |M         |obap-carousel          |A content carousel that supports overlays.                                                      |
 |    |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                               |
 |    |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                         |
-|    |M         |obap-splitter-container|A horizontal or vertical container with a splitter that allows two content items to be resized. |
+|    |L         |obap-status-label      |A simple status label.                                                                          |
 
-Count: 38/55
+Count: 40/57
 
 ### LAYOUT ELEMENTS
 

@@ -3,11 +3,12 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
+import { ObapSparklineController} from './obap-sparkline-controller.js';
 
 /**
  * A very small line chart, drawn without adornments or other chart-specific elements.
  */
-export class ObapLineSparkline extends ObapElement {
+export class ObapLineSparkline extends ObapSparklineController(ObapElement) {
     static get styles() {
         return [css`
             :host {
@@ -109,8 +110,8 @@ export class ObapLineSparkline extends ObapElement {
         const count = this.values.length;
         if (count === 0) return null;
 
-        const vw = 300;
-        const vh = 60;
+        const vw = this.clientWidth ? this.clientWidth : 300;
+        const vh = this.clientHeight ? this.clientHeight : 60;
         const r = this.markerSize / 2;
 
         const min = Math.min(...this.values);

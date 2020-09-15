@@ -3,6 +3,7 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
+import './visualizers/obap-data-table-visualizers.js';
 import '../obap-icon/obap-icon.js';
 
 export class ObapDataTableBodyCell extends ObapElement {
@@ -26,6 +27,7 @@ export class ObapDataTableBodyCell extends ObapElement {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                height: 100%;
             }
 
             .label {
@@ -61,6 +63,11 @@ export class ObapDataTableBodyCell extends ObapElement {
 
             .body-cell-icon[is-true] {
                 fill: var(--obap-data-table-true-color);
+            }
+
+            .visualizer {
+                height: 100%;
+                width: 100%;
             }
         `];
     }
@@ -112,6 +119,34 @@ export class ObapDataTableBodyCell extends ObapElement {
     _renderContent() {
         if (this.column.renderer) {
             return this.column.renderer(this.value, this.column);
+        }
+
+        if (this.column.visualizer) {
+            switch (this.column.visualizer.name) {
+                case 'rating': {
+                    return html`<obap-data-table-rating-visualizer class="visualizer" .value="${this.value}" .params="${this.column.visualizer.params}"></obap-data-table-rating-visualizer>`;
+                }
+
+                case 'percentage': {
+                    return html`<obap-data-table-percentage-visualizer class="visualizer" .value="${this.value}" .params="${this.column.visualizer.params}"></obap-data-table-percentage-visualizer>`;
+                }
+
+                case 'bar-chart': {
+                    return html`<obap-data-table-bar-chart-visualizer class="visualizer" .value="${this.value}" .params="${this.column.visualizer.params}"></obap-data-table-bar-chart-visualizer>`;
+                }
+
+                case 'line-chart': {
+                    return html`<obap-data-table-line-chart-visualizer class="visualizer" .value="${this.value}" .params="${this.column.visualizer.params}"></obap-data-table-line-chart-visualizer>`;
+                }
+
+                case 'enum': {
+                    return html`<obap-data-table-enum-visualizer class="visualizer" .value="${this.value}" .params="${this.column.visualizer.params}"></obap-data-table-enum-visualizer>`;
+                }
+
+                case 'boolean': {
+                    return html`<obap-data-table-boolean-visualizer class="visualizer" .value="${this.value}" .params="${this.column.visualizer.params}"></obap-data-table-boolean-visualizer>`;
+                }
+            }
         }
 
         switch (this.column.type) {

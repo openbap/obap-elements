@@ -59,13 +59,14 @@ export class ObapDataTableHeaderCell extends ObapElement {
                 flex: 1;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+                text-align: left;
             }
 
-            .label[column-type="number"] {
+            .label[column-type="number"], .label[column-type="right"] {
                 text-align: right;
             }
 
-            .label[column-type="boolean"], .label[column-type="action"] {
+            .label[column-type="boolean"], .label[column-type="action"], .label[column-type="center"] {
                 text-align: center;
             }
         `];
@@ -126,7 +127,7 @@ export class ObapDataTableHeaderCell extends ObapElement {
         return html`
             <div class="container">
                 ${this._renderSortIcon()}
-                <div class="label" column-type="${this.column.type}">${this.column.label}</div>
+                <div class="label" column-type="${(this.column.visualizer && this.column.visualizer.params && this.column.visualizer.params.headerAlign) ? this.column.visualizer.params.headerAlign : this.column.type}">${this.column.label}</div>
             </div>
         `;
     }

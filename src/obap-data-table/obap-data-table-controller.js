@@ -10,13 +10,11 @@ export const ObapDataTableController = (superClass) =>
         static get properties() {
             return {
                 columns: {
-                    type: Array,
-                    attribute: 'columns'
+                    type: Array
                 },
 
                 rows: {
-                    type: Array,
-                    attribute: 'rows'
+                    type: Array
                 },
 
                 selectedRows: {
@@ -42,19 +40,109 @@ export const ObapDataTableController = (superClass) =>
                 sortDescending: {
                     type: Boolean,
                     attribute: 'sort-descending'
+                },
+
+                fixedColumnsLeft: {
+                    type: Array
+                },
+
+                fixedColumnsRight: {
+                    type: Array
+                },
+
+                scrollColumns: {
+                    type: Array
+                },
+
+                columnActions: {
+                    type: Array
+                },
+
+                rowActions: {
+                    type: Array
+                },
+
+                columnActionsIcon: {
+                    type: String,
+                    attribute: 'column-actions-icon'
+                },
+
+                rowActionsIcon: {
+                    type: String,
+                    attribute: 'row-actions-icon'
                 }
             }
         }
 
+        get columns() {
+            return this._columns;
+        }
+
+        set columns(value) {
+            const oldValue = this.columns;
+
+            if (value !== oldValue) {
+                this._columns = value;
+
+                this._columns.forEach((column, index) => {
+                    column._internalIndex = index;
+                });
+
+                const oldFixedColumnsLeft = this.fixedColumnsLeft;
+                const oldFixedColumnsRight = this.fixedColumnsRight;
+                const oldScrollColumns = this.scrollColumns;
+
+                this._fixedColumnsLeft = this._columns.filter((column) => column.fix === 'left');
+                this._fixedColumnsRight = this._columns.filter((column) => column.fix === 'right');
+                this._scrollColumns = this._columns.filter((column) => ((column.fix !== 'left') && (column.fix !== 'right')));
+
+                this.requestUpdate('columns', oldValue);
+                this.requestUpdate('fixedColumnsLeft', oldFixedColumnsLeft);
+                this.requestUpdate('fixedColumnsRight', oldFixedColumnsRight);
+                this.requestUpdate('scrollColumns', oldScrollColumns);
+            }
+        }
+
+        get fixedColumnsLeft() {
+            return this._fixedColumnsLeft;
+        }
+
+        set fixedColumnsLeft(value) {
+            throw 'fixedColumnsLeft is read only';
+        }
+
+        get fixedColumnsRight() {
+            return this._fixedColumnsRight;
+        }
+
+        set fixedColumnsRight(value) {
+            throw 'fixedColumnsRight is read only';
+        }
+
+        get scrollColumns() {
+            return this._scrollColumns;
+        }
+
+        set scrollColumns(value) {
+            throw 'scrollColumns is read only';
+        }
+
         constructor() {
             super();
-            this.columns = [];
+            this._columns = [];
+            this._fixedColumnsLeft = [];
+            this._fixedColumnsRight = [];
+            this._scrollColumns = [];
             this.rows = [];
             this.selectedRows = [];
             this.selectionMode = 'none';
             this.idField = 'id';
             this.sortIndex = -1;
             this.sortDescending = false;
+            this.columnActions = [];
+            this.rowActions = [];
+            this.columnActionsIcon = '';
+            this.rowActionsIcon = '';
         }
 
         get sortedRows() {
@@ -80,6 +168,21 @@ export const ObapDataTableController = (superClass) =>
             }
 
             return this.rows;
+        }
+
+        syncHeaderCells(className) {
+            const visibleRow = this.renderRoot.querySelector(`tr.${className}:not([collapsed])`);
+            const invisibleRow = this.renderRoot.querySelector(`tr.${className}[collapsed]`);
+
+            if (visibleRow && invisibleRow) {
+                const visibleCells = visibleRow.querySelectorAll('th');
+                const invisibleCells = invisibleRow.querySelectorAll('th');
+
+                for (let i = 0; i < invisibleCells.length; i++) {
+                    visibleCells[i].style.width = invisibleCells[i].clientWidth + 'px';
+                    visibleCells[i].style.minWidth = invisibleCells[i].clientWidth + 'px';
+                }
+            }
         }
 
         get effectiveSelectedRows() {

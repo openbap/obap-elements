@@ -202,6 +202,7 @@ export class ObapDataTableLayout extends ObapElement {
                 overflow: hidden;
                 box-sizing: border-box;
                 outline: 0;
+         
             }
 
             .grouper {
@@ -228,7 +229,7 @@ export class ObapDataTableLayout extends ObapElement {
                 background: var(--obap-data-table-layout-header-fixed-left-background-color);
                 border-color: var(--obap-data-table-layout-header-fixed-left-border-color);
                 border-style: var(--obap-data-table-layout-header-fixed-left-border-style);
-                border-width: var(--obap-data-table-layout-header-fixed-left-border-width);
+                border-width: var(--obap-data-table-layout-header-fixed-left-border-width); 
             }
 
             .header-scroll {
@@ -374,6 +375,7 @@ export class ObapDataTableLayout extends ObapElement {
             .empty {
                 border: none;
             }
+            
         `];
     }
 

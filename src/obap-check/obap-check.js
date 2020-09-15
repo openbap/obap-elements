@@ -15,16 +15,16 @@ A Material Design checkbox.
 import '@obap/obap-elements/obap-check/obap-check.js';
 
 <!-- Unselected -->
-<obap-button label="unselected"></obap-button>
+<obap-check label="unselected"></obap-check>
 
 <!-- Selected -->
-<obap-button label="selected" selected></obap-button>
+<obap-check label="selected" selected></obap-check>
 
 <!-- Indeterminate -->
-<obap-button label="indeterminate" indeterminate></obap-button>
+<obap-check label="indeterminate" indeterminate></obap-check>
 
 <!-- Disabled -->
-<obap-button label="disabled" disabled></obap-button>
+<obap-check label="disabled" disabled></obap-check>
 ```
  */
 export class ObapCheck extends ObapInputElement {
@@ -83,12 +83,6 @@ export class ObapCheck extends ObapInputElement {
                 background: transparent;
                 border: 2px solid var(--obap-check-unselected-color);
             }
-
-            /*
-            .check-container[no-label] {
-                margin-right: 0;
-            }
-            */
 
             .label {
                 margin-left: 8px;

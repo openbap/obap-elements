@@ -37,6 +37,10 @@ export class DemoSparklineWinLoss extends ObapElement {
                 margin-bottom: 8px;
             }
 
+            obap-winloss-sparkline {
+                width: 100%;
+            }
+
             .center {
                 display: flex;
                 flex-direction: row;

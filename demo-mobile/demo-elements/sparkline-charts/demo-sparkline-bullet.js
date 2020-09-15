@@ -37,6 +37,10 @@ export class DemoSparklineBullet extends ObapElement {
                 margin-bottom: 8px;
             }
 
+            obap-bullet-sparkline {
+                width: 100%;
+            }
+
             .center {
                 display: flex;
                 flex-direction: row;

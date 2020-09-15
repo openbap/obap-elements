@@ -50,3 +50,6 @@ import './markdown-viewer-demo.js';
 import './demo-snippet-demo.js';
 import './layout-demo.js';
 import './data-table-lite-demo.js';
+import './splitter-container-demo.js';
+import './splitter-demo.js';
+import './status-label-demo.js';

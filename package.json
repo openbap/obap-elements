@@ -1,6 +1,6 @@
 {
   "name": "@obap/obap-elements",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "A LitElement Web Component Suite for line of business applications.",
   "author": "obap-elements",
   "license": "MIT",
@@ -12,14 +12,14 @@
     "directory": "src"
   },
   "scripts": {
-    "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
-    "go": "es-dev-server --app-index demo/index.html --node-resolve --open",
-    "go-mobile": "es-dev-server --app-index demo-mobile/index.html --node-resolve --open",
+    "start:watch": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
+    "start": "es-dev-server --app-index demo/index.html --node-resolve --open",
+    "start:mobile": "es-dev-server --app-index demo-mobile/index.html --node-resolve --open",
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
     "test-current": "karma start --grep test/obap-data-table-lite.test.js --coverage",
     "deploy": "npm publish src",
-    "testdeploy": "npm publish src --dry-run",
+    "deploy:test": "npm publish src --dry-run",
     "doc": "./node_modules/.bin/wca analyze src --format markdown --outDir docs/elements",
     "doc-wc": "./node_modules/.bin/wca analyze src --outFiles custom-elements.json",
     "build": "rimraf dist && rollup -c rollup.config.js",
@@ -39,7 +39,9 @@
     "es-dev-server": "^1.23.0",
     "rimraf": "^2.6.3",
     "rollup": "^2.9.1",
-    "web-component-analyzer": "^1.0.3"
+    "web-component-analyzer": "^1.0.3",
+    "serialize-javascript": ">=3.1.0",
+    "node-fetch": ">=2.6.1"
   },
   "publishConfig": {
     "access": "public"

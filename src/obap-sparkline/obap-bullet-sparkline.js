@@ -3,11 +3,12 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
+import { ObapSparklineController} from './obap-sparkline-controller.js';
 
 /**
  * A very small bullet chart, drawn without adornments or other chart-specific elements.
  */
-export class ObapBulletSparkline extends ObapElement {
+export class ObapBulletSparkline extends ObapSparklineController(ObapElement) {
     static get styles() {
         return [css`
             :host {
@@ -87,8 +88,9 @@ export class ObapBulletSparkline extends ObapElement {
     }
 
     render() {
-        const vw = 300;
-        const vh = 30;
+        const vw = this.clientWidth ? this.clientWidth : 300;
+        const vh = this.clientHeight ? this.clientHeight : 30;
+
         const targetRectWidth = 4;
         const ranges = this._getRangeValues(vw);
 

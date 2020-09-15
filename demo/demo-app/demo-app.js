@@ -127,6 +127,9 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-slider</div>
                         <div class="item">obap-sparkline</div>
                         <div class="item">obap-spinner</div>
+                        <div class="item">obap-splitter</div>
+                        <div class="item">obap-splitter-container</div>
+                        <div class="item">obap-status-label</div>
                         <div class="item">obap-stepper</div>
                         <div class="item">obap-switch</div>
                         <div class="item">obap-tabs</div>
@@ -180,6 +183,9 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <slider-demo></slider-demo>
                         <sparkline-demo></sparkline-demo>
                         <spinner-demo></spinner-demo>
+                        <splitter-demo></splitter-demo>
+                        <splitter-container-demo></splitter-container-demo>
+                        <status-label-demo></status-label-demo>
                         <stepper-demo></stepper-demo>
                         <switch-demo></switch-demo>
                         <tabs-demo></tabs-demo>

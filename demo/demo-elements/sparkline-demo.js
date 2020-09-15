@@ -67,6 +67,10 @@ export class SparklineDemo extends ObapElement {
                 margin: 16px;
                 outline: 0;
             }
+
+            obap-percentage-sparkline {
+                width: 200px;
+            }
         `];
     }
 
@@ -135,6 +139,13 @@ export class SparklineDemo extends ObapElement {
                 <div class="row">
                     <obap-bullet-sparkline class="sparkline" .percentageRanges="${this.bulletRanges}" value="60" target-value="50" max-value="100"></obap-bullet-sparkline>
                     <obap-bullet-sparkline class="sparkline custom-bullet" .percentageRanges="${this.bulletRanges}" value="60" target-value="50" max-value="100"></obap-bullet-sparkline>
+                </div>
+
+                <div class="title">Percentage</div>
+                <div class="row">
+                    <obap-percentage-sparkline class="sparkline" value="25"></obap-percentage-sparkline>
+                    <obap-percentage-sparkline class="sparkline" value="70"></obap-percentage-sparkline>
+                    <obap-percentage-sparkline class="sparkline" value="47"></obap-percentage-sparkline>
                 </div>
             </div>
         `;

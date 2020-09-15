@@ -63,7 +63,7 @@ export const ObapAttachedElementController = (superClass) =>
 
             this._resizeObserver = new ResizeObserver(entries => {
                 this.updatePosition();
-            });
+            }); 
         }
 
         connectedCallback() {

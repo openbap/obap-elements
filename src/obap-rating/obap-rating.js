@@ -3,7 +3,6 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
-import { obapIcons } from '../obap-icons/obap-icons.js';
 
 /**
  * A star rating element.
@@ -17,6 +16,7 @@ export class ObapRating extends ObapElement {
                 --obap-rating-size: 20px;
                 --obap-rating-separation: 4px;
                 display: block;
+                fill: var(--obap-rating-color);
             }
     
             :host([hidden]) {
@@ -27,7 +27,12 @@ export class ObapRating extends ObapElement {
                 pointer-events: none;
             }
 
+            /*
             :host([disabled]) > div > div > svg {
+                fill: var(--obap-rating-disabled-color);
+            }
+            */
+           :host([disabled]) {
                 fill: var(--obap-rating-disabled-color);
             }
 
@@ -54,7 +59,7 @@ export class ObapRating extends ObapElement {
             svg {
                 user-select: none;
                 stroke: transparent;
-                fill: var(--obap-rating-color);
+                /*fill: var(--obap-rating-color);*/
                 pointer-events: none;
             }
         `];

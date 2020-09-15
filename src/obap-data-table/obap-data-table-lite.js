@@ -10,6 +10,7 @@ import '../obap-data-table-layout/obap-data-table-layout.js';
 import './obap-data-table-header-cell.js';
 import './obap-data-table-body-cell.js';
 import './obap-data-table-selector-cell.js';
+import './obap-data-table-action-cell.js';
 
 /**
  * A simple Material Design data table with minimal features which is suitable for small data sets (performance will be an issue if you have a large number of rows). The following features are supported:
@@ -46,8 +47,8 @@ export class ObapDataTableLite extends ObapDataTableController(ObapElement) {
         return [body, css`
             :host {
                 --obap-data-table-background-color: var(--obap-surface-color, #FFFFFF);
-                --obap-data-table-hover-background-color: #F5F5F5;
-                --obap-data-table-fixed-background-color: #F5F5F5;
+                --obap-data-table-hover-background-color: #F1F1F1;
+                --obap-data-table-fixed-background-color: #F1F1F1;
                 --obap-data-table-action-color: var(--obap-primary-color, #5c6bc0);
                 --obap-data-table-disabled-action-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-data-table-true-color: var(--obap-text-primary-color, rgba(0, 0, 0, 0.87));
@@ -66,18 +67,31 @@ export class ObapDataTableLite extends ObapDataTableController(ObapElement) {
 
             obap-data-table-layout {
                 --obap-data-table-layout-header-action-left-border-width: 0 1px 1px 0;
+                --obap-data-table-layout-header-fixed-left-border-width: 0 1px 1px 0;
                 --obap-data-table-layout-header-scroll-border-width: 0 0 1px 0;
-                --obap-data-table-layout-header-action-right-border-width: 0 0 1px 1px;
+                --obap-data-table-layout-header-fixed-right-border-width: 0 1px 1px 1px;
+                --obap-data-table-layout-header-action-right-border-width: 0 0 1px 0;
 
                 --obap-data-table-layout-body-action-left-border-width: 0 1px 0 0;
-                --obap-data-table-layout-footer-action-left-border-width: 1px 1px 0 0;
+                --obap-data-table-layout-body-fixed-left-border-width: 0 1px 0 0;
+                --obap-data-table-layout-body-scroll-border-width: 0 0 0 0;
+                --obap-data-table-layout-body-fixed-right-border-width: 0 1px 0 1px;
+                --obap-data-table-layout-body-action-right-border-width: 0 0 0 0;
+
+                /*--obap-data-table-layout-footer-action-left-border-width: 0 1px 0 0;*/
+                /*--obap-data-table-layout-footer-fixed-left-border-width: 0 0 1px 0;*/
+                /*--obap-data-table-layout-footer-scroll-border-width: 0 0 1px 0;*/
+                /*--obap-data-table-layout-footer-fixed-right-border-width: 0 1px 0 1px;*/
+                /*--obap-data-table-layout-footer-action-right-border-width: 0 1px 0 1px;*/
                 
                 --obap-data-table-layout-background-color: var(--obap-data-table-fixed-background-color);
 
                 --obap-data-table-layout-header-action-left-color: inherit;
+                --obap-data-table-layout-header-fixed-left-color: inherit;
                 --obap-data-table-layout-header-action-left-background-color: var(--obap-data-table-fixed-background-color);
 
                 --obap-data-table-layout-body-action-left-color: inherit;
+                --obap-data-table-layout-body-fixed-left-color: inherit;
                 --obap-data-table-layout-body-action-left-background-color: var(--obap-data-table-fixed-background-color);
 
                 --obap-data-table-layout-header-scroll-color: inherit;
@@ -85,8 +99,13 @@ export class ObapDataTableLite extends ObapDataTableController(ObapElement) {
 
                 --obap-data-table-layout-body-scroll-color: inherit;
                 --obap-data-table-layout-body-scroll-background-color: var(--obap-data-table-background-color);
+                --obap-data-table-layout-body-scroll-background-color: transparent;
                 
                 height: 100%;
+            }
+
+            obap-data-table-body-cell {
+                height: var(--obap-data-table-row-height);
             }
 
             table {
@@ -116,16 +135,25 @@ export class ObapDataTableLite extends ObapDataTableController(ObapElement) {
                 background: var(--obap-data-table-fixed-background-color);
             }
 
-            .body-row {
+            .body-scroll-row {
                 background: var(--obap-data-table-background-color);
             }
 
-            .body-row:hover {
+            .body-scroll-row:hover {
                 background: var(--obap-data-table-hover-background-color);
             }
 
             td {
                 border-bottom: 1px solid var(--obap-divider-on-surface-color, rgba(0, 0, 0, 0.20));
+            }
+
+            .table-action-right {
+                border-right: 1px solid var(--obap-data-table-layout-border-color);
+            }
+
+            .action-spacer {
+                width: 32px;
+                height: calc(var(--obap-data-table-row-height) + 1px);
             }
 
             tr:last-of-type > td {
@@ -142,26 +170,99 @@ export class ObapDataTableLite extends ObapDataTableController(ObapElement) {
     render() {
         return html`
             <obap-data-table-layout class="typography-body" @obap-item-selected="${this._rowCheck}" @obap-data-table-layout-size-changed="${() => requestAnimationFrame(() => this._resizeHeaderCells())}">
-                ${this._renderSelectors()}
+                ${this._renderLeftActions()}
+
+                ${this.fixedColumnsLeft.length > 0 ? html`
+                    <div class="header-fixed-left" slot="header-fixed-left">
+                        ${this._renderDataHeader(true, 'header-fixed-left-row', this.fixedColumnsLeft)}
+                    </div>
+
+                    <div class="body-fixed-left" slot="body-fixed-left">
+                        ${this._renderDataHeader(false, 'header-fixed-left-row', this.fixedColumnsLeft)}
+                        ${this._renderDataBody('body-fixed-left-row', this.fixedColumnsLeft)}
+                    </div>
+                ` : null}
 
                 <div class="header-scroll" slot="header-scroll">
                     <table>
-                        ${this._renderScrollHeader(true)}
+                        ${this._renderDataHeader(true, 'header-scroll-row', this.scrollColumns)}
                     </table>
                 </div>
 
                 <div class="body-scroll" slot="body-scroll">
                     <table>
-                        ${this._renderScrollHeader(false)}
-                        ${this._renderScrollBody()}
+                        ${this._renderDataHeader(false, 'header-scroll-row', this.scrollColumns)}
+                        ${this._renderDataBody('body-scroll-row', this.scrollColumns)}
                     </table>
                 </div>
-            
+
+                ${this.fixedColumnsRight.length > 0 ? html`
+                    <div class="header-fixed-right" slot="header-fixed-right">
+                        ${this._renderDataHeader(true, 'header-fixed-right-row', this.fixedColumnsRight)}
+                    </div>
+
+                    <div class="body-fixed-right" slot="body-fixed-right">
+                        ${this._renderDataHeader(false, 'header-fixed-right-row', this.fixedColumnsRight)}
+                        ${this._renderDataBody('body-fixed-right-row', this.fixedColumnsRight)}
+                    </div>
+                ` : null}
+
+                ${this._renderRightActions()}
             </obap-data-table-layout>
         `;
     }
 
-    _renderSelectors() {
+    _renderRightActions() {
+        const hasColumnActions = (this.columnActions && this.columnActions.length > 0);
+        const hasRowActions = (this.rowActions && this.rowActions.length > 0);
+
+        if (hasColumnActions || hasRowActions) {
+            return html`
+                <div slot="header-action-right">
+                    <table class="table-action-right">
+                        ${this._renderActionRightHeader(hasColumnActions)}
+                    </table>
+                </div>  
+
+                <div slot="body-action-right">
+                    <table class="table-action-right">
+                        ${this._renderActionRightBody(hasRowActions)}
+                    </table>
+                </div>
+            `;
+        }
+        return null;
+    }
+
+    _renderActionRightHeader(show) {
+        return html`
+            <thead>
+                <tr>
+                    ${show ? html`
+                        <th>
+                            <obap-data-table-action-cell .actions="${this.columnActions}"></obap-data-table-action-cell>
+                        </th>
+                    ` : html`<div class="action-spacer"></div>`}
+                </tr>
+            </thead>
+        `;
+    }
+
+    _renderActionRightBody(show) {
+        return html`
+            <tbody>
+                ${repeat(this.sortedRows, (row) => row[this.idField], (row, rowIndex) => html`
+                    <tr>
+                        ${show ? html`
+                            <td><obap-data-table-action-cell .row="${row}" .actions="${this.rowActions}"></obap-data-table-action-cell></td>
+                        ` : html`<div class="action-spacer"></div>`}
+                    </tr>
+                `)}
+            </tbody>
+        `;
+    }
+
+    _renderLeftActions() {
         if ((this.selectionMode === 'single') || (this.selectionMode === 'multiple')) {
             return html`
                 <div slot="header-action-left">
@@ -208,14 +309,14 @@ export class ObapDataTableLite extends ObapDataTableController(ObapElement) {
         `;
     }
 
-    _renderScrollHeader(visible) {
+    _renderDataHeader(visible, rowClass, columns) {
         return html`
             <thead>
-                <tr class="header-row" ?collapsed="${!visible}">
-                    ${this.columns.map((column, index) => html`
+                <tr class="${rowClass}" ?collapsed="${!visible}">
+                    ${columns.map((column) => html`
                         <th>
-                            <obap-data-table-header-cell .column="${column}" ?sorted="${index === this.sortIndex}" ?visible="${visible}"
-                                                         ?sort-descending="${this.sortDescending}" column-index="${index}"
+                            <obap-data-table-header-cell .column="${column}" ?sorted="${column._internalIndex === this.sortIndex}" ?visible="${visible}"
+                                                         ?sort-descending="${this.sortDescending}" column-index="${column._internalIndex}"
                                                          @click="${(visible && column.sortable) ? this._onColumnClick : null}">
                             </obap-data-table-header-cell>
                         </th>
@@ -225,11 +326,11 @@ export class ObapDataTableLite extends ObapDataTableController(ObapElement) {
         `;
     }
 
-    _renderScrollBody() {
+    _renderDataBody(rowClass, columns) {
         return html`
             <tbody>
                 ${repeat(this.sortedRows, (row) => row[this.idField], (row) => html`
-                    <tr class="body-row">${this.columns.map((column) => this._renderBodyCell(column, row))}</tr>
+                    <tr class="${rowClass}">${columns.map((column) => this._renderBodyCell(column, row))}</tr>
                 `)}
             </tbody>
         `;
@@ -244,13 +345,9 @@ export class ObapDataTableLite extends ObapDataTableController(ObapElement) {
     }
 
     _resizeHeaderCells() {
-        const visibleCells = this.renderRoot.querySelector('tr.header-row:not([collapsed])').querySelectorAll('th');
-        const invisibleCells = this.renderRoot.querySelector('tr.header-row[collapsed]').querySelectorAll('th');
-
-        for (let i = 0; i < invisibleCells.length; i++) {
-            visibleCells[i].style.width = invisibleCells[i].clientWidth + 'px';
-            visibleCells[i].style.minWidth = invisibleCells[i].clientWidth + 'px';
-        }
+        this.syncHeaderCells('header-fixed-left-row');
+        this.syncHeaderCells('header-scroll-row');
+        this.syncHeaderCells('header-fixed-right-row');
     }
 
     _onColumnClick(e) {

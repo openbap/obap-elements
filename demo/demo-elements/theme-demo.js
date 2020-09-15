@@ -140,9 +140,9 @@ export class ThemeDemo extends ObapThemeController(ObapElement) {
                 </obap-radio-group>
 
                 <div class="items">
-                    <div class="item light-primary-item elevation-1 typography-caption">Light Primary</div>
+                    <div class="item light-primary-item elevation-1 typography-caption">Primary Light</div>
                     <div class="item primary-item elevation-1 typography-caption">Primary</div>
-                    <div class="item dark-primary-item elevation-1 typography-caption">Dark Primary</div>
+                    <div class="item dark-primary-item elevation-1 typography-caption">Primary Dark</div>
                     <div class="item accent-item elevation-1 typography-caption">Accent</div>
                     <div class="item surface-item elevation-1 typography-caption">Surface</div>
                     <div class="item window-item elevation-1 typography-caption">Window</div>

@@ -3,11 +3,12 @@
 Copyright (c) 2020 Paul H Mason. All rights reserved.
 */
 import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
+import { ObapSparklineController} from './obap-sparkline-controller.js';
 
 /**
  * A very small pie chart, drawn without adornments or other chart-specific elements.
  */
-export class ObapPieSparkline extends ObapElement {
+export class ObapPieSparkline extends ObapSparklineController(ObapElement) {
     static get styles() {
         return [css`
             :host {
@@ -84,6 +85,8 @@ export class ObapPieSparkline extends ObapElement {
     }
 
     render() {
+        this._vw = this.clientWidth ? this.clientWidth : 60;
+
         if (this.colors.length === 0) {
             const cs = getComputedStyle(this);
             //this.colors.push(this.getCssVariableValue(cs, '--obap-pie-section-color', 'var(--obap-primary-color, #5c6bc0)'));

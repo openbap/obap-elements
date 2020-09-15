@@ -35,6 +35,10 @@ export class DemoSparklineLine extends ObapElement {
                 margin-bottom: 24px;
             }
 
+            obap-line-sparkline {
+                width: 100%;
+            }
+
             obap-check {
                 margin-right: 24px;
             }
