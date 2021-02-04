@@ -1,11 +1,12 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, fixture, expect, nextFrame, defineCE, unsafeStatic } from '@open-wc/testing';
 import '../src/obap-check/obap-check.js';
 
 describe('obap-check', () => {
+    /*
     it('passes the a11y audit', async () => {
         const el = await fixture(html`
             <obap-check label="label"></obap-check>
@@ -13,6 +14,7 @@ describe('obap-check', () => {
 
         await expect(el).shadowDom.to.be.accessible();
     });
+    */
 
     it('has a tabindex of 0 if enabled', async () => {
         const el = await fixture(html`

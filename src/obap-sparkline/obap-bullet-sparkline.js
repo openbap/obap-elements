@@ -1,44 +1,22 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
-import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
-import { ObapSparklineController} from './obap-sparkline-controller.js';
+import { css, svg, ObapSimpleBaseChart, baseChartStyle } from '../obap-base-chart/obap-simple-base-chart.js';
 
 /**
  * A very small bullet chart, drawn without adornments or other chart-specific elements.
  */
-export class ObapBulletSparkline extends ObapSparklineController(ObapElement) {
+export class ObapBulletSparkline extends ObapSimpleBaseChart {
     static get styles() {
-        return [css`
+        return [baseChartStyle, css`
             :host {
                 --obap-bullet-sparkline-value-color: #212121;
                 --obap-bullet-sparkline-target-value-color: #212121;
                 --obap-bullet-sparkline-range-color: #9E9E9E;
 
-                display: block;
                 width: 300px;
                 height: 30px;
-            }
-    
-            :host([hidden]) {
-                display: none !important;
-            }
-    
-            :host([disabled]) {
-                pointer-events: none;
-            }
-
-            svg {
-                width: 100%;
-                height: 100%;
-            }
-
-            .container {
-                padding: 0;
-                margin: 0;
-                width: 100%;
-                height: 100%;
             }
 
             .value {
@@ -87,23 +65,19 @@ export class ObapBulletSparkline extends ObapSparklineController(ObapElement) {
         this.percentageRanges = [100];
     }
 
-    render() {
-        const vw = this.clientWidth ? this.clientWidth : 300;
-        const vh = this.clientHeight ? this.clientHeight : 30;
+    renderChart() {
+        const vw = this.width;
+        const vh = this.height;
 
         const targetRectWidth = 4;
         const ranges = this._getRangeValues(vw);
 
-        return html`
-            <div class="container">
-                ${svg`<svg viewBox="0 0 ${vw} ${vh}" preserveAspectRatio="none">
-                    <g>
-                        ${ranges.map((r) => svg`<rect class="range" x="${r.x}" y="0" width="${r.width}" height="${vh}" opacity="${r.opacity}"></rect>`)}
-                        <rect class="value" x="0" y="${vh * 0.4}" width="${(this.value / this.maxValue * vw)}" height="${vh * 0.2}"></rect>
-                        <rect class="target-value" x="${(this.targetValue / this.maxValue * vw) - (targetRectWidth / 2)}" y="${vh * 0.2}" width="${targetRectWidth}" height="${vh * 0.6}"></rect> 
-                    </g>
-                </svg>`}
-            </div>
+        return svg`
+            <g>
+                ${ranges.map((r) => svg`<rect class="range" x="${r.x}" y="0" width="${r.width}" height="${vh}" opacity="${r.opacity}"></rect>`)}
+                <rect class="value" x="0" y="${vh * 0.4}" width="${(this.value / this.maxValue * vw)}" height="${vh * 0.2}"></rect>
+                <rect class="target-value" x="${(this.targetValue / this.maxValue * vw) - (targetRectWidth / 2)}" y="${vh * 0.2}" width="${targetRectWidth}" height="${vh * 0.6}"></rect> 
+            </g>
         `;
     }
 

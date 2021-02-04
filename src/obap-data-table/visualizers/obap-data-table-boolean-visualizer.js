@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../obap-element/obap-element.js';
 import { ObapDataTableVisualizerController } from './obap-data-table-visualizer-controller.js';
@@ -77,13 +77,14 @@ export class ObapDataTableBooleanVisualizer extends ObapDataTableVisualizerContr
         const icons = Boolean(this.getParamValue('icons', false));
         const iconSize = this.getParamValue('iconSize', '14px');
         const val = this.value ? trueValue : falseValue;
+        const color = this.value ? (this.getParamValue('trueColor', 'rgba(0, 0, 0, 0.87)')) : (this.getParamValue('falseColor', 'rgba(0, 0, 0, 0.87)'));
         
         return html`
             <div class="container" align="${valueAlign}">
                 ${icons ? html`
-                    <obap-icon icon="${val}" style="width: ${iconSize}; height: ${iconSize};"></obap-icon>
+                    <obap-icon icon="${val}" style="width: ${iconSize}; height: ${iconSize}; fill: ${color};"></obap-icon>
                 ` : html`
-                    <div>${val}</div>
+                    <div style="color: ${color};">${val}</div>
                 `}
             </div>
         `;

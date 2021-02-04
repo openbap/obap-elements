@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import '../../src/obap-pages/obap-pages.js';
 
@@ -49,7 +49,10 @@ import './treeview-demo.js';
 import './markdown-viewer-demo.js';
 import './demo-snippet-demo.js';
 import './layout-demo.js';
-import './data-table-lite-demo.js';
+import './data-table-demo.js';
 import './splitter-container-demo.js';
 import './splitter-demo.js';
 import './status-label-demo.js';
+import './menu-demo.js';
+import './textfield-demo.js';
+import './chart-demo.js';

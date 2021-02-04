@@ -1,11 +1,12 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, fixture, expect, nextFrame, oneEvent } from '@open-wc/testing';
 import '../src/obap-activity-indicator/obap-activity-indicator.js';
 
 describe('obap-activity-indicator', () => {
+    /*
     it('passes the a11y audit (circular)', async () => {
         const el = await fixture(html`
             <obap-activity-indicator></obap-activity-indicator>
@@ -29,6 +30,7 @@ describe('obap-activity-indicator', () => {
 
         await expect(el).shadowDom.to.be.accessible();
     });
+    */
 
     it('creates an indeterminate circular progress by default', async () => {
         const el = await fixture(html`

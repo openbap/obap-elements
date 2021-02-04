@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import { ObapThemeController, themeManager } from '../../src/obap-styles/obap-theme-controller.js';
@@ -25,9 +25,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
             }
 
             .navigator {
-                min-width: 200px;
-                margin: 8px;
-                padding: 8px;
+                margin: 8px 0 8px 8px;
                 overflow: auto;
                 background: var(--obap-surface-color);
             }
@@ -62,8 +60,16 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                 color: var(--obap-on-selection-color);
             }
 
+            obap-selector {
+                margin: 8px;
+            }
+
             obap-pages {
                 height: 100%;
+            }
+
+            obap-splitter {
+                --obap-splitter-size: 8px;
             }
         `];
     }
@@ -80,7 +86,8 @@ export class DemoApp extends ObapThemeController(ObapElement) {
         super();
         themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
-        this.selectedPage = 0;
+        //this.selectedPage = 44;
+        this.selectedPage = 12;
     }
 
     render() {
@@ -102,13 +109,14 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-button</div>
                         <div class="item">obap-callout</div>
                         <div class="item">obap-card</div>
+                        <div class="item">obap-chart</div>
                         <div class="item">obap-check</div>
                         <div class="item">obap-chip</div>
                         <div class="item">obap-circular-progress</div>
                         <div class="item">obap-collapse-container</div>
                         <div class="item">obap-data-pager</div>
+                        <div class="item">obap-data-table</div>
                         <div class="item">obap-data-table-layout</div>
-                        <div class="item">obap-data-table-lite</div>
                         <div class="item">obap-demo-snippet</div>
                         <div class="item">obap-dialog</div>
                         <div class="item">obap-expandable-card</div>
@@ -116,6 +124,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-linear-progress</div>
                         <div class="item">obap-markdown-viewer</div>
                         <div class="item">obap-material</div>
+                        <div class="item">obap-menu</div>
                         <div class="item">obap-navigation-rail</div>
                         <div class="item">obap-pill-navigator</div>
                         <div class="item">obap-radio</div>
@@ -133,6 +142,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-stepper</div>
                         <div class="item">obap-switch</div>
                         <div class="item">obap-tabs</div>
+                        <div class="item">obap-textfield</div>
                         <div class="item">obap-tooltip</div>
                         <div class="item">obap-top-app-bar</div>
                         <div class="item">obap-treeview</div>
@@ -142,6 +152,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-translations</div>
                     </obap-selector>
                 </obap-material>
+                <obap-splitter show-handle></obap-splitter>
                 <obap-material class="pages">
                     <obap-pages selected-index="${this.selectedPage}">
                         <!-- STYLES -->
@@ -158,13 +169,14 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <button-demo></button-demo>
                         <callout-demo></callout-demo>
                         <card-demo></card-demo>
+                        <chart-demo></chart-demo>
                         <check-demo></check-demo>
                         <chip-demo></chip-demo>
                         <circular-progress-demo></circular-progress-demo>
                         <collapse-container-demo></collapse-container-demo>
                         <data-pager-demo></data-pager-demo>
+                        <data-table-demo></data-table-demo>
                         <data-table-layout-demo></data-table-layout-demo>
-                        <data-table-lite-demo></data-table-lite-demo>
                         <demo-snippet-demo></demo-snippet-demo>
                         <dialog-demo></dialog-demo>
                         <expandable-card-demo></expandable-card-demo>
@@ -172,6 +184,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <linear-progress-demo></linear-progress-demo>
                         <markdown-viewer-demo></markdown-viewer-demo>
                         <material-demo></material-demo>
+                        <menu-demo></menu-demo>
                         <navigation-rail-demo></navigation-rail-demo>
                         <pill-navigator-demo></pill-navigator-demo>
                         <radio-demo></radio-demo>
@@ -189,6 +202,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <stepper-demo></stepper-demo>
                         <switch-demo></switch-demo>
                         <tabs-demo></tabs-demo>
+                        <textfield-demo></textfield-demo>
                         <tooltip-demo></tooltip-demo>
                         <top-app-bar-demo></top-app-bar-demo>
                         <treeview-demo></treeview-demo>

@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, fixture, expect, nextFrame, defineCE, unsafeStatic } from '@open-wc/testing';
 import '../src/starter-element/starter-element.js';
@@ -82,6 +82,7 @@ describe('starter-element', () => {
         expect(el.role).to.equal('button');
     });
 
+    /*
     it('passes the a11y audit', async () => {
         const el = await fixture(html`
             <starter-element></starter-element>
@@ -89,4 +90,5 @@ describe('starter-element', () => {
 
         await expect(el).shadowDom.to.be.accessible();
     });
+    */
 });

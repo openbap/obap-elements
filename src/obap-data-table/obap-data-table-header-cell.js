@@ -1,17 +1,16 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import '../obap-icon/obap-icon.js';
 
 export class ObapDataTableHeaderCell extends ObapElement {
     static get styles() {
         return [css`
             :host {
-                display: block;
-                font-weight: 500;
-                padding: 0 20px;
+                display: flex;
+                position: relative;
+                font-weight: 500;  
                 user-select: none;
             }
     
@@ -27,12 +26,14 @@ export class ObapDataTableHeaderCell extends ObapElement {
                 cursor: pointer;
             }
 
-            obap-icon {
+            .arrow-icon {
                 width: 14px;
                 height: 14px;
             }
 
             .container {
+                width: 100%;
+                flex: 1;
                 position: relative;
                 display: flex;
                 flex-direction: row;
@@ -41,7 +42,11 @@ export class ObapDataTableHeaderCell extends ObapElement {
 
             .sort-icon {
                 position: absolute;
-                left: -16px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                left: 4px;
                 top: calc(50% - 1px);
                 transform: translate(0, -50%);
                 opacity: 0;
@@ -51,7 +56,7 @@ export class ObapDataTableHeaderCell extends ObapElement {
                 opacity: 1;
             }
 
-            .container:hover > .sort-icon:not([sorted]) {
+            :host(:hover:not([no-hover])) > .sort-icon:not([sorted]) {
                 opacity: 0.5;
             }
 
@@ -60,6 +65,9 @@ export class ObapDataTableHeaderCell extends ObapElement {
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 text-align: left;
+                width: 100%;
+                margin: 0 20px;
+                overflow: hidden;
             }
 
             .label[column-type="number"], .label[column-type="right"] {
@@ -91,6 +99,12 @@ export class ObapDataTableHeaderCell extends ObapElement {
             sortDescending: {
                 type: Boolean,
                 attribute: 'sort-descending'
+            },
+
+            noHover: {
+                type: Boolean,
+                attribute: 'no-hover',
+                reflect: true
             }
         }
     }
@@ -121,19 +135,32 @@ export class ObapDataTableHeaderCell extends ObapElement {
         this.columnIndex = -1;
         this.sorted = false;
         this.sortDescending = false;
+        this.noHover = false;
     }
 
     render() {
         return html`
-            <div class="container">
-                ${this._renderSortIcon()}
-                <div class="label" column-type="${(this.column.visualizer && this.column.visualizer.params && this.column.visualizer.params.headerAlign) ? this.column.visualizer.params.headerAlign : this.column.type}">${this.column.label}</div>
+            ${this._renderSortIcon()}
+            <div class="container">    
+                <div class="label" column-type="${(this.column.visualizer && this.column.visualizer.params && this.column.visualizer.params.headerAlign) ? this.column.visualizer.params.headerAlign : this.column.type}">${this.column.label}</div>   
             </div>
         `;
     }
 
     _renderSortIcon() {
-        return this.column.sortable ? html`<obap-icon ?sorted="${this.sorted}" class="sort-icon" icon="${this.sorted ? (this.sortDescending ? 'core:arrow-down' : 'core:arrow-up') : 'core:arrow-up'}"></obap-icon>` : null;
+        return this.column.sortable ? html`
+            <div class="sort-icon" ?sorted="${this.sorted}">
+                ${this.sorted ? (this.sortDescending ? this._renderUpArrow() : this._renderDownArrow()) : this._renderUpArrow()}
+            </div>
+        ` : null;
+    }
+
+    _renderUpArrow() {
+        return html`<svg class="arrow-icon" viewBox="0 0 24 24"><g><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"></path></g></svg>`;
+    }
+
+    _renderDownArrow() {
+        return html`<svg class="arrow-icon" viewBox="0 0 24 24"><g><path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"></path></g></svg>`;
     }
 }
 

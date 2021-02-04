@@ -1,37 +1,21 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
-import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
-import { ObapSparklineController} from './obap-sparkline-controller.js';
-
+import { css, svg, ObapSimpleBaseChart, baseChartStyle } from '../obap-base-chart/obap-simple-base-chart.js';
 /**
  * A very small bar chart, drawn without adornments or other chart-specific elements.
  */
-export class ObapBarSparkline extends ObapSparklineController(ObapElement) {
+export class ObapBarSparkline extends ObapSimpleBaseChart {
     static get styles() {
-        return [css`
+        return [baseChartStyle, css`
             :host {
                 --obap-bar-sparkline-background-color: transparent;
                 --obap-bar-sparkline-positive-color: var(--obap-primary-color, #5c6bc0);
                 --obap-bar-sparkline-negative-color: var(--obap-accent-color, #ec407a);
 
-                display: block;
                 width: 300px;
                 height: 60px;
-            }
-    
-            :host([hidden]) {
-                display: none !important;
-            }
-    
-            :host([disabled]) {
-                pointer-events: none;
-            }
-
-            svg {
-                width: 100%;
-                height: 100%;
             }
 
             rect {
@@ -40,13 +24,6 @@ export class ObapBarSparkline extends ObapSparklineController(ObapElement) {
 
             rect[negative] {
                 fill: var(--obap-bar-sparkline-negative-color);
-            }
-
-            .container {
-                padding: 0;
-                margin: 0;
-                width: 100%;
-                height: 100%;
             }
         `];
     }
@@ -72,12 +49,12 @@ export class ObapBarSparkline extends ObapSparklineController(ObapElement) {
         this.barSpacing = 2;
     }
 
-    render() {
+    renderChart() {
         const count = this.values.length;
         if (count === 0) return null;
 
-        const vw = this.clientWidth ? this.clientWidth : 300;
-        const vh = this.clientHeight ? this.clientHeight : 60;
+        const vw = this.width;
+        const vh = this.height;
 
         const min = Math.min(...this.values);
         const max = Math.max(...this.values);
@@ -86,21 +63,17 @@ export class ObapBarSparkline extends ObapSparklineController(ObapElement) {
         const origin = vh - (yScale * Math.abs(min));
         const xOffset = w + this.barSpacing;
 
-        return html`
-            <div class="container">
-                ${svg`<svg viewBox="0 0 ${vw} ${vh}" preserveAspectRatio="none">
-                    <g>
-                        ${this.values.map((value, index) => {
-                            const negative = (value < 0);
-                            const h = (yScale * Math.abs(value));
-                            const x = index * xOffset;
-                            const y = negative ? origin : origin - h;
+        return svg`
+            <g>
+                ${this.values.map((value, index) => {
+                    const negative = (value < 0);
+                    const h = (yScale * Math.abs(value));
+                    const x = index * xOffset;
+                    let y = negative ? origin : origin - h;
 
-                            return svg`<rect ?negative="${negative}" x="${x}" y="${y}" width="${w}" height="${h}"></rect>`}
-                        )}
-                    </g>
-                </svg>`}
-            </div>
+                    return svg`<rect ?negative="${negative}" x="${x}" y="${y}" width="${w}" height="${h}"></rect>`}
+                )}
+            </g>
         `;
     }
 }

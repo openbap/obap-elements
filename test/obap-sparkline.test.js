@@ -1,31 +1,21 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
-import { html, fixture, expect, nextFrame, oneEvent } from '@open-wc/testing';
+import { html, fixture, expect, nextFrame } from '@open-wc/testing';
 import '../src/obap-sparkline/obap-sparkline.js';
 
 describe('obap-bar-sparkline', () => {
-    it('passes the a11y audit', async () => {
-        const values = [10, 9, 5, 2, 9, 11];
-
-        const el = await fixture(html`
-            <obap-bar-sparkline .values="${values}"></obap-bar-sparkline>
-        `);
-
-        await expect(el).shadowDom.to.be.accessible();
-    });
-
     it('renders nothing if there are no values', async () => {     
         const el = await fixture(html`
             <obap-bar-sparkline></obap-bar-sparkline>
         `);
 
         await nextFrame();
-        const container = el.renderRoot.querySelector('.container');
+        const container = el.renderRoot.querySelector('svg');
 
         expect(el).to.not.equal(null);
-        expect(container).to.equal(null);
+        expect(container.childElementCount).to.equal(0);
     });
 
     it('can have positive values only', async () => {
@@ -73,26 +63,16 @@ describe('obap-bar-sparkline', () => {
 });
 
 describe('obap-winloss-sparkline', () => {
-    it('passes the a11y audit', async () => {
-        const values = [10, 9, 5, 2, 9, 11];
-
-        const el = await fixture(html`
-            <obap-winloss-sparkline .values="${values}"></obap-winloss-sparkline>
-        `);
-
-        await expect(el).shadowDom.to.be.accessible();
-    });
-
     it('renders nothing if there are no values', async () => {     
         const el = await fixture(html`
             <obap-winloss-sparkline></obap-winloss-sparkline>
         `);
 
         await nextFrame();
-        const container = el.renderRoot.querySelector('.container');
+        const container = el.renderRoot.querySelector('svg');
 
         expect(el).to.not.equal(null);
-        expect(container).to.equal(null);
+        expect(container.childElementCount).to.equal(0);
     });
 
     it('can have positive values only', async () => {
@@ -153,26 +133,16 @@ describe('obap-winloss-sparkline', () => {
 });
 
 describe('obap-line-sparkline', () => {
-    it('passes the a11y audit', async () => {
-        const values = [10, 9, 5, 2, 9, 11];
-
-        const el = await fixture(html`
-            <obap-line-sparkline .values="${values}"></obap-line-sparkline>
-        `);
-
-        await expect(el).shadowDom.to.be.accessible();
-    });
-
     it('renders nothing if there are no values', async () => {     
         const el = await fixture(html`
             <obap-line-sparkline></obap-line-sparkline>
         `);
 
         await nextFrame();
-        const container = el.renderRoot.querySelector('.container');
+        const container = el.renderRoot.querySelector('svg');
 
         expect(el).to.not.equal(null);
-        expect(container).to.equal(null);
+        expect(container.childElementCount).to.equal(0);
     });
 
     it('can have positive values only', async () => {
@@ -261,26 +231,16 @@ describe('obap-line-sparkline', () => {
 });
 
 describe('obap-pie-sparkline', () => {
-    it('passes the a11y audit', async () => {
-        const values = [10, 9, 5, 2, 9, 11];
-
-        const el = await fixture(html`
-            <obap-pie-sparkline .values="${values}"></obap-pie-sparkline>
-        `);
-
-        await expect(el).shadowDom.to.be.accessible();
-    });
-
     it('renders nothing if there are no values', async () => {     
         const el = await fixture(html`
             <obap-pie-sparkline></obap-pie-sparkline>
         `);
 
         await nextFrame();
-        const container = el.renderRoot.querySelector('.container');
+        const container = el.renderRoot.querySelector('svg');
 
         expect(el).to.not.equal(null);
-        expect(container).to.equal(null);
+        expect(container.childElementCount).to.equal(0);
     });
 
     it('creates a sector for each positive value', async () => {
@@ -372,14 +332,6 @@ describe('obap-pie-sparkline', () => {
 });
 
 describe('obap-bullet-sparkline', () => {
-    it('passes the a11y audit', async () => {
-        const el = await fixture(html`
-            <obap-bullet-sparkline></obap-bullet-sparkline>
-        `);
-
-        await expect(el).shadowDom.to.be.accessible();
-    });
-
     it('renders nothing if there are no values', async () => {     
         const el = await fixture(html`
             <obap-bullet-sparkline></obap-bullet-sparkline>
@@ -401,5 +353,17 @@ describe('obap-bullet-sparkline', () => {
         const ranges = el.renderRoot.querySelectorAll('rect.range');
 
         expect(ranges.length).to.equal(4);
+    });
+});
+
+describe('obap-percentage-sparkline', () => {
+    it('sets value property from attribute', async () => {     
+        const el = await fixture(html`
+            <obap-percentage-sparkline value="25"></obap-percentage-sparkline>
+        `);
+
+        await nextFrame();
+
+        expect(el.value).to.equal(25);
     });
 });

@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 
@@ -30,10 +30,10 @@ export class ObapStatusLabel extends ObapElement {
             .container {
                 display: flex;
                 justify-content: center;
-   
+                align-items: center;
                 height: 20px;
                 line-height: 21px;
-                font-size: 11px;
+                font-size: 10px;
                 text-transform: uppercase;
                 font-weight: 400;
                 -webkit-font-smoothing: antialiased;
@@ -45,7 +45,8 @@ export class ObapStatusLabel extends ObapElement {
         return {
             label: {
                 type: String,
-                attribute: 'label'
+                attribute: 'label',
+                reflect: true
             }
         }
     }

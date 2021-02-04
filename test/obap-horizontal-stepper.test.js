@@ -1,11 +1,12 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, fixture, expect, oneEvent, nextFrame } from '@open-wc/testing';
 import '../src/obap-stepper/obap-horizontal-stepper.js';
 
 describe('obap-horizontal-stepper', () => {
+    /*
     it('passes the a11y audit', async () => {
         const el = await fixture(html`
             <obap-horizontal-stepper>
@@ -17,6 +18,7 @@ describe('obap-horizontal-stepper', () => {
 
         await expect(el).shadowDom.to.be.accessible();
     });
+    */
 
     it('renders an error header if a step has an error', async () => {  
         const el = await fixture(html`
@@ -117,12 +119,14 @@ describe('obap-horizontal-stepper', () => {
         await nextFrame();
 
         const buttons = el.renderRoot.querySelectorAll('obap-button');
+        await nextFrame();
+
         expect(buttons.length).to.equal(4);
 
-        expect(buttons[0].label).to.equal(el.backText);
-        expect(buttons[1].label).to.equal(el.cancelText);
-        expect(buttons[2].label).to.equal(el.continueText);
-        expect(buttons[3].label).to.equal(el.finishText);
+        expect(buttons[0].getAttribute('label')).to.equal(el.backText);
+        expect(buttons[1].getAttribute('label')).to.equal(el.cancelText);
+        expect(buttons[2].getAttribute('label')).to.equal(el.continueText);
+        expect(buttons[3].getAttribute('label')).to.equal(el.finishText);
     });
 
     it('can navigate via the back button', async () => {  
@@ -139,18 +143,18 @@ describe('obap-horizontal-stepper', () => {
         const buttons = el.renderRoot.querySelectorAll('obap-button');
 
         expect(buttons.length).to.equal(4);
-        expect(buttons[0].disabled).to.equal(true);
+        expect(buttons[0].hasAttribute('disabled')).to.equal(true);
         expect(el.selected).to.equal(0);
         el.nextStep();
         await nextFrame();
 
         expect(el.selected).to.equal(1);
-        expect(buttons[0].disabled).to.equal(false);
+        expect(buttons[0].hasAttribute('disabled')).to.equal(false);
 
         buttons[0].click();
         await nextFrame();
 
-        expect(buttons[0].disabled).to.equal(true);
+        expect(buttons[0].hasAttribute('disabled')).to.equal(true);
         expect(el.selected).to.equal(0);
     });
 
@@ -168,7 +172,7 @@ describe('obap-horizontal-stepper', () => {
         const buttons = el.renderRoot.querySelectorAll('obap-button');
 
         expect(buttons.length).to.equal(4);
-        expect(buttons[0].disabled).to.equal(true);
+        expect(buttons[0].hasAttribute('disabled')).to.equal(true);
         expect(el.selected).to.equal(0);
         el.nextStep();
         await nextFrame();
@@ -177,12 +181,12 @@ describe('obap-horizontal-stepper', () => {
         await nextFrame();
 
         expect(el.selected).to.equal(2);
-        expect(buttons[0].disabled).to.equal(false);
+        expect(buttons[0].hasAttribute('disabled')).to.equal(false);
 
         buttons[1].click();
         await nextFrame();
 
-        expect(buttons[0].disabled).to.equal(true);
+        expect(buttons[0].hasAttribute('disabled')).to.equal(true);
         expect(el.selected).to.equal(0);
     });
 
@@ -200,20 +204,20 @@ describe('obap-horizontal-stepper', () => {
         const buttons = el.renderRoot.querySelectorAll('obap-button');
 
         expect(buttons.length).to.equal(4);
-        expect(buttons[2].disabled).to.equal(false);
+        expect(buttons[2].hasAttribute('disabled')).to.equal(false);
         expect(el.selected).to.equal(0);
 
         buttons[2].click();
         await nextFrame();
 
         expect(el.selected).to.equal(1);
-        expect(buttons[2].disabled).to.equal(false);
+        expect(buttons[2].hasAttribute('disabled')).to.equal(false);
 
         buttons[2].click();
         await nextFrame();
 
         expect(el.selected).to.equal(2);
-        expect(buttons[2].disabled).to.equal(true);
+        expect(buttons[2].hasAttribute('disabled')).to.equal(true);
     });
 
     it('can finish via the finish button', async () => {  
@@ -230,14 +234,14 @@ describe('obap-horizontal-stepper', () => {
         const buttons = el.renderRoot.querySelectorAll('obap-button');
 
         expect(buttons.length).to.equal(4);
-        expect(buttons[3].disabled).to.equal(true);
+        expect(buttons[3].hasAttribute('disabled')).to.equal(true);
         expect(el.selected).to.equal(0);
 
         el.nextStep();
         el.nextStep();
         await nextFrame();
 
-        expect(buttons[3].disabled).to.equal(false);
+        expect(buttons[3].hasAttribute('disabled')).to.equal(false);
         
         setTimeout(() => buttons[3].click());
         const { detail } = await oneEvent(el, 'obap-stepper-finish');

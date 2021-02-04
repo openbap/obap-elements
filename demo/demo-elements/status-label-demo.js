@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import '../../src/obap-status-label/obap-status-label.js';
@@ -30,6 +30,23 @@ export class StatusLabelDemo extends ObapElement {
               align-items: center;
               padding: 0;
             }
+
+            obap-status-label {
+                margin-right: 8px;
+                color: white;
+            }
+
+            obap-status-label[label="small"] {
+                background: #EC407A;
+            }
+
+            obap-status-label[label="medium"] {
+                background:#1E88E5;
+            }
+
+            obap-status-label[label="large"] {
+                background:#43A047;
+            }
         `];
     }
     
@@ -38,7 +55,9 @@ export class StatusLabelDemo extends ObapElement {
             <div class="container">
                 <div class="title">Demo</div>
                 <div class="row">
-                    <obap-status-label label="draft"></obap-status-label>
+                    <obap-status-label label="small"></obap-status-label>
+                    <obap-status-label label="medium"></obap-status-label>
+                    <obap-status-label label="large"></obap-status-label>
                 </div>
             </div>
         `;

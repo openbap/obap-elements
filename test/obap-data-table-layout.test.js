@@ -1,15 +1,25 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { fixture, expect, nextFrame, oneEvent } from '@open-wc/testing';
 import { html, css, svg, ObapElement } from '../src/obap-element/obap-element.js';
 import '../src/obap-data-table-layout/obap-data-table-layout.js';
 
 describe('obap-data-table-layout', () => {
+    /*
+    it('passes the a11y audit', async () => {
+        const el = await buildUi();
+
+        await expect(el).shadowDom.to.be.accessible();
+    });
+    */
+    
     it('can be created', async () => {     
         const el = await buildUi();
         await nextFrame();
+
+        el.updateLayout();
 
         expect(el).to.not.equal(null);
         expect(el.tagName.toLowerCase()).to.equal('obap-data-table-layout');

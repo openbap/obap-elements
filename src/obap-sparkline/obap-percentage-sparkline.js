@@ -1,14 +1,13 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
-import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
-import { ObapSparklineController} from './obap-sparkline-controller.js';
+import { html, css, ObapElement } from '../obap-element/obap-element.js';
 
 /**
  * A very small percentage chart, drawn without adornments or other chart-specific elements.
  */
-export class ObapPercentageSparkline extends ObapSparklineController(ObapElement) {
+export class ObapPercentageSparkline extends ObapElement {
     static get styles() {
         return [css`
             :host {

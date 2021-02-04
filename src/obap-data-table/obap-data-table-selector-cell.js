@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import '../obap-check/obap-check.js';
@@ -29,6 +29,10 @@ export class ObapDataTableSelectorCell extends ObapElement {
                 align-items: center;
                 padding: 0 8px;
             }
+
+            obap-check {
+                --obap-check-background-color: var(--obap-surface-color, white);
+            }
         `];
     }
 
@@ -42,6 +46,11 @@ export class ObapDataTableSelectorCell extends ObapElement {
             indeterminate: {
                 type: Boolean,
                 attribute: 'indeterminate'
+            },
+
+            disabled: {
+                type: Boolean,
+                attribute: 'disabled'
             }
         }
     }
@@ -50,18 +59,23 @@ export class ObapDataTableSelectorCell extends ObapElement {
         super();
         this.selected = false;
         this.indeterminate = false;
+        this.disabled = false;
     }
 
     render() {
         return html`
             <div class="container" @obap-item-selected="${this._onSelect}">
-                <obap-check ?selected="${this.selected}" ?indeterminate="${this.indeterminate}" no-ink></obap-check>
+                <obap-check no-ink ?selected="${this.selected}" ?indeterminate="${this.indeterminate}" ?disabled="${this.disabled}"></obap-check>
             </div>
         `;
     }
 
     _onSelect(e) {
         this.selected = e.detail.selected;
+
+        this.fireMessage('obap-data-table-row-selected', {
+            selected: this.selected
+        });
     }
 }
 

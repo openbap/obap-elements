@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import './obap-mobile-application.js';
@@ -77,7 +77,7 @@ export class DemoMobileApp extends ObapThemeController(ObapElement) {
                 </obap-application-view>
 
                 <obap-application-view name="data-tables" label="Data Tables" icon="app:data-tables" hide-sub-view-scroll-buttons>
-                    <obap-application-content name="data-table-lite" label="Data Table Lite"><demo-data-table-lite class="demo"></demo-data-table-lite></obap-application-content>
+                    <obap-application-content name="data-table" label="Data Table"><demo-data-table class="demo"></demo-data-table></obap-application-content>
                     <obap-application-content name="data-tables-pager" label="Data Pager"><demo-data-pager class="demo"></demo-data-pager></obap-application-content>
                 </obap-application-view>
 

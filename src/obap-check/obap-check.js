@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, svg, ObapInputElement } from '../obap-input-element/obap-input-element.js';
 import { body } from '../obap-styles/obap-typography.js';
@@ -34,10 +34,14 @@ export class ObapCheck extends ObapInputElement {
                 --obap-check-selected-color: var(--obap-primary-color, #5c6bc0);
                 --obap-check-indeterminate-color: var(--obap-primary-color, #5c6bc0);
                 --obap-check-unselected-color: var(--obap-text-secondary-color, rgba(0, 0, 0, 0.54));
+                --obap-check-background-color: white;
+                --obap-check-disabled-background-color: transparent;
                 --obap-check-disabled-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-check-ripple-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 display: inline-block;
                 outline: 0;
+                height: 20px;
+                box-sizing: content-box;
             }
 
             :host([hidden]) {
@@ -58,6 +62,10 @@ export class ObapCheck extends ObapInputElement {
                 border: 2px solid var(--obap-check-disabled-color);
             }
 
+            :host([disabled]) .container {
+                background: var(--obap-check-disabled-background-color);
+            }
+
             :host([disabled][selected]) .check-container, :host([disabled][indeterminate]) .check-container {
                 border: 2px solid transparent;
                 background: var(--obap-check-disabled-color);
@@ -68,6 +76,7 @@ export class ObapCheck extends ObapInputElement {
             }
 
             .container {
+                height: 100%;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -80,12 +89,13 @@ export class ObapCheck extends ObapInputElement {
                 height: 12px;
                 width: 12px;
                 border-radius: 2px;
-                background: transparent;
+                background: var(--obap-check-background-color);
+                margin-left: 2px;
                 border: 2px solid var(--obap-check-unselected-color);
             }
 
             .label {
-                margin-left: 8px;
+                margin-left: 10px;
             }
 
             .check {

@@ -1,11 +1,12 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, fixture, expect, oneEvent, nextFrame } from '@open-wc/testing';
 import '../src/obap-selector/obap-selector.js';
 
 describe('obap-selector', () => {
+    /*
     it('passes the a11y audit', async () => {
         const el = await fixture(html`
             <obap-selector></obap-selector>
@@ -13,6 +14,7 @@ describe('obap-selector', () => {
 
         await expect(el).shadowDom.to.be.accessible();
     });
+    */
 
     it('adds slotted children to items', async () => {
         const el = await fixture(html`

@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { css } from 'lit-element';
 
@@ -183,6 +183,8 @@ const elevation24 = css`
 const elevation = [elevation0, elevation1, elevation2, elevation3, elevation4, elevation6, elevation8, elevation12, elevation16, elevation24];
 const hostElevation = [hostElevation0, hostElevation1, hostElevation2, hostElevation3, hostElevation4, hostElevation6, hostElevation8, hostElevation12, hostElevation16, hostElevation24];
 
-export { elevation0, hostElevation0, elevation1, hostElevation1, elevation2, hostElevation2, elevation3, hostElevation3, elevation4, hostElevation4, 
-         elevation6, hostElevation6, elevation8, hostElevation8, elevation12, hostElevation12, elevation16, hostElevation16, elevation24, hostElevation24, 
-         elevation, hostElevation }
+export {
+    elevation0, hostElevation0, elevation1, hostElevation1, elevation2, hostElevation2, elevation3, hostElevation3, elevation4, hostElevation4,
+    elevation6, hostElevation6, elevation8, hostElevation8, elevation12, hostElevation12, elevation16, hostElevation16, elevation24, hostElevation24,
+    elevation, hostElevation
+}

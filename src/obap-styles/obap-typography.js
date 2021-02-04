@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { css } from 'lit-element';
 
@@ -93,7 +93,7 @@ const caption = css`
     -webkit-font-smoothing: antialiased;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; 
   }
 `;
 

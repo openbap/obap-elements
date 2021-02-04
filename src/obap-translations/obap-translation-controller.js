@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 function localize(key, defaultValue, casing, ...params) {
     return window.ObapTranslations ? window.ObapTranslations.localize(key, defaultValue, casing, params) : window.ObapTranslations._format(defaultValue, casing, params);

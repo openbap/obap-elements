@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 
@@ -37,14 +37,14 @@ import { html, css, ObapElement } from '../obap-element/obap-element.js';
  * 
  * |Variable                                 |Default Value                                 |
  * |-----------------------------------------|----------------------------------------------|
- * |--obap-data-table-layout-color           |--obap-text-primary-color, rgba(0, 0, 0, 0.87)|
+ * |--obap-data-table-layout-color           |rgba(0, 0, 0, 0.87)|
  * |--obap-data-table-layout-background-color|transparent                                   |
  * 
  * You can also set a top level border color and style and then just set the border widths on the individual parts, or override the color and style per part.
  * 
  * |Variable                             |Default Value                                       |
  * |-------------------------------------|----------------------------------------------------|
- * |--obap-data-table-layout-border-color|--obap-divider-on-surface-color, rgba(0, 0, 0, 0.20)|
+ * |--obap-data-table-layout-border-color|rgba(0, 0, 0, 0.20)|
  * |--obap-data-table-layout-border-style|solid                                               |
  * 
  * Each slotted part inherits the overall background and foreground colors, but you can override them individually, and set the border properties. They are named according to the following rules:
@@ -57,7 +57,7 @@ import { html, css, ObapElement } from '../obap-element/obap-element.js';
  * |--obap-data-table-layout-{part-slot-name}-border-style    |--obap-data-table-layout-border-style|
  * |--obap-data-table-layout-{part-slot-name}-border-width    |0                                    |
  */
-export class ObapDataTableLayout extends ObapElement {
+export class OpenDataTableLayout extends ObapElement {
     static get styles() {
         return [css`
             :host {
@@ -65,6 +65,12 @@ export class ObapDataTableLayout extends ObapElement {
                 --obap-data-table-layout-background-color: transparent;
                 --obap-data-table-layout-border-color: var(--obap-divider-on-surface-color, rgba(0, 0, 0, 0.20));
                 --obap-data-table-layout-border-style: solid;
+
+                --obap-data-table-layout-detail-color: inherit;
+                --obap-data-table-layout-detail-background-color: inherit;
+                --obap-data-table-layout-detail-border-color: var(--obap-data-table-layout-border-color);
+                --obap-data-table-layout-detail-border-style: var(--obap-data-table-layout-border-style);
+                --obap-data-table-layout-detail-border-width: 0;
 
                 --obap-data-table-layout-grouper-color: inherit;
                 --obap-data-table-layout-grouper-background-color: inherit;
@@ -187,13 +193,13 @@ export class ObapDataTableLayout extends ObapElement {
                 background: var(--obap-data-table-layout-background-color);
                 display: grid;
                 
-                grid-template-columns: auto auto 1fr auto auto; 
-                grid-template-rows:    auto auto 1fr auto auto;
-                grid-template-areas: "grouper              grouper             grouper         grouper              grouper"
-                                     "header-action-left   header-fixed-left   header-scroll   header-fixed-right   header-action-right"
-                                     "body-action-left     body-fixed-left     body-scroll     body-fixed-right     body-action-right"
-                                     "footer-action-left   footer-fixed-left   footer-scroll   footer-fixed-right   footer-action-right"
-                                     "pager                pager               pager           pager                pager"
+                grid-template-columns: auto auto 1fr auto auto auto; 
+                grid-template-rows:    auto auto 1fr auto auto auto;
+                grid-template-areas: "grouper              grouper             grouper         grouper              grouper               grouper"
+                                     "header-action-left   header-fixed-left   header-scroll   header-fixed-right   header-action-right   detail"
+                                     "body-action-left     body-fixed-left     body-scroll     body-fixed-right     body-action-right     detail"
+                                     "footer-action-left   footer-fixed-left   footer-scroll   footer-fixed-right   footer-action-right   detail"
+                                     "pager                pager               pager           pager                pager                 pager"
             }
 
             .grid-part {
@@ -202,7 +208,17 @@ export class ObapDataTableLayout extends ObapElement {
                 overflow: hidden;
                 box-sizing: border-box;
                 outline: 0;
-         
+            }
+
+            .detail {
+                grid-area: detail;
+                color: var(--obap-data-table-layout-detail-color);
+                background: var(--obap-data-table-layout-detail-background-color);
+                
+                border-color: var(--obap-data-table-layout-detail-border-color);
+                border-style: var(--obap-data-table-layout-detail-border-style);
+                border-width: var(--obap-data-table-layout-detail-border-width);
+                
             }
 
             .grouper {
@@ -375,7 +391,6 @@ export class ObapDataTableLayout extends ObapElement {
             .empty {
                 border: none;
             }
-            
         `];
     }
 
@@ -408,6 +423,8 @@ export class ObapDataTableLayout extends ObapElement {
     render() {
         return html`
             <div class="container">
+                <div tabindex="0" class="grid-part detail" no-scroll><slot name="detail"></slot></div>
+
                 <div tabindex="0" class="grid-part grouper" no-scroll><slot name="grouper"></slot></div>
                 
                 <div tabindex="0" class="grid-part header-action-left" no-scroll><slot name="header-action-left"></slot></div>
@@ -433,31 +450,61 @@ export class ObapDataTableLayout extends ObapElement {
         `;
     }
 
-    _handleSlotChangeEvent(e) {
-        if (this._slotLayoutComplete) return;
-        this._slotLayoutComplete = true;
-
+    updateLayout() {
+        this._resetScrollElements();
         this._positionScrollAreas();
 
-        let emptyElements = [...this.renderRoot.querySelectorAll('slot')].filter((slot => slot.assignedElements().length === 0)).map((slot) => slot.parentElement);
+        this._slotLayoutComplete = false;
+    }
 
-        emptyElements.forEach((el) => {
-            if ((el.clientWidth <= 1) || (el.clientHeight <= 1)) {
-                el.classList.add('empty'); 
+    _handleSlotChangeEvent(e) {
+        if (!this._slotLayoutComplete) {
+            this._slotLayoutComplete = true
+
+            let currentEmptyElements = [...this.renderRoot.querySelectorAll('slot')].filter((slot) => slot.parentElement.classList.contains('empty')).map((slot) => slot.parentElement);
+            
+            currentEmptyElements.forEach((el) => {
+                el.classList.remove('empty');
+            });
+
+            this._positionScrollAreas();
+
+            let emptyElements = [...this.renderRoot.querySelectorAll('slot')].filter((slot => slot.assignedElements().length === 0)).map((slot) => slot.parentElement);
+
+            emptyElements.forEach((el) => {
+                if ((el.clientWidth <= 1) || (el.clientHeight <= 1)) {
+                    el.classList.add('empty');
+                }
+            });
+        }
+    }
+
+    _hScrollHandler(e) {
+        const el = e.target;
+
+        requestAnimationFrame(() => {
+            this._hSync(el);
+
+            if (!el.classList.contains('hidden-scrollbar')) {
+                this.fireMessage('open-data-table-horizontal-scroll', { position: el.scrollLeft, clientWidth: el.clientWidth, scrollWidth: el.scrollWidth })
             }
         });
     }
 
-    _hScrollHandler(e) {
-        this._hSync(e.target);
-    }
-
     _vScrollHandler(e) {
-        this._vSync(e.target);
+        const el = e.target;
+
+        requestAnimationFrame(() => {
+            this._vSync(el);
+
+            if (!el.classList.contains('hidden-scrollbar')) {
+                this.fireMessage('open-data-table-vertical-scroll', { position: el.scrollTop, clientHeight: el.clientHeight, scrollHeight: el.scrollHeight })
+            }
+        });
     }
 
     _hSync(src) {
-        if (src._ignoreLeftScroll) {
+        if ((src._ignoreLeftScroll) || (src.offsetHeight < 1.1)) {
             src._ignoreLeftScroll = false;
             return;
         }
@@ -470,7 +517,7 @@ export class ObapDataTableLayout extends ObapElement {
     }
 
     _vSync(src) {
-        if (src._ignoreTopScroll) {
+        if ((src._ignoreTopScroll) || (src.offsetWidth < 1.1)) {
             src._ignoreTopScroll = false;
             return;
         }
@@ -485,6 +532,28 @@ export class ObapDataTableLayout extends ObapElement {
     _hasScrollbarStyle() {
         const style = getComputedStyle(this);
         return style.scrollbarWidth; // This basically identifies Firefox.
+    }
+
+    _resetScrollElements() {
+        const vElements = [...this.renderRoot.querySelectorAll('div[v-scroll]')];
+
+        vElements.forEach((el, index) => {
+            let div = el.querySelector('div.scroll-spacer');
+
+            if (div) {
+                el.removeChild(div);
+            }
+        });
+
+        const hElements = [...this.renderRoot.querySelectorAll('div[h-scroll]')];
+
+        hElements.forEach((el, index) => {
+            let div = el.querySelector('div.scroll-spacer');
+
+            if (div) {
+                el.removeChild(div);
+            }
+        });
     }
 
     _positionScrollAreas() {
@@ -511,15 +580,18 @@ export class ObapDataTableLayout extends ObapElement {
 
             if (index !== lastVIndex) {
                 el.classList.add('hidden-scrollbar');
+            } else {
+                el.classList.remove('hidden-scrollbar');
             }
 
             el.addEventListener('scroll', this._boundVScrollHandler, { passive: true });
         });
 
         // Horizontal scrollbar on bottom xxx-scroll.
+        //this._hElements = [...this.renderRoot.querySelectorAll('div[h-scroll]')].filter((el) => !el.classList.contains('empty'));
         this._hElements = [...this.renderRoot.querySelectorAll('div[h-scroll]')];
         const lastHIndex = this._hElements.length - 1;
-        const maxWidth = Math.max(...this._hElements.map((el) => el.scrollWidth));
+        const maxWidth = Math.max(...this._hElements.filter((el) => !el.classList.contains('empty')).map((el) => el.scrollWidth));
 
         this._hElements.forEach((el, index) => {
             el.style.overflowX = 'auto';
@@ -539,6 +611,8 @@ export class ObapDataTableLayout extends ObapElement {
 
             if (index !== lastHIndex) {
                 el.classList.add('hidden-scrollbar');
+            } else {
+                el.classList.remove('hidden-scrollbar');
             }
 
             el.addEventListener('scroll', this._boundHScrollHandler, { passive: true });
@@ -569,4 +643,4 @@ export class ObapDataTableLayout extends ObapElement {
     }
 }
 
-window.customElements.define('obap-data-table-layout', ObapDataTableLayout);
+window.customElements.define('obap-data-table-layout', OpenDataTableLayout);

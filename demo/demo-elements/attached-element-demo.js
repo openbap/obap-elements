@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import { title, body, code } from '../../src/obap-styles/obap-typography.js';
@@ -161,7 +161,7 @@ export class AttachedElementDemo extends ObapElement {
                                     <obap-radio label="middle-top"></obap-radio>
                                     <obap-radio label="middle-bottom"></obap-radio>
                                     <obap-radio label="center"></obap-radio>
-                                </obap-radio-group>
+                                </obap-radio-group> 
                             </td>
                         </tr>
 

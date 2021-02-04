@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
@@ -121,6 +121,22 @@ export class ObapMarkdownViewer extends ObapElement {
         this._src = '';
         this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
         this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
+
+        const renderer = {
+            heading(text, level) {
+                const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+                return `
+                      <h${level}>
+                        <a name="${escapedText}" class="anchor" href="#${escapedText}">
+                          <span class="header-link"></span>
+                        </a>
+                        ${text}
+                      </h${level}>`;
+            }
+        };
+
+        marked.use({ renderer });
     }
 
     updated(changedProperties) {
@@ -147,7 +163,7 @@ export class ObapMarkdownViewer extends ObapElement {
             }
 
             let lineIndent = line.match(/^(\s*)/)[0].length;
-            
+
             if (prev === null) {
                 return lineIndent;
             }

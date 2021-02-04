@@ -1,45 +1,26 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
-import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
-import { ObapSparklineController} from './obap-sparkline-controller.js';
+import { css, svg, ObapSimpleBaseChart, baseChartStyle } from '../obap-base-chart/obap-simple-base-chart.js';
 
 /**
  * A very small pie chart, drawn without adornments or other chart-specific elements.
  */
-export class ObapPieSparkline extends ObapSparklineController(ObapElement) {
+export class ObapPieSparkline extends ObapSimpleBaseChart {
     static get styles() {
-        return [css`
+        return [baseChartStyle, css`
             :host {
                 --obap-pie-sparkline-separator-color: white;
                 --obap-pie-section-color: var(--obap-primary-color, #5c6bc0);
                 --obap-pie-sparkline-separator-width: 2;
 
-                display: block;
                 width: 60px;
                 height: 60px;
             }
-    
-            :host([hidden]) {
-                display: none !important;
-            }
-    
-            :host([disabled]) {
-                pointer-events: none;
-            }
 
-            svg {
-                width: 100%;
-                height: 100%;
+            .svg-container {
                 transform: rotate(-90deg);
-            }
-
-            .container {
-                padding: 0;
-                margin: 0;
-                width: 100%;
-                height: 100%;
             }
 
             .outline {
@@ -78,15 +59,12 @@ export class ObapPieSparkline extends ObapSparklineController(ObapElement) {
     constructor() {
         super();
         this.values = [];
-        this._vw = 60;
         this.donutRadius = 0;
         this.colors = [];
         this.hideSeparators = false;
     }
 
-    render() {
-        this._vw = this.clientWidth ? this.clientWidth : 60;
-
+    renderChart() {
         if (this.colors.length === 0) {
             const cs = getComputedStyle(this);
             //this.colors.push(this.getCssVariableValue(cs, '--obap-pie-section-color', 'var(--obap-primary-color, #5c6bc0)'));
@@ -96,25 +74,19 @@ export class ObapPieSparkline extends ObapSparklineController(ObapElement) {
         this._colorCount = this.colors.length;
         const polygons = this._getPaths();
 
-        return polygons ? html`
-            <div class="container">
-                ${svg`
-                    <svg viewBox="0 0 ${this._vw} ${this._vw}" preserveAspectRatio="none">
-                        <defs>
-                            <mask id="mask">
-                                <rect width="100%" height="100%" fill="white"/>
-                                <circle cx="${this._vw / 2}" cy="${this._vw / 2}" r="${this.donutRadius}" fill="black" opacity="1"></circle>
-                            </mask>
-                        </defs>
-                        <g mask="url(#mask)">
-                            ${polygons.map((polygon, index) => svg`
-                                <path class="wedge" d="${polygon.wedge}" fill="${this._getNextColor(index)}"></path>
-                                ${this.hideSeparators ? null : svg`<path class="outline" d="${polygon.outline}"></path>`}
-                            `)}
-                        </g>
-                    </svg>
-                `}
-            </div>
+        return polygons ? svg`
+                <defs>
+                    <mask id="mask">
+                        <rect width="100%" height="100%" fill="white"/>
+                        <circle cx="${this.width / 2}" cy="${this.width / 2}" r="${this.donutRadius}" fill="black" opacity="1"></circle>
+                    </mask>
+                </defs>
+                <g mask="url(#mask)">
+                    ${polygons.map((polygon, index) => svg`
+                        <path class="wedge" d="${polygon.wedge}" fill="${this._getNextColor(index)}"></path>
+                        ${this.hideSeparators ? null : svg`<path class="outline" d="${polygon.outline}"></path>`}
+                    `)}
+                </g>
         ` : null;
     }
 
@@ -123,7 +95,7 @@ export class ObapPieSparkline extends ObapSparklineController(ObapElement) {
         this._itemCount = rawItems.length;
         if (this._itemCount === 0) return null;
 
-        const cx = (this._vw / 2);
+        const cx = (this.width / 2);
         const cy = cx;
         const r = cx;
         const pi2 = 2 * Math.PI;

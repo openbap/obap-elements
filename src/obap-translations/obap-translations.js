@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { ObapElement } from '../obap-element/obap-element.js';
 import { obapFetch } from '../obap-fetch/obap-fetch.js';

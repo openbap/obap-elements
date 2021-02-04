@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, fixture, expect, nextFrame, defineCE, unsafeStatic } from '@open-wc/testing';
 import { LitElement } from 'lit-element';

@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../obap-element/obap-element.js';
 import { ObapDataTableVisualizerController } from './obap-data-table-visualizer-controller.js';
@@ -45,7 +45,8 @@ export class ObapDataTablePercentageVisualizer extends ObapDataTableVisualizerCo
         //const minWidth = this.getParamValue('minWidth', 'auto');
         //const style = `min-width: ${minWidth};`;
         let style = this.getBaseStyle();
-        style = style.replace('bar-color', '--obap-percentage-sparkline-selected-color');
+        style = style.replace('fill-color', '--obap-percentage-sparkline-selected-color');
+        style = style.replace('background-color', '--obap-percentage-sparkline-unselected-color');
 
         /*
         --obap-percentage-sparkline-selected-color: var(--obap-primary-color, #5c6bc0);

@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, svg, ObapElement } from '../obap-element/obap-element.js';
 import { classMap } from 'lit-html/directives/class-map.js';
@@ -63,7 +63,6 @@ export class ObapSelectContainer extends ObapSelectController(ObapElement) {
 
             .container {
                 position: relative;
-
                 height: 100%;
             }
 

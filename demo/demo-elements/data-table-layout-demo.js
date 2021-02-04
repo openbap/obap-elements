@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import '../../src/obap-data-table-layout/obap-data-table-layout.js';
@@ -110,6 +110,13 @@ export class DataTableLayoutDemo extends ObapElement {
                 border-left: 1px solid silver;
             }
 
+            .detail {
+                width: 200px;
+                height: 100%;
+                border-left: 1px solid silver;
+                border-right: 1px solid silver;
+            }
+
             .large-h {
                 width: 2000px;
             }
@@ -150,6 +157,8 @@ export class DataTableLayoutDemo extends ObapElement {
                         <div class="footer-action-right part" slot="footer-action-right">footer-action-right</div>
                         
                         <div class="pager part" slot="pager">pager</div>
+
+                        <div class="pager detail" slot="detail">detail</div>
                     </obap-data-table-layout>
 
                 </div>

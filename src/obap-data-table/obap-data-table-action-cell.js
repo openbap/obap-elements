@@ -1,9 +1,8 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
-import '../obap-icon/obap-icon.js';
 
 export class ObapDataTableActionCell extends ObapElement {
     static get styles() {
@@ -31,10 +30,11 @@ export class ObapDataTableActionCell extends ObapElement {
                 cursor: pointer;
             }
 
-            obap-icon {
+            .menu-icon {
                 width: 14px;
                 height: 14px;
                 margin-top: 1px;
+                fill: red;
             }
         `];
     }
@@ -47,11 +47,6 @@ export class ObapDataTableActionCell extends ObapElement {
 
             actions: {
                 type: Array
-            },
-
-            icon: {
-                type: String,
-                attribute: 'icon'
             }
         }
     }
@@ -60,13 +55,12 @@ export class ObapDataTableActionCell extends ObapElement {
         super();
         this.row = null;
         this.actions = [];
-        this.icon = '';
     }
 
     render() {
         return html`
             <div class="container">
-                <obap-icon icon="core:menu"></obap-icon>
+                <svg class="menu-icon" viewBox="0 0 24 24"><g><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></g></svg>
             </div>
         `;
     }

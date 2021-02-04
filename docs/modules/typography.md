@@ -8,7 +8,7 @@ The predefined font styles depend on the use of the Roboto (normal and monospace
 
 ### Roboto
 
-Use just the Roboto font if you don't need monospace or simplified Chinese supprt.
+Use just the Roboto font if you don't need monospace or simplified Chinese support.
 
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@ font-family: 'Roboto', sans-serif;
 
 ### Roboto + Noto
 
-If you need simplifed Chinese support, use the following:
+If you need simplified Chinese support, use the following:
 
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -49,7 +49,7 @@ font-family: 'Noto Sans SC', sans-serif;
 
 ### Roboto + Roboto Mono + Noto
 
-If you need simplifed Chinese support and Roboto monospace (for code samples), use the following:
+If you need simplified Chinese support and Roboto monospace (for code samples), use the following:
 
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Roboto+Mono&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">

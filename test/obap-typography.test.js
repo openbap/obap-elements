@@ -1,6 +1,6 @@
 /*
 @license
-Copyright (c) 2020 Paul H Mason. All rights reserved.
+Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, fixture, expect, nextFrame, defineCE, unsafeStatic } from '@open-wc/testing';
 import { display, headline, title, subtitle, body, button, caption, overline, code, typography } from '../src/obap-styles/obap-typography.js';
