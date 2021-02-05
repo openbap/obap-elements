@@ -102,6 +102,7 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
             }
 
             .icon-right {
+                margin-left: 16px;
                 margin-right: -20px;
                 width: 16px;
                 height: 16px;

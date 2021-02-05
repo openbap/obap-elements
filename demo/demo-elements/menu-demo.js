@@ -205,6 +205,36 @@ export class MenuDemo extends ObapElement {
                                 label: 'File Icon Theme',
                                 separator: true
                             },
+                            // RADIO START
+                            {
+                                label: 'Radio 1',
+                                toggles: true,
+                                toggleGroup: 'preferences'
+                            },
+                            {
+                                label: 'Radio 2',
+                                toggles: true,
+                                toggleOn: true,
+                                toggleGroup: 'preferences'
+                            },
+                            {
+                                label: 'Radio 3',
+                                toggles: true,
+                                toggleGroup: 'preferences'
+                            },
+                            {
+                                label: 'Radio 4',
+                                toggles: true,
+                                toggleGroup: 'preferences'
+                            },
+                            {
+                                label: 'Radio 5',
+                                toggles: true,
+                                separator: true,
+                                toggleGroup: 'preferences'
+                            },
+
+                            // RADIO END
                             {
                                 label: 'Turn on Settings Sync...'
                             }

@@ -176,7 +176,18 @@ export const ObapMenuController = (superClass) =>
                     }
                 } else {
                     if (item.toggles) {
-                        item.toggleOn = !item.toggleOn;
+                        if (item.toggleGroup) {
+                            const groupItems = this.items.filter(menuItem => menuItem.toggleGroup === item.toggleGroup);
+
+                            if (groupItems.length > 1) {
+                                groupItems.forEach(menuItem => menuItem.toggleOn = false);
+                                item.toggleOn = true;
+                            } else {
+                                item.toggleOn = !item.toggleOn;
+                            }
+                        } else {
+                            item.toggleOn = !item.toggleOn;
+                        }
                     }
 
                     this.fireMessage('obap-menu-item-select', { item: item });
@@ -202,7 +213,7 @@ export const ObapMenuController = (superClass) =>
                 const originalIndex = index;
                 let item = menu.items[index];
 
-                while (item.disabled) {
+                while (item && item.disabled) {
                     index++;
                     item = menu.items[index];
 
@@ -243,7 +254,7 @@ export const ObapMenuController = (superClass) =>
             const originalIndex = index;
             let item = menu.items[index];
 
-            while (item.disabled) {
+            while (item && item.disabled) {
                 index--;
                 item = menu.items[index];
 

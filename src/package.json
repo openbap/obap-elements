@@ -1,6 +1,6 @@
 {
   "name": "@obap/obap-elements",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "A LitElement Web Component Suite for line of business applications.",
   "author": "obap-elements",
   "license": "MIT",

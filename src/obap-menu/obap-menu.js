@@ -4,11 +4,12 @@ Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { ObapMenuController } from './obap-menu-controller.js';
+import { body } from '../obap-styles/obap-typography.js';
 import './obap-popup-menu.js';
 
 export class ObapMenu extends ObapMenuController(ObapElement) {
     static get styles() {
-        return [css`
+        return [body, css`
             :host {
                 --obap-menu-bar-height: 24px;
                 --obap-menu-bar-color: var(--obap-on-primary-color, #FFFFFF);
@@ -66,7 +67,7 @@ export class ObapMenu extends ObapMenuController(ObapElement) {
     
     render() {
         return html`
-            <div class="container">
+            <div class="container typography-body">
                 ${this.items.map((item) => this._renderItem(item))}
             </div>
         `;
