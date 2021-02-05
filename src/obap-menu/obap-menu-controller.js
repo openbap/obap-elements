@@ -118,6 +118,7 @@ export const ObapMenuController = (superClass) =>
             this.tabIndex = 0;
             this.over = false;
             this._hasIcons = false;
+            this._tracking = false;
 
             this._boundHandleClick = this._handleClick.bind(this);
             this._boundHandleKeyPress = this._handleKeyPress.bind(this);
@@ -321,10 +322,12 @@ export const ObapMenuController = (superClass) =>
 
         _handleFocus() {
             this._focused = true;
+            this._tracking = true;
         }
 
         _handleBlur() {
             this._focused = false;
+            this._tracking = false;
         }
 
         _handleClick(e) {

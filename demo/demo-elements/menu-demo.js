@@ -15,6 +15,23 @@ export class MenuDemo extends ObapElement {
             .container {
                 height: 100%;
             }
+
+            .static-menu {
+                margin-top: 8px;
+            }
+
+            obap-popup-menu.static {
+                --obap-menu-height: 24px;
+                --obap-menu-color: var(--obap-on-surface-color);
+                --obap-menu-background-color: var(--obap-surface-color);
+                --obap-menu-active-color: var(--obap-on-selection-color);
+                --obap-menu-active-background-color: var(--obap-selection-color);
+                --obap-menu-disabled-color: var(--obap-text-disabled-color);
+                --obap-menu-disabled-background-color: var(--obap-surface-color);
+                --obap-menu-separator-color: rgba(0, 0, 0, 0.1);
+
+                outline: 1px solid lightgrey;
+            }
         `];
     }
 
@@ -1238,6 +1255,9 @@ export class MenuDemo extends ObapElement {
         return html`
             <div class="container">
                 <obap-menu .items="${this.items}" @obap-menu-item-select="${this._menuItemSelect}"></obap-menu>
+                <div class="static-menu">
+                    <obap-popup-menu class="static" static .items="${this.items}" @obap-menu-item-select="${this._menuItemSelect}"></obap-popup-menu>
+                </div>
             </div>
         `;
     }

@@ -43,6 +43,7 @@ export class ObapMenu extends ObapMenuController(ObapElement) {
                 position: relative;
                 display: flex;
                 align-items: center;
+                white-space: nowrap;
                 padding: 0 8px;
                 color: var(--obap-menu-bar-color);
                 background: var(--obap-menu-bar-background-color);

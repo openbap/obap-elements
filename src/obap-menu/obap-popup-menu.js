@@ -11,6 +11,7 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
     static get styles() {
         return [css`
             :host {
+                /*
                 --obap-menu-height: 24px;
                 --obap-menu-color: var(--obap-on-primary-color, #FFFFFF);
                 --obap-menu-background-color: var(--obap-primary-dark-color, #26418f);
@@ -19,17 +20,25 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
                 --obap-menu-disabled-color: var(--obap-on-primary-inactive-color, rgba(255, 255, 255, 0.7));
                 --obap-menu-disabled-background-color: var(--obap-primary-dark-color, #26418f);
                 --obap-menu-separator-color: rgba(255, 255, 255, 0.5);
+                */
 
                 display: block;
                 position: absolute;
-                color: var(--obap-menu-color);
-                background: var(--obap-menu-background-color);
+                z-index: 1;
+                color: var(--obap-menu-color, var(--obap-on-primary-color, #FFFFFF));
+                background: var(--obap-menu-background-color, var(--obap-primary-dark-color, #26418f));
                 box-sizing: border-box;
                 padding: 8px 1px;
                 outline: none;
                 box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-                0 1px 10px 0 rgba(0, 0, 0, 0.12),
-                0 2px 4px -1px rgba(0, 0, 0, 0.4);
+                            0 1px 10px 0 rgba(0, 0, 0, 0.12),
+                            0 2px 4px -1px rgba(0, 0, 0, 0.4);
+            }
+
+            :host([static]) {
+                position: static;
+                display: inline-block;
+                box-shadow: none;
             }
     
             :host([hidden]) {
@@ -53,10 +62,10 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
                 justify-content: space-between;
                 padding: 0 24px;
                 cursor: pointer;
-                color: var(--obap-menu-color);
-                background: var(--obap-menu-background-color);
+                color: var(--obap-menu-color, var(--obap-on-primary-color, #FFFFFF));
+                background: var(--obap-menu-background-color, var(--obap-primary-dark-color, #26418f));
                 white-space: nowrap;
-                height: var(--obap-menu-height);
+                height: var(--obap-menu-height, 24px);
             }
 
             .item-icons {
@@ -67,17 +76,24 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
                 pointer-events: none;
             }
 
+            /*
             :host([over]) > .container > .item[active], 
             :host([over]) > .container > .item:hover {
-                color: var(--obap-menu-active-color);
-                background: var(--obap-menu-active-background-color);
+                color: var(--obap-menu-active-color, var(--obap-on-primary-color, #FFFFFF));
+                background: var(--obap-menu-active-background-color, var(--obap-primary-color, #5c6bc0));
+            }
+            */
+
+            .item[active], .item:hover {
+                color: var(--obap-menu-active-color, var(--obap-on-primary-color, #FFFFFF));
+                background: var(--obap-menu-active-background-color, var(--obap-primary-color, #5c6bc0));
             }
 
             .item[disabled] {
                 pointer-events: none;
                 cursor: default;
-                color: var(--obap-menu-disabled-color);
-                background: var(--obap-menu-disabled-background-color);
+                color: var(--obap-menu-disabled-color, var(--obap-on-primary-inactive-color, rgba(255, 255, 255, 0.7)));
+                background: var(--obap-menu-disabled-background-color, var(--obap-primary-dark-color, #26418f));
             }
 
             .text-content {
@@ -93,7 +109,7 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
             .separator {
                 height: 1px;
                 margin: 4px 8px;
-                background: var(--obap-menu-separator-color);
+                background: var(--obap-menu-separator-color, rgba(255, 255, 255, 0.5));
                 pointer-events: none;
             }
 
@@ -117,8 +133,19 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
         `];
     }
 
+    static get properties() {
+        return {
+            static: {
+                type: Boolean,
+                attribute: 'static',
+                reflect: true
+            }
+        }
+    }
+
     constructor() {
         super();
+        this.static = false;
         this.anchor = 'bottom-left';
         this.inset = 'out';
         this.shift = 'right';
@@ -173,10 +200,10 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
     }
 
     _mouseEnterItem(e) {
-        this.activeItem = e.target.item;
+        if (!this.static || this._tracking) {
+            this.activeItem = e.target.item;
+        }
     }
-
-   
 }
 
 window.customElements.define('obap-popup-menu', ObapPopupMenu);
