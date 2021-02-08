@@ -39,6 +39,7 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
                 position: static;
                 display: inline-block;
                 box-shadow: none;
+                z-index: 0;
             }
     
             :host([hidden]) {

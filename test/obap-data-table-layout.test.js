@@ -40,8 +40,8 @@ describe('obap-data-table-layout', () => {
         el._vElements[2].scrollTop = 50; 
                
         await nextFrame();
-        expect(el._vElements[0].scrollTop).to.equal(50);
-        expect(el._vElements[1].scrollTop).to.equal(50);
+        expect(el._vElements[0].scrollTop).to.equal(0);
+        expect(el._vElements[1].scrollTop).to.equal(0);
         expect(el._vElements[2].scrollTop).to.equal(50);
     });
 
@@ -65,9 +65,9 @@ describe('obap-data-table-layout', () => {
         el._hElements[1].scrollLeft = 50; 
                
         await nextFrame();
-        expect(el._hElements[0].scrollLeft).to.equal(50);
+        expect(el._hElements[0].scrollLeft).to.equal(0);
         expect(el._hElements[1].scrollLeft).to.equal(50);
-        expect(el._hElements[2].scrollLeft).to.equal(50);
+        expect(el._hElements[2].scrollLeft).to.equal(0);
     });
 
     it('can debounce horizontal scroll events for dependent areas', async () => {     

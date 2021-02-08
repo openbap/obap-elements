@@ -11,13 +11,9 @@ export class ObapVerticalCollapseContainer extends ObapBaseCollapseContainer {
     static get styles() {
         return [css`
             :host {
-                --obap-collapse-container-transition-duration: 300ms;
-                --obap-collapse-container-max-size: 300px;
-                --obap-collapse-container-min-size: 0px;
-                transition: max-height var(--obap-collapse-container-transition-duration) linear;
                 display: block;
                 overflow: hidden; 
-                max-height: var(--obap-collapse-container-min-size);
+                height: 0;
             }
     
             :host([hidden]) {
@@ -28,8 +24,9 @@ export class ObapVerticalCollapseContainer extends ObapBaseCollapseContainer {
                 pointer-events: none;
             }
 
-            :host([opened]) {
-                max-height: var(--obap-collapse-container-max-size);
+            :host([open]) {
+                height: auto;
+                overflow: visible; 
             }
         `];
     }

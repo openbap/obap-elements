@@ -1,6 +1,6 @@
 {
   "name": "@obap/obap-elements",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "description": "A LitElement Web Component Suite for line of business applications.",
   "author": "obap-elements",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "start-mobile": "web-dev-server --app-index demo-mobile/index.html --node-resolve --open",
     "test": "web-test-runner test/**/*.test.js --node-resolve",
     "test-coverage": "web-test-runner test/**/*.test.js --node-resolve --coverage",
-    "test-current": "web-test-runner test/obap-sparkline.test.js --node-resolve --coverage",
+    "test-current": "web-test-runner test/obap-data-table-controller.test.js --node-resolve --coverage",
     "deploy": "npm publish src",
     "deploy:test": "npm publish src --dry-run",
     "doc": "./node_modules/.bin/wca analyze src --format markdown --outDir docs/elements",

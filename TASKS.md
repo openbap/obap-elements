@@ -64,7 +64,7 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |     |H         |obap-drag-drop-list    |A list that allows items to be reordered and moved between lists.                               |
 |    |     |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                         |
 |    |     |L         |obap-skeleton          |Display placeholder for content while the data loads.                                           |
-|-   |     |M         |obap-input-outline   |An outline element to create a notch that is used in outlined textfields and select elements.   |
+|X   |     |M         |obap-input-outline     |An outline element to create a notch that is used in outlined textfields and select elements.   |
 
 Count: 41/59
 

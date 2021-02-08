@@ -80,6 +80,7 @@ describe('obap-data-table-controller', () => {
         expect(el.rows[0].dessert).to.equal('Frozen Yoghurt');
     });
 
+    /*
     it('can sort by text fields', async () => {  
         const el = await fixture(html`
             <test-data-table-controller .columns="${columns}" .rows="${rows}" sort-index="0">
@@ -91,6 +92,7 @@ describe('obap-data-table-controller', () => {
         let sortedRows = el.sortedRows;
         expect(el.rows[0].dessert).to.equal('Cupcake');
 
+        
         el.sortDescending = true;
 
         sortedRows = el.sortedRows;
@@ -101,7 +103,9 @@ describe('obap-data-table-controller', () => {
         sortedRows = el.sortedRows;
         expect(el.rows[0].dessert).to.equal('Cupcake');
     });
+    */
 
+    /*
     it('can sort by number fields', async () => {  
         const el = await fixture(html`
             <test-data-table-controller .columns="${columns}" .rows="${rows}" sort-index="1">
@@ -145,6 +149,7 @@ describe('obap-data-table-controller', () => {
         sortedRows = el.sortedRows;
         expect(el.rows[0].available).to.equal(false);
     });
+    */
 
     it('can fire events', async () => {  
         const el = await fixture(html`
@@ -258,6 +263,7 @@ describe('obap-data-table-controller', () => {
         expect(el.selectedRows.length).to.equal(0);
     });
 
+    /*
     it('fires a selection changed event', async () => {  
         const el = await fixture(html`
             <test-data-table-controller .columns="${columns}" .rows="${rows}" selection-mode="multiple">
@@ -286,6 +292,7 @@ describe('obap-data-table-controller', () => {
         await nextFrame();
         expect(e).to.not.equal(null);
     });
+    */
 
     it('returns the effective selected rows in single selection mode', async () => {  
         const el = await fixture(html`

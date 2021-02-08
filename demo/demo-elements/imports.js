@@ -54,5 +54,6 @@ import './splitter-container-demo.js';
 import './splitter-demo.js';
 import './status-label-demo.js';
 import './menu-demo.js';
+import './input-outline-demo.js';
 import './textfield-demo.js';
 import './chart-demo.js';

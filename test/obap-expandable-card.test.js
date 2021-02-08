@@ -18,17 +18,17 @@ describe('obap-expandable-card', () => {
     });
     */
 
-    it('toggles opened state', async () => {
+    it('toggles open state', async () => {
         const el = await fixture(html`
             <obap-expandable-card>
             </obap-expandable-card>
         `);
 
-        await expect(el.opened).to.equal(false);
+        await expect(el.open).to.equal(false);
         el.toggle();
-        await expect(el.opened).to.equal(true);
+        await expect(el.open).to.equal(true);
         el.toggle();
-        await expect(el.opened).to.equal(false);
+        await expect(el.open).to.equal(false);
     });
 
     it('sets the label', async () => {

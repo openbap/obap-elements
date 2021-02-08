@@ -27,7 +27,7 @@ export class ObapAccordion extends ObapMultiSelectorController(ObapElement) {
 
     constructor() {
         super();
-        this.selectedAttribute = 'opened';
+        this.selectedAttribute = 'open';
     }
     
     render() {

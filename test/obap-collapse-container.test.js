@@ -19,17 +19,17 @@ describe('obap-vertical-collapse-container', () => {
     });
     */
 
-    it('toggles opened state', async () => {
+    it('toggles open state', async () => {
         const el = await fixture(html`
             <obap-vertical-collapse-container>
             </obap-vertical-collapse-container>
         `);
 
-        await expect(el.opened).to.equal(false);
+        await expect(el.open).to.equal(false);
         el.toggle();
-        await expect(el.opened).to.equal(true);
+        await expect(el.open).to.equal(true);
         el.toggle();
-        await expect(el.opened).to.equal(false);
+        await expect(el.open).to.equal(false);
     });
 });
 
@@ -46,16 +46,16 @@ describe('obap-horizontal-collapse-container', () => {
     });
     */
 
-    it('toggles opened state', async () => {
+    it('toggles open state', async () => {
         const el = await fixture(html`
             <obap-horizontal-collapse-container>
             </obap-horizontal-collapse-container>
         `);
 
-        await expect(el.opened).to.equal(false);
+        await expect(el.open).to.equal(false);
         el.toggle();
-        await expect(el.opened).to.equal(true);
+        await expect(el.open).to.equal(true);
         el.toggle();
-        await expect(el.opened).to.equal(false);
+        await expect(el.open).to.equal(false);
     });
 });

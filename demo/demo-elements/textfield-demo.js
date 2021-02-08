@@ -36,36 +36,12 @@ export class TextfieldDemo extends ObapElement {
                 margin: 16px;
                 width: 200px;
             }
-
-            
-            obap-input-outline {
-                width: 200px;
-                margin: 16px;
-                --obap-input-outline-label-offset: 4px;
-            }
-
-            input {
-                background: transparent;
-                border: none;
-                box-shadow: none;
-                height: 100%;
-                outline: none;
-                padding: 0;
-            }
-            
         `];
     }
     
     render() {
         return html`
             <div class="container">
-                
-                <div class="title">Outline</div>
-                <div class="row">
-                    <obap-input-outline label="name" type="underline"><input/></obap-input-outline>
-                    <obap-input-outline label="name" float type="outline"><input/></obap-input-outline>
-                </div>
-
                 <div class="title">Outline Style</div>
                 <div class="row">
                     <obap-textfield label="none" outline-style="none"></obap-textfield>

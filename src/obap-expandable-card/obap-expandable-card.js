@@ -37,13 +37,13 @@ export class ObapExpandableCard extends ObapElement {
             }
 
             obap-icon.chevron {
-                transition: 0.25s ease-out;
+                transition: 0.15s ease-out;
                 -webkit-transform: rotate(0deg);
                 -moz-transform: rotate(0deg);
                 transform: rotate(0deg);
             }
 
-            obap-icon.chevron[opened] {
+            obap-icon.chevron[open] {
                 -webkit-transform: rotate(180deg);
                 -moz-transform: rotate(180deg);
                 transform: rotate(180deg);
@@ -58,6 +58,7 @@ export class ObapExpandableCard extends ObapElement {
 
             .label {
                 flex: 1;
+                margin-left: 16px;
             }
         `];
     }
@@ -74,9 +75,9 @@ export class ObapExpandableCard extends ObapElement {
                 attribute: 'label'
             },
 
-            opened: {
+            open: {
                 type: Boolean,
-                attribute: 'opened',
+                attribute: 'open',
                 reflect: true
             },
 
@@ -91,7 +92,7 @@ export class ObapExpandableCard extends ObapElement {
         super();
         this.icon = '';
         this.label = '';
-        this.opened = false;
+        this.open = false;
         this.hideExpander = false;
     }
     
@@ -101,9 +102,9 @@ export class ObapExpandableCard extends ObapElement {
                 <div class="title-container" @click="${this.toggle}">
                     ${this.icon ? html`<obap-icon class="icon" icon="${this.icon}"></obap-icon>` : null}
                     <div class="label typography-body">${this.label}</div>
-                    ${this.hideExpander ? null : html`<obap-icon class="chevron" ?opened="${this.opened}" icon="core:chevron-down"></obap-icon>`}
+                    ${this.hideExpander ? null : html`<obap-icon class="chevron" ?open="${this.open}" icon="core:chevron-down"></obap-icon>`}
                 </div>
-                <obap-vertical-collapse-container ?opened="${this.opened}">
+                <obap-vertical-collapse-container ?open="${this.open}">
                     <slot></slot>
                 </obap-vertical-collapse-container>
             </div>
@@ -111,7 +112,7 @@ export class ObapExpandableCard extends ObapElement {
     }
 
     toggle() {
-        this.opened = !this.opened;
+        this.open = !this.open;
     }
 }
 

@@ -7,9 +7,9 @@ import { html, css, ObapElement } from '../obap-element/obap-element.js';
 class ObapBaseCollapseContainer extends ObapElement {
     static get properties() {
         return {
-            opened: {
+            open: {
                 type: Boolean,
-                attribute: 'opened',
+                attribute: 'open',
                 reflect: true
             }
         }
@@ -17,7 +17,7 @@ class ObapBaseCollapseContainer extends ObapElement {
 
     constructor() {
         super();
-        this.opened = false;
+        this.open = false;
     }
     
     render() {
@@ -25,7 +25,7 @@ class ObapBaseCollapseContainer extends ObapElement {
     }
 
     toggle() {
-        this.opened = !this.opened;
+        this.open = !this.open;
     }
 }
 
