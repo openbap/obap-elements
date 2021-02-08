@@ -22,7 +22,7 @@ export class ObapBackdrop extends ObapElement {
                 height: 100vh;
                 background: var(--obap-backdrop-color);
                 pointer-events: none;
-                transition: opacity 0.2s;
+                /*transition: opacity 0.2s;*/
                 opacity: 0;
             }
     

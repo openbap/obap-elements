@@ -57,3 +57,4 @@ import './menu-demo.js';
 import './input-outline-demo.js';
 import './textfield-demo.js';
 import './chart-demo.js';
+import './toolbar-demo.js';

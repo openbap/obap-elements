@@ -65,8 +65,10 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |     |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                         |
 |    |     |L         |obap-skeleton          |Display placeholder for content while the data loads.                                           |
 |X   |     |M         |obap-input-outline     |An outline element to create a notch that is used in outlined textfields and select elements.   |
+|    |     |M         |obap-toolbar           |A traditional style toolbar.                                                                    |
+|    |     |M         |obap-statusbar         |A traditional style statusbar.                                                                  |
 
-Count: 41/59
+Count: 41/61
 
 ### LAYOUT ELEMENTS
 
