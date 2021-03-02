@@ -48,7 +48,8 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |X   |     |M         |obap-splitter          |A splitter element that resizes its adjacent siblings relative to each other.                   |
 |X   |     |L         |obap-splitter-container|A horizontal or vertical container with a splitter that allows content areas to be resized.     |
 |X   |X    |L         |obap-status-label      |A simple status label.                                                                          |
-|    |     |M         |obap-snackbar          |A popup toast notification element.                                                             |
+|X   |     |M         |obap-snackbar          |A popup toast notification element.                                                             |
+|X   |     |M         |obap-message-dialog    |A Material Design dialog for displaying simple messages and options.                            |
 |    |     |M         |obap-time-picker       |A Material Design time picker (not the mobile type).                                            |
 |    |     |H         |obap-date-picker       |A Material Design date picker (not the mobile type).                                            |
 |    |     |H         |obap-color-picker      |A Material Design color picker.                                                                 |
@@ -65,10 +66,11 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |    |     |M         |obap-linked-selector   |Allows multiple selectors to be linked and share items.                                         |
 |    |     |L         |obap-skeleton          |Display placeholder for content while the data loads.                                           |
 |X   |     |M         |obap-input-outline     |An outline element to create a notch that is used in outlined textfields and select elements.   |
-|    |     |M         |obap-toolbar           |A traditional style toolbar.                                                                    |
+|-   |     |M         |obap-toolbar           |A traditional style toolbar.                                                                    |
 |    |     |M         |obap-statusbar         |A traditional style statusbar.                                                                  |
+|-   |     |M         |obap-navigation-bar    |A Material Design navigation bar for view and sub-view based applications.                      |
 
-Count: 41/61
+Count: 44/63
 
 ### LAYOUT ELEMENTS
 
@@ -170,24 +172,25 @@ Count: 0/1
 
 These are high level elements used to construct applications. 
 
-|Done|Tests|Complexity|Name                   |Notes                                             |
-|:--:|:---:|:--------:|-----------------------|--------------------------------------------------|
-|X   |     |M         |obap-router            |A simple view router for obap-application.        |
-|X   |     |M         |obap-translations      |A translation module for obap-application.        |
-|X   |     |M         |obap-local-storage     |A helper library for local storage.               |
-|X   |     |M         |obap-fetch             |A helper library to simplify the fetch API.       |
-|-   |     |H         |obap-application       |A view based desktop application framework.       |
-|    |     |H         |obap-mobile-application|A view based mobile application framework.        |
-|    |     |H         |obap-messaging         |A messaging system for obap-application views.    |
-|    |     |H         |obap-application-state |A Flux-like state manager.                        |
-|    |     |H         |obap-identity          |Handles a user OpenID Connect account, login, etc.|
-|    |     |H         |obap-access-policy     |Handles application feature access for users.     |
+|Done|Tests|Complexity|Name                      |Notes                                              |
+|:--:|:---:|:--------:|--------------------------|---------------------------------------------------|
+|X   |     |M         |obap-router               |A simple view router for obap-application.         |
+|X   |     |M         |obap-translations         |A translation module for obap-application.         |
+|X   |     |M         |obap-local-storage        |A helper library for local storage.                |
+|X   |     |M         |obap-fetch                |A helper library to simplify the fetch API.        |
+|-   |     |H         |obap-application          |A view based desktop application framework.        |
+|-   |     |H         |obap-composite-application|An iFrame view based desktop application framework.|
+|    |     |H         |obap-mobile-application   |A view based mobile application framework.         |
+|-   |     |H         |obap-messaging            |A messaging system for obap-application views.     |
+|    |     |H         |obap-application-state    |A Flux-like state manager.                         |
+|    |     |H         |obap-identity             |Handles a user OpenID Connect account, login, etc. |
+|    |     |H         |obap-access-policy        |Handles application feature access for users.      |
 
 *There is no "policy" standard, so `obap-access-policy` will define a standard based on the OBAP Policy Server. The `obap-identity` modules will support the OBAP Identity Server (OIDC) and allow providers (`obap-identity-provider`) to be written for other identity provider types.*
 
 *`obap-application` development will be ongoing, with new features being added as requirements are collected and other elements completed.*
 
-Count: 4/10
+Count: 4/11
 
 ### DEMO & DOCUMENTATION ELEMENTS
 

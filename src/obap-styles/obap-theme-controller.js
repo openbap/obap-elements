@@ -30,6 +30,10 @@ const ObapThemeController = (superClass) =>
                 }
 
                 this.requestUpdate('theme', oldval);
+
+                if(this.onThemeChanged) {
+                    this.onThemeChanged(this._theme);
+                }
             }
         }
         
@@ -47,6 +51,10 @@ const ObapThemeController = (superClass) =>
             this._theme = null;
         }
 
+        addTheme(name, primaryLight, primary, primaryDark, accent, window) {
+            themeManager.create(name, primaryLight, primary, primaryDark, accent, window);
+        }
+
         setGlobalTheme(name) {
             themeManager.apply(name);
         }
@@ -57,6 +65,10 @@ const ObapThemeController = (superClass) =>
 
         hasTheme(name) {
             return themeManager.hasTheme(name);
+        }
+
+        getThemeDetail(name) {
+            return themeManager.getThemeDetail(name);
         }
     };
 

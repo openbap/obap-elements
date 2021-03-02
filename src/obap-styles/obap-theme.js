@@ -16,6 +16,7 @@ class ObapThemeItem {
 class ObapTheme {
     constructor() {
         this.__themes = {};
+        this.__themeDefinitions = new Map();
 
         // Create the default theme.
         this.create('default', '#8e99f3', '#5c6bc0', '#26418f', '#ec407a', '#E0E0E0');
@@ -122,6 +123,14 @@ class ObapTheme {
 
     create(name, primaryLight, primary, primaryDark, accent, window) {
         this.__themes[name] = new ObapThemeItem(name, primaryLight, primary, primaryDark, accent, window);
+        this.__themeDefinitions.set(name, {
+            name: name,
+            primaryLight: primaryLight,
+            primary: primary,
+            primaryDark: primaryDark,
+            accent: accent,
+            window: window
+        });
     }
 
     getNames() {
@@ -131,6 +140,10 @@ class ObapTheme {
 
     hasTheme(name) {
         return (this.getNames().indexOf(name) > -1);
+    }
+
+    getThemeDetail(name) {
+        return this.__themeDefinitions.get(name);
     }
 }
 

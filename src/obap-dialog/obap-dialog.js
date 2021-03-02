@@ -33,11 +33,22 @@ export class ObapDialog extends ObapElement {
             }
 
             :host([opened]) {
-                display: flex;
+                display: flex; 
+                animation: dialog-show 0.25s 1;
             }
 
             .container {
                 background: white;
+            }
+
+            @keyframes dialog-show {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: 1;
+                }
             }
         `];
     }
@@ -54,6 +65,7 @@ export class ObapDialog extends ObapElement {
             this.requestUpdate('opened', oldValue);
 
             if (this.opened) {
+                this._actionKey = null;
                 window.addEventListener('popstate', this._boundHandleOnPopStateEvent);
             } else {
                 window.removeEventListener('popstate', this._boundHandleOnPopStateEvent);
@@ -75,7 +87,7 @@ export class ObapDialog extends ObapElement {
                 }
             }
 
-            this.fireMessage('obap-dialog-opened-changed', { opened: this._opened });
+            this.fireMessage('obap-dialog-opened-changed', { opened: this._opened, actionKey: this._actionKey});
         });
     }
 
@@ -102,6 +114,7 @@ export class ObapDialog extends ObapElement {
     constructor() {
         super();
         this._opened = false;
+        this._actionKey = null;
         this._backdrop = null;
         this.modal = false;
         this.noCancelOnEscKey = false;
@@ -118,8 +131,8 @@ export class ObapDialog extends ObapElement {
                 this._updateBackdrop();
             }
         });
-    } 
-    
+    }
+
     render() {
         return html`
             <div class="container elevation-24" @click="${this._handleClick}">
@@ -138,7 +151,7 @@ export class ObapDialog extends ObapElement {
 
     _updateBackdrop() {
         this._backdrop = document.body.querySelector('obap-backdrop') || document.body.appendChild(document.createElement('obap-backdrop'));
-
+        
         requestAnimationFrame(() => {
             this.opened ? this.style.zIndex = this._backdrop.show(this) : this._backdrop.hide(this);
         });
@@ -153,6 +166,11 @@ export class ObapDialog extends ObapElement {
 
             if (target.hasAttribute && (target.hasAttribute('dialog-confirm') || target.hasAttribute('dialog-dismiss'))) {
                 this.opened = false;
+
+                if (target.hasAttribute('action-key')) {
+                    this._actionKey = target.getAttribute('action-key');
+                }
+
                 e.stopPropagation();
                 break;
             }

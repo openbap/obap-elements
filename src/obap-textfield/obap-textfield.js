@@ -174,7 +174,7 @@ export class ObapTextfield extends ObapInputElement {
                 type: Boolean
             },
 
-            // none, underline, outline
+            // none, underline, outline, conventional
             outlineStyle: {
                 type: String,
                 attribute: 'outline-style'

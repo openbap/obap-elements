@@ -29,11 +29,32 @@ export class ObapInputOutline extends ObapElement {
                 pointer-events: none;
             }
 
+            :host([type="conventional"]) {
+                height: auto;
+            }
+
             .container {
                 position: relative;
                 display: flex;
                 width: 100%;
                 height: 100%;
+            }
+
+            .conventional-container {
+                width: 100%;
+            }
+
+            .border-conventional {
+                position: relative;
+                display: flex;
+                align-items: center;
+                flex: 1;
+                border: var(--obap-input-outline-border-size) solid var(--obap-input-outline-border-color);
+                border-radius: 3px;
+      
+                height: 32px;
+                padding: 0 4px;
+                box-sizing: border-box;
             }
 
             .border {
@@ -110,6 +131,11 @@ export class ObapInputOutline extends ObapElement {
                 display: none;
             }
 
+            .label-conventional {
+                margin-bottom: 4px;
+                color: var(--obap-input-outline-label-color);
+            }
+
             .slot-content {
                 position: absolute;
                 left: 0;
@@ -141,9 +167,14 @@ export class ObapInputOutline extends ObapElement {
                 attribute: 'no-placeholder'
             },
 
-            // none, underline, outline
+            // none, underline, outline, conventional
             type: {
-                type: String
+                type: String,
+                reflect: true
+            },
+
+            conventional: {
+                type: Boolean
             }
         }
     }
@@ -155,6 +186,7 @@ export class ObapInputOutline extends ObapElement {
         this.noFloat = false;
         this.noPlaceholder = false;
         this.type = 'underline';
+        this.conventional = false;
     }
     
     render() {
@@ -167,10 +199,25 @@ export class ObapInputOutline extends ObapElement {
                 return this._renderUnderline();
             }
 
+            case 'conventional': {
+                return this._renderConventional();
+            }
+
             default: {
-                return this._renderNone();
+                return this._renderNone(); 
             }
         }
+    }
+
+    _renderConventional() {
+        return html`
+            <div class="container">
+                <div class="conventional-container">
+                    ${this.label ? html`<div class="label-conventional typography-body">${this.label}</div>` : null}
+                    <div class="border-conventional"><slot></slot></div>
+                </div>
+            </div>
+        `;
     }
 
     _renderOutline() {

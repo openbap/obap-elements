@@ -47,6 +47,7 @@ export class InputOutlineDemo extends ObapElement {
                     <obap-input-outline label="none" type="none"></obap-input-outline>
                     <obap-input-outline label="underline" type="underline"></obap-input-outline>
                     <obap-input-outline label="outline" float type="outline"></obap-input-outline>
+                    <obap-input-outline label="conventional" type="conventional"></obap-input-outline>
                 </div>
 
                 <div class="title">Label Style</div>

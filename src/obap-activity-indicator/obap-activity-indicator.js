@@ -115,7 +115,7 @@ export class ObapActivityIndicator extends ObapElement {
 
                 to {
                     transform: scale(1, 1);
-                }
+                } 
             }
         `];
     }

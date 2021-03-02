@@ -23,6 +23,7 @@ USEFUL-LINKS.md
 /_site/
 /dist/
 /dist-mobile/
+/dist-app/
 
 # working folders
 /src/_working/

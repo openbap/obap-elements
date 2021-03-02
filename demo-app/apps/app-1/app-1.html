@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App One</title>
+
+    <style>
+        html {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+            background: #fafafa;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <app-1 view-id="app-1">Application 1</app-1>
+
+    <script type="module">
+        import './app-1.js';
+
+        //window.addEventListener('view-activated', (e) => console.log('app-1 ACTIVATED: ' + JSON.stringify(e.detail)));
+        //window.addEventListener('view-deactivated', (e) => console.log('app-1 DEACTIVATED: ' + JSON.stringify(e.detail)));
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,500&display=swap');
+    </style>
+</body>
+
+</html>

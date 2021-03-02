@@ -113,6 +113,10 @@ const ObapRouterController = (superClass) =>
             return this.routes[name];
         }
 
+        setRouteFromUrl() {
+            this._setRouteFromUrl();
+        }
+
         navigateBack() {
             if (this.disableRouting) return;
 
@@ -176,7 +180,7 @@ const ObapRouterController = (superClass) =>
                 }
             }
 
-            return route;
+            return route; 
         }
 
         _setRouteFromUrl() {

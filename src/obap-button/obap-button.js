@@ -3,6 +3,7 @@
 Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapInputElement } from '../obap-input-element/obap-input-element.js';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import { button } from '../obap-styles/obap-typography.js';
 import { hostElevation2, hostElevation6 } from '../obap-styles/obap-elevation.js';
 import '../obap-ripple/obap-ripple.js';
@@ -180,6 +181,14 @@ export class ObapButton extends ObapInputElement {
             },
 
             /**
+             * The url of the icon to display in the button (to the left of the label).
+             */
+            iconSrc: {
+                type: String,
+                attribute: 'icon-src'
+            },
+
+            /**
              * Whether or not the button is selected, if it's a toggle button.
              */
             selected: {
@@ -199,6 +208,7 @@ export class ObapButton extends ObapInputElement {
         this.selected = false;
         this.outline = false;
         this.icon = '';
+        this.iconSrc = '';
         this.label = '';
         this.role = 'button';
 
@@ -244,7 +254,7 @@ export class ObapButton extends ObapInputElement {
     render() {
         return html`
             <div class="container typography-button">
-                ${this.icon ? html`<obap-icon icon="${this.icon}"></obap-icon>` : null}
+                ${this.icon ? html`<obap-icon icon="${ifDefined(this.icon)}" src="${ifDefined(this.iconSrc)}"></obap-icon>` : null}
                 ${this.label ? html`<div ?has-icon="${this.icon !== ''}">${this.label}</div>` : null} 
             </div>
             ${this.noInk ? null : html`<obap-ripple ?has-focus="${this.selected}"></obap-ripple>`}

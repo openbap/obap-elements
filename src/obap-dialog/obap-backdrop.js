@@ -22,8 +22,9 @@ export class ObapBackdrop extends ObapElement {
                 height: 100vh;
                 background: var(--obap-backdrop-color);
                 pointer-events: none;
-                /*transition: opacity 0.2s;*/
+                transition: opacity 0.25s;
                 opacity: 0;
+  
             }
     
             :host([visible]) {
@@ -83,7 +84,7 @@ export class ObapBackdrop extends ObapElement {
         const index = this._items.indexOf(el);
         this._items.splice(index, 1);
 
-        const topItem = this._items[this._items.length - 1];
+        const topItem = this._items[this._items.length - 1]; 
 
         this._count -= 1;
         this._zIndex -= 2;

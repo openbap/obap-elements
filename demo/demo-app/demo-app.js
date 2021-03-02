@@ -87,7 +87,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
         themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
         //this.selectedPage = 44;
-        this.selectedPage = 47;
+        this.selectedPage = 39;
     }
 
     render() {
@@ -126,6 +126,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-markdown-viewer</div>
                         <div class="item">obap-material</div>
                         <div class="item">obap-menu</div>
+                        <div class="item">obap-navigation-bar</div>
                         <div class="item">obap-navigation-rail</div>
                         <div class="item">obap-pill-navigator</div>
                         <div class="item">obap-radio</div>
@@ -135,6 +136,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-select</div>
                         <div class="item">obap-selector</div>
                         <div class="item">obap-slider</div>
+                        <div class="item">obap-snackbar</div>
                         <div class="item">obap-sparkline</div>
                         <div class="item">obap-spinner</div>
                         <div class="item">obap-splitter</div>
@@ -188,6 +190,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <markdown-viewer-demo></markdown-viewer-demo>
                         <material-demo></material-demo>
                         <menu-demo></menu-demo>
+                        <navigation-bar-demo></navigation-bar-demo>
                         <navigation-rail-demo></navigation-rail-demo>
                         <pill-navigator-demo></pill-navigator-demo>
                         <radio-demo></radio-demo>
@@ -197,6 +200,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <select-demo></select-demo>
                         <selector-demo></selector-demo>
                         <slider-demo></slider-demo>
+                        <snackbar-demo></snackbar-demo>
                         <sparkline-demo></sparkline-demo>
                         <spinner-demo></spinner-demo>
                         <splitter-demo></splitter-demo>

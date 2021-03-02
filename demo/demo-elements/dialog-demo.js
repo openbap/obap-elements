@@ -5,6 +5,7 @@ Copyright (c) 2021 Paul H Mason. All rights reserved.
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import { title } from '../../src/obap-styles/obap-typography.js';
 import '../../src/obap-dialog/obap-dialog.js';
+import '../../src/obap-dialog/obap-message-dialog.js';
 import '../../src/obap-button/obap-button.js';
 
 export class DialogDemo extends ObapElement {
@@ -66,6 +67,33 @@ export class DialogDemo extends ObapElement {
         `];
     }
 
+    static get properties() {
+        return {
+            messageDialogActions: {
+                type: Array
+            }
+        }
+    }
+
+    constructor() {
+        super();
+
+        this.messageDialogActions = [
+            {
+                key: 'yes',
+                label: 'yes',
+                raised: true,
+                highlight: true
+            },
+            {
+                key: 'no',
+                label: 'no',
+                raised: false,
+                highlight: false
+            }
+        ];
+    }
+
     render() {
         return html`
             <obap-dialog id="plain-dialog">
@@ -81,7 +109,7 @@ export class DialogDemo extends ObapElement {
             </obap-dialog>
 
             <obap-dialog id="nested-dialog" modal>
-                ${this._renderCaption('Nested Dialog')}
+                ${this._renderCaption('Nested Dialog')} 
                 ${this._renderContent()}
                 ${this._renderNestedActions()}
             </obap-dialog>
@@ -92,12 +120,16 @@ export class DialogDemo extends ObapElement {
                 ${this._renderActions()}
             </obap-dialog>
 
+            <obap-message-dialog id="message-dialog" .actions="${this.messageDialogActions}" caption="Confirmation" message="Are you sure?">
+            </obap-message-dialog>
+
             <div class="container">
                 <div class="title">Demo</div>
                 <div class="row">
                     <obap-button raised label="plain dialog" @click="${this._showPlainDialog}"></obap-button>
                     <obap-button raised label="modal dialog" @click="${this._showModalDialog}"></obap-button>
                     <obap-button raised label="nested dialog" @click="${this._showNestedDialog}"></obap-button>
+                    <obap-button raised label="message dialog" @click="${this._showMessageDialog}"></obap-button>
                 </div>
             </div>
         `;
@@ -157,6 +189,11 @@ export class DialogDemo extends ObapElement {
 
     _showChildDialog() {
         const dlg = this.renderRoot.getElementById('child-dialog');
+        dlg.open();
+    }
+
+    _showMessageDialog() {
+        const dlg = this.renderRoot.getElementById('message-dialog');
         dlg.open();
     }
 

@@ -3,6 +3,7 @@
 Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import { obapIcons } from '../obap-icons/obap-icons.js';
 import '../obap-icons/obap-core-icons.js';
 
@@ -37,7 +38,7 @@ export class ObapIcon extends ObapElement {
                 height: var(--obap-icon-height);
             }
 
-            svg {
+            svg, img {
                 width: var(--obap-icon-width);
                 height: var(--obap-icon-height);
             }
@@ -58,8 +59,11 @@ export class ObapIcon extends ObapElement {
             * The name of the icon to use. The name should be of the form: `iconset_name:icon_name`.
             */
             icon: {
-                type: String,
-                attribute: 'icon'
+                type: String
+            },
+
+            src: {
+                type: String
             }
         };
     }
@@ -67,9 +71,14 @@ export class ObapIcon extends ObapElement {
     constructor() {
         super();
         this.icon = '';
+        this.src = '';
     }
 
     render() {
+        if (this.src && this.src !== 'undefined' && this.src !== 'null') {
+            return html`<img alt="${this.icon}" src="${ifDefined(this.src)}">`;
+        }
+
         return obapIcons.get(this.icon);
     }
 }

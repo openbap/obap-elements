@@ -199,7 +199,7 @@ export class OpenDataTableLayout extends ObapElement {
                                      "header-action-left   header-fixed-left   header-scroll   header-fixed-right   header-action-right   detail"
                                      "body-action-left     body-fixed-left     body-scroll     body-fixed-right     body-action-right     detail"
                                      "footer-action-left   footer-fixed-left   footer-scroll   footer-fixed-right   footer-action-right   detail"
-                                     "pager                pager               pager           pager                pager                 pager"
+                                     "pager                pager               pager           pager                pager                 pager";
             }
 
             .grid-part {

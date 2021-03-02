@@ -47,6 +47,7 @@ export class TextfieldDemo extends ObapElement {
                     <obap-textfield label="none" outline-style="none"></obap-textfield>
                     <obap-textfield label="underline" outline-style="underline"></obap-textfield>
                     <obap-textfield label="outline" outline-style="outline"></obap-textfield>
+                    <obap-textfield label="conventional" outline-style="conventional"></obap-textfield>
                 </div>
 
                 <div class="title">Label Options</div>

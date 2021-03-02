@@ -1,0 +1,168 @@
+[
+    {
+        "default": true,
+        "label": "Home",
+        "icon": "standard:home",
+        "id": "app-home",
+        "url": "./apps/home/home.html"
+    },
+    {
+        "default": false,
+        "label": "App One",
+        "icon": "standard:android",
+        "id": "app-1",
+        "url": "./apps/app-1/app-1.html",
+        "autoLoad": false,
+        "items": [
+            {
+                "label": "View 1",
+                "icon": "standard:cloud-queue",
+                "id": "app-1-view-1",
+                "url": "./apps/app-1/views/app-1-view-1.html",
+                "autoLoad": true
+            },
+            {
+                "label": "View 2",
+                "icon": "standard:cloud-queue",
+                "id": "app-1-view-2",
+                "url": "./apps/app-1/views/app-1-view-2.html",
+                "modal": true
+            },
+            {
+                "label": "View 3",
+                "icon": "standard:cloud-queue",
+                "id": "app-1-view-3",
+                "url": "./apps/app-1/views/app-1-view-3.html"
+            },
+            {
+                "label": "View Hidden",
+                "icon": "standard:cloud-queue",
+                "id": "app-1-view-hidden",
+                "url": "./apps/app-1/views/app-1-view-3.html",
+                "noNavigation": true 
+            },
+            {
+                "label": "Options",
+                "icon": "standard:settings",
+                "id": "app-1-view-options",
+                "url": "./apps/app-1/views/app-1-view-options.html",
+                "bottom": true
+            }
+        ]
+    },
+    {
+        "default": false,
+        "label": "App Two",
+        "icon": "standard:face",
+        "id": "app-2",
+        "url": "./apps/app-2/app-2.html",
+        "items": [
+            {
+                "label": "View 4",
+                "icon": "standard:cloud-queue",
+                "id": "app-2-view-1"
+            },
+            {
+                "label": "View 5",
+                "icon": "standard:cloud-queue",
+                "id": "app-2-view-2"
+            },
+            {
+                "label": "View 6",
+                "icon": "standard:cloud-queue",
+                "id": "app-2-view-3"
+            },
+            {
+                "label": "Options",
+                "icon": "standard:settings",
+                "id": "app-2-view-options",
+                "bottom": true
+            }
+        ]
+    },
+    {
+        "label": "App Three",
+        "icon": "standard:https",
+        "id": "app-3",
+        "url": "./apps/app-3/app-3.html",
+        "items": [
+            {
+                "label": "View 7",
+                "icon": "standard:cloud-queue",
+                "id": "app-3-view-1"
+            },
+            {
+                "label": "View 8",
+                "icon": "standard:cloud-queue",
+                "id": "app-3-view-2"
+            },
+            {
+                "label": "View 9",
+                "icon": "standard:cloud-queue",
+                "id": "app-3-view-3"
+            },
+            {
+                "label": "Options",
+                "icon": "standard:settings",
+                "id": "app-3-view-options",
+                "bottom": true
+            }
+        ]
+    },
+    {
+        "label": "App Four",
+        "iconSrc": "./apps/app-4/bug.svg",
+        "icon": "bug",
+        "id": "app-4",
+        "url": "./apps/app-4/app-4.html",
+        "items": [
+            {
+                "label": "View 10",
+                "icon": "standard:cloud-queue",
+                "id": "app-4-view-1"
+            },
+            {
+                "label": "View 11",
+                "iconSrc": "./apps/app-4/cloud.svg",
+                "icon": "cloud",
+                "id": "app-4-view-2"
+            },
+            {
+                "label": "View 12",
+                "icon": "standard:cloud-queue",
+                "id": "app-4-view-3"
+            },
+            {
+                "label": "Options",
+                "icon": "standard:settings",
+                "id": "app-4-view-options",
+                "bottom": true
+            }
+        ]
+    },
+    {
+        "label": "Options",
+        "icon": "standard:settings",
+        "id": "app-options",
+        "url": "./apps/options/options.html",
+        "bottom": true,
+        "items": [
+            {
+                "label": "Option 1",
+                "icon": "standard:cloud-queue",
+                "id": "options-view-1"
+            },
+            {
+                "label": "Option 2",
+                "icon": "standard:cloud-queue",
+                "id": "options-view-2",
+                "modal": true
+            },
+            {
+                "label": "Option 3",
+                "icon": "standard:cloud-queue",
+                "id": "options-view-3"
+            }
+        ]
+    }
+]

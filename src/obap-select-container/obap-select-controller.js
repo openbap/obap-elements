@@ -24,7 +24,7 @@ export const ObapSelectController = (superClass) =>
                     attribute: 'value'
                 },
 
-                // 'none' (default), 'underline', 'outline'
+                // 'none' (default), 'underline', 'outline', 'conventional'
                 borderStyle: {
                     type: String,
                     attribute: 'border-style',

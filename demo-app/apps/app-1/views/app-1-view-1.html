@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App One - View 1</title>
+
+    <style>
+        html {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+            background: #fafafa;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+        }
+
+        obap-composite-hosted-application {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            background: lightyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <obap-composite-hosted-application id='app' view-id="app-1-view-1">
+        <div>
+            Application 1 - View 1
+            <button onclick="_buttonClick()">GO</button>
+            <button onclick="_dialogButtonClick()">Dialog</button>
+            <button onclick="_snackbarButtonClick()">Snackbar</button>
+            <button onclick="_snackbarActionButtonClick()">Snackbar Action</button>
+            <button onclick="_messageDialogButtonClick()">Message Dialog</button>
+        </div>
+    </obap-composite-hosted-application>
+    
+
+    <script type="module">
+        import '../../../../src/obap-composite-hosted-application/obap-composite-hosted-application.js';
+
+        window._buttonClick = function() {
+            const app = document.getElementById('app');
+            app.navigateTo('app-1', 'app-1-view-hidden');
+            app.sendClientMessage('test-message', {}, -1);
+        }
+
+        window._dialogButtonClick = function() {
+            app.showDialog('app-1-view-1-dialog', './apps/app-1/views/app-1-view-1-dialog.html', { foo: 'bar' },  (result) => {
+                console.log('*** SHOW DIALOG CALLBACK ***');
+                console.log(result);
+            });
+        }
+
+        window._snackbarButtonClick = function() {
+            app.showSnackbar('This is a message.', 3000);
+        }
+
+        window._snackbarActionButtonClick = function() {
+            app.showActionSnackbar('This is an action message.', 'dismiss', () => {
+                console.log('*** ACTION SNACKBAR DISMISSED ***');
+            });
+        }
+
+        window._messageDialogButtonClick = function() {
+            app.showMessageDialog('Confirmation', 'Do you really want to do this?', [
+                {
+                    key: 'yes',
+                    label: 'yes',
+                    raised: true,
+                    highlight: true
+                },
+                {
+                    key: 'no',
+                    label: 'no',
+                    raised: false,
+                    highlight: false
+                }
+            ], (action) => {
+                console.log(`*** MESSAGE DIALOG DISMISSED: ${action} ***`);
+            });
+        }
+
+
+        //window.addEventListener('view-activated', (e) => console.log('app-1-view-1 ACTIVATED: ' + JSON.stringify(e.detail)));
+        //window.addEventListener('view-deactivated', (e) => console.log('app-1-view-1 DEACTIVATED: ' + JSON.stringify(e.detail)));
+
+        window.addEventListener('hub-message', (e) => {
+            //console.log('*** HUB MESSAGE CUSTOM ***');
+            //console.log(e.detail);
+        });
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,500&display=swap');
+    </style>
+</body>
+
+</html>
