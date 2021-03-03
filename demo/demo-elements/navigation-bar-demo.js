@@ -218,14 +218,13 @@ export class NavigationBarDemo extends ObapElement {
     }
 
     _selectionChanged(e) {
+        //console.log(e.detail)
         if ((!this.selectedItemDetail) || (this.selectedItemDetail.index !== e.detail.index) || (this.selectedItemDetail.subIndex !== e.detail.subIndex)) {
             this.selectedItemDetail = {
                 index: e.detail.index,
                 subIndex: e.detail.subIndex,
                 id: e.detail.id
             }
-
-            console.log(this.selectedItemDetail);
         }
     }
 }

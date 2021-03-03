@@ -399,7 +399,7 @@ this.showMessageDialog('Confirmation', 'Do you really want to do this?',
             key: 'yes',
             label: 'yes',
             raised: true,
-             highlight: true
+            highlight: true
         },
         {
             key: 'no',

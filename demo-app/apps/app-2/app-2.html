@@ -23,17 +23,29 @@
             height: 100vh;
             width: 100%;
         }
+
+        obap-composite-hosted-application {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            background: lightyellow;
+        }
     </style>
 </head>
 
 <body>
-    <app-2 view-id="app-2">Application 2</app-2>
+    <obap-composite-hosted-application view-id="app-2">
+        <obap-composite-hosted-view>Application 2</obap-composite-hosted-view>
+    </obap-composite-hosted-application>
 
     <script type="module">
-        import './app-2.js';
+        import '../../../src/obap-composite-hosted-application/obap-composite-hosted-application.js';
 
-        //window.addEventListener('view-activated', (e) => console.log('app-2 ACTIVATED: ' + JSON.stringify(e.detail)));
-        //window.addEventListener('view-deactivated', (e) => console.log('app-2 DEACTIVATED: ' + JSON.stringify(e.detail)));
+        //window.addEventListener('view-activated', (e) => console.log('app-4 ACTIVATED: ' + JSON.stringify(e.detail)));
+        //window.addEventListener('view-deactivated', (e) => console.log('app-4 DEACTIVATED: ' + JSON.stringify(e.detail)));
     </script>
 
     <style>

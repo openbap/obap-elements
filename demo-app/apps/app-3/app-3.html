@@ -37,7 +37,12 @@
 </head>
 
 <body>
-    <obap-composite-hosted-application view-id="app-3" top-level>Application 3</obap-composite-hosted-application>
+    <obap-composite-hosted-application view-id="app-3">
+        <obap-composite-hosted-view view-id="app-3-view-1">View 7</obap-composite-hosted-view>
+        <obap-composite-hosted-view view-id="app-3-view-2">View 8</obap-composite-hosted-view>
+        <obap-composite-hosted-view view-id="app-3-view-3">View 9</obap-composite-hosted-view>
+        <obap-composite-hosted-view view-id="app-3-view-options">Options</obap-composite-hosted-view> 
+    </obap-composite-hosted-application>
 
     <script type="module">
         import '../../../src/obap-composite-hosted-application/obap-composite-hosted-application.js';

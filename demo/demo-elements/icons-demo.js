@@ -98,7 +98,7 @@ export class IconsDemo extends ObapElement {
                 </obap-selector-container>
             </div>
         `;
-    }
+    } 
 }
 
 window.customElements.define('icons-demo', IconsDemo);

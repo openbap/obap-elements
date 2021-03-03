@@ -24,59 +24,57 @@
             width: 100%;
         }
 
-        obap-composite-hosted-application {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            background: lightyellow;
-        }
     </style>
 </head>
 
 <body>
-    <obap-composite-hosted-application id='app' view-id="app-1-view-1">
-        <div>
-            Application 1 - View 1
-            <button onclick="_buttonClick()">GO</button>
-            <button onclick="_dialogButtonClick()">Dialog</button>
-            <button onclick="_snackbarButtonClick()">Snackbar</button>
-            <button onclick="_snackbarActionButtonClick()">Snackbar Action</button>
-            <button onclick="_messageDialogButtonClick()">Message Dialog</button>
-        </div>
-    </obap-composite-hosted-application>
+    <obap-composite-hosted-application view-id="app-1-view-1">
+        <obap-composite-hosted-view>
+            <obap-composite-hosted-view-content label="Application 1 - View 1">
+                <view-1-content></view-1-content>
+            </obap-composite-hosted-view-content> 
+        </obap-composite-hosted-view>
+    </obap-composite-hosted-application> 
     
 
     <script type="module">
         import '../../../../src/obap-composite-hosted-application/obap-composite-hosted-application.js';
+        import './view-1-content.js';
+
+        /*
+        Application 1 - View 1
+        <button onclick="_buttonClick()">GO</button>
+        <button onclick="_dialogButtonClick()">Dialog</button>
+        <button onclick="_snackbarButtonClick()">Snackbar</button>
+        <button onclick="_snackbarActionButtonClick()">Snackbar Action</button>
+        <button onclick="_messageDialogButtonClick()">Message Dialog</button>
+        */
+
 
         window._buttonClick = function() {
-            const app = document.getElementById('app');
-            app.navigateTo('app-1', 'app-1-view-hidden');
-            app.sendClientMessage('test-message', {}, -1);
+            window.applicationHost.navigateTo('app-1', 'app-1-view-hidden');
+            window.applicationHost.sendClientMessage('test-message', {}, -1);
         }
 
         window._dialogButtonClick = function() {
-            app.showDialog('app-1-view-1-dialog', './apps/app-1/views/app-1-view-1-dialog.html', { foo: 'bar' },  (result) => {
+            window.applicationHost.showDialog('app-1-view-1-dialog', './apps/app-1/views/app-1-view-1-dialog.html', { foo: 'bar' },  (result) => {
                 console.log('*** SHOW DIALOG CALLBACK ***');
                 console.log(result);
             });
         }
 
         window._snackbarButtonClick = function() {
-            app.showSnackbar('This is a message.', 3000);
+            window.applicationHost.showSnackbar('This is a message.', 3000);
         }
 
         window._snackbarActionButtonClick = function() {
-            app.showActionSnackbar('This is an action message.', 'dismiss', () => {
+            window.applicationHost.showActionSnackbar('This is an action message.', 'dismiss', () => {
                 console.log('*** ACTION SNACKBAR DISMISSED ***');
             });
         }
 
         window._messageDialogButtonClick = function() {
-            app.showMessageDialog('Confirmation', 'Do you really want to do this?', [
+            window.applicationHost.showMessageDialog('Confirmation', 'Do you really want to do this?', [
                 {
                     key: 'yes',
                     label: 'yes',

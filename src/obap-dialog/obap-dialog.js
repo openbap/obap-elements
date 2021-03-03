@@ -58,11 +58,14 @@ export class ObapDialog extends ObapElement {
     }
 
     set opened(value) {
-        let oldValue = this._opened;
+        //let oldValue = this._opened;
+        //if (value === oldValue) return;
 
         requestAnimationFrame(() => {
+            let oldValue = this._opened;
+            if (value === oldValue) return;
+            
             this._opened = value;
-            this.requestUpdate('opened', oldValue);
 
             if (this.opened) {
                 this._actionKey = null;
@@ -88,6 +91,7 @@ export class ObapDialog extends ObapElement {
             }
 
             this.fireMessage('obap-dialog-opened-changed', { opened: this._opened, actionKey: this._actionKey});
+            this.requestUpdate('opened', oldValue);
         });
     }
 

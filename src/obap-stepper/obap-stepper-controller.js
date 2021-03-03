@@ -70,7 +70,7 @@ export const ObapStepperController = (superClass) =>
 
         constructor() {
             super();
-            this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
+            this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this); 
             this._boundStepperStepStateChangeEvent = this._handleStepperStepStateChangeEvent.bind(this);
             this.linear = false;
             this.canCancel = true;

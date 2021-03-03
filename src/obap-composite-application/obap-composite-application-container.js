@@ -79,7 +79,7 @@ export class ObapCompositeApplicationHost extends ObapElement {
     render() {
         return html`
             <div class="container">
-                ${this.load ? html`<iframe src="${this.url}" title="${this.caption}"></iframe>` : null}
+                ${this.load ? html`<iframe style="visibility:hidden;" onload="this.style.visibility = 'visible';" src="${this.url}" title="${this.caption}"></iframe>` : null}
             </div>
         `;
     }

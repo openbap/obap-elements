@@ -18,7 +18,7 @@ export class App2 extends ObapCompositeHostedApplicationController(LitElement) {
             }
 
             
-            .container {
+            container {
                 height: 100%;
                 display: flex;
                 flex-direction: column;

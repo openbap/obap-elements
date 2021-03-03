@@ -37,7 +37,11 @@
 </head>
 
 <body>
-    <obap-composite-hosted-application view-id="app-options" top-level>Options</obap-composite-hosted-application>
+    <obap-composite-hosted-application view-id="app-options">
+        <obap-composite-hosted-view view-id="options-view-1">Option 1</obap-composite-hosted-view>
+        <obap-composite-hosted-view view-id="options-view-2">Option 2</obap-composite-hosted-view>
+        <obap-composite-hosted-view view-id="options-view-3">Option 2</obap-composite-hosted-view>
+    </obap-composite-hosted-application>
 
     <script type="module">
         import '../../../src/obap-composite-hosted-application/obap-composite-hosted-application.js';

@@ -186,26 +186,6 @@ export class ObapNavigationBar extends ObapElement {
         }
     }
 
-    get items() {
-        return this._items;
-    }
-
-    set items(value) {
-        const oldValue = this.items;
-
-        if (oldValue !== value) {
-            this._items = value;
-
-            this.requestUpdate('items', oldValue);
-
-            if (this.selectedIndex > -1) {
-                const oldIndex = this.selectedIndex;
-                this.selectedIndex = -1;
-                this.selectedIndex = oldIndex;
-            }
-        }
-    }
-
     get selectedItem() {
         return this._selectedItem;
     }
@@ -214,69 +194,49 @@ export class ObapNavigationBar extends ObapElement {
         return this._selectedSubItem;
     }
 
-    get selectedIndex() {
-        return this._selectedIndex;
-    }
-
-    set selectedIndex(value) {
-        if (this.selectedIndex !== value) {
-            const oldValue = this.selectedIndex;
-            this._selectedIndex = value;
-            this.requestUpdate('selectedIndex', oldValue);
-
-            if ((this._selectedIndex > -1) && (this._selectedIndex < this.items.length)) {
-                
-                const oldItem = this.selectedItem;
-                this._selectedItem = this.items[this._selectedIndex];
-                this.requestUpdate('selectedItem', oldItem);
-
-                if (this._selectedItem.subIndex === undefined) {
-                    if (this._selectedItem.items && this._selectedItem.items.length > 0) {
-                        this.selectedSubIndex = 0;
-                    } else {
-                        this.selectedSubIndex = -1;
-                    }
-                } else {
-                    this.selectedSubIndex = this._selectedItem.subIndex;
-                }
-            }
-
-            this._fireSelectionChangeMessage();
-        }
-    }
-
-    get selectedSubIndex() {
-        return this._selectedSubIndex;
-    }
-
-    set selectedSubIndex(value) {
-        if (this.selectedSubIndex !== value) {
-            const oldValue = this.selectedSubIndex;
-            this._selectedSubIndex = value;
-            this.requestUpdate('selectedSubIndex', oldValue);
-
-            if ((this.selectedItem) && (this._selectedSubIndex > -1) && (this.selectedItem.items) && (this._selectedSubIndex < this.selectedItem.items.length)) {
-                const oldItem = this.selectedSubItem;
-                this._selectedSubItem = this.selectedItem.items[this._selectedSubIndex];
-                this.selectedItem.subIndex = this._selectedSubIndex;
-                this.requestUpdate('selectedSubItem', oldItem);
-            }
-
-            this._fireSelectionChangeMessage();
-        }
-    }
-
     constructor() {
         super();
         this.elevation = 0;
-        this._selectedIndex = -1;
-        this._selectedSubIndex = -1;
+        this.selectedIndex = -1;
+        this.selectedSubIndex = -1;
         this._selectedItem = null;
         this._selectedSubItem = null;
-        this._items = [];
+        this.items = [];
         this.hideLabels = false;
         this.hideIcons = false;
     }
+
+    connectedCallback() {
+        super.connectedCallback();
+
+    }
+
+    disconnectedCallback() {
+
+        super.disconnectedCallback();
+    }
+
+    firstUpdated(changedProperties) {
+        super.firstUpdated(changedProperties);
+
+    }
+
+    updated(changedProperties) {
+        super.updated(changedProperties);
+
+        changedProperties.forEach((oldValue, propName) => {
+            if ((propName === 'items') || (propName === 'selectedIndex')) {
+                const oldItem = this.selectedItem;
+                this._selectedItem = this.items[this.selectedIndex];
+                this.requestUpdate('selectedItem', oldItem);
+            } else if (propName === 'selectedSubIndex' && this.selectedItem && this.selectedItem.items) {
+                const oldItem = this.selectedSubItem;
+                this._selectedSubItem = this.selectedItem.items[this.selectedItem.selectedIndex];
+                this.requestUpdate('selectedSubItem', oldItem);
+            } 
+        });
+    }
+
 
     render() {
         return html`
@@ -300,7 +260,7 @@ export class ObapNavigationBar extends ObapElement {
             return html`
                 <div class="right-container">
                     <div class="typography-subtitle right-container-title">${this.selectedItem.label}</div>
-                    <obap-selector selected-index="${this.selectedSubIndex}" @obap-item-selected="${this._subItemSelected}">
+                    <obap-selector selected-index="${this._getSelectedItemChildIndex(this.selectedSubIndex)}" @obap-item-selected="${this._subItemSelected}">
                         ${this.selectedItem.items ? this.selectedItem.items.filter(item => !item.bottom).map(item => this._renderSubItem(item)) : null}
                         <div class="spacer" no-select></div>
                         ${this.selectedItem.items ? this.selectedItem.items.filter(item => item.bottom).map(item => this._renderSubItem(item)) : null}
@@ -330,12 +290,35 @@ export class ObapNavigationBar extends ObapElement {
         `;
     }
 
+    _getSelectedItemChildIndex(subIndex) {
+        let index = -1;
+        
+        if (this.selectedItem) {
+            index = subIndex;
+
+            if ((index === undefined) || (index === null) || (index < 0) || (index > this.selectedItem.items.length - 1)) {
+                if ((this.selectedItem.items) && (this.selectedItem.items.length > 0)) {
+                    index = 0;
+                } else {
+                    index = -1;
+                }
+            }
+
+            this.selectedItem.selectedIndex = index;
+        }
+        
+        return index;
+    }
+
     _itemSelected(e) {
         this.selectedIndex = e.detail.index;
+        this._fireSelectionChangeMessage();
     }
 
     _subItemSelected(e) {
-        this.selectedSubIndex = e.detail.index;
+        this.selectedItem.selectedIndex = e.detail.index;
+        this.selectedSubIndex = this.selectedItem.selectedIndex;
+        this._fireSelectionChangeMessage();
     }
 
     _fireSelectionChangeMessage() {
@@ -343,7 +326,7 @@ export class ObapNavigationBar extends ObapElement {
             if (this.selectedItem) {
                 const msg =  {
                     index: this.selectedIndex,
-                    subIndex: this.selectedSubIndex
+                    subIndex: (this.selectedItem.selectedIndex !== undefined && this.selectedItem.selectedIndex !== null) ? this.selectedItem.selectedIndex : -1
                 }
 
                 this.fireMessage('obap-navigation-bar-change', msg);

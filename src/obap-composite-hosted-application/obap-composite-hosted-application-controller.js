@@ -64,7 +64,7 @@ export const ObapCompositeHostedApplicationController = (superClass) =>
         connectedCallback() {
             super.connectedCallback();
             this.startMessageClient();
-            this.registerMessageClient();
+            this.registerMessageClient(); 
         }
 
         disconnectedCallback() {

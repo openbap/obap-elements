@@ -24,7 +24,8 @@
             width: 100%;
         }
 
-        obap-composite-hosted-application {
+        .content {
+            width: 100%;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -37,7 +38,15 @@
 </head>
 
 <body>
-    <obap-composite-hosted-application view-id="app-home">Home</obap-composite-hosted-application>
+    <obap-composite-hosted-application view-id="app-home">
+        <obap-composite-hosted-view view-id="app-home" label="Home" default>
+            <obap-composite-hosted-view-content label="One"><div class="content">Home 1</div></obap-composite-hosted-view-content>
+            <obap-composite-hosted-view-content label="Two"><div class="content">Home 2</div></obap-composite-hosted-view-content>
+            <obap-composite-hosted-view-content label="Three"><div class="content">Home 3</div></obap-composite-hosted-view-content>
+            <obap-composite-hosted-view-content label="Four"><div class="content">Home 4</div></obap-composite-hosted-view-content>
+            <obap-composite-hosted-view-content label="Five"><div class="content">Home 5</div></obap-composite-hosted-view-content>
+        </obap-composite-hosted-view>
+    </obap-composite-hosted-application>
 
     <script type="module">
         import '../../../src/obap-composite-hosted-application/obap-composite-hosted-application.js';

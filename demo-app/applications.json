@@ -81,7 +81,7 @@
         ]
     },
     {
-        "label": "App Three",
+        "label": "App Three", 
         "icon": "standard:https",
         "id": "app-3",
         "url": "./apps/app-3/app-3.html",
@@ -156,11 +156,11 @@
                 "label": "Option 2",
                 "icon": "standard:cloud-queue",
                 "id": "options-view-2",
-                "modal": true
+                "modal": false
             },
             {
                 "label": "Option 3",
-                "icon": "standard:cloud-queue",
+                "icon": "standard:cloud-queue", 
                 "id": "options-view-3"
             }
         ]
