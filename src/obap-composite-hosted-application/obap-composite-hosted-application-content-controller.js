@@ -7,7 +7,7 @@ The following handlers can be provided:
 
 onViewActivated(appId, viewId)
 onViewDeactivated(appId, viewId)
-onViewThemeChanged()
+onViewThemeChanged(name)
 onViewLocaleChanged()
 
 */

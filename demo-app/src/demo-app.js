@@ -41,7 +41,7 @@ class DemoApp extends LitElement {
 
     render() {
         return html`
-            <obap-composite-application .items="${this.applications}" elevation="2" @obap-composite-application-change="${this._onApplicationChange}"></obap-composite-application>
+            <obap-composite-application collapsible horizontal .items="${this.applications}" elevation="2" @obap-composite-application-change="${this._onApplicationChange}"></obap-composite-application>
         `;
     }
 

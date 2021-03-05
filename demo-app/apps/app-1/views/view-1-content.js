@@ -40,10 +40,28 @@ export class View1Content extends ObapCompositeHostedApplicationContentControlle
     constructor() {
         super();
 
+        /*
         this.addEventListener('view-activated', (e) => {
             console.log('uuu')
             console.log(e.detail);
         });
+        */
+    }
+
+    onViewActivated(appId, viewId) {
+        console.log(`*** BAZINGA VIEW ACTIVATED: ${appId}, ${viewId}`);
+    }
+
+    onViewDeactivated(appId, viewId) {
+        console.log(`*** BAZINGA VIEW DEACTIVATED: ${appId}, ${viewId}`);
+    }
+
+    onViewThemeChanged(name) {
+        console.log(`*** BAZINGA VIEW THEME CHANGED: ${name}`);
+    }
+
+    onViewLocaleChanged(name) {
+        console.log(`*** BAZINGA VIEW LOCALE CHANGED: ${name}`);
     }
 
     _buttonClick() {

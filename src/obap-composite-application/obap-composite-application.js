@@ -116,6 +116,18 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
             hideIcons: {
                 type: Boolean,
                 attribute: 'hide-icons'
+            },
+
+            collapsible: {
+                type: Boolean
+            },
+
+            horizontal: {
+                type: Boolean
+            },
+
+            open: {
+                type: Boolean
             }
         }
     }
@@ -131,6 +143,9 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
         this._defaultApplicationDetails = null;
         this.hideLabels = false;
         this.hideIcons = false;
+        this.collapsible = false;
+        this.horizontal = false;
+        this.open = false;
 
         this.addTheme('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         this.theme = 'default';
@@ -171,7 +186,7 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
                     <obap-button ?default-item="${this.currentRoute ? this.currentRoute.isDefault : false}" @click="${this._onToolbarButtonClick}" round class="title-icon" slot="left" icon="${this._getIcon(this.defaultIcon, this.selectedApplicationDetails)}" icon-src="${ifDefined(this._getIconSrc(this.defaultIcon, this.selectedApplicationDetails))}"></obap-button>
                 </obap-top-app-bar>
                 <obap-navigation-bar ?hidden="${this._isModal(this.selectedApplicationDetails)}" .items="${this.items}" elevation="${this.elevation}" @obap-navigation-bar-change="${this._selectionChanged}"
-                                     ?hide-icons="${this.hideIcons}" ?hide-labels="${this.hideLabels}"
+                                     ?hide-icons="${this.hideIcons}" ?hide-labels="${this.hideLabels}" ?collapsible="${this.collapsible}" ?horizontal="${this.horizontal}" ?open="${this.open}"
                                      selected-index="${this.selectedApplicationDetails ? this.selectedApplicationDetails.index : -1}"
                                      selected-sub-index="${this.selectedApplicationDetails ? this.selectedApplicationDetails.subIndex : -1}"></obap-navigation-bar>
                 ${this._renderContent()}
@@ -232,13 +247,9 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
         return false;
     }
 
-    _hideTitle(application) {
-        
+    _hideTitle(application) {      
         const result = application && application.item && application.item.hideTitle;
-        console.log('hide title : ' + result)
-        console.log(application)
         return application && application.item && application.item.hideTitle;
-        
     }
 
     _getTitle(defaultTitle, application) {
@@ -272,7 +283,6 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
     }
 
     _selectView(index, subIndex, source) {
-        //console.log(`SELECT VIEW: ${index}, ${subIndex}`)
         if ((!this.selectedApplicationDetails) || (this.selectedApplicationDetails.index !== index) || (this.selectedApplicationDetails.subIndex !== subIndex)) {
             const oldValue = this.selectedApplicationDetails;
             const item = this.items[index];

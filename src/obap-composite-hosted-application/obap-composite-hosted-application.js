@@ -62,7 +62,7 @@ export class ObapCompositeHostedApplication extends ObapCompositeHostedApplicati
         `;
     }
 
-    onViewMessage(message){
+    onViewMessage(message) {
         //console.log('HUB MESSAGE CONTROL');
         //console.log(JSON.stringify(message));
         this.fireMessage('view-message', { type: message.type, data: message.body });
@@ -116,11 +116,16 @@ export class ObapCompositeHostedApplication extends ObapCompositeHostedApplicati
         this.fireMessage('view-deactivated', { appId: appId, viewId: viewId });
     }
 
-    onViewThemeChanged() {
+    onViewThemeChanged(name) {
         //console.log(`${this.viewId} THEME CHANGED TO ${this.theme}`);
+        /*
         if (this.contentIndex > -1) {
-            this.views[this.contentIndex].onViewThemeChanged();
+            this.views[this.contentIndex].onViewThemeChanged(name);
         }
+        */
+        this.views.forEach(view => {
+            view.onViewThemeChanged(name);
+        });
     }
 
     onViewLocaleChanged() {

@@ -44,6 +44,14 @@ export class ObapCompositeHostedViewContent extends ObapElement {
         this.renderRoot.addEventListener('slotchange', this._boundHandleSlotChangeEvent);
     }
 
+    onViewInitialized(appId, viewId) {
+        this._contentItems.forEach(item => {
+            if (item.onViewInitialized) {
+                item.onViewInitialized(appId, viewId);
+            }
+        });
+    }
+
     onViewActivated(appId, viewId) {
         this._contentItems.forEach(item => {
             if (item.onViewActivated) {
@@ -60,18 +68,20 @@ export class ObapCompositeHostedViewContent extends ObapElement {
         });
     }
 
-    onViewThemeChanged() {
+    onViewThemeChanged(name) {
+        /*
         this._contentItems.forEach(item => {
             if (item.onViewThemeChanged) {
-                item.onViewThemeChanged(appId, viewId);
+                item.onViewThemeChanged(name);
             }
         });
+        */
     }
 
     onViewLocaleChanged() {
         this._contentItems.forEach(item => {
             if (item.onViewLocaleChanged) {
-                item.onViewLocaleChanged(appId, viewId);
+                item.onViewLocaleChanged();
             }
         });
     }

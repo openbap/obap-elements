@@ -101,10 +101,10 @@ export class ObapCompositeHostedView extends ObapElement {
         super.updated(changedProperties);
 
         changedProperties.forEach((oldValue, propName) => {
- 
+
         });
     }
-    
+
     render() {
         return html`
             <obap-selector-container class="container" selected-index="${this.contentIndex}">
@@ -124,6 +124,13 @@ export class ObapCompositeHostedView extends ObapElement {
         ` : null;
     }
 
+    onViewInitialized(appId, viewId) {
+        //console.log(`CONTENT INITIALIZED: AppId = ${appId}, viewId = ${viewId}`);
+        this.contentItems.forEach(item => {
+            item.onViewInitialized(appId, viewId);
+        });
+    }
+
     onViewActivated(appId, viewId) {
         //console.log(`CONTENT ACTIVATED: AppId = ${appId}, viewId = ${viewId}`);
         this.contentItems.forEach(item => {
@@ -138,10 +145,10 @@ export class ObapCompositeHostedView extends ObapElement {
         });
     }
 
-    onViewThemeChanged() {
+    onViewThemeChanged(name) {
         //console.log(`${this.viewId} THEME CHANGED TO ${this.theme}`);
         this.contentItems.forEach(item => {
-            item.onViewThemeChanged();
+            item.onViewThemeChanged(name);
         });
     }
 
