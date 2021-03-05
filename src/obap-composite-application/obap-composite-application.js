@@ -144,8 +144,6 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
         return this._defaultApplicationDetails;
     }
 
-    
-
     connectedCallback() {
         super.connectedCallback();
         this.startMessageHub();
@@ -169,7 +167,7 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
     render() {
         return html`
             <div class="container">
-                <obap-top-app-bar elevation="${this.elevation}" caption="${this._getTitle(this.defaultTitle, this.selectedApplicationDetails)}">
+                <obap-top-app-bar ?hidden="${this._hideTitle(this.selectedApplicationDetails)}" elevation="${this.elevation}" caption="${this._getTitle(this.defaultTitle, this.selectedApplicationDetails)}">
                     <obap-button ?default-item="${this.currentRoute ? this.currentRoute.isDefault : false}" @click="${this._onToolbarButtonClick}" round class="title-icon" slot="left" icon="${this._getIcon(this.defaultIcon, this.selectedApplicationDetails)}" icon-src="${ifDefined(this._getIconSrc(this.defaultIcon, this.selectedApplicationDetails))}"></obap-button>
                 </obap-top-app-bar>
                 <obap-navigation-bar ?hidden="${this._isModal(this.selectedApplicationDetails)}" .items="${this.items}" elevation="${this.elevation}" @obap-navigation-bar-change="${this._selectionChanged}"
@@ -234,6 +232,15 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
         return false;
     }
 
+    _hideTitle(application) {
+        
+        const result = application && application.item && application.item.hideTitle;
+        console.log('hide title : ' + result)
+        console.log(application)
+        return application && application.item && application.item.hideTitle;
+        
+    }
+
     _getTitle(defaultTitle, application) {
         if (application) {
             if (application.item) {
@@ -265,6 +272,7 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
     }
 
     _selectView(index, subIndex, source) {
+        //console.log(`SELECT VIEW: ${index}, ${subIndex}`)
         if ((!this.selectedApplicationDetails) || (this.selectedApplicationDetails.index !== index) || (this.selectedApplicationDetails.subIndex !== subIndex)) {
             const oldValue = this.selectedApplicationDetails;
             const item = this.items[index];

@@ -4,7 +4,7 @@ Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, LitElement } from 'lit-element';
 import { ObapCompositeHostedApplicationContentController } from '../../../../src/obap-composite-hosted-application/obap-composite-hosted-application-content-controller.js';
-
+import '../../../../src/obap-check/obap-check.js';
 
 export class View1Content extends ObapCompositeHostedApplicationContentController(LitElement) {
     static get styles() {
@@ -32,6 +32,7 @@ export class View1Content extends ObapCompositeHostedApplicationContentControlle
                 <button @click="${this._snackbarButtonClick}">Snackbar</button>
                 <button @click="${this._snackbarActionButtonClick}">Snackbar Action</button>
                 <button @click="${this._messageDialogButtonClick}">Message Dialog</button>
+                <obap-check label="Test Check"><</obap-check>
             </div>
         `;
     }

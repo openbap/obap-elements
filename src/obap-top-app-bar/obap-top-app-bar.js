@@ -37,6 +37,14 @@ export class ObapTopAppBar extends ObapElement {
                 height: 48px;
             }
 
+            :host([hidden]) {
+                display: none !important;
+            }
+    
+            :host([disabled]) {
+                pointer-events: none;
+            }
+
             .container {
                 height: 100%;
                 margin: 0 8px 0 8px;

@@ -23,6 +23,10 @@ export class ObapNavigationBar extends ObapElement {
 
                 --obap-navigation-bar-badge-color: var(--obap-primary-color, #5c6bc0);
                 --obap-navigation-bar-badge-background-color: var(--obap-on-primary-color, white);
+
+                --obap-navigation-bar-normal-size: 72px;
+                --obap-navigation-bar-no-label-size: 56px;
+                --obap-navigation-bar-collapsed-size: 48px;
                 
                 display: block;
                 
@@ -45,10 +49,18 @@ export class ObapNavigationBar extends ObapElement {
             }
 
             .left-container {
-                min-width: 72px;
+                min-width: var(--obap-navigation-bar-normal-size);
                 height: 100%;
                 display: flex;
                 flex-direction: column;
+            }
+
+            .left-container[no-labels] {
+                min-width: var(--obap-navigation-bar-no-label-size);
+            }
+
+            .left-container[horizontal] {
+                min-width: var(--obap-navigation-bar-collapsed-size);
             }
 
             .right-container {
@@ -68,18 +80,43 @@ export class ObapNavigationBar extends ObapElement {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                min-width: 72px;
-                height: 72px;
+                min-width: var(--obap-navigation-bar-normal-size);
+                height: var(--obap-navigation-bar-normal-size);
                 box-sizing: border-box;
                 padding: 8px;
                 cursor: pointer;
             }
 
-            .item-container > * {
+            .item-container[no-labels] {
+                min-width: var(--obap-navigation-bar-no-label-size);
+                height: var(--obap-navigation-bar-no-label-size);
+            }
+
+            .horizontal-item-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: var(--obap-navigation-bar-collapsed-size);
+                height: var(--obap-navigation-bar-collapsed-size);
+                box-sizing: border-box;
+                padding: 8px;
+                cursor: pointer;
+            }
+
+            .horizontal-item-container[open] {
+                justify-content: flex-start;
+                padding-left: calc(12px + (var(--obap-navigation-bar-collapsed-size) - 48px) / 2);
+            }
+
+            .item-container > *, .horizontal-item-container > * {
                 pointer-events: none;
             }
 
-            .item-container[selected] {
+            .item-container[selected], .horizontal-item-container[selected] {
+                color: var(--obap-navigation-bar-active-color, white);
+            }
+
+            .item-container:hover, .horizontal-item-container:hover {
                 color: var(--obap-navigation-bar-active-color, white);
             }
 
@@ -124,9 +161,9 @@ export class ObapNavigationBar extends ObapElement {
                 flex: 1;
             }
 
-            .item-icon[large-icon] {
-                --obap-icon-width: 32px;
-                --obap-icon-height: 32px;
+            .horizontal-item-icon {
+                --obap-icon-width: 24px;
+                --obap-icon-height: 24px;
             }
 
             .sub-item-label {
@@ -140,6 +177,12 @@ export class ObapNavigationBar extends ObapElement {
             .right-container-title {
                 border-bottom: 1px solid var(--obap-divider-on-surface-color, rgba(0, 0, 0, 0.20));
                 margin-bottom: 8px;
+            }
+
+            .horizontal-item-label {
+                margin-left: 16px;
+                margin-right: 8px;
+                flex: 1;
             }
         `];
     }
@@ -176,12 +219,28 @@ export class ObapNavigationBar extends ObapElement {
                 attribute: 'hide-icons'
             },
 
+            collapsible: {
+                type: Boolean
+            },
+
+            horizontal: {
+                type: Boolean
+            },
+
             selectedItem: {
                 type: Object
             },
 
             selectedSubItem: {
                 type: Object
+            },
+
+            open: {
+                type: Boolean
+            },
+
+            hovering: {
+                type: Boolean
             }
         }
     }
@@ -266,6 +325,10 @@ export class ObapNavigationBar extends ObapElement {
         }
     }
 
+    get hovering() {
+        return this._hovering;
+    }
+
     constructor() {
         super();
         this.elevation = 0;
@@ -276,12 +339,16 @@ export class ObapNavigationBar extends ObapElement {
         this._items = [];
         this.hideLabels = false;
         this.hideIcons = false;
+        this.collapsible = false;
+        this.horizontal = false;
+        this.open = false;
+        this._hovering = false;
     }
 
     render() {
         return html`
-            <div class="container">
-                <div class="left-container">
+            <div class="container" @mouseenter="${this._onMouseEnter}"  @mouseleave="${this._onMouseLeave}">
+                <div class="left-container" ?no-labels="${this.hideLabels}" ?horizontal="${this.horizontal}">
                     <slot></slot>
                     <obap-selector selected-index="${this.selectedIndex}" @obap-item-selected="${this._itemSelected}">
                         ${this.items.filter(item => !item.bottom).map(item => this._renderItem(item))}
@@ -313,9 +380,17 @@ export class ObapNavigationBar extends ObapElement {
     }
 
     _renderItem(item) {
+        if (this.horizontal) {
+            return html`
+                <div class="horizontal-item-container" ?open="${!this._hideItemLabel()}">
+                    <obap-icon class="horizontal-item-icon" icon="${ifDefined(item.icon)}" src="${ifDefined(item.iconSrc)}"></obap-icon>
+                    <div ?hidden="${this._hideItemLabel(this.hovering)}" class="horizontal-item-label typography-body">${item.label}</div>
+                </div>
+            `;
+        }
         return html`
-            <div class="item-container">
-                <obap-icon class="item-icon" ?large-icon="${this.hideLabels}" icon="${ifDefined(item.icon)}" src="${ifDefined(item.iconSrc)}"></obap-icon>
+            <div class="item-container" ?no-labels="${this.hideLabels}">
+                <obap-icon class="item-icon" icon="${ifDefined(item.icon)}" src="${ifDefined(item.iconSrc)}"></obap-icon>
                 ${!this.hideLabels ? html`<div class="item-label typography-caption">${item.label}</div>` : null}
             </div>
         `;
@@ -328,6 +403,24 @@ export class ObapNavigationBar extends ObapElement {
                 <div class="sub-item-label typography-body">${item.label}</div>
             </div>
         `;
+    }
+
+    _hideItemLabel() {
+        if (this.collapsible) {
+            return !this.hovering;
+        }
+
+        return !this.open;
+    }
+
+    _onMouseEnter() {
+        this._hovering = true;
+        this.requestUpdate('hovering', false);
+    }
+
+    _onMouseLeave() {
+        this._hovering = false;
+        this.requestUpdate('hovering', true);
     }
 
     _itemSelected(e) {

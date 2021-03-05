@@ -141,11 +141,20 @@
         ]
     },
     {
+        "label": "Polymer",
+        "icon": "standard:polymer",
+        "id": "app-polymer",
+        "url": "https://www.polymer-project.org/",
+        "external": true,
+        "bottom": true
+    },
+    {
         "label": "Options",
         "icon": "standard:settings",
         "id": "app-options",
         "url": "./apps/options/options.html",
         "bottom": true,
+        "hideTitle": false,
         "items": [
             {
                 "label": "Option 1",

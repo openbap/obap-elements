@@ -74,7 +74,7 @@ export class ObapCompositeHostedApplication extends ObapCompositeHostedApplicati
     }
 
     onViewActivated(appId, viewId) {
-        console.log(`${this.viewId} ACTIVATED: AppId = ${appId}, viewId = ${viewId}`);
+        //console.log(`${this.viewId} ACTIVATED: AppId = ${appId}, viewId = ${viewId}`);
 
         if ((!this.views) || (this.views.length === 0)) return;
 

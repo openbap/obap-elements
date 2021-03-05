@@ -192,14 +192,14 @@ export class NavigationBarDemo extends ObapElement {
         return html`
             <div class="container">
                 <div class="row">
-                    <obap-navigation-bar hide-icons .items="${this.items}" elevation="4" selected-index="0" @obap-navigation-bar-change="${this._selectionChanged}">
+                    <obap-navigation-bar horizontal collapsible hide-icons .items="${this.items}" elevation="4" selected-index="0" @obap-navigation-bar-change="${this._selectionChanged}">
                         
                     </obap-navigation-bar> 
                     <obap-material class="app-content" elevation="4">
                         ${this._renderAppTitle()}
                     </obap-material>
                 </div>
-            </div>
+            </div> 
         `;
     }
 

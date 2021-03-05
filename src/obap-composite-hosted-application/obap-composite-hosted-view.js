@@ -101,7 +101,7 @@ export class ObapCompositeHostedView extends ObapElement {
         super.updated(changedProperties);
 
         changedProperties.forEach((oldValue, propName) => {
-            //
+ 
         });
     }
     
@@ -125,13 +125,14 @@ export class ObapCompositeHostedView extends ObapElement {
     }
 
     onViewActivated(appId, viewId) {
+        //console.log(`CONTENT ACTIVATED: AppId = ${appId}, viewId = ${viewId}`);
         this.contentItems.forEach(item => {
             item.onViewActivated(appId, viewId);
         });
     }
 
     onViewDeactivated(appId, viewId) {
-        //console.log(`${this.applicationId} DEACTIVATED: AppId = ${appId}, viewId = ${viewId}`);
+        //console.log(`CONTENT DEACTIVATED: AppId = ${appId}, viewId = ${viewId}`);
         this.contentItems.forEach(item => {
             item.onViewDeactivated(appId, viewId);
         });
