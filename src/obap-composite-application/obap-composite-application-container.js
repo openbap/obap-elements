@@ -39,6 +39,10 @@ export class ObapCompositeApplicationHost extends ObapElement {
                 type: String
             },
 
+            external: {
+                type: Boolean
+            },
+
             caption: {
                 type: String
             },
@@ -74,6 +78,7 @@ export class ObapCompositeApplicationHost extends ObapElement {
         this._load = false;
         this.hostId = '';
         this.caption = '';
+        this.external = false;
     }
     
     render() {

@@ -141,10 +141,10 @@
         ]
     },
     {
-        "label": "Polymer",
+        "label": "LitElement",
         "icon": "standard:polymer",
-        "id": "app-polymer",
-        "url": "https://www.polymer-project.org/",
+        "id": "app-litelement",
+        "url": "https://lit-element.polymer-project.org/",
         "external": true,
         "bottom": true
     },

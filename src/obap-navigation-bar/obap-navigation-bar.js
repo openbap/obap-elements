@@ -181,7 +181,7 @@ export class ObapNavigationBar extends ObapElement {
 
             .horizontal-item-label {
                 margin-left: 16px;
-                margin-right: 8px;
+                margin-right: 16px;
                 flex: 1;
             }
         `];
@@ -289,6 +289,9 @@ export class ObapNavigationBar extends ObapElement {
                 this._selectedItem = this.items[this._selectedIndex];
                 this.requestUpdate('selectedItem', oldItem);
 
+                //this.selectedSubIndex = this._selectedItem.subIndex;
+
+                
                 if (this._selectedItem.subIndex === undefined) {
                     if (this._selectedItem.items && this._selectedItem.items.length > 0) {
                         this.selectedSubIndex = 0;
@@ -298,6 +301,7 @@ export class ObapNavigationBar extends ObapElement {
                 } else {
                     this.selectedSubIndex = this._selectedItem.subIndex;
                 }
+                
             }
 
             this._fireSelectionChangeMessage();
@@ -345,10 +349,21 @@ export class ObapNavigationBar extends ObapElement {
         this._hovering = false;
     }
 
+    select(index, subIndex, resetPreviousSubIndex = false) {
+        if (resetPreviousSubIndex && this.selectedItem) {
+            this.selectedItem.subIndex = -1;
+        }
+
+        this.selectedIndex = index;
+        this.selectedSubIndex = subIndex;
+
+        //this.requestUpdate();
+    }
+
     render() {
         return html`
-            <div class="container" @mouseenter="${this._onMouseEnter}"  @mouseleave="${this._onMouseLeave}">
-                <div class="left-container" ?no-labels="${this.hideLabels}" ?horizontal="${this.horizontal}">
+            <div class="container" @mouseleave="${this._onMouseLeave}">
+                <div class="left-container" ?no-labels="${this.hideLabels}" ?horizontal="${this.horizontal}" @mouseenter="${this._onMouseEnter}">
                     <slot></slot>
                     <obap-selector selected-index="${this.selectedIndex}" @obap-item-selected="${this._itemSelected}">
                         ${this.items.filter(item => !item.bottom).map(item => this._renderItem(item))}
