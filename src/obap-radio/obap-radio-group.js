@@ -22,7 +22,12 @@ class ObapRadioGroup extends ObapSelectorController(ObapElement) {
     constructor() {
         super();
         this.role = 'radiogroup';
-        this.enterSelects = true;
+        this.enterSelects = true;   
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.setAttribute('aria-label', 'radio group');   
     }
 
     render() {

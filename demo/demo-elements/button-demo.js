@@ -3,7 +3,7 @@
 Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
-import '../../src/obap-button/obap-button.js';
+import '../../src/obap-button/obap-button-group.js';
 
 export class ButtonDemo extends ObapElement {
     static get styles() {
@@ -73,6 +73,14 @@ export class ButtonDemo extends ObapElement {
             .magenta {
                 --obap-button-disabled-background-color: lightpink;
             }
+
+            obap-button-group {
+                margin: 16px;
+            }
+
+            obap-button-group > obap-button {
+                margin: 0;
+            }
         `];
     }
     
@@ -123,6 +131,17 @@ export class ButtonDemo extends ObapElement {
                     <obap-button round icon="bug-report" class="accent-reverse"></obap-button>
                     <obap-button round icon="android" class="primary-reverse" toggle raised label="toggle"></obap-button>
                     <obap-button round icon="bug-report" class="accent-reverse" toggle raised label="toggle"></obap-button>
+                </div>
+
+                <div class="title"  @click="${this._click}">Button Group</div>
+                <div class="row">
+                    <obap-button-group selected-index="0">
+                        <obap-button icon="settings" outline toggle></obap-button>
+                        <obap-button icon="android" outline toggle></obap-button>
+                        <obap-button icon="bug-report" outline toggle></obap-button>
+                        <obap-button icon="face" outline toggle></obap-button>
+                        <obap-button icon="shopping-cart" outline toggle></obap-button>
+                    </obap-button-group>
                 </div>
             </div>
         `;

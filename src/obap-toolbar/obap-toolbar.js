@@ -82,7 +82,7 @@ export class ObapToolbar extends ObapElement {
 
     constructor() {
         super();
-    
+        this.role = 'toolbar';
         this.vertical = false;
     }
 

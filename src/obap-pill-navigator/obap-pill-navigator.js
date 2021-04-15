@@ -58,7 +58,7 @@ export class ObapPillNavigator extends ObapElement {
                 height: var(--obap-pill-size);
                 margin-right: var(--obap-pill-separation);
                 background: var(--obap-pill-color);
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
                 border: var(--obap-pill-border-size) solid var(--obap-pill-border-color);
                 box-sizing: border-box;
                 cursor: pointer;
@@ -126,6 +126,7 @@ export class ObapPillNavigator extends ObapElement {
 
     constructor() {
         super();
+        this.role = 'tablist';
         this.count = 0;
         this.readonly = false;
         this.disabledPills = [];
@@ -134,8 +135,8 @@ export class ObapPillNavigator extends ObapElement {
     
     render() {
         return html`
-            <obap-selector class="container" selected-index="${this.selected}" @obap-item-selected="${this._selectedHandler}">
-                ${[...Array(this.count)].map((_, index) => html`<div class="pill" ?no-select="${this.disabledPills.indexOf(index) > -1}"></div>`)}
+            <obap-selector role="presentation" class="container" selected-index="${this.selected}" @obap-item-selected="${this._selectedHandler}">
+                ${[...Array(this.count)].map((_, index) => html`<div role="tab" class="pill" ?no-select="${this.disabledPills.indexOf(index) > -1}"></div>`)}
             </obap-selector>
         `;
     }

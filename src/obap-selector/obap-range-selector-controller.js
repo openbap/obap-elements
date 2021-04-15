@@ -10,7 +10,7 @@ import { ObapMultiSelectorController } from './obap-multi-selector-controller.js
  * @param {*} superClass 
  */
 export const ObapRangeSelectorController = (superClass) =>
-    class ObapRangeSelectorControllerComponent extends ObapMultiSelectorController(superClass) {
+    class ObapRangeSelectorControllerComponent extends ObapMultiSelectorController(superClass) { 
         static get properties() {
             return {
                 /**

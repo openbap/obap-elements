@@ -63,7 +63,7 @@ class ObapSimpleBaseChart extends ObapElement {
 
     constructor() {
         super();
-
+        this.role = "figure";
         this._width = 0;
         this._height = 0;
 

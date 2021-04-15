@@ -42,7 +42,7 @@ export class ObapSelectContainer extends ObapSelectController(ObapElement) {
 
             .selected-container[border-style="outline"] {
                 border: var(--obap-select-border-size) solid var(--obap-select-border-color);
-                border-radius: 3px;
+                border-radius: var(--obap-border-radius-normal, 3px);
             }
 
             .selected-container[border-style="underline"] {
@@ -185,6 +185,7 @@ export class ObapSelectContainer extends ObapSelectController(ObapElement) {
                         <svg ?opened="${this.opened}" viewBox="0 0 24 24"><g><path d="M7 10l5 5 5-5z"/></g></svg>
                     </div>
                     ${this._renderLabel()}
+                    <input hidden aria-hidden="true" type="text" aria-autocomplete="none" aria-controls="selection-content" aria-label="${this.label ? this.label : 'Select'}">
                 </div>
 
                 <div id="selection-content" class="selection-content" ?opened="${this.opened}">

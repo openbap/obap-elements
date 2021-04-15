@@ -21,7 +21,7 @@ export class ObapActivityIndicator extends ObapElement {
                 --obap-activity-indicator-track-color: var(--obap-block-color, #ECECEC);
 
                 display: block;
-                border-radius: 0;
+                border-radius: var(-obap-border-radius-none);
                 padding: 4px;
             }
     
@@ -34,7 +34,7 @@ export class ObapActivityIndicator extends ObapElement {
             }
 
             :host([activity-type="circular"]) {
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
             }
 
             :host([activity-type="linear"]) {
@@ -75,7 +75,7 @@ export class ObapActivityIndicator extends ObapElement {
             }
 
             .typing-indicator[round] > .pill {
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
             }
 
             .typing-indicator[disabled] > .pill {

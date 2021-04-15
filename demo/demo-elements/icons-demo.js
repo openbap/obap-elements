@@ -46,6 +46,7 @@ export class IconsDemo extends ObapElement {
             .icon-group {
                 display: flex;
                 flex-wrap: wrap;
+                height: 100%;
             }
 
             obap-tabs {
@@ -53,7 +54,11 @@ export class IconsDemo extends ObapElement {
             }
 
             obap-selector-container {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
                 margin-bottom: 24px;
+                box-sizing: border-box;
             }
 
             obap-icon {
@@ -62,6 +67,10 @@ export class IconsDemo extends ObapElement {
                 background: white;
                 color: var(--obap-text-secondary-color, rgba(0, 0, 0, 0.54));
                 cursor: pointer;
+            }
+
+            .pages {
+                flex: 1;
             }
         `];
     }
@@ -86,7 +95,7 @@ export class IconsDemo extends ObapElement {
                     <obap-tabs class="elevation-1" scroll hide-scroll-buttons>
                         ${this.groups.map(group => html`<obap-tab>${group}</obap-tab>`)}
                     </obap-tabs>
-                    <obap-pages>
+                    <obap-pages class="pages">
                         ${this.groups.map(group => html`
                             <div class="icon-group">
                                 ${getIconNames(group).map(icon => html`

@@ -14,7 +14,7 @@ export class ObapStatusLabel extends ObapElement {
                 display: block;
                 color: var(--obap-on-primary-color);
                 background: var(--obap-primary-color);
-                border-radius: 3px;
+                border-radius: var(--obap-border-radius-normal, 3px);
                 overflow: hidden;
                 padding: 0 4px;
             }

@@ -95,7 +95,7 @@ export class ObapMessageDialog extends ObapElement {
 
     render() {
         return html`
-            <obap-dialog modal ?opened="${this.opened}">
+            <obap-dialog modal ?opened="${this.opened}" aria-labelledby="dlg-caption" aria-describedby="dlg-content" role="alertdialog">
                 <div class="container">
                     ${[this._renderCaption(), this._renderContent(), this._renderActions()]}
                 </div>
@@ -105,13 +105,13 @@ export class ObapMessageDialog extends ObapElement {
 
     _renderCaption() {
         return this.caption ? html`
-            <div class="caption typography-title">${this.caption}</div>
+            <div id="dlg-caption" class="caption typography-title">${this.caption}</div>
         ` : null;
     }
 
     _renderContent() {
         return this.message ? html`
-            <div class="content">${this.message} </div>
+            <div id="dlg-content" class="content">${this.message} </div>
         ` : null;
     }
 

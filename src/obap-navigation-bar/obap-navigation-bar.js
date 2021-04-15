@@ -128,7 +128,7 @@ export class ObapNavigationBar extends ObapElement {
                 box-sizing: border-box;
                 padding: 0 8px;
                 cursor: pointer;
-                border-radius: 3px;
+                border-radius: var(--obap-border-radius-normal, 3px);
             }
 
             .sub-item-container > * {
@@ -207,6 +207,11 @@ export class ObapNavigationBar extends ObapElement {
 
             items: {
                 type: Array
+            },
+
+            hideTitle: {
+                type: Boolean,
+                attribute: 'hide-title'
             },
 
             hideLabels: {
@@ -335,12 +340,14 @@ export class ObapNavigationBar extends ObapElement {
 
     constructor() {
         super();
+        this.role = 'navigation';
         this.elevation = 0;
         this._selectedIndex = -1;
         this._selectedSubIndex = -1;
         this._selectedItem = null;
         this._selectedSubItem = null;
         this._items = [];
+        this.hideTitle = false;
         this.hideLabels = false;
         this.hideIcons = false;
         this.collapsible = false;
@@ -349,6 +356,12 @@ export class ObapNavigationBar extends ObapElement {
         this._hovering = false;
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+        this.setAttribute('aria-label', 'Navigation');
+    }
+
+    /*
     select(index, subIndex, resetPreviousSubIndex = false) {
         if (resetPreviousSubIndex && this.selectedItem) {
             this.selectedItem.subIndex = -1;
@@ -359,15 +372,16 @@ export class ObapNavigationBar extends ObapElement {
 
         //this.requestUpdate();
     }
+    */
 
     render() {
         return html`
-            <div class="container" @mouseleave="${this._onMouseLeave}">
-                <div class="left-container" ?no-labels="${this.hideLabels}" ?horizontal="${this.horizontal}" @mouseenter="${this._onMouseEnter}">
+            <div class="container" @mouseleave="${this._onMouseLeave}" role="presentation">
+                <div class="left-container" ?no-labels="${this.hideLabels}" ?horizontal="${this.horizontal}" @mouseenter="${this._onMouseEnter}" role="presentation">
                     <slot></slot>
-                    <obap-selector selected-index="${this.selectedIndex}" @obap-item-selected="${this._itemSelected}">
+                    <obap-selector role="tablist" selected-index="${this.selectedIndex}" @obap-item-selected="${this._itemSelected}">
                         ${this.items.filter(item => !item.bottom).map(item => this._renderItem(item))}
-                        <div class="spacer" no-select></div>
+                        <div class="spacer" no-select role="presentation"></div>
                         ${this.items.filter(item => item.bottom).map(item => this._renderItem(item))}
                     </obap-selector>  
                 </div>
@@ -378,13 +392,13 @@ export class ObapNavigationBar extends ObapElement {
     }
 
     _renderRightContainer() {
-        if (this.selectedItem && this.selectedItem.items && this.selectedItem.items.length > 0) {
+        if (this.hovering && this.selectedItem && this.selectedItem.items && this.selectedItem.items.length > 0) {
             return html`
-                <div class="right-container">
-                    <div class="typography-subtitle right-container-title">${this.selectedItem.label}</div>
-                    <obap-selector selected-index="${this.selectedSubIndex}" @obap-item-selected="${this._subItemSelected}">
+                <div class="right-container" role="presentation">
+                    ${!this.hideTitle ? html`<div class="typography-subtitle right-container-title" role="presentation">${this.selectedItem.label}</div>` : null}
+                    <obap-selector role="tablist" selected-index="${this.selectedSubIndex}" @obap-item-selected="${this._subItemSelected}">
                         ${this.selectedItem.items ? this.selectedItem.items.filter(item => !item.bottom).map(item => this._renderSubItem(item)) : null}
-                        <div class="spacer" no-select></div>
+                        <div class="spacer" no-select role="presentation"></div>
                         ${this.selectedItem.items ? this.selectedItem.items.filter(item => item.bottom).map(item => this._renderSubItem(item)) : null}
                     </obap-selector>  
                 </div>
@@ -397,14 +411,14 @@ export class ObapNavigationBar extends ObapElement {
     _renderItem(item) {
         if (this.horizontal) {
             return html`
-                <div class="horizontal-item-container" ?open="${!this._hideItemLabel()}">
+                <div class="horizontal-item-container" ?open="${!this._hideItemLabel()}" role="tab">
                     <obap-icon class="horizontal-item-icon" icon="${ifDefined(item.icon)}" src="${ifDefined(item.iconSrc)}"></obap-icon>
                     <div ?hidden="${this._hideItemLabel(this.hovering)}" class="horizontal-item-label typography-body">${item.label}</div>
                 </div>
             `;
         }
         return html`
-            <div class="item-container" ?no-labels="${this.hideLabels}">
+            <div class="item-container" ?no-labels="${this.hideLabels}" role="tab">
                 <obap-icon class="item-icon" icon="${ifDefined(item.icon)}" src="${ifDefined(item.iconSrc)}"></obap-icon>
                 ${!this.hideLabels ? html`<div class="item-label typography-caption">${item.label}</div>` : null}
             </div>
@@ -413,7 +427,7 @@ export class ObapNavigationBar extends ObapElement {
 
     _renderSubItem(item) {
         return html`
-            <div class="sub-item-container" ?hide-item="${item.noNavigation}">
+            <div class="sub-item-container" ?hide-item="${item.noNavigation}" role="tab">
                 ${!this.hideIcons && (item.icon || item.iconSrc) ? html`<obap-icon class="sub-item-icon" icon="${ifDefined(item.icon)}" src="${ifDefined(item.iconSrc)}"></obap-icon>` : null}
                 <div class="sub-item-label typography-body">${item.label}</div>
             </div>

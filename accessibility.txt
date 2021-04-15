@@ -1,0 +1,17 @@
+data-table
+==========
+Role = grid
+aria-label = "Data Grid"
+aria-rowcount
+aria-colcount
+
+
+Nested tables and parents, tbody: Role = presentation
+Rows (tr): [x] Role = row, [ ] aria-expanded, [x] aria-selected, [x] aria-rowindex
+Columns (td): Role = [ ] columnheader [ ] aria-selected, [ ] aria-colindex, [ ] aria-label, [ ] aria-sort (none, x, x)
+cells (td): Role: [ ] gridcell [ ] aria-selected, [ ] aria-colindex, [ ] aria-describedby (id of header td)
+
+
+Charts
+======
+https://blog.tenon.io/accessible-charts-with-aria/

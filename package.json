@@ -1,6 +1,6 @@
 {
   "name": "@obap/obap-elements",
-  "version": "0.0.48",
+  "version": "0.0.50",
   "description": "A LitElement Web Component Suite for line of business applications.",
   "author": "obap-elements",
   "license": "MIT",
@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "web-dev-server --app-index demo/index.html --node-resolve --open",
+    "start-accessibility": "web-dev-server --app-index accessibility/index.html --node-resolve --open",
     "start-watch": "web-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "start-mobile": "web-dev-server --app-index demo-mobile/index.html --node-resolve --open",
     "start-app": "web-dev-server --app-index demo-app/index.html --node-resolve --open",

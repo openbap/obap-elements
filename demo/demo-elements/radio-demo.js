@@ -4,7 +4,7 @@ Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../../src/obap-element/obap-element.js';
 import '../../src/obap-radio/obap-radio-group.js';
-import '../../src/obap-radio/obap-radio.js';
+import '../../src/obap-radio/obap-radio.js'; 
 
 export class RadioDemo extends ObapElement {
     static get styles() {

@@ -12,8 +12,7 @@ export class ObapVerticalCollapseContainer extends ObapBaseCollapseContainer {
         return [css`
             :host {
                 display: block;
-                overflow: hidden; 
-                height: 0;
+                overflow: hidden;
             }
     
             :host([hidden]) {
@@ -24,9 +23,9 @@ export class ObapVerticalCollapseContainer extends ObapBaseCollapseContainer {
                 pointer-events: none;
             }
 
-            :host([open]) {
-                height: auto;
-                overflow: visible; 
+            .content {
+                height: 0px;
+                pointer-events: none;
             }
         `];
     }

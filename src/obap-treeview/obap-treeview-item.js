@@ -165,7 +165,7 @@ export class ObapTreeviewItem extends ObapTreeviewItemController(ObapElement) {
     }
 
     _renderSingleCheck() {
-        return html`<obap-check @obap-item-selected="${this._handleItemSelected}" no-ink ?selected="${this.selected}" ?indeterminate="${this.indeterminate}" name="${this.label}"></obap-check>`;
+        return html`<obap-check @obap-item-selected="${this._handleItemSelected}" no-ink ?selected="${this.selected}" ?indeterminate="${this.indeterminate}" name="${this.label}" aria-label="${this.label}"></obap-check>`;
     }
 
     _handleItemClick(e) {

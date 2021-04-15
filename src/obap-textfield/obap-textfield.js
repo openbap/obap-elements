@@ -174,6 +174,10 @@ export class ObapTextfield extends ObapInputElement {
                 type: Boolean
             },
 
+            readonly: {
+                type: Boolean
+            },
+
             // none, underline, outline, conventional
             outlineStyle: {
                 type: String,
@@ -215,6 +219,11 @@ export class ObapTextfield extends ObapInputElement {
                 attribute: 'no-placeholder'
             },
 
+            noHelper: {
+                type: Boolean,
+                attribute: 'no-helper'
+            },
+
             charCounter: {
                 type: Boolean,
                 attribute: 'char-counter'
@@ -241,9 +250,23 @@ export class ObapTextfield extends ObapInputElement {
         }
     }
 
+    get label() {
+        return this._label;
+    }
+
+    set label(value) {
+        const oldValue = this.label;
+
+        if (oldValue !== value) {
+            this._label = value;
+            this.requestUpdate('label', oldValue);
+            this.setAttribute('aria-label', this.label);
+        }
+    }
+
     constructor() {
         super();
-
+        this.role = 'textbox';
         this._type = 'text';
         this.value = '';
         this.label = '';
@@ -264,6 +287,8 @@ export class ObapTextfield extends ObapInputElement {
         this.charCounter = false;
         this.autoValidate = false;
         this.noTooltip = false;
+        this.noHelper = false;
+        this.readonly = false;
 
         this._allowedTypes = ['text', 'password', 'email', 'number', 'search', 'tel', 'url'];
     }
@@ -301,7 +326,7 @@ export class ObapTextfield extends ObapInputElement {
                         ${this._getIcon(this.startIcon, 'start-icon')}
                         <input
                             id="input"
-                            aria-labelledby="label"
+                            aria-label="${this.label}"
                             .type="${this.type}"
                             ?required="${this.required}"
                             .value="${this.value}"
@@ -355,6 +380,8 @@ export class ObapTextfield extends ObapInputElement {
     }
 
     _renderHelper() {
+        if (this.noHelper) return null;
+        
         if (this.invalid && (this.validationMessage || this._defaultValidationMessage)) {
             return html`
                 <div class="helper-container typography-caption">

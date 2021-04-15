@@ -146,6 +146,7 @@ export class ObapMarkdownViewer extends ObapElement {
             if (propName === 'markdown') {
                 if (this.markdown) {
                     Prism.highlightAllUnder(this.renderRoot, false);
+                    this._fixAccessibility();
                     this.fireMessage('obap-markdown-viewer-markdown-ready');
                 }
             }
@@ -219,6 +220,18 @@ export class ObapMarkdownViewer extends ObapElement {
         if (this._scriptTag) {
             this.markdown = this._scriptTag.text.trim();
         }
+    }
+
+    _fixAccessibility() {
+        const elements = this.renderRoot.querySelectorAll('li > input');
+
+        elements.forEach(el => {
+            const label = el.nextSibling;
+
+            if ((label) && (label.nodeType === 3)) {
+                el.setAttribute('aria-label', label.textContent.trim());
+            }
+        });
     }
 }
 

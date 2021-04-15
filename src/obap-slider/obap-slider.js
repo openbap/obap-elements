@@ -4,6 +4,7 @@ Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
 import { html, css, ObapElement } from '../obap-element/obap-element.js';
 import { caption } from '../obap-styles/obap-typography.js';
+import { elevation2 } from '../obap-styles/obap-elevation.js';
 import '../obap-icon/obap-icon.js';
 
 /**
@@ -11,17 +12,20 @@ import '../obap-icon/obap-icon.js';
  */
 export class ObapSlider extends ObapElement {
     static get styles() {
-        return [caption, css`
+        return [caption, elevation2, css`
             :host {
                 --obap-slider-color: var(--obap-on-surface-color, rgba(0, 0, 0, 0.87));
                 --obap-slider-background-color: var(--obap-surface-color, #FFFFFF);
                 --obap-slider-inactive-track-color: var(--obap-primary-light-color, #8e99f3);
                 --obap-slider-active-track-color: var(--obap-primary-color, #5c6bc0);
                 --obap-slider-thumb-color: var(--obap-primary-color, #5c6bc0);
+                --obap-slider-thumb-border-color: transparent;
                 --obap-slider-icon-color: var(--obap-text-icon-color, rgba(0, 0, 0, 0.38));
                 --obap-slider-icon-size: 16px;
                 --obap-slider-callout-color: #FFFFFF;
                 --obap-slider-callout-background-color: rgba(97, 97, 97, 0.85);
+                --obap-slider-track-height: 3px;
+                --obap-slider-thumb-resting-size: 14px;
 
                 display: block;
                 height: 40px;
@@ -31,7 +35,7 @@ export class ObapSlider extends ObapElement {
             }
     
             :host([hidden]) {
-                display: none !important;
+                display: none !important; 
             }
     
             :host([disabled]) {
@@ -55,14 +59,16 @@ export class ObapSlider extends ObapElement {
             .inactive-track {
                 position: relative;
                 flex: 1;
-                height: 3px;
+                height: var(--obap-slider-track-height, 3px);
                 background: var(--obap-slider-inactive-track-color);
+                border-radius: var(--obap-border-radius-pill, 9999px);
             }
 
             .active-track {
                 position: absolute;
-                height: 3px;
+                height: var(--obap-slider-track-height, 3px);
                 background: var(--obap-slider-active-track-color);
+                border-radius: var(--obap-border-radius-pill, 9999px);
                 left: 0;
                 top: 0;
             }
@@ -74,17 +80,19 @@ export class ObapSlider extends ObapElement {
             .thumb {
                 position: absolute;
                 outline: 0;
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
+                width: var(--obap-slider-thumb-resting-size);
+                height: var(--obap-slider-thumb-resting-size);
+                border-radius: var(--obap-border-radius-circle, 50%);
+                border: 1px solid var(--obap-slider-thumb-border-color);
                 background: var(--obap-slider-thumb-color);
                 left: 0;
                 top: 50%;
                 transform: translate(-50%, -50%);
-                transition: all 0.05s linear;
+                transition: all 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+                box-sizing: border-box;
             }
 
-            .thumb[dragging], .thumb:focus {
+            .thumb:not([disable-thumb-expand])[dragging], .thumb:focus:not([disable-thumb-expand]) {
                 width: 20px;
                 height: 20px;
             }
@@ -95,7 +103,7 @@ export class ObapSlider extends ObapElement {
                 left: 6px;
                 top: -6px;
                 color: white;
-                border-radius: 3px;
+                border-radius: var(--obap-border-radius-normal, 3px);
                 color: var(--obap-slider-callout-color);
                 background: var(--obap-slider-callout-background-color);
                 transform: translate(-50%, -100%);
@@ -122,10 +130,13 @@ export class ObapSlider extends ObapElement {
 
             .thumb[dragging] > .balloon, .thumb:focus > .balloon {
                 display: block;
-                left: 10px;
+                left: 9px;
+                transform: translate(-50%, -100%) scale(1);
             }
 
-           
+            .thumb[disable-thumb-expand][dragging] > .balloon, .thumb:focus[disable-thumb-expand] > .balloon {
+                left: calc((var(--obap-slider-thumb-resting-size) / 2) - 1px);
+            }
 
             .stop-label {
                 position: absolute;
@@ -256,7 +267,30 @@ export class ObapSlider extends ObapElement {
             labelFormat: {
                 type: String,
                 attribute: 'label-format'
+            },
+
+            disableThumbExpand: {
+                type: Boolean,
+                attribute: 'disable-thumb-expand'
+            },
+
+            label: {
+                type: String
             }
+        }
+    }
+
+    get label() {
+        return this._label;
+    }
+
+    set label(value) {
+        const oldValue = this.label;
+
+        if (oldValue !== value) {
+            this._label = value;
+            this.requestUpdate('label', oldValue);
+            this.setAttribute('aria-label', value); 
         }
     }
 
@@ -270,6 +304,8 @@ export class ObapSlider extends ObapElement {
         if (value !== oldValue) {
             this._value = Number(value);
             requestAnimationFrame(() => this.requestUpdate('value', oldValue));
+            this.setAttribute('aria-valuenow', value);
+            this.setAttribute('aria-valuetext', value);
         }
     }
 
@@ -296,6 +332,34 @@ export class ObapSlider extends ObapElement {
         if (value !== oldValue) {
             this._endValue = Number(value);
             requestAnimationFrame(() => this.requestUpdate('endValue', oldValue));
+        }
+    }
+
+    get minValue() {
+        return this._minValue;
+    }
+
+    set minValue(value) {
+        const oldValue = this.minValue;
+
+        if (value !== oldValue) {
+            this._minValue = Number(value);
+            this.requestUpdate('minValue', oldValue);
+            this.setAttribute('aria-valuemin', value);
+        }
+    }
+
+    get maxValue() {
+        return this._maxValue;
+    }
+
+    set maxValue(value) {
+        const oldValue = this.maxValue;
+
+        if (value !== oldValue) {
+            this._maxValue = Number(value);
+            this.requestUpdate('maxValue', oldValue);
+            this.setAttribute('aria-valuemax', value);
         }
     }
 
@@ -333,10 +397,11 @@ export class ObapSlider extends ObapElement {
 
     constructor() {
         super();
-
-        this._value = 0;
-        this._startValue = 0;
-        this._endValue = 0;
+        this.role = 'slider';
+        this.label = 'Slider';
+        this.value = 0;
+        this.startValue = 0;
+        this.endValue = 0;
         this.minValue = 0;
         this.maxValue = 100;
         this._stops = [];
@@ -354,6 +419,7 @@ export class ObapSlider extends ObapElement {
         this._discrete = false;
         this.floatingLabelDecimalPoints = 0;
         this.labelFormat = '';
+        this.disableThumbExpand = false;
 
         this._dragging = false;
         this._rangeDragging = false;
@@ -443,13 +509,13 @@ export class ObapSlider extends ObapElement {
 
         if (this.range) {
             return html`
-                <div id="thumb-start" thumb tabindex="0" class="thumb" style="left: ${this.startValue * scale}%;">
+                <div id="thumb-start" thumb ?disable-thumb-expand="${this.disableThumbExpand}" tabindex="0" class="thumb elevation-2" style="left: ${this.startValue * scale}%;">
                     ${this.showFloatingLabel ? html`
                         <div class="balloon"><slot name="start-value"><div class="balloon-content">${this._formatValue(this.startValue.toFixed(this.floatingLabelDecimalPoints))}</div></slot></div>
                     ` : null}  
                 </div>
                 
-                <div id="thumb-end" thumb tabindex="0" class="thumb" style="left: ${this.endValue * scale}%;">
+                <div id="thumb-end" ?disable-thumb-expand="${this.disableThumbExpand}" thumb tabindex="0" class="thumb elevation-2" style="left: ${this.endValue * scale}%;">
                     ${this.showFloatingLabel ? html`
                         <div class="balloon"><slot name="end-value"><div class="balloon-content">${this._formatValue(this.endValue.toFixed(this.floatingLabelDecimalPoints))}</div></slot></div>
                     ` : null}
@@ -457,7 +523,7 @@ export class ObapSlider extends ObapElement {
             `;
         } else {
             return html`
-                <div id="thumb" thumb tabindex="0" class="thumb" style="left: ${this.value * scale}%;">
+                <div id="thumb" ?disable-thumb-expand="${this.disableThumbExpand}" thumb tabindex="0" class="thumb elevation-2" style="left: ${this.value * scale}%;">
                     ${this.showFloatingLabel ? html`
                         <div class="balloon"><slot name="value"><div class="balloon-content">${this._formatValue(this.value.toFixed(this.floatingLabelDecimalPoints))}</div></slot></div>
                     ` : null}

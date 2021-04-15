@@ -63,6 +63,7 @@ export class ObapTreeview extends ObapTreeviewItemController(ObapElement) {
 
     constructor() {
         super();
+        this.role = 'tree';
         this._currentSelection = null;
     }
 

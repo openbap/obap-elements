@@ -87,13 +87,22 @@ export class ObapToolbarButton extends ObapElement {
 
     constructor() {
         super();
-    
+        this.role = 'button';
         this.label = '';
         this.tooltip = '';
         this.icon = '';
         this.labelPosition = 'bottom'
     }
 
+    updated(changedProperties) {
+        super.updated(changedProperties);
+
+        changedProperties.forEach((oldValue, propName) => {
+            if ((propName === 'label') || (propName === 'icon')) {
+                this.setAttribute('aria-label', this.label ? this.label : this.icon);
+            }
+        });
+    }
     
     render() {
         return html`

@@ -44,7 +44,7 @@ export class RippleDemo extends ObapElement {
                 padding: 11px 10px 9px 10px;
                 margin-right: 16px;
                 box-sizing: border-box;
-                border-radius: 3px;
+                border-radius: var(--obap-border-radius-normal, 3px);
                 cursor: pointer;
                 transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -72,7 +72,7 @@ export class RippleDemo extends ObapElement {
                 align-items: center;
                 box-sizing: border-box;
                 cursor: pointer;
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
                 width: 40px;
                 height: 40px;
                 margin-right: 32px;
@@ -90,7 +90,7 @@ export class RippleDemo extends ObapElement {
             }
 
             .circle {
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
             }
 
             .grey {
@@ -154,22 +154,22 @@ export class RippleDemo extends ObapElement {
                     </div>
 
                     <div class="button raised typography-button" @mousedown="${this._handleMouseDownEvent}" @mouseup="${this._handleMouseUpEvent}">
-                        <div class="center" tabindex="1">NO INK</div>
+                        <div class="center" tabindex="0">NO INK</div>
                         <obap-ripple no-ink></obap-ripple>
                     </div>
 
                     <div class="button raised grey typography-button" @mousedown="${this._handleMouseDownEvent}" @mouseup="${this._handleMouseUpEvent}">
-                        <div class="center" tabindex="1">CANCEL</div>
+                        <div class="center" tabindex="0">CANCEL</div>
                         <obap-ripple></obap-ripple>
                     </div>
 
                     <div class="button raised blue typography-button" @mousedown="${this._handleMouseDownEvent}" @mouseup="${this._handleMouseUpEvent}">
-                        <div class="center" tabindex="1">COMPOSE</div>
+                        <div class="center" tabindex="0">COMPOSE</div>
                         <obap-ripple class="white-ripple"></obap-ripple>
                     </div>
 
                     <div class="button raised green typography-button" @mousedown="${this._handleMouseDownEvent}" @mouseup="${this._handleMouseUpEvent}">
-                        <div class="center" tabindex="1">OK</div>
+                        <div class="center" tabindex="0">OK</div>
                         <obap-ripple class="white-ripple"></obap-ripple>
                     </div>
                 </div>

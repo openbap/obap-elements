@@ -143,6 +143,7 @@ export class ObapCheck extends ObapInputElement {
 
         if (oldValue !== value) {
             this._selected = value;
+            this.setAttribute('aria-checked', value);    
             this.requestUpdate('selected', oldValue);
             this.fireMessage('obap-item-selected', {
                 selected: this._selected,
@@ -157,6 +158,21 @@ export class ObapCheck extends ObapInputElement {
         this.indeterminate = false;
         this.noInk = false;
         this.role = 'checkbox';
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.setAttribute('aria-checked', this.selected); 
+    }
+
+    updated(changedProperties) {
+        super.updated(changedProperties);
+
+        changedProperties.forEach((oldValue, propName) => {
+            if (propName === 'label') {
+                this.setAttribute('aria-label', this.label);    
+            }
+        });
     }
 
     render() {

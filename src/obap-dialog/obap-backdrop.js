@@ -2,8 +2,8 @@
 @license
 Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
-import { html, css, ObapElement } from '../obap-element/obap-element.js';
-
+import { css, ObapElement } from '../obap-element/obap-element.js';
+import { opacityAnimation } from '../obap-animation/obap-animation.js';
 /**
  * A semi-opaque backdrop for modal elements, such as dialogs.
  */
@@ -12,9 +12,9 @@ export class ObapBackdrop extends ObapElement {
         return [css`
             :host {
                 --obap-backdrop-color: #000000;
-                --obap-backdrop-opacity: 0.6;
+                --obap-backdrop-opacity: 0.35;
                 
-                display: block;
+                display: none;
                 position: fixed;
                 left: 0;
                 top: 0;
@@ -22,14 +22,10 @@ export class ObapBackdrop extends ObapElement {
                 height: 100vh;
                 background: var(--obap-backdrop-color);
                 pointer-events: none;
-                transition: opacity 0.25s;
-                opacity: 0;
-  
             }
     
             :host([visible]) {
                 pointer-events: auto;
-                opacity: var(--obap-backdrop-opacity);
             }
     
             :host([disabled]) {
@@ -46,6 +42,11 @@ export class ObapBackdrop extends ObapElement {
                 reflect: true
             },
 
+            animationDuration: {
+                type: Number,
+                attribute: 'animation-duration'
+            },
+
             _count: {
                 type: Number,
                 attribute: 'count',
@@ -56,7 +57,8 @@ export class ObapBackdrop extends ObapElement {
 
     constructor() {
         super();
-        this.visible = false;
+        this._visible = false;
+        this.animationDuration = 280;
         this._count = 0;
         this._zIndex = 248;
         this._items = [];
@@ -68,15 +70,19 @@ export class ObapBackdrop extends ObapElement {
         if (index === -1) {
             this._items.push(el);
         }
-        
+
         this._count += 1;
         this._zIndex += 2;
         this.style.zIndex = this._zIndex;
 
         if (el.modal) {
             this.visible = (this._count > 0);
+
+            if (this.visible && this._count === 1) {
+                opacityAnimation(this, 0, this.opacity, () => this.style.display = 'block', null, this.animationDuration);
+            }
         }
-        
+
         return (this._zIndex + 1);
     }
 
@@ -84,7 +90,7 @@ export class ObapBackdrop extends ObapElement {
         const index = this._items.indexOf(el);
         this._items.splice(index, 1);
 
-        const topItem = this._items[this._items.length - 1]; 
+        const topItem = this._items[this._items.length - 1];
 
         this._count -= 1;
         this._zIndex -= 2;
@@ -94,14 +100,25 @@ export class ObapBackdrop extends ObapElement {
             this.visible = (this._count > 0);
         }
 
-        if (this._count === 0) {
-            this.parentNode.removeChild(this);
+        if ((this.visible) && (this._count === 0)) {
+            opacityAnimation(this, this.opacity, 0, null, () => {
+                this.style.display = 'none';
+
+                if (this._count === 0) {
+                    this.parentNode.removeChild(this);
+                }
+            }, this.animationDuration);
         }
     }
 
     isOnTop(el) {
         const index = this._items.indexOf(el);
         return (index === this._items.length - 1);
+    }
+
+    get opacity() {
+        const cs = getComputedStyle(this);
+        return this.getCssVariableValue(cs, '--obap-backdrop-opacity', 0.6);
     }
 }
 

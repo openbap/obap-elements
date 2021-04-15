@@ -58,7 +58,7 @@ export class ObapBadge extends ObapAttachedElementController(ObapElement) {
                 user-select: none;
                 width: calc(var(--obap-badge-size) + var(--obap-badge-border-width));
                 height: calc(var(--obap-badge-size) + var(--obap-badge-border-width));
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
                 color: var(--obap-badge-color);
                 background: var(--obap-badge-background-color);
                 border: var(--obap-badge-border-width) solid var(--obap-badge-border-color);

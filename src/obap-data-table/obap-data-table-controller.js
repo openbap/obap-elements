@@ -9,6 +9,10 @@ export const ObapDataTableController = (superClass) =>
     class ObapDataTableControllerComponent extends superClass {
         static get properties() {
             return {
+                label: {
+                    type: String
+                },
+
                 loading: {
                     type: Boolean,
                     attribute: 'loading',
@@ -200,6 +204,7 @@ export const ObapDataTableController = (superClass) =>
                 });
 
                 this.updateDisplayColumns();
+                this.setAttribute('aria-colcount', this._columns ? this._columns.length : 0);
                 this.requestUpdate('columns', oldValue);
             }
         }
@@ -263,6 +268,8 @@ export const ObapDataTableController = (superClass) =>
 
         constructor() {
             super();
+            this.label = 'Data Grid';
+            this.role = 'grid';
             this.loading = false;
             this.preloadRowCount = 10;
             this._columns = [];
@@ -326,7 +333,15 @@ export const ObapDataTableController = (superClass) =>
             let layoutUpdated = false;
 
             changedProperties.forEach((oldValue, propName) => {
+                if (propName === 'label') {
+                    this.setAttribute('aria-label', this.label);
+                }
+
                 if ((propName === 'sortIndex') || (propName === 'sortField') || (propName === 'sortType') || (propName === 'sortDescending') || (propName === 'rows')) {
+                    if (propName === 'rows') {
+                        this.setAttribute('aria-rowcount', this.rows ? this.rows.length : 0);
+                    }
+
                     this._sortRows();
                 }
 
@@ -628,6 +643,14 @@ export const ObapDataTableController = (superClass) =>
                     //this.fireMessage('obap-data-table-selection-changed');
                 }
             }
+        }
+
+        isRowSelected(row) {
+            if (this.selectedRows) {
+                return this.selectedRows.indexOf(row) > -1;
+            }
+
+            return false;
         }
 
         selectRow(index) {

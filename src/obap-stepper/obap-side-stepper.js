@@ -159,7 +159,7 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
                 align-items: center;
                 width: 24px;
                 height: 24px;
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
                 color: var(--obap-on-primary-color, #FFFFFF);
                 background: var(--obap-inactive-color, #9E9E9E);
                 margin-right: 8px;
@@ -254,7 +254,7 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
             <div class="main-container">
                 <obap-selector-container class="container" selected-index="0">
                     <div class="left-container">
-                        <obap-selector class="navigator" @obap-item-selected="${this._stepSelected}">
+                        <obap-selector role="presentation" item-role="tab" class="navigator" @obap-item-selected="${this._stepSelected}">
                             <div no-select class="line" ?custom-icons="${this.hasCustomIcons}"></div>
                             ${this.steps.map((step, index) => this._renderHeaderItem(step, index))}
                         </obap-selector>
@@ -279,7 +279,7 @@ export class ObapSideStepper extends ObapStepperController(ObapElement) {
 
     _renderHeaderItem(step, index) {
         return html`
-            <div class="header-item" ?disabled="${this.disabled || step.disabled || !step.selectable}">
+            <div aria-selected="${step.selected}" class="header-item" ?disabled="${this.disabled || step.disabled || !step.selectable}">
                 ${step.icon ? this._renderHeaderIcon(step, index) : this._renderHeaderBadge(step, index)}
                 ${this._renderHeaderLabels(step)}
             </div>

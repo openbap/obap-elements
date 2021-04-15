@@ -103,7 +103,7 @@ export class SliderDemo extends ObapElement {
 
                 <div class="title">End Icons & Values</div>
                 <div class="row">
-                    <obap-slider show-floating-label start-icon="android" end-icon="face" show-start-label show-end-label range min-value="0" max-value="100" start-value="25"  end-value="50" .stops="${this.stops}"></obap-slider>
+                    <obap-slider show-floating-label start-icon="android" end-icon="face" show-start-icon show-end-icon range min-value="0" max-value="100" start-value="25"  end-value="50" .stops="${this.stops}"></obap-slider>
                 </div>
 
                 <div class="row">

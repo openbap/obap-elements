@@ -72,7 +72,6 @@ export class ObapSplitter extends ObapElement {
             // horizontal, vertical (default).
             orientation: {
                 type: String,
-                attribute: 'orientation',
                 reflect: true
             },
 
@@ -83,14 +82,29 @@ export class ObapSplitter extends ObapElement {
         }
     }
 
+    get orientation() {
+        return this._orientation;
+    }
+
+    set orientation(value) {
+        const oldValue = this.orientation;
+
+        if (oldValue !== value) {
+            this._orientation = value;
+            this.requestUpdate('orientation', oldValue);
+            requestAnimationFrame(() => this.setAttribute('aria-orientation', value));
+        }
+    }
+
     constructor() {
         super();
+        this.role = 'separator';
         this.orientation = 'vertical';
         this.showHandle = false;
-
         this._resizerContent_1 = null;
         this._resizerContent_2 = null;
         this._resizing = false;
+        this._previousValue = 0;
 
         this._boundHandleResizeStart = this._handleResizeStart.bind(this);
         this._boundHandleResizeStep = this._handleResizeStep.bind(this);
@@ -101,6 +115,18 @@ export class ObapSplitter extends ObapElement {
         document.addEventListener('mouseup', this._boundHandleResizeEnd);
         document.addEventListener('touchmove', this._boundHandleResizeStep);
         document.addEventListener('touchend', this._boundHandleResizeEnd);
+    }
+
+    firstUpdated(changedProperties) {
+        super.firstUpdated(changedProperties);
+        this._onSizeChanged();
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.setAttribute('aria-valuemin', 0);
+        this.setAttribute('aria-valuemax', 100);
+        
     }
 
     render() {
@@ -149,8 +175,10 @@ export class ObapSplitter extends ObapElement {
             } else {
                 resizerContent_1.style.width = sum + 'px';
                 resizerContent_2.style.width = '0px';
-            }
+             }
         }
+
+        this._onSizeChanged();
     }
 
     _handleResizeStart(e) {
@@ -207,6 +235,8 @@ export class ObapSplitter extends ObapElement {
                     this._resizerContentSize_2 = oldSize_2;
                 }
             }
+
+            this._onSizeChanged();
         }
     }
 
@@ -214,6 +244,28 @@ export class ObapSplitter extends ObapElement {
         this._resizerContent_1 = null;
         this._resizerContent_2 = null;
         this._resizing = false;
+    }
+
+    _onSizeChanged() {
+        const rect1 = this.previousElementSibling.getBoundingClientRect();
+        const rect2 = this.nextElementSibling.getBoundingClientRect();
+        let value = 0;
+
+        if (this.orientation === 'horizontal') {
+            if ((rect1.height > 0) || (rect2.height > 0)) {
+                value = ((rect1.height / (rect1.height + rect2.height)) * 100).toFixed(0);
+            }
+        } else {
+            if ((rect1.width > 0) || (rect2.width > 0)) {
+                value = ((rect1.width / (rect1.width + rect2.width)) * 100).toFixed(0);
+            }
+        }
+
+        if (value !== this._previousValue) {
+            this._previousValue = value;
+            this.setAttribute('aria-valuenow', value);
+        }
+        
     }
 }
 

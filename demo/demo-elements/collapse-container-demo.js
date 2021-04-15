@@ -43,7 +43,7 @@ export class CollapseContainerDemo extends ObapElement {
             }
 
             .content-horizontal {
-                height: 300px;
+                height: 100px;
                 border: 1px solid lightgrey;
                 padding: 4px;
             }

@@ -20,7 +20,7 @@ export class TabsDemo extends ObapElement {
             .title {
                 padding: 4px 8px;
                 color: var(--obap-on-primary-color);
-                background: var(--obap-primary-color);
+                background: var(--obap-primary-color); 
             }
 
             obap-tabs {

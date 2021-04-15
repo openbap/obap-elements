@@ -2,7 +2,7 @@
 @license
 Copyright (c) 2021 Paul H Mason. All rights reserved.
 */
-import { theme as themeManager } from './obap-theme.js';
+import { themeManager } from './obap-theme-manager.js';
 
 const ObapThemeController = (superClass) =>
     class ObapThemeControllerComponent extends superClass {
@@ -72,4 +72,4 @@ const ObapThemeController = (superClass) =>
         }
     };
 
-    export {ObapThemeController as ObapThemeController, themeManager}
+    export {ObapThemeController, themeManager}

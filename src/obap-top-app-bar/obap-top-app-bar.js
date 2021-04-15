@@ -94,8 +94,23 @@ export class ObapTopAppBar extends ObapElement {
         }
     }
 
+    get caption() {
+        return this._caption;
+    }
+
+    set caption(value) {
+        const oldValue = this.caption;
+
+        if (oldValue !== value) {
+            this._caption = value;
+            this.requestUpdate('caption', oldValue);
+            this.setAttribute('aria-label', value);
+        }
+    }
+
     constructor() {
         super();
+        this.role = 'toolbar';
         this.caption = '';
         this.elevation = 0;
     }

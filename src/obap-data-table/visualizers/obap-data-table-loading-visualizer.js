@@ -27,7 +27,7 @@ export class ObapDataTableLoadingVisualizer extends ObapDataTableVisualizerContr
 
             .container {
                 margin: 12px 0;
-                border-radius: 6px;
+                border-radius: var(--obap-border-radius-pill, 9999px);
                 height: calc(100% - 24px);
                 background: var(--obap-data-table-loading-color);
                 animation: fade-animation var(--obap-data-table-loading-animation-duration, 3s) infinite linear;

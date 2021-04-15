@@ -60,3 +60,5 @@ import './chart-demo.js';
 import './toolbar-demo.js';
 import './navigation-bar-demo.js';
 import './snackbar-demo.js';
+import './pages-demo.js';
+import './pickers-demo.js';

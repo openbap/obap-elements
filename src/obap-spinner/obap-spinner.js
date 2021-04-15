@@ -21,7 +21,7 @@ export class ObapSpinner extends ObapElement {
                 --obap-spinner-ripple-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-spinner-content-color: var(--obap-on-surface-color, rgba(0, 0, 0, 0.87));
                 --obap-spinner-content-background-color: transparent;
-                --obap-spinner-border-radius: 3px;
+                --obap-spinner-border-radius: var(--obap-border-radius-normal, 3px);
                 display: inline-block;
                 outline: 0;
                 background: var(--obap-spinner-background-color);
@@ -224,19 +224,82 @@ export class ObapSpinner extends ObapElement {
         }
     }
 
+    get value() {
+        return this._value;
+    }
+
+    set value(value) {
+        const oldValue = this.value;
+
+        if (oldValue !== value) {
+            this._value = value;
+            this.requestUpdate('value', oldValue);
+
+            requestAnimationFrame(() => {
+                let ariaLabel = 'Item';
+
+                switch (this.type) {
+                    case 'text': {
+                        ariaLabel = this.textValues[value];
+                        break;
+                    }
+    
+                    case 'number': {
+                        ariaLabel = value;
+                        break;
+                    }
+                }
+    
+                this.setAttribute('aria-label', ariaLabel);
+                this.setAttribute('aria-valuenow', value);
+            })
+            
+        }
+    }
+
+    get minValue() {
+        return this._minValue;
+    }
+
+    set minValue(value) {
+        const oldValue = this.minValue;
+
+        if (value !== oldValue) {
+            this._minValue = Number(value);
+            this.requestUpdate('minValue', oldValue);
+            this.setAttribute('aria-valuemin', value);
+        }
+    }
+
+    get maxValue() {
+        return this._maxValue;
+    }
+
+    set maxValue(value) {
+        const oldValue = this.maxValue;
+
+        if (value !== oldValue) {
+            this._maxValue = Number(value);
+            this.requestUpdate('maxValue', oldValue);
+            this.setAttribute('aria-valuemax', value);
+        }
+    }
+
     constructor() {
         super();
+        this.role = 'spinbutton';
+        
         this._boundHandleKeyPressEvent = this._handleKeyPressEvent.bind(this);
         this.layout = 'horizontal';
         this.type = 'number';
         this.hideButtons = false;
         this.editable = false;
-        this.wrapValue = false;
-        this.value = -1;
+        this.wrapValue = false; 
         this.numberLength = 0;
         this.minValue = 0;
         this.maxValue = 100;
         this.textValues = [];
+        this.value = -1;
         this.showTooltips = false;
         this.nextValueLabel = 'Next value';
         this.previousValueLabel = 'Previous value';
@@ -310,16 +373,18 @@ export class ObapSpinner extends ObapElement {
             }
 
             default: { // number
+                const numberValue = this.value.toString().padStart(this.numberLength, '0');
+
                 if (this.editable) {
                     return html`
                         <div class="value-container">
-                            <input id="numberInput" tabindex="0" type="number" .value="${this.value.toString().padStart(this.numberLength, '0')}" 
-                            @change="${this._handleInputEvent}" @click="${this._handleInputClick}">
+                            <input id="numberInput" tabindex="0" type="number" .value="${numberValue}" 
+                            @change="${this._handleInputEvent}" @click="${this._handleInputClick}" aria-label="${numberValue}">
                         </div>
                     `;
                 }
   
-                return html`<div class="value-container">${this.value.toString().padStart(this.numberLength, '0')}</div>`;
+                return html`<div class="value-container">${numberValue}</div>`;
             }
         }
     }

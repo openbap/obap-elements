@@ -241,57 +241,57 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
 
     render() {
         return html`
-            <obap-data-table-layout id="layout" class="typography-body" @obap-data-table-vertical-scroll="${this._tableVerticalScroll}" @obap-data-table-column-resize="${this._columnResize}" @obap-data-table-row-toggle="${this._rowToggle}" @obap-data-table-row-selected="${this._rowCheck}" @obap-data-table-layout-size-changed="${() => requestAnimationFrame(() => this._resizeHeaderCells())}">
+            <obap-data-table-layout role="presentation" id="layout" class="typography-body" @obap-data-table-vertical-scroll="${this._tableVerticalScroll}" @obap-data-table-column-resize="${this._columnResize}" @obap-data-table-row-toggle="${this._rowToggle}" @obap-data-table-row-selected="${this._rowCheck}" @obap-data-table-layout-size-changed="${() => requestAnimationFrame(() => this._resizeHeaderCells())}">
                 ${this._renderLeftActions()}
 
                 ${this.displayColumns.fixedLeft.length > 0 ? html`
-                    <div class="header-fixed-left" slot="header-fixed-left">
-                        <table>
+                    <div class="header-fixed-left" slot="header-fixed-left" role="presentation">
+                        <table role="presentation">
                             ${this._renderDataHeader(true, 'header-fixed-left-row', this.displayColumns.fixedLeft)}
                         </table>
                     </div>
 
-                    <div class="body-fixed-left" slot="body-fixed-left">
-                        <div class="virtual-row-top"></div>
-                        <table @click="${this._onRowClick}">
+                    <div class="body-fixed-left" slot="body-fixed-left" role="presentation">
+                        <div class="virtual-row-top" role="presentation"></div>
+                        <table @click="${this._onRowClick}" role="presentation">
                             ${this._renderDataHeader(false, 'header-fixed-left-row', this.displayColumns.fixedLeft)}
                             ${this._renderDataBody('body-fixed-left-row', this.displayColumns.fixedLeft, true)}
                         </table>
-                        <div class="virtual-row-bottom"></div>
+                        <div class="virtual-row-bottom" role="presentation"></div>
                     </div>
                 ` : null}
 
                 ${this.displayColumns.scroll.length > 0 ? html`
-                    <div class="header-scroll" slot="header-scroll">
-                        <table>
+                    <div class="header-scroll" slot="header-scroll" role="presentation">
+                        <table role="presentation">
                             ${this._renderDataHeader(true, 'header-scroll-row', this.displayColumns.scroll)}
                         </table>
                     </div>
 
-                    <div class="body-scroll" slot="body-scroll">
-                        <div class="virtual-row-top"></div>
-                        <table @click="${this._onRowClick}" id="mainTable">
+                    <div class="body-scroll" slot="body-scroll" role="presentation">
+                        <div class="virtual-row-top" role="presentation"></div>
+                        <table @click="${this._onRowClick}" id="mainTable" role="presentation">
                             ${this._renderDataHeader(false, 'header-scroll-row', this.displayColumns.scroll)}
                             ${this._renderDataBody('body-scroll-row', this.displayColumns.scroll, false)}
                         </table>
-                        <div class="virtual-row-bottom"></div>
+                        <div class="virtual-row-bottom" role="presentation"></div>
                     </div>
                 ` : null}
 
                 ${this.displayColumns.fixedRight.length > 0 ? html`
-                    <div class="header-fixed-right" slot="header-fixed-right">
-                        <table>
+                    <div class="header-fixed-right" slot="header-fixed-right" role="presentation">
+                        <table role="presentation">
                             ${this._renderDataHeader(true, 'header-fixed-right-row', this.displayColumns.fixedRight)}
                         </table>
                     </div>
 
-                    <div class="body-fixed-right" slot="body-fixed-right">
-                        <div class="virtual-row-top"></div>
-                        <table @click="${this._onRowClick}">
+                    <div class="body-fixed-right" slot="body-fixed-right" role="presentation">
+                        <div class="virtual-row-top" role="presentation"></div>
+                        <table @click="${this._onRowClick}" role="presentation">
                             ${this._renderDataHeader(false, 'header-fixed-right-row', this.displayColumns.fixedRight)}
                             ${this._renderDataBody('body-fixed-right-row', this.displayColumns.fixedRight, true)}
                         </table>
-                        <div class="virtual-row-bottom"></div>
+                        <div class="virtual-row-bottom" role="presentation"></div>
                     </div>
                 ` : null}
 
@@ -330,15 +330,10 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
 
     _renderDetailRow(row, rowIndex, count, showContent) {
         if (this.hasDetailRowTemplate && this.rowExpanded(row)) {
-            if (showContent) {
-                return html`<tr class="detail-row"><td row-index="${rowIndex}" class="detail-cell" ?has-content="${showContent}" colspan="${count}">${this.detailRowTemplate(row)}</td></tr>`;
-            } else {
-                return html`<tr class="detail-row"><td row-index="${rowIndex}" class="detail-cell" ?has-content="${showContent}" colspan="${count}"></td></tr>`;
-            }
-
+            return html`<tr role="row" aria-rowindex="${rowIndex}" aria-selected="${this.isRowSelected(row)}" class="detail-row"><td row-index="${rowIndex}" class="detail-cell" ?has-content="${showContent}" colspan="${count}">${showContent ? this.detailRowTemplate(row) : null}</td></tr>`;
         }
     }
-
+   
     _renderDetailSection(row) {
         if (this.hasDetailSectionTemplate && row) {
             return html`<div class="detail-section" slot="detail">${this.detailSectionTemplate(row)}</div>`;
@@ -373,8 +368,8 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
 
     _renderActionRightHeader(show) {
         return html`
-            <thead>
-                <tr>
+            <thead role="presentation">
+                <tr role="row">
                     ${show ? html`
                         <th>
                             <obap-data-table-action-cell .actions="${this.columnActions}"></obap-data-table-action-cell>
@@ -387,9 +382,9 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
 
     _renderActionRightBody(show) {
         return html`
-            <tbody>
+            <tbody role="presentation">
                 ${repeat(this.displayRows, (row) => row[this.idField], (row, rowIndex) => html`
-                    <tr>
+                    <tr role="row" aria-rowindex="${rowIndex}" aria-selected="${this.isRowSelected(row)}">
                         ${show ? html`
                             <td><obap-data-table-action-cell .row="${row}" .actions="${this.rowActions}"></obap-data-table-action-cell></td>
                         ` : html`<div class="action-spacer"></div>`}
@@ -424,8 +419,8 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
         switch (mode) {
             case 'single': {
                 return html`
-                    <thead>
-                        <tr>
+                    <thead role="presentation">
+                        <tr role="row">
                             <th class="blank-check"></th>
                         </tr>
                     </thead>
@@ -434,8 +429,8 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
 
             case 'multiple': {
                 return html`
-                    <thead>
-                        <tr>
+                    <thead role="presentation">
+                        <tr role="row">
                             <th>
                                 <obap-data-table-selector-cell ?indeterminate="${(this.selectedRows.length > 0) && (this.selectedRows.length < this.rows.length)}" ?selected="${(this.selectedRows.length === this.rows.length) && (this.rows.length > 0)}" ?disabled="${this.rows.length === 0}"></obap-data-table-selector-cell>
                             </th>
@@ -448,14 +443,13 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
                 return null;
             }
         }
-
     }
 
     _renderActionLeftBody() {
         return html`
-            <tbody>
+            <tbody role="presentation">
                 ${repeat(this.displayRows, (row) => row[this.idField], (row, rowIndex) => html`
-                    <tr>
+                    <tr role="row" aria-rowindex="${rowIndex}" aria-selected="${this.isRowSelected(row)}">
                         ${(this.selectionMode === 'single' || this.selectionMode === 'multiple') ? html`
                                 <td><obap-data-table-selector-cell row-index="${rowIndex}" ?selected="${this.effectiveSelectedRows.indexOf(row) > -1}"></obap-data-table-selector-cell></td>
                             ` : null
@@ -479,7 +473,7 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
         return html`
             <thead>
                 ${(visible && (columns.length > 1)) ? this._renderGroupHeaders(columns) : null}
-                <tr class="${rowClass}" ?collapsed="${!visible}">
+                <tr role="row" class="${rowClass}" ?collapsed="${!visible}">
                     ${columns[this.headerDepth - 1].map((column, index) => {
             const styles = styleMap({
                 width: (canHaveSize && column.width) ? column.width : null
@@ -510,7 +504,7 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
             const lastGroup = index === groupsColumns.length - 1;
             const columnCount = columns.length - 1;
 
-            return html`<tr>
+            return html`<tr role="row">
                 ${columns.map((column, index) => {
                 const rightBorder = (index !== columnCount) && ((columns[index + 1].label) || (column.label));
 
@@ -531,8 +525,8 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
         if (this.loading) {
             return html`
                 <tbody>
-                    ${repeat(this.displayRows, (row) => html`
-                        <tr .row="${row}" class="${rowClass}">${columns[this.headerDepth - 1].map((column) => this._renderBodyCell(column, row))}</tr>
+                    ${repeat(this.displayRows, (row, rowIndex) => html`
+                        <tr role="row" aria-rowindex="${rowIndex}" aria-selected="${this.isRowSelected(row)}" .row="${row}" class="${rowClass}">${columns[this.headerDepth - 1].map((column) => this._renderBodyCell(column, row))}</tr>
                     `)}
                 </tbody>
             `;
@@ -541,7 +535,7 @@ export class ObapDataTable extends ObapDataTableController(ObapElement) {
         return html`
             <tbody>
                 ${repeat(this.displayRows, (row) => row[this.idField], (row, rowIndex) => html`
-                    <tr ?selected-row="${showActive && row === this.activeRow}" .row="${row}" class="${rowClass}">${columns[this.headerDepth - 1].map((column) => this._renderBodyCell(column, row))}</tr>
+                    <tr role="row" aria-rowindex="${rowIndex}" aria-selected="${this.isRowSelected(row)}" ?selected-row="${showActive && row === this.activeRow}" .row="${row}" class="${rowClass}">${columns[this.headerDepth - 1].map((column) => this._renderBodyCell(column, row))}</tr>
                     ${this._renderDetailRow(row, rowIndex, columnCount, !fixed)}
                 `)}
             </tbody>

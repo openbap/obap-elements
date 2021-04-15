@@ -17,7 +17,7 @@ export class ObapRipple extends ObapElement {
                 height: 100%;
                 background: var(--obap-ripple-color);
                 opacity: 0;
-                transition: opacity 0.50s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             :host([extend="1"]) {
@@ -25,7 +25,7 @@ export class ObapRipple extends ObapElement {
                 top: -50%;
                 width: 200%;
                 height: 200%;
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
             }
 
             :host([extend="2"]) {
@@ -33,7 +33,7 @@ export class ObapRipple extends ObapElement {
                 top: -100%;
                 width: 300%;
                 height: 300%;
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
             }
 
             :host([hidden]) {
@@ -44,8 +44,12 @@ export class ObapRipple extends ObapElement {
                 pointer-events: none;
             }
 
+            :host(:not([active]):not([has-focus])[over]) {
+                opacity: 0.10;
+            }
+            
             :host([active]), :host([has-focus]) {
-                opacity: 0.40;
+                opacity: 0.20;
             }
         `];
     }
@@ -71,6 +75,12 @@ export class ObapRipple extends ObapElement {
                 reflect: true
             },
 
+            over: {
+                type: Boolean,
+                attribute: 'over',
+                reflect: true
+            },
+
             noInk: {
                 type: Boolean,
                 attribute: 'no-ink',
@@ -84,8 +94,10 @@ export class ObapRipple extends ObapElement {
         this.extend = 0;
         this.active = false;
         this.hasFocus = false;
+        this.over = false;
         this._boundHandleMouseUpEvent = this._handleMouseUpEvent.bind(this);
         this._boundHandleMouseDownEvent = this._handleMouseDownEvent.bind(this);
+        this._boundHandleMouseEnterEvent = this._handleMouseEnterEvent.bind(this);
         this._boundHandleMouseLeaveEvent = this._handleMouseLeaveEvent.bind(this);
     }
 
@@ -95,6 +107,7 @@ export class ObapRipple extends ObapElement {
         if (!this.noInk) {
             this.addEventListener('mousedown', this._boundHandleMouseDownEvent);
             this.addEventListener('mouseup', this._boundHandleMouseUpEvent);
+            this.addEventListener('mouseenter', this._boundHandleMouseEnterEvent);
             this.addEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
             
             this.addEventListener('touchstart', this._boundHandleMouseDownEvent);
@@ -106,6 +119,7 @@ export class ObapRipple extends ObapElement {
         if (!this.noInk) {
             this.removeEventListener('mousedown', this._boundHandleMouseDownEvent);
             this.removeEventListener('mouseup', this._boundHandleMouseUpEvent);
+            this.removeEventListener('mouseenter', this._boundHandleMouseEnterEvent);
             this.removeEventListener('mouseleave', this._boundHandleMouseLeaveEvent);
 
             this.removeEventListener('touchstart', this._boundHandleMouseDownEvent);
@@ -125,8 +139,13 @@ export class ObapRipple extends ObapElement {
         this.active = false;
     }
 
+    _handleMouseEnterEvent(e) {
+        this.over = true;
+    }
+
     _handleMouseLeaveEvent(e) {
         this.active = false;
+        this.over = false;
     }
 }
 

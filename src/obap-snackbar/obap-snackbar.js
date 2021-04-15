@@ -67,7 +67,7 @@ export class ObapSnackbar extends ObapElement {
                 align-items: center;
                 background: var(--obap-notification-color, #323232);
                 color: var(--obap-on-notification-color, rgba(255, 255, 255, 0.87));
-                border-radius: 5px;
+                border-radius: var(--obap-border-radius-normal, 3px);
                 padding: 8px 16px;
                 box-sizing: border-box;
             }
@@ -164,7 +164,7 @@ export class ObapSnackbar extends ObapElement {
     render() {
         if (!this.removed) {
             return html`
-                <div class="container elevation-4">
+                <div class="container elevation-4" role="${this.action ? 'alertdialog' : 'alert'}">
                     <div class="message typography-body">${this.message}</div>
                     ${this.action ? html`<obap-button @click="${this._onActionClick}" label="${this.action}"></obap-button>` : null}
                 </div>
@@ -176,7 +176,6 @@ export class ObapSnackbar extends ObapElement {
 
     _onActionClick(e) {
         this.hide();
-        
     }
 }
 

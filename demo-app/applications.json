@@ -145,7 +145,7 @@
         "icon": "standard:polymer",
         "id": "app-litelement",
         "url": "https://lit-element.polymer-project.org/",
-        "external": true,
+        "external": false,
         "bottom": true
     },
     {

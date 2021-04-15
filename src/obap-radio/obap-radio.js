@@ -94,6 +94,20 @@ export class ObapRadio extends ObapInputElement {
         this.role = 'radio';
     }
 
+    updated(changedProperties) {
+        super.updated(changedProperties);
+
+        changedProperties.forEach((oldValue, propName) => {
+            if (propName === 'label') {
+                this.setAttribute('aria-label', this._getAriaLabel());    
+            }
+        });
+    }
+
+    _getAriaLabel() {
+        return this.label;
+    }
+
     render() {
         return html`
             <div class="container typography-body">

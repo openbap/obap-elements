@@ -72,6 +72,34 @@ export const ObapTreeviewItemController = (superClass) =>
             }
         }
 
+        get open() {
+            return this._open;
+        }
+
+        set open(value) {
+            const oldValue = this.open;
+            
+            if (oldValue !== value) {
+                this._open = value;
+                this.requestUpdate('open', oldValue);
+                this.setAttribute('aria-expanded', value);
+            }
+        }
+
+        get label() {
+            return this._label;
+        }
+
+        set label(value) {
+            const oldValue = this.label;
+            
+            if (oldValue !== value) {
+                this._label = value;
+                this.requestUpdate('label', oldValue);
+                this.setAttribute('aria-label', value);
+            }
+        }
+
         get selectLeafOnly() {
             return this._selectLeafOnly;
         }
@@ -123,6 +151,8 @@ export const ObapTreeviewItemController = (superClass) =>
                 }
 
                 this.requestUpdate('selected', oldValue);
+                //this.setAttribute('aria-checked', value); 
+
                 if (this._selectionSource) {
                     this.fireMessage('obap-treeview-selection-change', {
                         source: this.item,
@@ -135,7 +165,7 @@ export const ObapTreeviewItemController = (superClass) =>
 
         constructor() {
             super();
-
+            this.role = 'treeitem';
             this.label = '';
             this._icon = '';
             this.open = false;

@@ -45,6 +45,14 @@ export class DialogDemo extends ObapElement {
                 background: #E0E0E0;
             }
 
+            .full-screen-content {
+                width: calc(100% - 16px);
+                height: calc(100% - 104px);
+                margin: 0 8px;
+                box-sizing: border-box;
+                background: #E0E0E0;
+            }
+
             .child-content {
                 width: 300px;
                 height: 200px;
@@ -120,6 +128,12 @@ export class DialogDemo extends ObapElement {
                 ${this._renderActions()}
             </obap-dialog>
 
+            <obap-dialog id="full-screen-dialog" full-screen modal>
+                ${this._renderCaption('Full Screen Dialog')}
+                ${this._renderFullScreenContent()}
+                ${this._renderActions()}
+            </obap-dialog>
+
             <obap-message-dialog id="message-dialog" .actions="${this.messageDialogActions}" caption="Confirmation" message="Are you sure?">
             </obap-message-dialog>
 
@@ -129,6 +143,7 @@ export class DialogDemo extends ObapElement {
                     <obap-button raised label="plain dialog" @click="${this._showPlainDialog}"></obap-button>
                     <obap-button raised label="modal dialog" @click="${this._showModalDialog}"></obap-button>
                     <obap-button raised label="nested dialog" @click="${this._showNestedDialog}"></obap-button>
+                    <obap-button raised label="full screen dialog" @click="${this._showFullScreenDialog}"></obap-button>
                     <obap-button raised label="message dialog" @click="${this._showMessageDialog}"></obap-button>
                 </div>
             </div>
@@ -144,6 +159,12 @@ export class DialogDemo extends ObapElement {
     _renderContent() {
         return html`
             <div class="content"></div>
+        `;
+    }
+
+    _renderFullScreenContent() {
+        return html`
+            <div class="full-screen-content"></div>
         `;
     }
 
@@ -194,6 +215,11 @@ export class DialogDemo extends ObapElement {
 
     _showMessageDialog() {
         const dlg = this.renderRoot.getElementById('message-dialog');
+        dlg.open();
+    }
+
+    _showFullScreenDialog() {
+        const dlg = this.renderRoot.getElementById('full-screen-dialog');
         dlg.open();
     }
 

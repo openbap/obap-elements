@@ -150,14 +150,8 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
         this.anchor = 'bottom-left';
         this.inset = 'out';
         this.shift = 'right';
+        this.role = 'menu';
     }
-
-    /*
-    firstUpdated(changedProperties) {
-        super.firstUpdated(changedProperties);
-        this._resizeLabels();
-    }
-    */
     
     render() {
         return html`
@@ -169,11 +163,12 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
 
     _renderItem(item) {
         const hasItems = item.items && item.items.length > 0;
+        const showPopup = item === this.activeItem && hasItems > 0;
 
         return html`
-            <div class="item ${this.hasIcons ? 'item-icons' : ''}" ?disabled="${item.disabled}" .item="${item}" ?active="${item === this.activeItem}" @click="${(e) => this.select(e.target.item)}" @mouseenter="${this._mouseEnterItem}">
-                ${(item === this.activeItem && hasItems > 0) ? html`
-                    <obap-popup-menu .items="${item.items}" .parentMenu="${this}" anchor="top-right" inset="out" shift="down" offset-x="-1" offset-y="-8"></obap-popup-menu>
+            <div role="${this._getMenuItemRole(item)}" area-checked="${item.toggleOn ? item.toggleOn : false}" aria-haspopup="${showPopup}" aria-expanded="${showPopup}" aria-label="${item.label}" class="item ${this.hasIcons ? 'item-icons' : ''}" ?disabled="${item.disabled}" .item="${item}" ?active="${item === this.activeItem}" @click="${(e) => this.select(e.target.item)}" @mouseenter="${this._mouseEnterItem}">
+                ${(showPopup) ? html`
+                    <obap-popup-menu aria-label="${item.label}" .items="${item.items}" .parentMenu="${this}" anchor="top-right" inset="out" shift="down" offset-x="-1" offset-y="-8"></obap-popup-menu>
                 ` : null}
 
                 ${(item.toggles && item.toggleOn) ? html`<obap-icon ignore class="icon-left" icon="core:check"></obap-icon>` : null}
@@ -188,6 +183,18 @@ export class ObapPopupMenu extends ObapMenuController(ObapAttachedElementControl
 
             ${item.separator ? html`<div class="separator"></div>` : null}
         `
+    }
+
+    _getMenuItemRole(item) {
+        if (item.toggles) {
+            if (item.toggleGroup) {
+                return 'menuitemradio';
+            }
+
+            return 'menuitemcheckbox';
+        }
+
+        return 'menuitem';
     }
 
     _resizeLabels() {

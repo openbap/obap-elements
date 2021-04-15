@@ -98,7 +98,7 @@ export class ObapCallout extends ObapAttachedElementController(ObapElement) {
                 position: relative;
                 color: var(--obap-callout-color);
                 background: var(--obap-callout-background-color);
-                border-radius: 3px;
+                border-radius: var(--obap-border-radius-normal, 3px);
                 padding: 8px;
                 margin: var(--obap-callout-arrow-size);
             }

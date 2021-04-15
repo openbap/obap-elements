@@ -4,9 +4,9 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 
 ### UI ELEMENTS
    
-|Done|Tests|Complexity|Name                   |Notes                                                                                     |
-|:--:|:---:|:--------:|-----------------------|------------------------------------------------------------------------------------------| 
-|X   |X    |H         |obap-styles            |Includes theming, typography and elevation.                                               |
+|Done|Tests|Complexity|Name                   |Notes                                                                                           |
+|:--:|:---:|:--------:|-----------------------|------------------------------------------------------------------------------------------------| 
+|X   |X    |H         |obap-styles            |Includes theming, typography and elevation.                                                     |
 |X   |X    |H         |obap-selector          |Used by things that require iteme selection - tabs, pages, lists, menus, etc.                   |
 |X   |X    |S         |obap-selector-container|Synchronizes selection lists, such as tabs to pages.                                            |
 |X   |X    |H         |obap-attached-element  |Behaviour that docks an element to another element - uses by badges, tooltips, etc.             |
@@ -19,7 +19,7 @@ Complete elements are marked with an 'X' while those that are in progress are ma
 |X   |X    |L         |obap-tooltip           |A Material Design tooltip that is displayed on mouse hover.                                     |
 |X   |X    |M         |obap-callout           |A speech bubble type element that can either behave like a tooltip or be fixed inline.          |
 |X   |X    |M         |obap-ripple            |A Material Design ripple effect that is used to indicate selection (especially by buttons).     |
-|X   |X    |H         |obap-button            |A Material Design Button. Supports regular, raised, icon and fab styles.                        |
+|X   |X    |H         |obap-button            |A Material Design Button. Supports regular, raised, icon and fab styles, with toggle support.   |
 |X   |X    |L         |obap-check             |A Material Design checkbox.                                                                     |
 |X   |X    |M         |obap-radio             |A Material Design radio button and group.                                                       |
 |X   |X    |L         |obap-chip              |A Material Design chip.                                                                         |

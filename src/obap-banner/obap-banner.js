@@ -83,6 +83,7 @@ export class ObapBanner extends ObapElement {
 
     constructor() {
         super();
+        this.role = 'banner';
         this.icon = '';
         this.confirmAction = '';
         this.dismissAction = '';

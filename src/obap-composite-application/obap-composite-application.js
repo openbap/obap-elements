@@ -211,6 +211,32 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
         if (usePages) {
             return html`
                 <obap-pages selected-index="${this.selectedApplicationDetails ? this.selectedApplicationDetails.displaySubIndex : -1}">
+                    ${item.url ? html`<obap-composite-application-container ?external="${item.external}" host-id="${item.id}" ?load="${this._canLoad(item, this.selectedApplicationDetails, false)}" class="view-content" url="${item.url}" caption="${item.label}"></obap-composite-application-container>` : null}
+                    ${item.items.filter(child => child.url).map((child) => html`
+                        <obap-composite-application-container ?external="${child.external}"  host-id="${child.id}" ?load="${this._canLoad(child, this.selectedApplicationDetails, true)}" class="view-content" url="${child.url}" caption="${child.label}"></obap-composite-application-container>
+                    `)}
+                </obap-pages>
+            `;
+        } else {
+            let childLabel = 'No Child';
+
+            if (hasChildren && this.selectedApplicationDetails && (this.selectedApplicationDetails.subIndex > -1 && (this.selectedApplicationDetails.index === index))) {
+                const child = item.items[this.selectedApplicationDetails.subIndex];
+                childLabel = child.label;
+            }
+
+            return (item.url) ? html`<obap-composite-application-container ?external="${item.external}" host-id="${item.id}" ?load="${this._canLoad(item, this.selectedApplicationDetails, false)}" class="view-content" url="${item.url}" caption="${item.label}"></obap-composite-application-container>` : null;
+        }
+    }
+
+    /*
+    _renderChildContent(item, index) {
+        const hasChildren = item.items && item.items.length > 0;
+        const usePages = hasChildren && (item.items.filter(child => child.url).length > 0);
+
+        if (usePages) {
+            return html`
+                <obap-pages selected-index="${this.selectedApplicationDetails ? this.selectedApplicationDetails.displaySubIndex : -1}">
                     ${item.url && !item.external ? html`<obap-composite-application-container host-id="${item.id}" ?load="${this._canLoad(item, this.selectedApplicationDetails, false)}" class="view-content" url="${item.url}" caption="${item.label}"></obap-composite-application-container>` : null}
                     ${item.items.filter(child => child.url && !child.external).map((child) => html`
                         <obap-composite-application-container host-id="${child.id}" ?load="${this._canLoad(child, this.selectedApplicationDetails, true)}" class="view-content" url="${child.url}" caption="${child.label}"></obap-composite-application-container>
@@ -228,6 +254,7 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
             return (item.url && !item.external) ? html`<obap-composite-application-container host-id="${item.id}" ?load="${this._canLoad(item, this.selectedApplicationDetails, false)}" class="view-content" url="${item.url}" caption="${item.label}"></obap-composite-application-container>` : null;
         }
     }
+    */
 
     _canLoad(item, details, isChild) {
         if (item.autoLoad) {
@@ -283,9 +310,11 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
     }
 
     _selectView(index, subIndex, source) {
+        /*
         if ((subIndex === undefined) || isNaN(subIndex)) {
             subIndex = -1;
         };
+        */
 
         if ((!this.selectedApplicationDetails) || (this.selectedApplicationDetails.index !== index) || (this.selectedApplicationDetails.subIndex !== subIndex)) {
             const oldValue = this.selectedApplicationDetails;
@@ -315,6 +344,7 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
                 }
             }
 
+            /*
             let externalUrl = null;
 
             if (subItem && subItem.url && subItem.external) {
@@ -322,57 +352,60 @@ export class ObapCompositeApplication extends ObapRouterController(ObapThemeCont
             } else if (item && item.url && item.external) {
                 externalUrl = item.url;
             }
+            */
 
-            if (!externalUrl) {
-                let isDefault = this.defaultApplicationDetails ? (this.defaultApplicationDetails.index === index && this.defaultApplicationDetails.subIndex === subIndex) : false;
+            //if (!externalUrl) {
+            let isDefault = this.defaultApplicationDetails ? (this.defaultApplicationDetails.index === index && this.defaultApplicationDetails.subIndex === subIndex) : false;
 
-                this._selectedApplicationDetails = {
-                    index: index,
-                    subIndex: subIndex,
-                    displaySubIndex: displaySubIndex,
-                    item: item,
-                    subItem: subItem,
-                    isDefault: isDefault
-                }
-
-                this._previousSelectedApplicationDetails = oldValue;
-
-                this.requestUpdate('selectedApplicationDetails', oldValue);
-
-                this.sendMessageToAllClients({
-                    type: 'deactivate',
-                    body: {
-                        appId: oldValue && oldValue.item ? oldValue.item.id : -1,
-                        viewId: oldValue && oldValue.subItem ? oldValue.subItem.id : -1,
-                        manageView: (oldValue && oldValue.subItem) ? (oldValue.subItem.url ? false : true) : false
-                    }
-                });
-
-                this.sendMessageToClient(subItem && subItem.url ? subItem.id : item.id, {
-                    type: 'activate',
-                    body: {
-                        appId: item.id,
-                        viewId: subItem ? subItem.id : -1,
-                        manageView: subItem && subItem.url ? false : true
-                    }
-                });
-
-                if (subItem) {
-                    this.setCurrentRoute(`${item.id}-${subItem.id}`, null);
-                } else {
-                    this.setCurrentRoute(`${item.id}`, null);
-                }
-            } else {
-                window.open(externalUrl, '_blank');
-
-                requestAnimationFrame(() => {
-                    const nav = this.renderRoot.querySelector('obap-navigation-bar');
-
-                    if (nav) {
-                        nav.select(this._selectedApplicationDetails.index, this._selectedApplicationDetails.subIndex, true);
-                    }
-                });
+            this._selectedApplicationDetails = {
+                index: index,
+                subIndex: subIndex,
+                displaySubIndex: displaySubIndex,
+                item: item,
+                subItem: subItem,
+                isDefault: isDefault
             }
+
+            this._previousSelectedApplicationDetails = oldValue;
+
+            this.requestUpdate('selectedApplicationDetails', oldValue);
+
+            this.sendMessageToAllClients({
+                type: 'deactivate',
+                body: {
+                    appId: oldValue && oldValue.item ? oldValue.item.id : -1,
+                    viewId: oldValue && oldValue.subItem ? oldValue.subItem.id : -1,
+                    manageView: (oldValue && oldValue.subItem) ? (oldValue.subItem.url ? false : true) : false
+                }
+            });
+
+            this.sendMessageToClient(subItem && subItem.url ? subItem.id : item.id, {
+                type: 'activate',
+                body: {
+                    appId: item.id,
+                    viewId: subItem ? subItem.id : -1,
+                    manageView: subItem && subItem.url ? false : true
+                }
+            });
+
+            if (subItem) {
+                this.setCurrentRoute(`${item.id}-${subItem.id}`, null);
+            } else {
+                this.setCurrentRoute(`${item.id}`, null);
+            }
+            /*
+        } else {
+            window.open(externalUrl, '_blank');
+
+            requestAnimationFrame(() => {
+                const nav = this.renderRoot.querySelector('obap-navigation-bar');
+
+                if (nav) {
+                    nav.select(this._selectedApplicationDetails.index, this._selectedApplicationDetails.subIndex, true);
+                }
+            });
+        }
+        */
         }
     }
 

@@ -60,7 +60,7 @@ export class ObapApplicationView extends ObapElement {
                 height: 32px;
                 line-height: 26px;
                 padding: 4px 8px;
-                border-radius: 3px;
+                border-radius: var(--obap-border-radius-normal, 3px);
                 box-sizing: border-box;
                 cursor: pointer;
             }

@@ -4,10 +4,10 @@ Theming in the context of OBAP elements only involves colors and follows a modif
 
 ## Creating Themes
 
-The theming system only has a single default theme (blue and pink), so you'll probaly want to create at least one theme for your application. Theme management is all done using the `theme` export from `obap-theme.js`.
+The theming system only has a single default theme (blue and pink), so you'll probaly want to create at least one theme for your application. Theme management is all done using the `themeManager` export from `obap-theme-manager.js`.
 
 ```javascript
-import { theme } from '@obap/obap-elements/obap-styles/obap-theme.js';
+import { themeManager } from '@obap/obap-elements/obap-styles/obap-theme-manager.js';
 ```
 
 You can then create a theme like so:

@@ -5,7 +5,7 @@ Copyright (c) 2021 Paul H Mason. All rights reserved.
 import { html, fixture, expect, nextFrame, defineCE, unsafeStatic } from '@open-wc/testing';
 import { LitElement } from 'lit-element';
 import { ObapThemeController } from '../src/obap-styles/obap-theme-controller.js';
-import { theme } from '../src/obap-styles/obap-theme.js';
+import { themeManager as theme } from '../src/obap-styles/obap-theme-manager.js';
 
 const tagName = defineCE(
     class extends ObapThemeController(LitElement) {

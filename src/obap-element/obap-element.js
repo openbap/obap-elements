@@ -53,8 +53,8 @@ class ObapElement extends LitElement {
 
         if (value !== oldval) {
             this._disabled = value;
-            value ? this.setAttribute('aria-disabled', 'true') : this.setAttribute('aria-disabled', 'false');
             this.requestUpdate('disabled', oldval);
+            this.setAttribute('aria-disabled', value);
         }
     }
 

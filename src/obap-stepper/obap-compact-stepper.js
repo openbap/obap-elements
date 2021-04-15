@@ -99,6 +99,11 @@ export class ObapCompactStepper extends ObapStepperController(ObapElement) {
             }
         `];
     }
+
+    constructor() {
+        super();
+        this.role = 'navigation';
+    }
     
     render() {
         const step = this.steps[this.selected];

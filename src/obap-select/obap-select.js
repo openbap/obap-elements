@@ -112,10 +112,21 @@ export class ObapSelect extends ObapSelectController(ObapElement) {
     
     constructor() {
         super();
+        this.role = 'combobox';
         this.selectedIndex = -1;
         this.items = [];
         this.selectedItemIndexes = [];
         this.multi = false;
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+
+        this.setAttribute('aria-autocomplete', 'none');
+        this.setAttribute('aria-haspopup', true);
+        this.setAttribute('aria-readonly', true);
+        this.setAttribute('aria-expanded', false);
+        this.setAttribute('aria-owns', 'selector');
     }
 
     updated(changedProperties) {
@@ -123,6 +134,14 @@ export class ObapSelect extends ObapSelectController(ObapElement) {
         this._selector = this.renderRoot.getElementById('selector');
 
         changedProperties.forEach((oldValue, propName) => {
+            if (propName === 'opened') {
+                this.setAttribute('aria-expanded', this.opened);
+            }
+
+            if (propName === 'label') {
+                this.setAttribute('aria-label', this.label ? this.label : 'Select');
+            }
+
             if (propName === 'selectedIndex') {
                 if (this.selectedIndex !== -1) {
                     this._updateValue();
@@ -144,10 +163,10 @@ export class ObapSelect extends ObapSelectController(ObapElement) {
             <div class="container typography-body">
                 <obap-select-container id="select-container" value="${this.value}" label="${this.label}" icon="${this.icon}" border-style="${this.borderStyle}" 
                                     ?no-float-label="${this.noFloatLabel}" ?opened="${this.opened}" @obap-select-action="${this._handleAction}">
-                    <div>
-                        <obap-selector id="selector" selector-type="${this.multi ? 'multi' : 'single'}" @obap-item-selected="${this._handleItemClick}" @obap-item-deselected="${this._handleItemClick}">
+                    <div role="presentation">
+                        <obap-selector id="selector" role="listbox" aria-label="${this.label}" aria-multiselectable="${this.multi}" selector-type="${this.multi ? 'multi' : 'single'}" @obap-item-selected="${this._handleItemClick}" @obap-item-deselected="${this._handleItemClick}">
                             ${this.items.map((item, index) => html`
-                                <div class="item" ?selected="${this._isSelected(index)}">
+                                <div role="option" aria-selected="${this._isSelected(index)}" class="item" ?selected="${this._isSelected(index)}">
                                     ${this._renderCheck()}
                                     <div>${item}</div>
                                 </div>

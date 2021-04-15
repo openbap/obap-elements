@@ -31,7 +31,7 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
                 min-width: var(--obap-navigation-rail-item-size);
                 height: 100%;
                 color: var(--obap-navigation-rail-color);
-                background: var(--obap-navigation-rail-background-color);
+                background: var(--obap-navigation-rail-background-color); 
                 overflow: hidden;
             }
 
@@ -104,7 +104,8 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
 
     constructor() {
         super();
-
+        this.role = 'presentation';
+        this.itemRole = 'tab';
         this.collapsible = false;
         this.expanded = false;
         this.actionIcon = '';
@@ -125,11 +126,11 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
             }
         });
     }
-    
-    render() { 
+
+    render() {
         return html`
             ${this.actionIcon ? this._renderAction(this.actionIcon, this.actionLabel) : null}
-            <div class="container">
+            <div class="container" role="tablist">
                 <slot></slot>
             </div>
         `;
@@ -146,7 +147,7 @@ export class ObapNavigationRail extends ObapSelectorController(ObapElement) {
     _updateItems() {
         this.items.forEach((item) => {
             item._collapsible = this.collapsible;
-            item._expanded = this.expanded;
+            item.expanded = this.expanded;
         });
     }
 

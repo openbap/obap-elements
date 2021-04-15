@@ -43,15 +43,15 @@ export class ObapButton extends ObapInputElement {
     static get styles() {
         return [button, hostElevation2, hostElevation6, css`
             :host {
-                --obap-button-color: var(--obap-text-primary-color, rgba(0, 0, 0, 0.87));
-                --obap-button-outline-color: var(--obap-text-primary-color, rgba(0, 0, 0, 0.87));
+                --obap-button-color: var(--obap-primary-color, #5c6bc0);
+                --obap-button-outline-color: var(--obap-divider-on-surface-color, rgba(0, 0, 0, 0.20));
                 --obap-button-disabled-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-button-split-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-button-background-color: var(--obap-surface-color,#FFFFFF);
                 --obap-button-disabled-background-color: transparent;
                 --obap-button-ripple-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
                 --obap-button-outline-size: 1px;
-                
+                  
                 display: inline-block;
                 position: relative;
                 box-sizing: border-box;
@@ -59,11 +59,11 @@ export class ObapButton extends ObapInputElement {
                 user-select: none;
                 cursor: pointer;
                 outline: 0;
-                border-radius: 3px;
+                border-radius: var(--obap-border-radius-normal, 3px);
                 color: var(--obap-button-color);
                 background: var(--obap-button-background-color);
                 min-width: 64px;
-                height: 32px;
+                height: 36px;
             }
     
             :host([hidden]) {
@@ -77,12 +77,33 @@ export class ObapButton extends ObapInputElement {
                 background: var(--obap-button-disabled-background-color);
             }
 
-            :host([round]) {
-                border-radius: 20px;
+            :host(:not([label])) {
+                min-width: 36px;
+                width: 36px;
             }
 
             :host([outline]) {
                 border: var(--obap-button-outline-size) solid var(--obap-button-outline-color);
+            }
+
+            :host([round]) {
+                border-radius: var(--obap-border-radius-pill, 9999px);
+                min-width: 40px;
+                height: 40px;
+            }
+
+            obap-ripple {
+                --obap-ripple-color: var(--obap-button-ripple-color);
+                border-radius: inherit;
+            }
+
+            :host([invert-colors]:not([disabled])) {
+                color: var(--obap-button-background-color);
+                background: var(--obap-button-color);
+            }
+
+            :host([invert-colors]) obap-ripple {
+                --obap-ripple-color: var(--obap-button-background-color);
             }
 
             .container {
@@ -95,16 +116,6 @@ export class ObapButton extends ObapInputElement {
                 height: 100%;
                 width: 100%;
                 padding: 11px 10px 9px 10px;
-            }
-
-            :host([round]) {
-                min-width: 40px;
-                height: 40px;
-            }
-
-            obap-ripple {
-                --obap-ripple-color: var(--obap-button-ripple-color);
-                border-radius: inherit;
             }
 
             div[has-icon] {
@@ -195,6 +206,15 @@ export class ObapButton extends ObapInputElement {
                 type: Boolean,
                 attribute: 'selected',
                 reflect: true
+            },
+
+            /**
+             * Switches the background and foreground colors, and sets the ripple color to the foreground color.
+             */
+            invertColors: {
+                type: Boolean,
+                attribute: 'invert-colors',
+                reflect: true
             }
         }
     }
@@ -210,6 +230,7 @@ export class ObapButton extends ObapInputElement {
         this.icon = '';
         this.iconSrc = '';
         this.label = '';
+        this.invertColors = false;
         this.role = 'button';
 
         this._boundHandleMouseUpEvent = this._handleMouseUpEvent.bind(this);

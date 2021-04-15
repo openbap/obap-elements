@@ -16,7 +16,7 @@ export class ObapRating extends ObapElement {
                 --obap-rating-size: 20px;
                 --obap-rating-separation: 4px;
                 display: block;
-                fill: var(--obap-rating-color);
+                fill: var(--obap-rating-color); 
             }
     
             :host([hidden]) {
@@ -90,7 +90,39 @@ export class ObapRating extends ObapElement {
             readOnly: {
                 type: Boolean,
                 attribute: 'read-only'
+            },
+
+            label: {
+                type: String
             }
+        }
+    }
+
+    get label() {
+        return this._label;
+    }
+
+    set label(value) {
+        const oldValue = this.label;
+
+        if (oldValue !== value) {
+            this._label = value;
+            this.requestUpdate('label', oldValue);
+            this.setAttribute('aria-label', value); 
+        }
+    }
+
+    get count() {
+        return this._count;
+    }
+
+    set count(value) {
+        const oldValue = this.count;
+
+        if (oldValue !== value) {
+            this._count = value;
+            this.requestUpdate('count', oldValue);
+            this.setAttribute('aria-valuemax', value);
         }
     }
 
@@ -110,17 +142,26 @@ export class ObapRating extends ObapElement {
             });
 
             this.requestUpdate('rating', oldValue);
+            this.setAttribute('aria-valuenow', value);
         }
     }
 
     constructor() {
         super();
+        
+        this.role = 'progressbar';
+        this.label = 'Rating';
         this.count = 5;
         this._rating = 0;
         this.allowHalf = false;
         this.heart = false;
         this.readOnly = false;
         this._prevIndex = -1;
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.setAttribute('aria-valuemin', 0);
     }
 
     render() {

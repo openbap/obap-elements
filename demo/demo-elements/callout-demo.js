@@ -75,7 +75,7 @@ export class CalloutDemo extends ObapElement {
                 margin-bottom: 8px;
                 height: 48px;
                 width: 48px;
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
                 cursor: pointer;
             }
 

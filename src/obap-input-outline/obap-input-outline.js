@@ -50,7 +50,7 @@ export class ObapInputOutline extends ObapElement {
                 align-items: center;
                 flex: 1;
                 border: var(--obap-input-outline-border-size) solid var(--obap-input-outline-border-color);
-                border-radius: 3px;
+                border-radius: var(--obap-border-radius-normal, 3px);
       
                 height: 32px;
                 padding: 0 4px;
@@ -73,7 +73,7 @@ export class ObapInputOutline extends ObapElement {
                 display: flex;
                 align-items: center;
                 border-width: var(--obap-input-outline-border-size) 0 var(--obap-input-outline-border-size) 0;
-                border-radius: 0;
+                border-radius: var(--obap-border-radius-none, 0);
             }
 
             .notch[float] {
@@ -85,7 +85,7 @@ export class ObapInputOutline extends ObapElement {
                 position: relative;
                 display: flex;
                 align-items: center;
-                border-radius: 0;
+                border-radius: var(--obap-border-radius-none, 0);
                 padding: 0 4px;
             }
 

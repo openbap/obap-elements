@@ -13,6 +13,7 @@ export class ObapTabs extends ObapSelectorController(ObapElement) {
         return [button, css`
             :host {
                 display: block;
+                position: relative;
                 --obap-tabs-color: var(--obap-on-primary-color, #FFFFFF);
                 --obap-tabs-inactive-color: var(--obap-on-primary-inactive-color, rgba(255, 255, 255, 0.7));
                 --obap-tabs-disabled-color: var(--obap-text-disabled-color, rgba(0, 0, 0, 0.38));
@@ -35,16 +36,6 @@ export class ObapTabs extends ObapSelectorController(ObapElement) {
 
             .container[fill] > ::slotted(obap-tab) {
                 flex: 1;
-            }
-
-            ::slotted(obap-tab) {
-                color: var(--obap-tabs-inactive-color);
-                border-bottom: 2px transparent solid;
-            }
-
-            ::slotted(obap-tab[selected]:not([disabled])) {
-                color: var(--obap-tabs-color);
-                border-bottom: 2px var(--obap-tabs-color) solid;
             }
 
             .container {
@@ -78,6 +69,7 @@ export class ObapTabs extends ObapSelectorController(ObapElement) {
     constructor() {
         super();
         this.role = 'tablist';
+        this.itemRole = 'tab';
         this.fill = false;
         this.scroll = false;
         this.hideScrollButtons = false;

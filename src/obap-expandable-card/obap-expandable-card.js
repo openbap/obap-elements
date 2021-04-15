@@ -59,6 +59,7 @@ export class ObapExpandableCard extends ObapElement {
             .label {
                 flex: 1;
                 margin-left: 16px;
+                pointer-events: none;
             }
         `];
     }
@@ -95,16 +96,16 @@ export class ObapExpandableCard extends ObapElement {
         this.open = false;
         this.hideExpander = false;
     }
-    
+
     render() {
         return html`
-            <div class="container">
-                <div class="title-container" @click="${this.toggle}">
+            <div class="container" role="presentation">
+                <div id="title" class="title-container" @click="${this.toggle}" role="button" aria-label="${this.label}">
                     ${this.icon ? html`<obap-icon class="icon" icon="${this.icon}"></obap-icon>` : null}
                     <div class="label typography-body">${this.label}</div>
                     ${this.hideExpander ? null : html`<obap-icon class="chevron" ?open="${this.open}" icon="core:chevron-down"></obap-icon>`}
                 </div>
-                <obap-vertical-collapse-container ?open="${this.open}">
+                <obap-vertical-collapse-container ?open="${this.open}" aria-expanded="${this.open}" role="region" aria-labelledby="title">
                     <slot></slot>
                 </obap-vertical-collapse-container>
             </div>

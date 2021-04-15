@@ -218,9 +218,9 @@ export class DataTableDemo extends ObapElement {
 
     detailRowRenderer(row) {
         //const height = 40 + (row.id * 10);
-        const height = 40;
+        const height = 80;
         return html`
-            <div style="height: ${height}px; display: flex; align-items: center; width: auto; padding: 0 24px; background: lightyellow;">
+            <div style="height: auto; display: flex; align-items: center; width: auto; padding: 24px 24px; background: lightyellow; box-sizing: border-box;">
                 <div>DETAIL ROW: ${row.dessert}</div>
             </div>
         `;

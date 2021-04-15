@@ -19,8 +19,8 @@ export class ObapChip extends ObapElement {
                 --obap-chip-selected-background-color: var(--obap-primary-light-color, #5d638f);
 
                 display: inline-block;
-                height: 24px;
-                border-radius: 12px;
+                height: 28px;
+                border-radius: var(--obap-border-radius-pill, 9999px);
                 color: var(--obap-chip-color);
                 background: var(--obap-chip-background-color);
             }
@@ -48,6 +48,7 @@ export class ObapChip extends ObapElement {
             }
 
             .container {
+                height: 100%;
                 display: inline-flex;
                 flex-direction: row;
                 justify-content: center;
@@ -55,7 +56,6 @@ export class ObapChip extends ObapElement {
                 align-items: center;
                 box-sizing: border-box;
                 min-width: 64px;
-                height: 24px;
                 padding: 4px 6px;
             }
 

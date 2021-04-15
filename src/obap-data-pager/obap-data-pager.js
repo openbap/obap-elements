@@ -30,7 +30,7 @@ export class ObapDataPager extends ObapElement {
                 width: 32px;
                 min-height: 32px;
                 min-width: 32px;
-                border-radius: 16px;
+                border-radius: var(--obap-border-radius-circle, 50%);
             }
 
             obap-select {

@@ -50,7 +50,7 @@ export class ObapSwitch extends ObapElement {
                 flex-direction: row-reverse;
                 align-items: center;
                 height: 100%;
-                border-radius: 12px;
+                border-radius: var(--obap-border-radius-pill, 9999px);
                 padding: 0 10px 0 26px;
                 color: var(--obap-switch-label-color);
                 background: var(--obap-switch-track-color);
@@ -70,7 +70,7 @@ export class ObapSwitch extends ObapElement {
                 left: 2px;
                 width: 20px;
                 height: 20px;
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
                 background: var(--obap-switch-thumb-color);
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
                             0 1px 5px 0 rgba(0, 0, 0, 0.12),
@@ -118,11 +118,40 @@ export class ObapSwitch extends ObapElement {
         }
     }
 
+    get selected() {
+        return this._selected;
+    }
+
+    set selected(value) {
+        const oldValue = this.selected;
+
+        if (oldValue !== value) {
+            this._selected = value;
+            this.setAttribute('aria-checked', value);
+            this.requestUpdate('selected', oldValue);
+        }
+    }
+
     constructor() {
         super();
+        this.role = 'switch';
         this.selected = false;
         this.leftLabel = '';
         this.rightLabel = '';
+    }
+
+    updated(changedProperties) {
+        super.updated(changedProperties);
+
+        changedProperties.forEach((oldValue, propName) => {
+            if ((propName === 'leftLabel') || (propName === 'rightLabel')) {
+                if (this.leftLabel && this.rightLabel) {
+                    this.setAttribute('aria-label', `${this.leftLabel} ${this.rightLabel}`);
+                } else {
+                    this.setAttribute('aria-label', 'switch');
+                }
+            }
+        });
     }
 
     render() {

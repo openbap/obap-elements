@@ -38,7 +38,7 @@ export class ObapNavigationRailItem extends ObapElement {
                 color: var(--obap-navigation-rail-active-color);
             }
 
-            :host([_expanded]) {
+            :host([expanded]) {
                 width: 100%;
             }
 
@@ -120,9 +120,9 @@ export class ObapNavigationRailItem extends ObapElement {
                 reflect: true
             },
 
-            _expanded: {
+            expanded: {
                 type: Boolean,
-                attribute: '_expanded',
+                attribute: 'expanded',
                 reflect: true
             }
         }
@@ -130,6 +130,7 @@ export class ObapNavigationRailItem extends ObapElement {
 
     constructor() {
         super();
+        
         this.icon = '';
         this.label = '';
         this.badgeIcon = '';
@@ -138,8 +139,18 @@ export class ObapNavigationRailItem extends ObapElement {
         this._expanded = false;
     }
 
+    updated(changedProperties) {
+        super.updated(changedProperties);
+
+        changedProperties.forEach((oldValue, propName) => {
+            if ((propName === 'label') || (propName === 'icon')) {
+                this.setAttribute('aria-label', this.label ? this.label : this.icon);
+            }
+        });
+    }
+
     render() {
-        if (this._expanded) {
+        if (this.expanded) {
             return this._renderExpanded(this.icon, this.label);
         } else {
             if (this._collapsible) {
@@ -162,6 +173,15 @@ export class ObapNavigationRailItem extends ObapElement {
         `;
     }
 
+    _renderCollapsed(icon) {
+        return html`
+            <div class="container">
+                ${icon ? html`<obap-icon id="icon" icon="${icon}"></obap-icon>` : null}
+                ${this._renderBadge()}
+            </div>
+        `;
+    }
+
     _renderNormal(icon, label) {
         return html`
             <div class="container">
@@ -170,15 +190,6 @@ export class ObapNavigationRailItem extends ObapElement {
                     ${this._renderBadge()}
                     ${label ? html`<div class="label vertical-label typography-caption">${label}</div>` : null}
                 </div>
-            </div>
-        `;
-    }
-
-    _renderCollapsed(icon) {
-        return html`
-            <div class="container">
-                ${icon ? html`<obap-icon id="icon" icon="${icon}"></obap-icon>` : null}
-                ${this._renderBadge()}
             </div>
         `;
     }

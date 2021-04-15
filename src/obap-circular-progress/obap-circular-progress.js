@@ -51,7 +51,7 @@ export class ObapCircularProgress extends ObapElement {
                 height: var(--obap-circular-progress-size);
                 width: var(--obap-circular-progress-size);
                 background: var(--obap-circular-progress-backround-color);
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
                 overflow: hidden;
             }
 
@@ -86,7 +86,7 @@ export class ObapCircularProgress extends ObapElement {
 
             }
 
-            @keyframes indeterminate-rotate {
+            @keyframes indeterminate-rotate { 
                 from {
                     transform: rotate(-90deg);
                 }
@@ -168,12 +168,96 @@ export class ObapCircularProgress extends ObapElement {
             icon: {
                 type: String,
                 attribute: 'icon'
+            },
+
+            label: {
+                type: String
+            }
+        }
+    }
+
+    get label() {
+        return this._label;
+    }
+
+    set label(value) {
+        const oldValue = this.label;
+
+        if (oldValue !== value) {
+            this._label = value;
+            this.requestUpdate('label', oldValue);
+            this.setAttribute('aria-label', value); 
+        }
+    }
+
+    get min() {
+        return this._min;
+    }
+
+    set min(value) {
+        const oldValue = this.min;
+
+        if (oldValue !== value) {
+            this._min = value;
+            this.requestUpdate('min', oldValue);
+            this.setAttribute('aria-valuemin', value);
+        }
+    }
+
+    get max() {
+        return this._max;
+    }
+
+    set max(value) {
+        const oldValue = this.max;
+
+        if (oldValue !== value) {
+            this._max = value;
+            this.requestUpdate('max', oldValue);
+            this.setAttribute('aria-valuemax', value);
+        }
+    }
+
+    get value() {
+        return this._value;
+    }
+
+    set value(value) {
+        const oldValue = this.value;
+
+        if (oldValue !== value) {
+            this._value = value;
+            this.requestUpdate('value', oldValue);
+
+            if (!this.indeterminate) {
+                this.setAttribute('aria-valuenow', value);
+            }
+        }
+    }
+
+    get indeterminate() {
+        return this._indeterminate;
+    }
+
+    set indeterminate(value) {
+        const oldValue = this.indeterminate;
+
+        if (oldValue !== value) {
+            this._indeterminate = value;
+            this.requestUpdate('indeterminate', oldValue);
+
+            if (value) {
+                this.removeAttribute('aria-valuenow');
+            } else {
+                this.setAttribute('aria-valuenow', this.value);
             }
         }
     }
 
     constructor() {
         super();
+        this.role = 'progressbar';
+        this.label = 'Progress Bar';
         this.min = 0;
         this.max = 100;
         this.value = 0;

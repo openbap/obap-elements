@@ -17,6 +17,10 @@ export const ObapSelectorController = (superClass) =>
             const oldValue = this.selectedIndex;
 
             if ((oldValue != value) || (this.toggles)) {
+                if (this.onSelectedIndexChanged) {
+                    this.onSelectedIndexChanged(oldValue, value);
+                }
+
                 this._selectedIndex = value;
                 this._changeSelection(this._selectedIndex, oldValue);
                 this.activeIndex = -1;
@@ -136,6 +140,11 @@ export const ObapSelectorController = (superClass) =>
                 disableManualSelection: {
                     type: Boolean,
                     attribute: 'disable-manual-selection'
+                },
+
+                itemRole: {
+                    type: String,
+                    attribute: 'item-role'
                 }
             }
         }
@@ -143,6 +152,7 @@ export const ObapSelectorController = (superClass) =>
         constructor() {
             super();
 
+            this.role = 'list';
             this._boundHandleSelectionEvent = this._handleSelectionEvent.bind(this);
             this._boundHandleSlotChangeEvent = this._handleSlotChangeEvent.bind(this);
             this._boundHandleEnterEvent = this._handleEnterEvent.bind(this);
@@ -157,6 +167,7 @@ export const ObapSelectorController = (superClass) =>
             this.selectorType = 'single';
             this.selectedAttribute = 'selected';
             this.activeAttribute = 'active';
+            this.itemRole = 'listitem';
         }
 
         updated(changedProperties) {
@@ -254,8 +265,15 @@ export const ObapSelectorController = (superClass) =>
                 });
             }
 
+            if (this.itemRole) {
+                items.forEach((item) => {
+                    item.setAttribute('role', this.itemRole);
+                });
+            }
+
             const oldItems = this._items;
             this._items = items;
+            
             this._changeSelection(this.selectedIndex, -1);
             this.requestUpdate('items', oldItems);
         }

@@ -13,7 +13,6 @@ export class ObapHorizontalCollapseContainer extends ObapBaseCollapseContainer {
             :host {
                 display: block;
                 overflow: hidden; 
-                width: 0;
             }
     
             :host([hidden]) {
@@ -24,11 +23,18 @@ export class ObapHorizontalCollapseContainer extends ObapBaseCollapseContainer {
                 pointer-events: none;
             }
 
-            :host([open]) {
-                width: auto;
-                overflow: visible; 
+            .content {
+                width: 0px;
+                height: 100%;
+                overflow: hidden; 
+                pointer-events: none;
             }
         `];
+    }
+
+    constructor() {
+        super();
+        this.horizontal = true;
     }
 }
 

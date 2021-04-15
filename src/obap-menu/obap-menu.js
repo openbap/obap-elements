@@ -65,6 +65,16 @@ export class ObapMenu extends ObapMenuController(ObapElement) {
             }
         `];
     }
+
+    constructor() {
+        super();
+        this.role = 'menubar';
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.setAttribute('aria-label', 'Menu Bar');
+    }
     
     render() {
         return html`
@@ -76,11 +86,12 @@ export class ObapMenu extends ObapMenuController(ObapElement) {
 
     _renderItem(item) {
         const hasItems = item.items && item.items.length > 0;
+        const showPopup = item === this.activeItem && hasItems > 0;
 
         return html`
-            <div class="item" ?disabled="${item.disabled}" .item="${item}" ?active="${item === this.activeItem}" @click="${(e) => this.select(e.target.item)}" @mouseenter="${this._mouseEnterItem}">
-                ${(item === this.activeItem && hasItems > 0) ? html`
-                    <obap-popup-menu .items="${item.items}" .parentMenu="${this}"></obap-popup-menu>
+            <div role="menuitem" aria-haspopup="${showPopup}" aria-expanded="${showPopup}" aria-label="${item.label}" class="item" ?disabled="${item.disabled}" .item="${item}" ?active="${item === this.activeItem}" @click="${(e) => this.select(e.target.item)}" @mouseenter="${this._mouseEnterItem}">
+                ${(showPopup) ? html`
+                    <obap-popup-menu aria-label="${item.label}" .items="${item.items}" .parentMenu="${this}"></obap-popup-menu>
                 ` : null}
 
                 <span ignore>${item.label}</span>

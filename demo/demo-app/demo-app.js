@@ -64,7 +64,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                 margin: 8px;
             }
 
-            obap-pages {
+            obap-pages, obap-animated-pages {
                 height: 100%;
             }
 
@@ -87,7 +87,8 @@ export class DemoApp extends ObapThemeController(ObapElement) {
         themeManager.create('green', '#80e27e', '#4caf50', '#087f23', '#ffc107', '#FAFAFA');
         themeManager.apply('default');
         //this.selectedPage = 44;
-        this.selectedPage = 29;
+        //this.selectedPage = 32;
+        this.selectedPage = 18;
     }
 
     render() {
@@ -128,6 +129,8 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <div class="item">obap-menu</div>
                         <div class="item">obap-navigation-bar</div>
                         <div class="item">obap-navigation-rail</div>
+                        <div class="item">obap-pages</div>
+                        <div class="item">obap-pickers</div>
                         <div class="item">obap-pill-navigator</div>
                         <div class="item">obap-radio</div>
                         <div class="item">obap-rating</div>
@@ -158,7 +161,7 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                 </obap-material>
                 <obap-splitter show-handle></obap-splitter>
                 <obap-material class="pages">
-                    <obap-pages selected-index="${this.selectedPage}">
+                    <obap-pages animation-style="fade" selected-index="${this.selectedPage}">
                         <!-- STYLES -->
                         <theme-demo></theme-demo>
                         <elevation-demo></elevation-demo>
@@ -192,6 +195,8 @@ export class DemoApp extends ObapThemeController(ObapElement) {
                         <menu-demo></menu-demo>
                         <navigation-bar-demo></navigation-bar-demo>
                         <navigation-rail-demo></navigation-rail-demo>
+                        <pages-demo></pages-demo>
+                        <pickers-demo></pickers-demo>
                         <pill-navigator-demo></pill-navigator-demo>
                         <radio-demo></radio-demo>
                         <rating-demo></rating-demo>

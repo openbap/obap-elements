@@ -62,7 +62,7 @@ export class SelectorDemo extends ObapElement {
                 padding: 1px 0 0 1px;
                 width: 24px;
                 height: 24px;
-                border-radius: 50%;
+                border-radius: var(--obap-border-radius-circle, 50%);
                 box-sizing: border-box;
                 cursor: pointer;
             }
