@@ -55,7 +55,7 @@
   "devDependencies": {
     "@open-wc/building-rollup": "^1.9.4",
     "@open-wc/testing": "^2.5.32",
-    "@open-wc/testing-karma": "^3.4.8",
+    "@open-wc/testing-karma": "^4.0.9",
     "@web/dev-server": "0.0.14",
     "@web/test-runner": "^0.9.13",
     "deepmerge": "^3.2.0",
